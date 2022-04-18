@@ -10,7 +10,7 @@ class TddBankingKataApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assertThat(true).isTrue();
+		assertThat(true).isFalse();
 	}
 
 }
