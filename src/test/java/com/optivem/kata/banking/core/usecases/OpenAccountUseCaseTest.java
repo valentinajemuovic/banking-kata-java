@@ -67,4 +67,21 @@ public class OpenAccountUseCaseTest {
     private static Stream<String> should_throw_exception_when_last_name_is_empty() {
         return Stream.of(null, "", " ", "   ");
     }
+
+    @ParameterizedTest
+    @MethodSource
+    void should_throw_exception_when_initial_balance_is_negative(int balance) {
+        var request = new OpenAccountRequest();
+        request.setFirstName("John");
+        request.setLastName("Smith");
+        request.setInitialBalance(balance);
+
+        var exception = assertThrows(ValidationException.class, () -> useCase.handle(request));
+
+        assertThat(exception.getMessage()).isEqualTo(ValidationMessages.INITIAL_BALANCE_NEGATIVE);
+    }
+
+    private static Stream<Integer> should_throw_exception_when_initial_balance_is_negative() {
+        return Stream.of(-1, -2, -10);
+    }
 }
