@@ -2,24 +2,27 @@ package com.optivem.kata.banking.core.common;
 
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 
-public class Guard {
-    public static void AgainstNullOrWhitespace(String value, String message) {
-        if(isNullOrWhitespace(value)) {
-            throw new ValidationException(message);
-        }
-    }
+import java.util.function.Predicate;
 
-    private static boolean isNullOrWhitespace(String value) {
-        return value == null || value.trim().equals("");
+public class Guard {
+
+    public static void AgainstNullOrWhitespace(String value, String message) {
+        Against(Validation::isNullOrWhitespace, value, message);
     }
 
     public static void AgainstNegative(int value, String message) {
-        if(isNegative(value)) {
+        Against(Validation::isNegative, value, message);
+    }
+
+    public static void Against(Predicate<String> tester, String value, String message) {
+        if(tester.test(value)) {
             throw new ValidationException(message);
         }
     }
 
-    private static boolean isNegative(int value) {
-        return value < 0;
+    public static void Against(Predicate<Integer> tester, int value, String message) {
+        if(tester.test(value)) {
+            throw new ValidationException(message);
+        }
     }
 }
