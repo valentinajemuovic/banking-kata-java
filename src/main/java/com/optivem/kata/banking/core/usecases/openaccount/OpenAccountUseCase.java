@@ -20,9 +20,12 @@ public class OpenAccountUseCase {
 
         var accountNumber = accountNumberGenerator.next();
 
+        return getResponse(accountNumber);
+    }
+
+    private OpenAccountResponse getResponse(String accountNumber) {
         var response = new OpenAccountResponse();
         response.setAccountNumber(accountNumber);
-
         return response;
     }
 }
