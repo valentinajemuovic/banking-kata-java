@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OpenAccountRequest {
     private String firstName;
-
+    private String lastName;
 }
