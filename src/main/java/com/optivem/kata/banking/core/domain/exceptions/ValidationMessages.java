@@ -5,4 +5,5 @@ public class ValidationMessages {
     public static final String LAST_NAME_EMPTY = "Last name is empty";
     public static final String INITIAL_BALANCE_NEGATIVE = "Initial balance is negative";
     public static final String ACCOUNT_NUMBER_EMPTY = "Account number is empty";
+    public static final String ACCOUNT_NUMBER_NOT_EXIST = "Account number does not exist";
 }

@@ -1,9 +1,11 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsRequest;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsResponse;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsUseCase;
+import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,16 +16,22 @@ import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHIT
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WithdrawFundsUseCaseTest {
+
+    private FakeBankAccountRepository repository;
     private WithdrawFundsUseCase useCase;
 
     @BeforeEach
     void init() {
-        this.useCase = new WithdrawFundsUseCase();
+        this.repository = new FakeBankAccountRepository();
+        this.useCase = new WithdrawFundsUseCase(repository);
     }
 
     @Test
     void nothing() {
         var accountNumber = "GB10BARC20040184197751";
+
+        var bankAccount = new BankAccount(accountNumber);
+        repository.add(bankAccount);
 
         var request = new WithdrawFundsRequest();
         request.setAccountNumber(accountNumber);
@@ -42,6 +50,16 @@ public class WithdrawFundsUseCaseTest {
         request.setAccountNumber(accountNumber);
 
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+    }
+
+    @Test
+    void should_throw_exception_given_non_existent_account_number() {
+        var accountNumber = "GB10BARC20040184197751";
+
+        var request = new WithdrawFundsRequest();
+        request.setAccountNumber(accountNumber);
+
+        assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     private void assertThrows(WithdrawFundsRequest request, String message) {
