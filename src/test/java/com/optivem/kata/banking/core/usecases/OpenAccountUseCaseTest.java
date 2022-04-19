@@ -36,7 +36,7 @@ public class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource
-    void should_open_account_when_request_is_valid(String firstName, String lastName, int initialBalance, String accountNumber) {
+    void should_open_account_given_request_is_valid(String firstName, String lastName, int initialBalance, String accountNumber) {
         accountNumberGenerator.add(accountNumber);
 
         var request = new OpenAccountRequest();
@@ -55,14 +55,14 @@ public class OpenAccountUseCaseTest {
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
 
-    private static Stream<Arguments> should_open_account_when_request_is_valid() {
+    private static Stream<Arguments> should_open_account_given_request_is_valid() {
         return Stream.of(Arguments.of("John", "Smith", 0, "GB41OMQP68570038161775"),
                 Arguments.of("Mary", "McDonald", 50, "GB36BMFK75394735916876"));
     }
 
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
-    void should_throw_exception_when_first_name_is_empty(String firstName) {
+    void should_throw_exception_given_first_name_is_empty(String firstName) {
         var request = new OpenAccountRequest();
         request.setFirstName(firstName);
 
@@ -71,7 +71,7 @@ public class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
-    void should_throw_exception_when_last_name_is_empty(String lastName) {
+    void should_throw_exception_given_last_name_is_empty(String lastName) {
         var request = new OpenAccountRequest();
         request.setFirstName("John");
         request.setLastName(lastName);
@@ -81,7 +81,7 @@ public class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource(NEGATIVE_INTEGERS)
-    void should_throw_exception_when_initial_balance_is_negative(int balance) {
+    void should_throw_exception_given_initial_balance_is_negative(int balance) {
         var request = new OpenAccountRequest();
         request.setFirstName("John");
         request.setLastName("Smith");
