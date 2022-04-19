@@ -43,7 +43,7 @@ public class OpenAccountUseCaseTest {
 
         var response = useCase.handle(request);
 
-        assertThat(response).usingRecursiveComparison().isEqualTo(expectedResponse);
+        assertThat(response).isEqualTo(expectedResponse);
     }
 
     private static Stream<Arguments> should_open_account_when_request_is_valid() {
@@ -57,9 +57,7 @@ public class OpenAccountUseCaseTest {
         var request = new OpenAccountRequest();
         request.setFirstName(firstName);
 
-        var exception = assertThrows(ValidationException.class, () -> useCase.handle(request));
-
-        assertThat(exception.getMessage()).isEqualTo(ValidationMessages.FIRST_NAME_EMPTY);
+        assertThrowsValidationException(request, ValidationMessages.FIRST_NAME_EMPTY);
     }
 
     private static Stream<String> should_throw_exception_when_first_name_is_empty() {
@@ -73,9 +71,7 @@ public class OpenAccountUseCaseTest {
         request.setFirstName("John");
         request.setLastName(lastName);
 
-        var exception = assertThrows(ValidationException.class, () -> useCase.handle(request));
-
-        assertThat(exception.getMessage()).isEqualTo(ValidationMessages.LAST_NAME_EMPTY);
+        assertThrowsValidationException(request, ValidationMessages.LAST_NAME_EMPTY);
     }
 
     private static Stream<String> should_throw_exception_when_last_name_is_empty() {
@@ -90,12 +86,15 @@ public class OpenAccountUseCaseTest {
         request.setLastName("Smith");
         request.setInitialBalance(balance);
 
-        var exception = assertThrows(ValidationException.class, () -> useCase.handle(request));
-
-        assertThat(exception.getMessage()).isEqualTo(ValidationMessages.INITIAL_BALANCE_NEGATIVE);
+        assertThrowsValidationException(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
     }
 
     private static Stream<Integer> should_throw_exception_when_initial_balance_is_negative() {
         return Stream.of(-1, -2, -10);
+    }
+
+    private void assertThrowsValidationException(OpenAccountRequest request, String message) {
+        var exception = assertThrows(ValidationException.class, () -> useCase.handle(request));
+        assertThat(exception.getMessage()).isEqualTo(message);
     }
 }
