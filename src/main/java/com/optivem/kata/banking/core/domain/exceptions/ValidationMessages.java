@@ -10,4 +10,6 @@ public class ValidationMessages {
     public static final String ACCOUNT_NUMBER_EMPTY = "Account number is empty";
     public static final String ACCOUNT_NUMBER_NOT_EXIST = "Account number does not exist";
     public static final String NON_POSITIVE_TRANSACTION_AMOUNT = "Transaction amount is not positive";
+
+
 }
