@@ -1,6 +1,8 @@
 package com.optivem.kata.banking.infra.fake.bankaccounts;
 
 import com.optivem.kata.banking.core.common.Factory;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +25,7 @@ class FakeBankAccountRepositoryTest {
     @Test
     void should_return_empty_result_when_account_number_does_not_exist() {
         var accountNumber = "GB36BARC20038032622823";
-        var retrievedBankAccount = repository.find(accountNumber);
+        var retrievedBankAccount = find(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.empty());
     }
 
@@ -34,7 +36,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        var retrievedBankAccount = repository.find(accountNumber);
+        var retrievedBankAccount = find(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(bankAccount));
     }
 
@@ -50,7 +52,7 @@ class FakeBankAccountRepositoryTest {
 
         bankAccount.setBalance(60);
 
-        var retrievedBankAccount = repository.find(accountNumber);
+        var retrievedBankAccount = find(accountNumber);
 
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
@@ -64,13 +66,13 @@ class FakeBankAccountRepositoryTest {
         var expectedBankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
         repository.add(bankAccount);
-        var retrievedBankAccount = repository.find(accountNumber);
+        var retrievedBankAccount = find(accountNumber);
 
         assertThat(retrievedBankAccount).isPresent();
 
         retrievedBankAccount.get().setBalance(20);
 
-        var subsequentRetrievedBankAccount = repository.find(accountNumber);
+        var subsequentRetrievedBankAccount = find(accountNumber);
 
         assertThat(subsequentRetrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
@@ -84,7 +86,7 @@ class FakeBankAccountRepositoryTest {
         var expectedBankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
         repository.add(bankAccount);
-        var retrievedBankAccount = repository.find(accountNumber);
+        var retrievedBankAccount = find(accountNumber);
 
         assertThat(retrievedBankAccount).isPresent();
 
@@ -92,7 +94,7 @@ class FakeBankAccountRepositoryTest {
 
         retrievedBankAccount.get().setBalance(10);
 
-        var subsequentRetrievedBankAccount = repository.find(accountNumber);
+        var subsequentRetrievedBankAccount = find(accountNumber);
 
         assertThat(subsequentRetrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
@@ -111,7 +113,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.update(bankAccount);
 
-        var retrievedBankAccount = repository.find(accountNumber);
+        var retrievedBankAccount = find(accountNumber);
 
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedUpdatedBankAccount));
     }
@@ -135,5 +137,9 @@ class FakeBankAccountRepositoryTest {
         var bankAccount = Factory.createDefaultBankAccount(accountNumber);
 
         assertThrowsRepositoryException(() -> repository.update(bankAccount), RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+    }
+
+    private Optional<BankAccount> find(String accountNumber) {
+        return repository.find(new AccountNumber(accountNumber));
     }
 }

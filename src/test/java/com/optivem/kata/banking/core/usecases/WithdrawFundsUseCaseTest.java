@@ -1,6 +1,8 @@
 package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.common.Factory;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsRequest;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsResponse;
@@ -51,15 +53,18 @@ class WithdrawFundsUseCaseTest {
 
         var expectedBankAccount = Factory.createDefaultBankAccount(accountNumber, expectedFinalBalance);
 
-        var retrievedBankAccount = repository.find(accountNumber);
+        var retrievedBankAccount = findBankAccount(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
 
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
+        var amount = 30;
+
         var request = new WithdrawFundsRequest();
         request.setAccountNumber(accountNumber);
+        request.setAmount(amount);
 
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
@@ -96,4 +101,7 @@ class WithdrawFundsUseCaseTest {
         assertThrowsValidationException(useCase, request, message);
     }
 
+    private Optional<BankAccount> findBankAccount(String accountNumber) {
+        return repository.find(new AccountNumber(accountNumber));
+    }
 }

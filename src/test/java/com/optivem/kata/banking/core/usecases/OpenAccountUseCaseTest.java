@@ -1,5 +1,7 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.common.Factory;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
@@ -37,7 +39,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_open_account_given_request_is_valid(String firstName, String lastName, int initialBalance, String accountNumber) {
-        accountNumberGenerator.add(accountNumber);
+        registerNextAccountNumber(accountNumber);
 
         var request = new OpenAccountRequest();
         request.setFirstName(firstName);
@@ -47,11 +49,11 @@ class OpenAccountUseCaseTest {
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
 
-        var expectedBankAccount = new BankAccount(accountNumber, firstName, lastName, initialBalance);
+        var expectedBankAccount = Factory.createBankAccount(accountNumber, firstName, lastName, initialBalance);
 
         assertSuccess(request, expectedResponse);
 
-        var retrievedBankAccount = bankAccountRepository.find(accountNumber);
+        var retrievedBankAccount = findBankAccount(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
 
@@ -96,5 +98,13 @@ class OpenAccountUseCaseTest {
     
     private void assertThrows(OpenAccountRequest request, String message) {
         assertThrowsValidationException(useCase, request, message);
+    }
+
+    private void registerNextAccountNumber(String accountNumber) {
+        accountNumberGenerator.add(new AccountNumber(accountNumber));
+    }
+
+    private Optional<BankAccount> findBankAccount(String accountNumber) {
+        return bankAccountRepository.find(new AccountNumber(accountNumber));
     }
 }

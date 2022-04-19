@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.infra.fake.accounts;
 
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryException;
@@ -11,15 +12,15 @@ import java.util.Optional;
 
 public class FakeBankAccountRepository implements BankAccountRepository {
 
-    private final Map<String, BankAccount> bankAccounts;
+    private final Map<AccountNumber, BankAccount> bankAccounts;
 
     public FakeBankAccountRepository() {
         this.bankAccounts = new HashMap<>();
     }
 
     @Override
-    public Optional<BankAccount> find(String accountNumber) {
-        if(!bankAccounts.containsKey(accountNumber)) {
+    public Optional<BankAccount> find(AccountNumber accountNumber) {
+        if(!contains(accountNumber)) {
             return Optional.empty();
         }
 
@@ -31,29 +32,29 @@ public class FakeBankAccountRepository implements BankAccountRepository {
 
     @Override
     public void add(BankAccount bankAccount) {
-        var key = bankAccount.getAccountNumber();
+        var accountName = bankAccount.getAccountNumber();
         var clonedBankAccount = new BankAccount(bankAccount);
 
-        if(bankAccounts.containsKey(key)) {
+        if(contains(accountName)) {
             throw new RepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
         }
 
-        bankAccounts.put(key, clonedBankAccount);
+        bankAccounts.put(accountName, clonedBankAccount);
     }
 
     @Override
     public void update(BankAccount bankAccount) {
-        var key = bankAccount.getAccountNumber();
+        var accountNumber = bankAccount.getAccountNumber();
 
-        if(!contains(key)) {
+        if(!contains(accountNumber)) {
             throw new RepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
         }
 
         var clonedBankAccount = new BankAccount(bankAccount);
-        bankAccounts.put(key, clonedBankAccount);
+        bankAccounts.put(accountNumber, clonedBankAccount);
     }
 
-    private boolean contains(String accountNumber) {
+    private boolean contains(AccountNumber accountNumber) {
         return bankAccounts.containsKey(accountNumber);
     }
 

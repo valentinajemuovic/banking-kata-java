@@ -27,12 +27,12 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
         var bankAccount = new BankAccount(accountNumber, request.getFirstName(), request.getLastName(), request.getInitialBalance());
         bankAccountRepository.add(bankAccount);
 
-        return getResponse(accountNumber);
+        return getResponse(bankAccount);
     }
 
-    private OpenAccountResponse getResponse(String accountNumber) {
+    private OpenAccountResponse getResponse(BankAccount bankAccount) {
         var response = new OpenAccountResponse();
-        response.setAccountNumber(accountNumber);
+        response.setAccountNumber(bankAccount.getAccountNumber().value());
         return response;
     }
 }

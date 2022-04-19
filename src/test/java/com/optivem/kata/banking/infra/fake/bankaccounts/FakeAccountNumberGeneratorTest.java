@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.infra.fake.bankaccounts;
 
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeException;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
@@ -28,7 +29,7 @@ class FakeAccountNumberGeneratorTest {
     void should_return_next_element_when_there_is_one_element() {
         var expectedValue = "GB54BARC20032611545669";
 
-        generator.add(expectedValue);
+        registerNextAccountNumber(expectedValue);
 
         assertNextEquals(expectedValue);
         assertNextThrowsException();
@@ -40,7 +41,9 @@ class FakeAccountNumberGeneratorTest {
         var expectedValue2 = "GB36BARC20038032622823";
         var expectedValue3 = "GB10BARC20040184197751";
 
-        generator.add(expectedValue1, expectedValue2, expectedValue3);
+        registerNextAccountNumber(expectedValue1);
+        registerNextAccountNumber(expectedValue2);
+        registerNextAccountNumber(expectedValue3);
 
         assertNextEquals(expectedValue1);
         assertNextEquals(expectedValue2);
@@ -50,11 +53,15 @@ class FakeAccountNumberGeneratorTest {
 
     private void assertNextEquals(String expectedValue) {
         var next = generator.next();
-        assertThat(next).isEqualTo(expectedValue);
+        assertThat(next).isEqualTo(new AccountNumber(expectedValue));
     }
 
     private void assertNextThrowsException() {
         var exception = assertThrows(FakeException.class, () -> generator.next());
         assertThat(exception.getMessage()).isEqualTo(FakeMessages.GENERATOR_DOES_NOT_HAVE_NEXT);
+    }
+
+    private void registerNextAccountNumber(String accountNumber) {
+        generator.add(new AccountNumber(accountNumber));
     }
 }

@@ -1,12 +1,12 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
 public class BankAccount {
-    private final String accountNumber;
+    private final AccountNumber accountNumber;
     private final String firstName;
     private final String lastName;
     private int balance;
 
-    public BankAccount(String accountNumber, String firstName, String lastName, int balance) {
+    public BankAccount(AccountNumber accountNumber, String firstName, String lastName, int balance) {
         this.accountNumber = accountNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,7 +17,7 @@ public class BankAccount {
         this(other.getAccountNumber(), other.getFirstName(), other.getLastName(), other.getBalance());
     }
 
-    public String getAccountNumber() {
+    public AccountNumber getAccountNumber() {
         return accountNumber;
     }
 

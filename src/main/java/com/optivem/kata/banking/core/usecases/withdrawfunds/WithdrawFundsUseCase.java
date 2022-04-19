@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.usecases.withdrawfunds;
 
 import com.optivem.kata.banking.core.common.Guard;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
@@ -16,16 +17,10 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     }
 
     public WithdrawFundsResponse handle(WithdrawFundsRequest request) {
-        Guard.againstNullOrWhitespace(request.getAccountNumber(), ValidationMessages.ACCOUNT_NUMBER_EMPTY);
         Guard.againstNonPositive(request.getAmount(), ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
 
-        var optionalBankAccount = repository.find(request.getAccountNumber());
+        var bankAccount = getBankAccount(request);
 
-        if(optionalBankAccount.isEmpty()) {
-            throw new ValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
-        }
-
-        var bankAccount = optionalBankAccount.get();
         var balance = bankAccount.getBalance();
         balance -= request.getAmount();
 
@@ -34,6 +29,19 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
         repository.update(bankAccount);
 
         return getResponse(bankAccount);
+    }
+
+    private BankAccount getBankAccount(WithdrawFundsRequest request) {
+        Guard.againstNullOrWhitespace(request.getAccountNumber(), ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+
+        var accountNumber = new AccountNumber(request.getAccountNumber());
+        var optionalBankAccount = repository.find(accountNumber);
+
+        if(optionalBankAccount.isEmpty()) {
+            throw new ValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        }
+
+        return optionalBankAccount.get();
     }
 
     private WithdrawFundsResponse getResponse(BankAccount bankAccount) {

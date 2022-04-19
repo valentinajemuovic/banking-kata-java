@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface BankAccountRepository {
 
-    Optional<BankAccount> find(String accountNumber);
+    Optional<BankAccount> find(AccountNumber accountNumber);
 
     void add(BankAccount bankAccount);
 
