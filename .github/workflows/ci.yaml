@@ -2,14 +2,14 @@ name: CI
 on: [push]
 jobs:
   build-job:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup JDK 17
+      - name: Setup Java
         uses: actions/setup-java@v2
         with:
           java-version: 17
           distribution: 'adopt'
-      - name: Build
+      - name: Gradle Build
         run: ./gradlew build
