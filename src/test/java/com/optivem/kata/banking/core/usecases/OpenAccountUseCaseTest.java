@@ -1,12 +1,12 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.domain.entities.BankAccount;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
-import com.optivem.kata.banking.infra.fake.generators.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.infra.fake.repositories.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

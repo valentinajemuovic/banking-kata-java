@@ -1,7 +1,7 @@
-package com.optivem.kata.banking.infra.fake.repositories;
+package com.optivem.kata.banking.infra.fake.accounts;
 
-import com.optivem.kata.banking.core.domain.entities.BankAccount;
-import com.optivem.kata.banking.core.domain.repositories.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 
 import java.util.HashMap;
 import java.util.Map;

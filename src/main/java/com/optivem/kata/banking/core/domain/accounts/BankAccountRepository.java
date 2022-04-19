@@ -1,6 +1,4 @@
-package com.optivem.kata.banking.core.domain.repositories;
-
-import com.optivem.kata.banking.core.domain.entities.BankAccount;
+package com.optivem.kata.banking.core.domain.accounts;
 
 import java.util.Optional;
 

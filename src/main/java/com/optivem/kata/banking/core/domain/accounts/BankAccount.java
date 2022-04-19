@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.domain.entities;
+package com.optivem.kata.banking.core.domain.accounts;
 
 public class BankAccount {
     private String accountNumber;

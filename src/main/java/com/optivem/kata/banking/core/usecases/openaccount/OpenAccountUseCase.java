@@ -1,10 +1,10 @@
 package com.optivem.kata.banking.core.usecases.openaccount;
 
 import com.optivem.kata.banking.core.common.Guard;
-import com.optivem.kata.banking.core.domain.entities.BankAccount;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.domain.generators.AccountNumberGenerator;
-import com.optivem.kata.banking.core.domain.repositories.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
 public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccountResponse> {

@@ -1,6 +1,7 @@
-package com.optivem.kata.banking.infra.fake.repositories;
+package com.optivem.kata.banking.infra.fake.bankaccounts;
 
-import com.optivem.kata.banking.core.domain.entities.BankAccount;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
+import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
