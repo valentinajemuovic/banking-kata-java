@@ -1,29 +1,35 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.domain.entities.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
 import com.optivem.kata.banking.infra.fake.generators.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.infra.fake.repositories.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse2;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OpenAccountUseCaseTest {
 
     private FakeAccountNumberGenerator accountNumberGenerator;
+    private FakeBankAccountRepository bankAccountRepository;
     private OpenAccountUseCase useCase;
 
     @BeforeEach
     void init() {
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
-        this.useCase = new OpenAccountUseCase(accountNumberGenerator);
+        this.bankAccountRepository = new FakeBankAccountRepository();
+        this.useCase = new OpenAccountUseCase(accountNumberGenerator, bankAccountRepository);
     }
 
     @ParameterizedTest
@@ -38,8 +44,13 @@ public class OpenAccountUseCaseTest {
 
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
-        
+
+        var expectedBankAccount = new BankAccount(accountNumber);
+
         assertResponse(request, expectedResponse);
+
+        var retrievedBankAccount = bankAccountRepository.find(accountNumber);
+        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
 
     private static Stream<Arguments> should_open_account_when_request_is_valid() {
