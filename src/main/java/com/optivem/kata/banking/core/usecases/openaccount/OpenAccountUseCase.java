@@ -9,8 +9,8 @@ import com.optivem.kata.banking.core.usecases.UseCase;
 
 public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccountResponse> {
 
-    private AccountNumberGenerator accountNumberGenerator;
-    private BankAccountRepository bankAccountRepository;
+    private final AccountNumberGenerator accountNumberGenerator;
+    private final BankAccountRepository bankAccountRepository;
 
     public OpenAccountUseCase(AccountNumberGenerator accountNumberGenerator, BankAccountRepository bankAccountRepository) {
         this.accountNumberGenerator = accountNumberGenerator;
@@ -24,7 +24,7 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
 
         var accountNumber = accountNumberGenerator.next();
 
-        var bankAccount = new BankAccount(accountNumber, request.getInitialBalance());
+        var bankAccount = new BankAccount(accountNumber, request.getFirstName(), request.getLastName(), request.getInitialBalance());
         bankAccountRepository.add(bankAccount);
 
         return getResponse(accountNumber);

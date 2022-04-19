@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.infra.fake.bankaccounts;
 
-import com.optivem.kata.banking.core.domain.accounts.BankAccount;
+import com.optivem.kata.banking.core.common.Factory;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,8 +30,7 @@ class FakeBankAccountRepositoryTest {
     @Test
     void show_return_bank_account_when_account_number_exists() {
         var accountNumber = "GB36BARC20038032622823";
-        var balance = 40;
-        var bankAccount = new BankAccount(accountNumber, balance);
+        var bankAccount = Factory.createDefaultBankAccount(accountNumber);
 
         repository.add(bankAccount);
 
@@ -43,9 +42,9 @@ class FakeBankAccountRepositoryTest {
     void should_not_be_able_to_change_bank_account_after_add() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = new BankAccount(accountNumber, balance);
+        var bankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
-        var expectedBankAccount = new BankAccount(accountNumber, balance);
+        var expectedBankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
         repository.add(bankAccount);
 
@@ -60,9 +59,9 @@ class FakeBankAccountRepositoryTest {
     void should_not_be_able_to_change_bank_account_after_find() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = new BankAccount(accountNumber, balance);
+        var bankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
-        var expectedBankAccount = new BankAccount(accountNumber, balance);
+        var expectedBankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
         repository.add(bankAccount);
         var retrievedBankAccount = repository.find(accountNumber);
@@ -80,9 +79,9 @@ class FakeBankAccountRepositoryTest {
     void should_not_be_able_to_change_bank_account_after_update() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = new BankAccount(accountNumber, balance);
+        var bankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
-        var expectedBankAccount = new BankAccount(accountNumber, balance);
+        var expectedBankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
 
         repository.add(bankAccount);
         var retrievedBankAccount = repository.find(accountNumber);
@@ -102,9 +101,9 @@ class FakeBankAccountRepositoryTest {
     void should_retrieve_updated_bank_account_after_update() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = new BankAccount(accountNumber, balance);
+        var bankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
         var updateBalance = 10;
-        var expectedUpdatedBankAccount = new BankAccount(accountNumber, updateBalance);
+        var expectedUpdatedBankAccount = Factory.createDefaultBankAccount(accountNumber, updateBalance);
 
         repository.add(bankAccount);
 
@@ -122,8 +121,8 @@ class FakeBankAccountRepositoryTest {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
         var balance2 = 60;
-        var bankAccount = new BankAccount(accountNumber, balance);
-        var bankAccount2 = new BankAccount(accountNumber, balance2);
+        var bankAccount = Factory.createDefaultBankAccount(accountNumber, balance);
+        var bankAccount2 = Factory.createDefaultBankAccount(accountNumber, balance2);
 
         repository.add(bankAccount);
 
@@ -133,8 +132,7 @@ class FakeBankAccountRepositoryTest {
     @Test
     void should_throw_exception_when_attempt_to_update_non_existent_bank_account() {
         var accountNumber = "GB36BARC20038032622823";
-        var balance = 40;
-        var bankAccount = new BankAccount(accountNumber, balance);
+        var bankAccount = Factory.createDefaultBankAccount(accountNumber);
 
         assertThrowsRepositoryException(() -> repository.update(bankAccount), RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }

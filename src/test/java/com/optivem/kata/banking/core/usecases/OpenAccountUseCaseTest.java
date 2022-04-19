@@ -47,7 +47,7 @@ class OpenAccountUseCaseTest {
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
 
-        var expectedBankAccount = new BankAccount(accountNumber, initialBalance);
+        var expectedBankAccount = new BankAccount(accountNumber, firstName, lastName, initialBalance);
 
         assertSuccess(request, expectedResponse);
 
