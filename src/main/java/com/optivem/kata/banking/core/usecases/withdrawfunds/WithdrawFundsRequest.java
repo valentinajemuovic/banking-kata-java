@@ -1,4 +1,6 @@
 package com.optivem.kata.banking.core.usecases.withdrawfunds;
 
-public class WithdrawFundsRequest {
+import com.optivem.kata.banking.core.usecases.Request;
+
+public class WithdrawFundsRequest implements Request<WithdrawFundsResponse> {
 }

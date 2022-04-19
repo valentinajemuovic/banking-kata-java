@@ -4,8 +4,9 @@ import com.optivem.kata.banking.core.common.Guard;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.domain.generators.AccountNumberGenerator;
+import com.optivem.kata.banking.core.usecases.UseCase;
 
-public class OpenAccountUseCase {
+public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccountResponse> {
 
     private AccountNumberGenerator accountNumberGenerator;
 

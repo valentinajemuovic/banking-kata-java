@@ -1,19 +1,19 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
+import com.optivem.kata.banking.core.common.Assertions;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
 import com.optivem.kata.banking.infra.fake.generators.FakeAccountNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -57,7 +57,7 @@ public class OpenAccountUseCaseTest {
         var request = new OpenAccountRequest();
         request.setFirstName(firstName);
 
-        assertThrowsValidationException(request, ValidationMessages.FIRST_NAME_EMPTY);
+        assertThrows(request, ValidationMessages.FIRST_NAME_EMPTY);
     }
 
     private static Stream<String> should_throw_exception_when_first_name_is_empty() {
@@ -71,7 +71,7 @@ public class OpenAccountUseCaseTest {
         request.setFirstName("John");
         request.setLastName(lastName);
 
-        assertThrowsValidationException(request, ValidationMessages.LAST_NAME_EMPTY);
+        assertThrows(request, ValidationMessages.LAST_NAME_EMPTY);
     }
 
     private static Stream<String> should_throw_exception_when_last_name_is_empty() {
@@ -86,15 +86,14 @@ public class OpenAccountUseCaseTest {
         request.setLastName("Smith");
         request.setInitialBalance(balance);
 
-        assertThrowsValidationException(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
+        assertThrows(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
     }
 
     private static Stream<Integer> should_throw_exception_when_initial_balance_is_negative() {
         return Stream.of(-1, -2, -10);
     }
 
-    private void assertThrowsValidationException(OpenAccountRequest request, String message) {
-        var exception = assertThrows(ValidationException.class, () -> useCase.handle(request));
-        assertThat(exception.getMessage()).isEqualTo(message);
+    private void assertThrows(OpenAccountRequest request, String message) {
+        assertThrowsValidationException(useCase, request, message);
     }
 }
