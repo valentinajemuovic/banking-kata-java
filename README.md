@@ -1,6 +1,6 @@
 # Banking Kata - Java
 
-[![CI](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml)
+[![CI](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml/badge.svg)](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml)
 
 TDD & Clean Architecture implementation.
 
