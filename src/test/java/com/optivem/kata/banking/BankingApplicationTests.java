@@ -10,7 +10,7 @@ class BankingApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assertThat(1 == 1).isTrue();
+		assertThat(1 == 1).isSameAs(true);
 	}
 
 }

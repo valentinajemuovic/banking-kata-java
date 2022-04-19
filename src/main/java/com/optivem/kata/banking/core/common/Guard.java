@@ -2,6 +2,7 @@ package com.optivem.kata.banking.core.common;
 
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 
+import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
 public class Guard {
@@ -14,7 +15,7 @@ public class Guard {
         }
     }
 
-    public static void against(Predicate<Integer> tester, int value, String message) {
+    public static void against(IntPredicate tester, int value, String message) {
         if(tester.test(value)) {
             throw new ValidationException(message);
         }
