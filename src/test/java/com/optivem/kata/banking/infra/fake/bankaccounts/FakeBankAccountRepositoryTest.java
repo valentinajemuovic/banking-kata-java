@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FakeBankAccountRepositoryTest {
+class FakeBankAccountRepositoryTest {
 
     private FakeBankAccountRepository repository;
 

@@ -6,28 +6,30 @@ import java.util.function.Predicate;
 
 public class Guard {
 
-    public static void Against(Predicate<String> tester, String value, String message) {
+    private Guard() {}
+
+    public static void against(Predicate<String> tester, String value, String message) {
         if(tester.test(value)) {
             throw new ValidationException(message);
         }
     }
 
-    public static void Against(Predicate<Integer> tester, int value, String message) {
+    public static void against(Predicate<Integer> tester, int value, String message) {
         if(tester.test(value)) {
             throw new ValidationException(message);
         }
     }
 
-    public static void AgainstNullOrWhitespace(String value, String message) {
-        Against(Validation::isNullOrWhitespace, value, message);
+    public static void againstNullOrWhitespace(String value, String message) {
+        against(Validation::isNullOrWhitespace, value, message);
     }
 
-    public static void AgainstNegative(int value, String message) {
-        Against(Validation::isNegative, value, message);
+    public static void againstNegative(int value, String message) {
+        against(Validation::isNegative, value, message);
     }
 
-    public static void AgainstNonPositive(int value, String message) {
-        Against(Validation::isNonPositive, value, message);
+    public static void againstNonPositive(int value, String message) {
+        against(Validation::isNonPositive, value, message);
     }
 
 }

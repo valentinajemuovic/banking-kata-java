@@ -16,7 +16,7 @@ import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_IN
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WithdrawFundsUseCaseTest {
+class WithdrawFundsUseCaseTest {
 
     private FakeBankAccountRepository repository;
     private WithdrawFundsUseCase useCase;

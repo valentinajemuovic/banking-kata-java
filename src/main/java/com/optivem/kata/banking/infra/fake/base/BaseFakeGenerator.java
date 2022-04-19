@@ -11,7 +11,7 @@ import java.util.Queue;
 public abstract class BaseFakeGenerator<T> implements Generator<T> {
     private Queue<String> queue;
 
-    public BaseFakeGenerator() {
+    protected BaseFakeGenerator() {
         this.queue = new ArrayDeque<>();
     }
 

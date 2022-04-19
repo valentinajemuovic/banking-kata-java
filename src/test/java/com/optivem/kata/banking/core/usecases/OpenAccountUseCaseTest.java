@@ -21,7 +21,7 @@ import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGE
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OpenAccountUseCaseTest {
+class OpenAccountUseCaseTest {
 
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeBankAccountRepository bankAccountRepository;
