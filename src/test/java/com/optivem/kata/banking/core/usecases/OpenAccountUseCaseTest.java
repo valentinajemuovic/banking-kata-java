@@ -15,8 +15,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.Assertions.assertResponse2;
+import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
+import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGERS;
+import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OpenAccountUseCaseTest {
@@ -47,7 +49,7 @@ public class OpenAccountUseCaseTest {
 
         var expectedBankAccount = new BankAccount(accountNumber);
 
-        assertResponse(request, expectedResponse);
+        assertSuccess(request, expectedResponse);
 
         var retrievedBankAccount = bankAccountRepository.find(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
@@ -59,7 +61,7 @@ public class OpenAccountUseCaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource
+    @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_when_first_name_is_empty(String firstName) {
         var request = new OpenAccountRequest();
         request.setFirstName(firstName);
@@ -67,12 +69,8 @@ public class OpenAccountUseCaseTest {
         assertThrows(request, ValidationMessages.FIRST_NAME_EMPTY);
     }
 
-    private static Stream<String> should_throw_exception_when_first_name_is_empty() {
-        return Stream.of(null, "", " ", "   ");
-    }
-
     @ParameterizedTest
-    @MethodSource
+    @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_when_last_name_is_empty(String lastName) {
         var request = new OpenAccountRequest();
         request.setFirstName("John");
@@ -81,12 +79,8 @@ public class OpenAccountUseCaseTest {
         assertThrows(request, ValidationMessages.LAST_NAME_EMPTY);
     }
 
-    private static Stream<String> should_throw_exception_when_last_name_is_empty() {
-        return Stream.of(null, "", " ", "   ");
-    }
-
     @ParameterizedTest
-    @MethodSource
+    @MethodSource(NEGATIVE_INTEGERS)
     void should_throw_exception_when_initial_balance_is_negative(int balance) {
         var request = new OpenAccountRequest();
         request.setFirstName("John");
@@ -96,12 +90,8 @@ public class OpenAccountUseCaseTest {
         assertThrows(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
     }
 
-    private static Stream<Integer> should_throw_exception_when_initial_balance_is_negative() {
-        return Stream.of(-1, -2, -10);
-    }
-
-    private void assertResponse(OpenAccountRequest request, OpenAccountResponse expectedResponse) {
-        assertResponse2(useCase, request, expectedResponse);
+    private void assertSuccess(OpenAccountRequest request, OpenAccountResponse expectedResponse) {
+        assertResponse(useCase, request, expectedResponse);
     }
     
     private void assertThrows(OpenAccountRequest request, String message) {

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Assertions {
 
-    public static <R extends Request<P>, P, U extends UseCase<R, P>> void assertResponse2(U useCase, R request, P expectedResponse) {
+    public static <R extends Request<P>, P, U extends UseCase<R, P>> void assertResponse(U useCase, R request, P expectedResponse) {
         var response = useCase.handle(request);
         assertThat(response).isEqualTo(expectedResponse);
     }
