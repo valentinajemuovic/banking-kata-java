@@ -5,11 +5,11 @@ import com.optivem.kata.banking.infra.fake.exceptions.FakeException;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Queue;
 
 public abstract class BaseFakeGenerator<T> implements Generator<T> {
-    private Queue<String> queue;
+    private final Queue<T> queue;
 
     protected BaseFakeGenerator() {
         this.queue = new ArrayDeque<>();
@@ -21,10 +21,10 @@ public abstract class BaseFakeGenerator<T> implements Generator<T> {
             throw new FakeException(FakeMessages.GENERATOR_DOES_NOT_HAVE_NEXT);
         }
 
-        return (T)queue.remove();
+        return queue.remove();
     }
 
-    public void add(String... values) {
-        Arrays.stream(values).forEach(e -> queue.add(e));
+    public void add(T... values) {
+        queue.addAll(List.of(values));
     }
 }
