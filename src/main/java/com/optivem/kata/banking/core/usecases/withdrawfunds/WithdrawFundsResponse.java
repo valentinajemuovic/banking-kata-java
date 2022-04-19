@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class WithdrawFundsResponse {
+    private int balance;
 }

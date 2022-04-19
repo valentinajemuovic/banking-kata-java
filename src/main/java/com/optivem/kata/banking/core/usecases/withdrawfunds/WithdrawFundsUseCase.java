@@ -24,6 +24,13 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
             throw new ValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
         }
 
-        return new WithdrawFundsResponse();
+        var bankAccount = optionalBankAccount.get();
+        var balance = bankAccount.getBalance();
+        balance -= request.getAmount();
+
+        var response = new WithdrawFundsResponse();
+        response.setBalance(balance);
+
+        return response;
     }
 }

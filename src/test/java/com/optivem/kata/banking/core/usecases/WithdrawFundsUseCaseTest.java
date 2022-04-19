@@ -28,11 +28,13 @@ public class WithdrawFundsUseCaseTest {
     }
 
     @Test
-    void nothing() {
+    void should_withdraw_funds_given_valid_request() {
         var accountNumber = "GB10BARC20040184197751";
+        var initialBalance = 70;
         var amount = 30;
+        var expectedFinalBalance = 40;
 
-        var bankAccount = new BankAccount(accountNumber);
+        var bankAccount = new BankAccount(accountNumber, initialBalance);
         repository.add(bankAccount);
 
         var request = new WithdrawFundsRequest();
@@ -40,6 +42,7 @@ public class WithdrawFundsUseCaseTest {
         request.setAmount(amount);
 
         var expectedResponse = new WithdrawFundsResponse();
+        expectedResponse.setBalance(expectedFinalBalance);
 
         var response = useCase.handle(request);
 

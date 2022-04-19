@@ -24,7 +24,7 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
 
         var accountNumber = accountNumberGenerator.next();
 
-        var bankAccount = new BankAccount(accountNumber);
+        var bankAccount = new BankAccount(accountNumber, request.getInitialBalance());
         bankAccountRepository.add(bankAccount);
 
         return getResponse(accountNumber);

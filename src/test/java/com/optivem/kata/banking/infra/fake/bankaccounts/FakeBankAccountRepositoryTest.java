@@ -28,7 +28,8 @@ public class FakeBankAccountRepositoryTest {
     @Test
     void show_return_bank_account_when_account_number_exists() {
         var accountNumber = "GB36BARC20038032622823";
-        var bankAccount = new BankAccount(accountNumber);
+        var balance = 40;
+        var bankAccount = new BankAccount(accountNumber, balance);
 
         repository.add(bankAccount);
 
