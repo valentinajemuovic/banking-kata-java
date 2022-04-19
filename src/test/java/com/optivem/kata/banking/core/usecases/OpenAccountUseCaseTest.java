@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.common.Assertions;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
@@ -13,9 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static com.optivem.kata.banking.core.common.Assertions.assertResponse2;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OpenAccountUseCaseTest {
 
@@ -40,10 +38,8 @@ public class OpenAccountUseCaseTest {
 
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
-
-        var response = useCase.handle(request);
-
-        assertThat(response).isEqualTo(expectedResponse);
+        
+        assertResponse(request, expectedResponse);
     }
 
     private static Stream<Arguments> should_open_account_when_request_is_valid() {
@@ -93,6 +89,10 @@ public class OpenAccountUseCaseTest {
         return Stream.of(-1, -2, -10);
     }
 
+    private void assertResponse(OpenAccountRequest request, OpenAccountResponse expectedResponse) {
+        assertResponse2(useCase, request, expectedResponse);
+    }
+    
     private void assertThrows(OpenAccountRequest request, String message) {
         assertThrowsValidationException(useCase, request, message);
     }
