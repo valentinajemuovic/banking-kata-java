@@ -16,6 +16,7 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
 
     public WithdrawFundsResponse handle(WithdrawFundsRequest request) {
         Guard.AgainstNullOrWhitespace(request.getAccountNumber(), ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        Guard.AgainstNonPositive(request.getAmount(), ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
 
         var optionalBankAccount = repository.find(request.getAccountNumber());
 

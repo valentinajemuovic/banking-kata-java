@@ -9,4 +9,8 @@ public class Validation {
     public static boolean isNegative(int value) {
         return value < 0;
     }
+
+    public static boolean isNonPositive(int value) {
+        return value <= 0;
+    }
 }

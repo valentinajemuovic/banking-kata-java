@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
+import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,12 +30,14 @@ public class WithdrawFundsUseCaseTest {
     @Test
     void nothing() {
         var accountNumber = "GB10BARC20040184197751";
+        var amount = 30;
 
         var bankAccount = new BankAccount(accountNumber);
         repository.add(bankAccount);
 
         var request = new WithdrawFundsRequest();
         request.setAccountNumber(accountNumber);
+        request.setAmount(amount);
 
         var expectedResponse = new WithdrawFundsResponse();
 
@@ -55,11 +58,25 @@ public class WithdrawFundsUseCaseTest {
     @Test
     void should_throw_exception_given_non_existent_account_number() {
         var accountNumber = "GB10BARC20040184197751";
+        var amount = 30;
 
         var request = new WithdrawFundsRequest();
         request.setAccountNumber(accountNumber);
+        request.setAmount(amount);
 
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+    }
+
+    @ParameterizedTest
+    @MethodSource(NON_POSITIVE_INTEGERS)
+    void should_throw_exception_given_non_positive_amount(int amount) {
+        var accountNumber = "GB10BARC20040184197751";
+
+        var request = new WithdrawFundsRequest();
+        request.setAccountNumber(accountNumber);
+        request.setAmount(amount);
+
+        assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
     private void assertThrows(WithdrawFundsRequest request, String message) {

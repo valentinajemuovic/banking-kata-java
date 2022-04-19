@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class WithdrawFundsRequest implements Request<WithdrawFundsResponse> {
     private String accountNumber;
+    private int amount;
 }
