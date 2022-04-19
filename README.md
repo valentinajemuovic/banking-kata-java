@@ -7,3 +7,5 @@ Banking Use Cases:
 - Withdraw funds
 - Deposit funds
 - View statement
+
+Java implementation (OpenJDK 17)
