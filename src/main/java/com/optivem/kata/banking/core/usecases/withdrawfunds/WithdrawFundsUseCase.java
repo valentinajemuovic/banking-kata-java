@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.usecases.withdrawfunds;
 
 import com.optivem.kata.banking.core.common.Guard;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
@@ -8,7 +9,7 @@ import com.optivem.kata.banking.core.usecases.UseCase;
 
 public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, WithdrawFundsResponse> {
 
-    private BankAccountRepository repository;
+    private final BankAccountRepository repository;
 
     public WithdrawFundsUseCase(BankAccountRepository repository) {
         this.repository = repository;
@@ -28,9 +29,16 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
         var balance = bankAccount.getBalance();
         balance -= request.getAmount();
 
-        var response = new WithdrawFundsResponse();
-        response.setBalance(balance);
+        bankAccount.setBalance(balance);
 
+        repository.update(bankAccount);
+
+        return getResponse(bankAccount);
+    }
+
+    private WithdrawFundsResponse getResponse(BankAccount bankAccount) {
+        var response = new WithdrawFundsResponse();
+        response.setBalance(bankAccount.getBalance());
         return response;
     }
 }

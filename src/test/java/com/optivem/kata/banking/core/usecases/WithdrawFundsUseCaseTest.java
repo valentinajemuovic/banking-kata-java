@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Optional;
+
+import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
@@ -44,9 +47,12 @@ class WithdrawFundsUseCaseTest {
         var expectedResponse = new WithdrawFundsResponse();
         expectedResponse.setBalance(expectedFinalBalance);
 
-        var response = useCase.handle(request);
+        assertSuccess(request, expectedResponse);
 
-        assertThat(response).usingRecursiveComparison().isEqualTo(expectedResponse);
+        var expectedBankAccount = new BankAccount(accountNumber, expectedFinalBalance);
+
+        var retrievedBankAccount = repository.find(accountNumber);
+        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
 
     @ParameterizedTest
@@ -80,6 +86,10 @@ class WithdrawFundsUseCaseTest {
         request.setAmount(amount);
 
         assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+    }
+
+    private void assertSuccess(WithdrawFundsRequest request, WithdrawFundsResponse expectedResponse) {
+        assertResponse(useCase, request, expectedResponse);
     }
 
     private void assertThrows(WithdrawFundsRequest request, String message) {

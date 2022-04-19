@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class FakeBankAccountRepository implements BankAccountRepository {
 
-    private Map<String, BankAccount> bankAccounts;
+    private final Map<String, BankAccount> bankAccounts;
 
     public FakeBankAccountRepository() {
         this.bankAccounts = new HashMap<>();
@@ -27,7 +27,14 @@ public class FakeBankAccountRepository implements BankAccountRepository {
 
     @Override
     public void add(BankAccount bankAccount) {
+        var clonedBankAccount = new BankAccount(bankAccount);
         var key = bankAccount.getAccountNumber();
-        bankAccounts.put(key, bankAccount);
+        bankAccounts.put(key, clonedBankAccount);
     }
+
+    @Override
+    public void update(BankAccount bankAccount) {
+        throw new UnsupportedOperationException();
+    }
+
 }

@@ -36,4 +36,21 @@ class FakeBankAccountRepositoryTest {
         var retrievedBankAccount = repository.find(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(bankAccount));
     }
+
+    @Test
+    void should_not_be_able_to_change_after_adding() {
+        var accountNumber = "GB36BARC20038032622823";
+        var balance = 40;
+        var bankAccount = new BankAccount(accountNumber, balance);
+
+        var expectedBankAccount = new BankAccount(accountNumber, balance);
+
+        repository.add(bankAccount);
+
+        bankAccount.setBalance(60);
+
+        var retrievedBankAccount = repository.find(accountNumber);
+
+        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
+    }
 }
