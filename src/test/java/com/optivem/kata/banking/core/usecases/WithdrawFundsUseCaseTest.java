@@ -10,9 +10,11 @@ import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
@@ -33,13 +35,9 @@ class WithdrawFundsUseCaseTest {
         this.useCase = new WithdrawFundsUseCase(repository);
     }
 
-    @Test
-    void should_withdraw_funds_given_valid_request() {
-        var accountNumber = "GB10BARC20040184197751";
-        var initialBalance = 70;
-        var amount = 30;
-        var expectedFinalBalance = 40;
-
+    @ParameterizedTest
+    @MethodSource
+    void should_withdraw_funds_given_valid_request(String accountNumber, int initialBalance, int amount, int expectedFinalBalance) {
         givenBankAccount(accountNumber, initialBalance);
 
         var request = aWithdrawFundsRequest()
@@ -55,6 +53,11 @@ class WithdrawFundsUseCaseTest {
         assertContainsBankAccount(accountNumber, expectedFinalBalance);
     }
 
+    private static Stream<Arguments> should_withdraw_funds_given_valid_request() {
+        return Stream.of(Arguments.of("GB10BARC20040184197751", 70, 30, 40),
+                Arguments.of("GB36BMFK75394735916876", 100, 100, 0));
+    }
+
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
@@ -67,10 +70,7 @@ class WithdrawFundsUseCaseTest {
 
     @Test
     void should_throw_exception_given_non_existent_account_number() {
-        var accountNumber = "GB10BARC20040184197751";
-
         var request = aWithdrawFundsRequest()
-                .accountNumber(accountNumber)
                 .build();
 
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
