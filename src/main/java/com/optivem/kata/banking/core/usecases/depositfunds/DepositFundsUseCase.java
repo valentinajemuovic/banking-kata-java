@@ -22,10 +22,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
         var bankAccount = getBankAccount(request);
 
-        var balance = bankAccount.getBalance();
-        balance += request.getAmount();
-
-        bankAccount.setBalance(balance);
+        bankAccount.deposit(request.getAmount());
 
         repository.update(bankAccount);
 

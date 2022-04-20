@@ -54,7 +54,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        bankAccount.setBalance(60);
+        bankAccount.deposit(60);
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -77,7 +77,7 @@ class FakeBankAccountRepositoryTest {
 
         var retrievedBankAccount = repository.find(new AccountNumber(accountNumber)).get();
 
-        retrievedBankAccount.setBalance(20);
+        retrievedBankAccount.deposit(20);
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -102,7 +102,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.update(retrievedBankAccount);
 
-        retrievedBankAccount.setBalance(10);
+        retrievedBankAccount.deposit(10);
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -117,7 +117,7 @@ class FakeBankAccountRepositoryTest {
                 .balance(balance)
                 .build();
 
-        var updateBalance = 10;
+        var updateBalance = 50;
 
         var expectedUpdatedBankAccount = aBankAccount()
                 .accountNumber(accountNumber)
@@ -126,7 +126,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        bankAccount.setBalance(10);
+        bankAccount.deposit(10);
 
         repository.update(bankAccount);
 

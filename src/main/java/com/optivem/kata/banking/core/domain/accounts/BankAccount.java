@@ -1,5 +1,8 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
+import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
+import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+
 public class BankAccount {
     private final AccountNumber accountNumber;
     private final AccountHolderName accountHolderName;
@@ -25,7 +28,15 @@ public class BankAccount {
         return balance;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void deposit(int amount) {
+        balance += amount;
+    }
+
+    public void withdraw(int amount) {
+        if(amount > balance) {
+            throw new ValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
+        }
+
+        balance -= amount;
     }
 }

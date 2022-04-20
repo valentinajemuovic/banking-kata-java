@@ -21,14 +21,7 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
 
         var bankAccount = getBankAccount(request);
 
-        if(request.getAmount() > bankAccount.getBalance()) {
-            throw new ValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
-        }
-
-        var balance = bankAccount.getBalance();
-        balance -= request.getAmount();
-
-        bankAccount.setBalance(balance);
+        bankAccount.withdraw(request.getAmount());
 
         repository.update(bankAccount);
 
