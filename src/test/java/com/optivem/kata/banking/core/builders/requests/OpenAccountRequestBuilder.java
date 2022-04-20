@@ -42,7 +42,6 @@ public class OpenAccountRequestBuilder {
         request.setFirstName(firstName);
         request.setLastName(lastName);
         request.setInitialBalance(balance);
-
         return request;
     }
 }

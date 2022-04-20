@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
@@ -41,9 +42,10 @@ class WithdrawFundsUseCaseTest {
 
         givenBankAccount(accountNumber, initialBalance);
 
-        var request = new WithdrawFundsRequest();
-        request.setAccountNumber(accountNumber);
-        request.setAmount(amount);
+        var request = aWithdrawFundsRequest()
+                .accountNumber(accountNumber)
+                .amount(amount)
+                .build();
 
         var expectedResponse = new WithdrawFundsResponse();
         expectedResponse.setBalance(expectedFinalBalance);
@@ -56,11 +58,9 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
-        var amount = 30;
-
-        var request = new WithdrawFundsRequest();
-        request.setAccountNumber(accountNumber);
-        request.setAmount(amount);
+        var request = aWithdrawFundsRequest()
+                .accountNumber(accountNumber)
+                .build();
 
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
@@ -68,11 +68,10 @@ class WithdrawFundsUseCaseTest {
     @Test
     void should_throw_exception_given_non_existent_account_number() {
         var accountNumber = "GB10BARC20040184197751";
-        var amount = 30;
 
-        var request = new WithdrawFundsRequest();
-        request.setAccountNumber(accountNumber);
-        request.setAmount(amount);
+        var request = aWithdrawFundsRequest()
+                .accountNumber(accountNumber)
+                .build();
 
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
@@ -80,11 +79,9 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource(NON_POSITIVE_INTEGERS)
     void should_throw_exception_given_non_positive_amount(int amount) {
-        var accountNumber = "GB10BARC20040184197751";
-
-        var request = new WithdrawFundsRequest();
-        request.setAccountNumber(accountNumber);
-        request.setAmount(amount);
+        var request = aWithdrawFundsRequest()
+                .amount(amount)
+                .build();
 
         assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
@@ -97,9 +94,10 @@ class WithdrawFundsUseCaseTest {
 
         givenBankAccount(accountNumber, balance);
 
-        var request = new WithdrawFundsRequest();
-        request.setAccountNumber(accountNumber);
-        request.setAmount(amount);
+        var request = aWithdrawFundsRequest()
+                .accountNumber(accountNumber)
+                .amount(amount)
+                .build();
 
         assertThrows(request, ValidationMessages.INSUFFICIENT_FUNDS);
 

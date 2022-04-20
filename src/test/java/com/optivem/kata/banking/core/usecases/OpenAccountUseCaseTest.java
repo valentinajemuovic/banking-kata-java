@@ -40,12 +40,13 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_open_account_given_request_is_valid(String firstName, String lastName, int initialBalance, String accountNumber) {
-        registerNextAccountNumber(accountNumber);
+        setupNextRandomAccountNumber(accountNumber);
 
-        var request = new OpenAccountRequest();
-        request.setFirstName(firstName);
-        request.setLastName(lastName);
-        request.setInitialBalance(initialBalance);
+        var request = anOpenAccountRequest()
+                .firstName(firstName)
+                .lastName(lastName)
+                .initialBalance(initialBalance)
+                .build();
 
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
@@ -105,7 +106,7 @@ class OpenAccountUseCaseTest {
         assertThrowsValidationException(useCase, request, message);
     }
 
-    private void registerNextAccountNumber(String accountNumber) {
+    private void setupNextRandomAccountNumber(String accountNumber) {
         accountNumberGenerator.add(new AccountNumber(accountNumber));
     }
 
