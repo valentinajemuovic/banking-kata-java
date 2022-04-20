@@ -1,27 +1,23 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
-import com.optivem.kata.banking.core.common.Guard;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 public class AccountHolderName {
-    private final String firstName;
-    private final String lastName;
+    private final NonEmptyString firstName;
+    private final NonEmptyString lastName;
 
     public AccountHolderName(String firstName, String lastName) {
-        Guard.againstNullOrWhitespace(firstName, ValidationMessages.FIRST_NAME_EMPTY);
-        Guard.againstNullOrWhitespace(lastName, ValidationMessages.LAST_NAME_EMPTY);
-
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = new NonEmptyString(firstName, ValidationMessages.FIRST_NAME_EMPTY);
+        this.lastName = new NonEmptyString(lastName, ValidationMessages.LAST_NAME_EMPTY);
     }
 
-    public String getFirstName() {
+    public NonEmptyString getFirstName() {
         return firstName;
     }
 
-    public String getLastName() {
+    public NonEmptyString getLastName() {
         return lastName;
     }
 }
