@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.common.Factory;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
@@ -17,6 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static com.optivem.kata.banking.core.builders.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGERS;
@@ -49,7 +49,11 @@ class OpenAccountUseCaseTest {
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
 
-        var expectedBankAccount = Factory.createBankAccount(accountNumber, firstName, lastName, initialBalance);
+        var expectedBankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .firstName(firstName)
+                .lastName(lastName)
+                .balance(initialBalance);
 
         assertSuccess(request, expectedResponse);
 

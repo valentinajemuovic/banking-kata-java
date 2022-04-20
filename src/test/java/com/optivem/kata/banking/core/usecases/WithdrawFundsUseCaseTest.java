@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.common.Factory;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
@@ -15,6 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Optional;
 
+import static com.optivem.kata.banking.core.builders.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
@@ -39,7 +39,11 @@ class WithdrawFundsUseCaseTest {
         var amount = 30;
         var expectedFinalBalance = 40;
 
-        var bankAccount = Factory.createDefaultBankAccount(accountNumber, initialBalance);
+        var bankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(initialBalance)
+                .build();
+
         repository.add(bankAccount);
 
         var request = new WithdrawFundsRequest();
@@ -51,7 +55,10 @@ class WithdrawFundsUseCaseTest {
 
         assertSuccess(request, expectedResponse);
 
-        var expectedBankAccount = Factory.createDefaultBankAccount(accountNumber, expectedFinalBalance);
+        var expectedBankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(expectedFinalBalance)
+                .build();
 
         var retrievedBankAccount = findBankAccount(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
