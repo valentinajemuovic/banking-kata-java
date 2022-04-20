@@ -10,7 +10,7 @@ import com.optivem.kata.banking.core.usecases.UseCase;
 
 public class DepositFundsUseCase implements UseCase<DepositFundsRequest, DepositFundsResponse> {
 
-    private BankAccountRepository repository;
+    private final BankAccountRepository repository;
 
     public DepositFundsUseCase(BankAccountRepository repository) {
         this.repository = repository;
@@ -18,6 +18,8 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
     @Override
     public DepositFundsResponse handle(DepositFundsRequest request) {
+        Guard.againstNonPositive(request.getAmount(), ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+
         var bankAccount = getBankAccount(request);
 
         return new DepositFundsResponse();

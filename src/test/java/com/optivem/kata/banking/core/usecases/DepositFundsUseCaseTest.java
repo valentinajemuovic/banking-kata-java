@@ -14,6 +14,7 @@ import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder
 import static com.optivem.kata.banking.core.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
+import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class DepositFundsUseCaseTest {
@@ -57,6 +58,16 @@ class DepositFundsUseCaseTest {
                 .build();
 
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+    }
+
+    @ParameterizedTest
+    @MethodSource(NON_POSITIVE_INTEGERS)
+    void should_throw_exception_given_non_positive_amount(int amount) {
+        var request = aDepositFundsRequest()
+                .amount(amount)
+                .build();
+
+        assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
     private void assertSuccess(DepositFundsRequest request, DepositFundsResponse expectedResponse) {

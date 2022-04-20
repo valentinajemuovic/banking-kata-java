@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class DepositFundsRequest {
     private String accountNumber;
+    private int amount;
 }
