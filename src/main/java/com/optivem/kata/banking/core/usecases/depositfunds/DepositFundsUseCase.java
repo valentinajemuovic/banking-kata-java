@@ -25,9 +25,11 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
         var balance = bankAccount.getBalance();
         balance += request.getAmount();
 
-        var response = new DepositFundsResponse();
-        response.setBalance(balance);
-        return response;
+        bankAccount.setBalance(balance);
+
+        repository.update(bankAccount);
+
+        return getResponse(bankAccount);
     }
 
     private BankAccount getBankAccount(DepositFundsRequest request) {
@@ -41,5 +43,11 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
         }
 
         return optionalBankAccount.get();
+    }
+
+    private DepositFundsResponse getResponse(BankAccount bankAccount) {
+        var response = new DepositFundsResponse();
+        response.setBalance(bankAccount.getBalance());
+        return response;
     }
 }

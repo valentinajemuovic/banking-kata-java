@@ -1,5 +1,7 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsResponse;
@@ -10,12 +12,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Optional;
+
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class DepositFundsUseCaseTest {
 
@@ -46,6 +51,8 @@ class DepositFundsUseCaseTest {
         expectedResponse.setBalance(expectedFinalBalance);
 
         assertSuccess(request, expectedResponse);
+
+        assertContainsBankAccount(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -93,4 +100,17 @@ class DepositFundsUseCaseTest {
         repository.add(bankAccount);
     }
 
+    private void assertContainsBankAccount(String accountNumber, int balance) {
+        var expectedBankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(balance)
+                .build();
+
+        var retrievedBankAccount = findBankAccount(accountNumber);
+        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
+    }
+
+    private Optional<BankAccount> findBankAccount(String accountNumber) {
+        return repository.find(new AccountNumber(accountNumber));
+    }
 }
