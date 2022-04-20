@@ -19,10 +19,9 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     public WithdrawFundsResponse handle(WithdrawFundsRequest request) {
         var accountNumber = new AccountNumber(request.getAccountNumber());
         var amount = new TransactionAmount(request.getAmount());
+
         var bankAccount = getBankAccount(accountNumber);
-
         bankAccount.withdraw(amount);
-
         repository.update(bankAccount);
 
         return getResponse(bankAccount);

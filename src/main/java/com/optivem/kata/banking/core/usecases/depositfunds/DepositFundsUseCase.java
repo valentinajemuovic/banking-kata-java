@@ -20,10 +20,9 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
     public DepositFundsResponse handle(DepositFundsRequest request) {
         var accountNumber = new AccountNumber(request.getAccountNumber());
         var amount = new TransactionAmount(request.getAmount());
+
         var bankAccount = getBankAccount(accountNumber);
-
         bankAccount.deposit(amount);
-
         repository.update(bankAccount);
 
         return getResponse(bankAccount);
