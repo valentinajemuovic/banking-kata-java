@@ -16,7 +16,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.builders.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGERS;
@@ -69,8 +70,9 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_first_name_is_empty(String firstName) {
-        var request = new OpenAccountRequest();
-        request.setFirstName(firstName);
+        var request = anOpenAccountRequest()
+                .firstName(firstName)
+                .build();
 
         assertThrows(request, ValidationMessages.FIRST_NAME_EMPTY);
     }
@@ -78,20 +80,19 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_last_name_is_empty(String lastName) {
-        var request = new OpenAccountRequest();
-        request.setFirstName("John");
-        request.setLastName(lastName);
+        var request = anOpenAccountRequest()
+                .lastName(lastName)
+                .build();
 
         assertThrows(request, ValidationMessages.LAST_NAME_EMPTY);
     }
 
     @ParameterizedTest
     @MethodSource(NEGATIVE_INTEGERS)
-    void should_throw_exception_given_initial_balance_is_negative(int balance) {
-        var request = new OpenAccountRequest();
-        request.setFirstName("John");
-        request.setLastName("Smith");
-        request.setInitialBalance(balance);
+    void should_throw_exception_given_initial_balance_is_negative(int initialBalance) {
+        var request = anOpenAccountRequest()
+                .initialBalance(initialBalance)
+                .build();
 
         assertThrows(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
     }

@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Optional;
 
-import static com.optivem.kata.banking.core.builders.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;

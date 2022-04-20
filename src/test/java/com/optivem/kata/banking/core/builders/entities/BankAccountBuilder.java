@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.builders;
+package com.optivem.kata.banking.core.builders.entities;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
@@ -6,8 +6,8 @@ import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 public class BankAccountBuilder {
 
     private static final String ACCOUNT_NUMBER = "GB10BARC20040184197751";
-    private static final String FIRST_NAME = "JOHN";
-    private static final String LAST_NAME = "SMITH";
+    private static final String FIRST_NAME = "John";
+    private static final String LAST_NAME = "Smith";
     private static final int BALANCE = 100;
 
     private AccountNumber accountNumber;
@@ -49,10 +49,4 @@ public class BankAccountBuilder {
     public BankAccount build() {
         return new BankAccount(accountNumber, firstName, lastName, balance);
     }
-
-
-
-
-
-
 }

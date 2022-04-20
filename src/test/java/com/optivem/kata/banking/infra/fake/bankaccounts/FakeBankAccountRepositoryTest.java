@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static com.optivem.kata.banking.core.builders.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsRepositoryException;
 import static org.assertj.core.api.Assertions.assertThat;
 
