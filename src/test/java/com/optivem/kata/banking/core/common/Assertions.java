@@ -1,20 +1,15 @@
 package com.optivem.kata.banking.core.common;
 
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 import com.optivem.kata.banking.core.usecases.UseCase;
-import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.function.Executable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Assertions {
-
-    public static <R, P, U extends UseCase<R, P>> void assertResponse(U useCase, R request, P expectedResponse) {
-        var response = useCase.handle(request);
-        assertThat(response).isEqualTo(expectedResponse);
-    }
 
     public static void assertThrowsRepositoryException(Executable executable, String message) {
         var exception = assertThrows(RepositoryException.class, executable);
@@ -30,7 +25,11 @@ public class Assertions {
         assertThrowsValidationException(() -> useCase.handle(request), message);
     }
 
-    public static BankAccountRepositoryAssert assertThatRepository(FakeBankAccountRepository repository) {
+    public static <R, P> UseCaseAssert assertThatUseCase(UseCase<R, P> useCase) {
+        return new UseCaseAssert(useCase);
+    }
+
+    public static BankAccountRepositoryAssert assertThatRepository(BankAccountRepository repository) {
         return new BankAccountRepositoryAssert(repository);
     }
 }

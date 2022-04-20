@@ -44,7 +44,7 @@ class DepositFundsUseCaseTest {
         var expectedResponse = new DepositFundsResponse();
         expectedResponse.setBalance(expectedFinalBalance);
 
-        assertSuccess(request, expectedResponse);
+        assertThatUseCase(useCase).assertResponse(request, expectedResponse);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, expectedFinalBalance);
     }
@@ -75,10 +75,6 @@ class DepositFundsUseCaseTest {
                 .build();
 
         assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
-    }
-
-    private void assertSuccess(DepositFundsRequest request, DepositFundsResponse expectedResponse) {
-        assertResponse(useCase, request, expectedResponse);
     }
 
     private void assertThrows(DepositFundsRequest request, String message) {

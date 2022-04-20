@@ -43,7 +43,7 @@ class WithdrawFundsUseCaseTest {
         var expectedResponse = new WithdrawFundsResponse();
         expectedResponse.setBalance(expectedFinalBalance);
 
-        assertSuccess(request, expectedResponse);
+        assertThatUseCase(useCase).assertResponse(request, expectedResponse);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, expectedFinalBalance);
     }
@@ -97,10 +97,6 @@ class WithdrawFundsUseCaseTest {
         assertThrows(request, ValidationMessages.INSUFFICIENT_FUNDS);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, balance);
-    }
-
-    private void assertSuccess(WithdrawFundsRequest request, WithdrawFundsResponse expectedResponse) {
-        assertResponse(useCase, request, expectedResponse);
     }
 
     private void assertThrows(WithdrawFundsRequest request, String message) {

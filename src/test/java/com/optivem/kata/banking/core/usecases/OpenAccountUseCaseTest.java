@@ -54,7 +54,7 @@ class OpenAccountUseCaseTest {
                 .balance(initialBalance)
                 .build();
 
-        assertSuccess(request, expectedResponse);
+        assertThatUseCase(useCase).assertResponse(request, expectedResponse);
 
         assertThatRepository(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
     }
@@ -92,10 +92,6 @@ class OpenAccountUseCaseTest {
                 .build();
 
         assertThrows(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
-    }
-
-    private void assertSuccess(OpenAccountRequest request, OpenAccountResponse expectedResponse) {
-        assertResponse(useCase, request, expectedResponse);
     }
     
     private void assertThrows(OpenAccountRequest request, String message) {
