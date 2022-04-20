@@ -15,8 +15,8 @@ import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
-import static com.optivem.kata.banking.core.common.Assertions.assertThatRepository;
-import static com.optivem.kata.banking.core.common.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.assertions.Assertions.assertThatRepository;
+import static com.optivem.kata.banking.core.assertions.Assertions.assertThatUseCase;
 import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 
