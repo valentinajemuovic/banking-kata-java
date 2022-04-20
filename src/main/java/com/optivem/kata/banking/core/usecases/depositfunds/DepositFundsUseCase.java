@@ -37,7 +37,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
     private DepositFundsResponse getResponse(BankAccount bankAccount) {
         var response = new DepositFundsResponse();
-        response.setBalance(bankAccount.getBalance().getValue().getValue());
+        response.setBalance(bankAccount.getBalance().getValue().value());
         return response;
     }
 }

@@ -31,7 +31,7 @@ public class Guard {
     }
 
     public static void againstNegative(Money value, String message) {
-        againstNegative(value.getValue(), message);
+        againstNegative(value.value(), message);
     }
 
     public static void againstNonPositive(int value, String message) {
@@ -39,6 +39,6 @@ public class Guard {
     }
 
     public static void againstNonPositive(Money value, String message) {
-        againstNonPositive(value.getValue(), message);
+        againstNonPositive(value.value(), message);
     }
 }
