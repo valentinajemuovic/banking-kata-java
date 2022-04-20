@@ -1,4 +1,19 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
-public record AccountNumber(String value) {
+import com.optivem.kata.banking.core.common.Guard;
+import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
+public class AccountNumber {
+    private String value;
+
+    public AccountNumber(String value) {
+        Guard.againstNullOrWhitespace(value, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

@@ -2,7 +2,9 @@ package com.optivem.kata.banking.core.domain.accounts;
 
 import com.optivem.kata.banking.core.common.Guard;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 public class AccountHolderName {
     private final String firstName;
     private final String lastName;

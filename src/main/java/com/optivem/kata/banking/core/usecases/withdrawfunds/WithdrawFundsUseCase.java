@@ -29,8 +29,6 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     }
 
     private BankAccount getBankAccount(WithdrawFundsRequest request) {
-        Guard.againstNullOrWhitespace(request.getAccountNumber(), ValidationMessages.ACCOUNT_NUMBER_EMPTY);
-
         var accountNumber = new AccountNumber(request.getAccountNumber());
         var optionalBankAccount = repository.find(accountNumber);
 
