@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.common.assertions;
 
-import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
 import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatExecutable;
@@ -21,7 +20,7 @@ public class UseCaseRequestAssert<R, P> {
         assertThat(response).isEqualTo(expectedResponse);
     }
 
-    public ValidationException throwsValidationException(String message) {
-        return assertThatExecutable(() -> useCase.handle(request)).throwsValidationException(message);
+    public void throwsValidationException(String message) {
+        assertThatExecutable(() -> useCase.handle(request)).throwsValidationException(message);
     }
 }

@@ -15,15 +15,13 @@ public class ExecutableAssert {
         this.executable = executable;
     }
 
-    public RepositoryException throwsRepositoryException(String message) {
+    public void throwsRepositoryException(String message) {
         var exception = assertThrows(RepositoryException.class, executable);
         assertThat(exception.getMessage()).isEqualTo(message);
-        return exception;
     }
 
-    public ValidationException throwsValidationException(String message) {
+    public void throwsValidationException(String message) {
         var exception = assertThrows(ValidationException.class, executable);
         assertThat(exception.getMessage()).isEqualTo(message);
-        return exception;
     }
 }
