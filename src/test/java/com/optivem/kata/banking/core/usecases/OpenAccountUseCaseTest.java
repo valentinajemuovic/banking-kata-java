@@ -55,7 +55,8 @@ class OpenAccountUseCaseTest {
                 .accountNumber(accountNumber)
                 .firstName(firstName)
                 .lastName(lastName)
-                .balance(initialBalance);
+                .balance(initialBalance)
+                .build();
 
         assertSuccess(request, expectedResponse);
 

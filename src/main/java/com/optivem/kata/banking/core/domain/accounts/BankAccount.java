@@ -2,24 +2,24 @@ package com.optivem.kata.banking.core.domain.accounts;
 
 public class BankAccount {
     private final AccountNumber accountNumber;
-    private final String firstName;
-    private final String lastName;
+    private final AccountHolderName accountHolderName;
     private int balance;
 
-    public BankAccount(AccountNumber accountNumber, String firstName, String lastName, int balance) {
+    public BankAccount(AccountNumber accountNumber, AccountHolderName accountHolderName, int balance) {
         this.accountNumber = accountNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.accountHolderName = accountHolderName;
         this.balance = balance;
     }
 
     public BankAccount(BankAccount other) {
-        this(other.getAccountNumber(), other.getFirstName(), other.getLastName(), other.getBalance());
+        this(other.getAccountNumber(), other.getAccountHolderName(), other.getBalance());
     }
 
     public AccountNumber getAccountNumber() {
         return accountNumber;
     }
+
+    public AccountHolderName getAccountHolderName() { return accountHolderName; }
 
     public int getBalance() {
         return balance;
@@ -27,13 +27,5 @@ public class BankAccount {
 
     public void setBalance(int balance) {
         this.balance = balance;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 }
