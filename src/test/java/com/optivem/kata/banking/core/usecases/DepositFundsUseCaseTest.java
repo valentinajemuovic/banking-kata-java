@@ -4,11 +4,13 @@ import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsResponse;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
+import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
 import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
 import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
@@ -16,16 +18,22 @@ import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHIT
 
 class DepositFundsUseCaseTest {
 
+    private FakeBankAccountRepository repository;
     private DepositFundsUseCase useCase;
 
     @BeforeEach
     void init() {
-        this.useCase = new DepositFundsUseCase();
+        this.repository = new FakeBankAccountRepository();
+        this.useCase = new DepositFundsUseCase(repository);
     }
 
     @Test
     void should_deposit_funds_given_valid_request() {
+        var accountNumber = "GB41OMQP68570038161775";
+        givenBankAccount(accountNumber);
+
         var request = aDepositFundsRequest()
+                .accountNumber(accountNumber)
                 .build();
 
         var expectedResponse = new DepositFundsResponse();
@@ -43,6 +51,13 @@ class DepositFundsUseCaseTest {
         assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
+    @Test
+    void should_throw_exception_given_non_existent_account_number() {
+        var request = aDepositFundsRequest()
+                .build();
+
+        assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+    }
 
     private void assertSuccess(DepositFundsRequest request, DepositFundsResponse expectedResponse) {
         assertResponse(useCase, request, expectedResponse);
@@ -50,6 +65,14 @@ class DepositFundsUseCaseTest {
 
     private void assertThrows(DepositFundsRequest request, String message) {
         assertThrowsValidationException(useCase, request, message);
+    }
+
+    private void givenBankAccount(String accountNumber) {
+        var bankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .build();
+
+        repository.add(bankAccount);
     }
 
 }
