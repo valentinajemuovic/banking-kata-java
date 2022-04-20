@@ -17,8 +17,8 @@ import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder
 import static com.optivem.kata.banking.core.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
 import static com.optivem.kata.banking.core.assertions.Assertions.assertThatRepository;
 import static com.optivem.kata.banking.core.assertions.Assertions.assertThatUseCase;
-import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGERS;
-import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
+import static com.optivem.kata.banking.core.data.MethodSources.NEGATIVE_INTEGERS;
+import static com.optivem.kata.banking.core.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class OpenAccountUseCaseTest {
 

@@ -16,8 +16,8 @@ import static com.optivem.kata.banking.core.builders.requests.WithdrawFundsReque
 import static com.optivem.kata.banking.core.assertions.Assertions.assertThatRepository;
 import static com.optivem.kata.banking.core.assertions.Assertions.assertThatUseCase;
 import static com.optivem.kata.banking.core.givens.Givens.givenThatRepository;
-import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
-import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
+import static com.optivem.kata.banking.core.data.MethodSources.NON_POSITIVE_INTEGERS;
+import static com.optivem.kata.banking.core.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class WithdrawFundsUseCaseTest {
 
