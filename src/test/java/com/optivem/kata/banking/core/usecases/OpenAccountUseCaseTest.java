@@ -2,7 +2,6 @@ package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
 import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
@@ -16,7 +15,8 @@ import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
-import static com.optivem.kata.banking.core.common.Assertions.*;
+import static com.optivem.kata.banking.core.common.Assertions.assertThatRepository;
+import static com.optivem.kata.banking.core.common.Assertions.assertThatUseCase;
 import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -71,7 +71,7 @@ class OpenAccountUseCaseTest {
                 .firstName(firstName)
                 .build();
 
-        assertThrows(request, ValidationMessages.FIRST_NAME_EMPTY);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.FIRST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -81,7 +81,7 @@ class OpenAccountUseCaseTest {
                 .lastName(lastName)
                 .build();
 
-        assertThrows(request, ValidationMessages.LAST_NAME_EMPTY);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.LAST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -91,11 +91,7 @@ class OpenAccountUseCaseTest {
                 .initialBalance(initialBalance)
                 .build();
 
-        assertThrows(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
-    }
-    
-    private void assertThrows(OpenAccountRequest request, String message) {
-        assertThrowsValidationException(useCase, request, message);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
     }
 
     private void setupNextRandomAccountNumber(String accountNumber) {

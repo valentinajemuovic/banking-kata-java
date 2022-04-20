@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsResponse;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -12,7 +11,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
-import static com.optivem.kata.banking.core.common.Assertions.*;
+import static com.optivem.kata.banking.core.common.Assertions.assertThatRepository;
+import static com.optivem.kata.banking.core.common.Assertions.assertThatUseCase;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -56,7 +56,7 @@ class DepositFundsUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -64,7 +64,7 @@ class DepositFundsUseCaseTest {
         var request = aDepositFundsRequest()
                 .build();
 
-        assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @ParameterizedTest
@@ -74,11 +74,7 @@ class DepositFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
-    }
-
-    private void assertThrows(DepositFundsRequest request, String message) {
-        assertThrowsValidationException(useCase, request, message);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
     private void givenBankAccount(String accountNumber, int initialBalance) {

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
-import static com.optivem.kata.banking.core.common.Assertions.assertThrowsRepositoryException;
+import static com.optivem.kata.banking.core.common.Assertions.assertThatExecutable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class FakeBankAccountRepositoryTest {
@@ -165,7 +165,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        assertThrowsRepositoryException(() -> repository.add(bankAccount2), RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
+        assertThatExecutable(() -> repository.add(bankAccount2)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
     }
 
     @Test
@@ -176,7 +176,7 @@ class FakeBankAccountRepositoryTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        assertThrowsRepositoryException(() -> repository.update(bankAccount), RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+        assertThatExecutable(() -> repository.update(bankAccount)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }
 
     private Optional<BankAccount> find(String accountNumber) {

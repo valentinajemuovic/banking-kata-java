@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsRequest;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsResponse;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsUseCase;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -15,7 +14,8 @@ import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
-import static com.optivem.kata.banking.core.common.Assertions.*;
+import static com.optivem.kata.banking.core.common.Assertions.assertThatRepository;
+import static com.optivem.kata.banking.core.common.Assertions.assertThatUseCase;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -60,7 +60,7 @@ class WithdrawFundsUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -68,7 +68,7 @@ class WithdrawFundsUseCaseTest {
         var request = aWithdrawFundsRequest()
                 .build();
 
-        assertThrows(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @ParameterizedTest
@@ -78,7 +78,7 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
     @Test
@@ -94,13 +94,9 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        assertThrows(request, ValidationMessages.INSUFFICIENT_FUNDS);
+        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.INSUFFICIENT_FUNDS);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, balance);
-    }
-
-    private void assertThrows(WithdrawFundsRequest request, String message) {
-        assertThrowsValidationException(useCase, request, message);
     }
 
     private void givenBankAccount(String accountNumber, int balance) {
