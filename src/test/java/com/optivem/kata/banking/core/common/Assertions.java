@@ -11,7 +11,7 @@ public class Assertions {
     }
 
     public static <R, P> UseCaseAssert<R, P> assertThatUseCase(UseCase<R, P> useCase) {
-        return new UseCaseAssert(useCase);
+        return new UseCaseAssert<>(useCase);
     }
 
     public static BankAccountRepositoryAssert assertThatRepository(BankAccountRepository repository) {

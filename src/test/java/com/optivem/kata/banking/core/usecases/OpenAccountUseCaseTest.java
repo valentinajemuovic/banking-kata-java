@@ -54,7 +54,7 @@ class OpenAccountUseCaseTest {
                 .balance(initialBalance)
                 .build();
 
-        assertThatUseCase(useCase).assertResponse(request, expectedResponse);
+        assertThatUseCase(useCase).withRequest(request).assertResponse(expectedResponse);
 
         assertThatRepository(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
     }
@@ -71,7 +71,7 @@ class OpenAccountUseCaseTest {
                 .firstName(firstName)
                 .build();
 
-        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.FIRST_NAME_EMPTY);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.FIRST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -81,7 +81,7 @@ class OpenAccountUseCaseTest {
                 .lastName(lastName)
                 .build();
 
-        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.LAST_NAME_EMPTY);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.LAST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -91,7 +91,7 @@ class OpenAccountUseCaseTest {
                 .initialBalance(initialBalance)
                 .build();
 
-        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.INITIAL_BALANCE_NEGATIVE);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.INITIAL_BALANCE_NEGATIVE);
     }
 
     private void setupNextRandomAccountNumber(String accountNumber) {

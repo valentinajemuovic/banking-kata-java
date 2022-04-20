@@ -43,7 +43,7 @@ class WithdrawFundsUseCaseTest {
         var expectedResponse = new WithdrawFundsResponse();
         expectedResponse.setBalance(expectedFinalBalance);
 
-        assertThatUseCase(useCase).assertResponse(request, expectedResponse);
+        assertThatUseCase(useCase).withRequest(request).assertResponse(expectedResponse);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, expectedFinalBalance);
     }
@@ -60,7 +60,7 @@ class WithdrawFundsUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -68,7 +68,7 @@ class WithdrawFundsUseCaseTest {
         var request = aWithdrawFundsRequest()
                 .build();
 
-        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @ParameterizedTest
@@ -78,7 +78,7 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
     @Test
@@ -94,7 +94,7 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        assertThatUseCase(useCase).throwsValidationException(request, ValidationMessages.INSUFFICIENT_FUNDS);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, balance);
     }
