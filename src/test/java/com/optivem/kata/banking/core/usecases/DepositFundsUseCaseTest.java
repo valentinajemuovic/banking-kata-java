@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
 import static com.optivem.kata.banking.core.common.Assertions.assertThatRepository;
 import static com.optivem.kata.banking.core.common.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.common.Givens.givenThatRepository;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -34,7 +34,7 @@ class DepositFundsUseCaseTest {
         var depositAmount = 50;
         var expectedFinalBalance = 150;
 
-        givenBankAccount(accountNumber, initialBalance);
+        givenThatRepository(repository).containsBankAccount(accountNumber, initialBalance);
 
         var request = aDepositFundsRequest()
                 .accountNumber(accountNumber)
@@ -75,14 +75,5 @@ class DepositFundsUseCaseTest {
                 .build();
 
         assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
-    }
-
-    private void givenBankAccount(String accountNumber, int initialBalance) {
-        var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(initialBalance)
-                .build();
-
-        repository.add(bankAccount);
     }
 }

@@ -12,10 +12,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
 import static com.optivem.kata.banking.core.common.Assertions.assertThatRepository;
 import static com.optivem.kata.banking.core.common.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.common.Givens.givenThatRepository;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -33,7 +33,7 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_withdraw_funds_given_valid_request(String accountNumber, int initialBalance, int amount, int expectedFinalBalance) {
-        givenBankAccount(accountNumber, initialBalance);
+        givenThatRepository(repository).containsBankAccount(accountNumber, initialBalance);
 
         var request = aWithdrawFundsRequest()
                 .accountNumber(accountNumber)
@@ -87,7 +87,7 @@ class WithdrawFundsUseCaseTest {
         var balance = 140;
         var amount = 141;
 
-        givenBankAccount(accountNumber, balance);
+        givenThatRepository(repository).containsBankAccount(accountNumber, balance);
 
         var request = aWithdrawFundsRequest()
                 .accountNumber(accountNumber)
@@ -97,14 +97,5 @@ class WithdrawFundsUseCaseTest {
         assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, balance);
-    }
-
-    private void givenBankAccount(String accountNumber, int balance) {
-        var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
-                .build();
-
-        repository.add(bankAccount);
     }
 }
