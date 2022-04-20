@@ -19,7 +19,6 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     public WithdrawFundsResponse handle(WithdrawFundsRequest request) {
         var accountNumber = new AccountNumber(request.getAccountNumber());
         var amount = new TransactionAmount(request.getAmount());
-
         var bankAccount = getBankAccount(accountNumber);
 
         bankAccount.withdraw(amount);
@@ -30,7 +29,6 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     }
 
     private BankAccount getBankAccount(AccountNumber accountNumber) {
-
         var optionalBankAccount = repository.find(accountNumber);
 
         if(optionalBankAccount.isEmpty()) {

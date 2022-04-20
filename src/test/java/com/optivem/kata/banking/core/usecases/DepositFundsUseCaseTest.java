@@ -61,7 +61,10 @@ class DepositFundsUseCaseTest {
 
     @Test
     void should_throw_exception_given_non_existent_account_number() {
+        var accountNumber = "GB41OMQP68570038161775";
+
         var request = aDepositFundsRequest()
+                .accountNumber(accountNumber)
                 .build();
 
         assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);

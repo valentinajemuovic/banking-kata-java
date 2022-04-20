@@ -83,7 +83,7 @@ class OpenAccountUseCaseTest {
                 .initialBalance(initialBalance)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.INITIAL_BALANCE_NEGATIVE);
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.BALANCE_NEGATIVE);
     }
 
     private void setupNextRandomAccountNumber(String accountNumber) {

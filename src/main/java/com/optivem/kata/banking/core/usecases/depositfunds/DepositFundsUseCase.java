@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases.depositfunds;
 
-import com.optivem.kata.banking.core.common.Guard;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
@@ -19,10 +18,9 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
     @Override
     public DepositFundsResponse handle(DepositFundsRequest request) {
-        Guard.againstNonPositive(request.getAmount(), ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
-
-        var bankAccount = getBankAccount(request);
+        var accountNumber = new AccountNumber(request.getAccountNumber());
         var amount = new TransactionAmount(request.getAmount());
+        var bankAccount = getBankAccount(accountNumber);
 
         bankAccount.deposit(amount);
 
@@ -31,8 +29,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
         return getResponse(bankAccount);
     }
 
-    private BankAccount getBankAccount(DepositFundsRequest request) {
-        var accountNumber = new AccountNumber(request.getAccountNumber());
+    private BankAccount getBankAccount(AccountNumber accountNumber) {
         var optionalBankAccount = repository.find(accountNumber);
 
         if(optionalBankAccount.isEmpty()) {
