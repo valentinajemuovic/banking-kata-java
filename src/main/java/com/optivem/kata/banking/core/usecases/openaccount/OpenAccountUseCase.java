@@ -1,11 +1,8 @@
 package com.optivem.kata.banking.core.usecases.openaccount;
 
 import com.optivem.kata.banking.core.common.Guard;
-import com.optivem.kata.banking.core.domain.accounts.AccountHolderName;
-import com.optivem.kata.banking.core.domain.accounts.BankAccount;
+import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
 public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccountResponse> {
@@ -29,9 +26,11 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
         Guard.againstNegative(request.getInitialBalance(), ValidationMessages.INITIAL_BALANCE_NEGATIVE);
 
         var accountHolderName = new AccountHolderName(request.getFirstName(), request.getLastName());
+        var balance = new Balance(request.getInitialBalance());
         var accountNumber = accountNumberGenerator.next();
 
-        return new BankAccount(accountNumber, accountHolderName, request.getInitialBalance());
+
+        return new BankAccount(accountNumber, accountHolderName, balance);
     }
 
     private OpenAccountResponse getResponse(BankAccount bankAccount) {

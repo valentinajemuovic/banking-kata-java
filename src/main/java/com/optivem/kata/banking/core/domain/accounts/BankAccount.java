@@ -6,9 +6,9 @@ import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 public class BankAccount {
     private final AccountNumber accountNumber;
     private final AccountHolderName accountHolderName;
-    private int balance;
+    private Balance balance;
 
-    public BankAccount(AccountNumber accountNumber, AccountHolderName accountHolderName, int balance) {
+    public BankAccount(AccountNumber accountNumber, AccountHolderName accountHolderName, Balance balance) {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.balance = balance;
@@ -24,19 +24,19 @@ public class BankAccount {
 
     public AccountHolderName getAccountHolderName() { return accountHolderName; }
 
-    public int getBalance() {
+    public Balance getBalance() {
         return balance;
     }
 
-    public void deposit(int amount) {
-        balance += amount;
+    public void deposit(TransactionAmount amount) {
+        balance = balance.add(amount);
     }
 
-    public void withdraw(int amount) {
-        if(amount > balance) {
+    public void withdraw(TransactionAmount amount) {
+        if(amount.greaterThan(balance)) {
             throw new ValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
         }
 
-        balance -= amount;
+        balance = balance.subtract(amount);
     }
 }

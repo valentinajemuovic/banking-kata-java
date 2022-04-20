@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.core.usecases.withdrawfunds;
 
-import com.optivem.kata.banking.core.common.Guard;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.UseCase;
@@ -17,19 +17,20 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     }
 
     public WithdrawFundsResponse handle(WithdrawFundsRequest request) {
-        Guard.againstNonPositive(request.getAmount(), ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+        var accountNumber = new AccountNumber(request.getAccountNumber());
+        var amount = new TransactionAmount(request.getAmount());
 
-        var bankAccount = getBankAccount(request);
+        var bankAccount = getBankAccount(accountNumber);
 
-        bankAccount.withdraw(request.getAmount());
+        bankAccount.withdraw(amount);
 
         repository.update(bankAccount);
 
         return getResponse(bankAccount);
     }
 
-    private BankAccount getBankAccount(WithdrawFundsRequest request) {
-        var accountNumber = new AccountNumber(request.getAccountNumber());
+    private BankAccount getBankAccount(AccountNumber accountNumber) {
+
         var optionalBankAccount = repository.find(accountNumber);
 
         if(optionalBankAccount.isEmpty()) {
@@ -41,7 +42,7 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
 
     private WithdrawFundsResponse getResponse(BankAccount bankAccount) {
         var response = new WithdrawFundsResponse();
-        response.setBalance(bankAccount.getBalance());
+        response.setBalance(bankAccount.getBalance().getValue());
         return response;
     }
 }

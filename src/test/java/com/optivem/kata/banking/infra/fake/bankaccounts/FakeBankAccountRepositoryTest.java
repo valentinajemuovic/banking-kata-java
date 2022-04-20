@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.infra.fake.bankaccounts;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,7 +55,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        bankAccount.deposit(60);
+        bankAccount.deposit(new TransactionAmount(60));
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -77,7 +78,7 @@ class FakeBankAccountRepositoryTest {
 
         var retrievedBankAccount = repository.find(new AccountNumber(accountNumber)).get();
 
-        retrievedBankAccount.deposit(20);
+        retrievedBankAccount.deposit(new TransactionAmount(20));
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -102,7 +103,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.update(retrievedBankAccount);
 
-        retrievedBankAccount.deposit(10);
+        retrievedBankAccount.deposit(new TransactionAmount(10));
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -126,7 +127,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        bankAccount.deposit(10);
+        bankAccount.deposit(new TransactionAmount(10));
 
         repository.update(bankAccount);
 
