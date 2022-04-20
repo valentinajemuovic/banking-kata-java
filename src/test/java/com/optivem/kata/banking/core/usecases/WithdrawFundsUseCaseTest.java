@@ -100,6 +100,26 @@ class WithdrawFundsUseCaseTest {
         assertThrows(request, ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
+    @Test
+    void should_throw_exception_given_insufficient_funds() {
+        var accountNumber = "GB10BARC20040184197751";
+        var balance = 140;
+        var amount = 141;
+
+        var bankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(balance)
+                .build();
+
+        repository.add(bankAccount);
+
+        var request = new WithdrawFundsRequest();
+        request.setAccountNumber(accountNumber);
+        request.setAmount(amount);
+
+        assertThrows(request, ValidationMessages.INSUFFICIENT_FUNDS);
+    }
+
     private void assertSuccess(WithdrawFundsRequest request, WithdrawFundsResponse expectedResponse) {
         assertResponse(useCase, request, expectedResponse);
     }
