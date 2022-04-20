@@ -26,12 +26,10 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
     }
 
     private BankAccount getBankAccount(OpenAccountRequest request) {
-        Guard.againstNullOrWhitespace(request.getFirstName(), ValidationMessages.FIRST_NAME_EMPTY);
-        Guard.againstNullOrWhitespace(request.getLastName(), ValidationMessages.LAST_NAME_EMPTY);
         Guard.againstNegative(request.getInitialBalance(), ValidationMessages.INITIAL_BALANCE_NEGATIVE);
 
-        var accountNumber = accountNumberGenerator.next();
         var accountHolderName = new AccountHolderName(request.getFirstName(), request.getLastName());
+        var accountNumber = accountNumberGenerator.next();
 
         return new BankAccount(accountNumber, accountHolderName, request.getInitialBalance());
     }
