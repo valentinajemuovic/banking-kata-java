@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.assertions;
+package com.optivem.kata.banking.core.common.assertions;
 
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;

@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.assertions;
+package com.optivem.kata.banking.core.common.assertions;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.usecases.UseCase;

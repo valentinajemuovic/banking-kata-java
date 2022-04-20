@@ -1,11 +1,11 @@
-package com.optivem.kata.banking.core.assertions;
+package com.optivem.kata.banking.core.common.assertions;
 
+import com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 
 import java.util.Optional;
 
-import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BankAccountRepositoryAssert {
@@ -17,7 +17,7 @@ public class BankAccountRepositoryAssert {
     }
 
     public void containsBankAccount(String accountNumber, int balance) {
-        var expectedBankAccount = aBankAccount()
+        var expectedBankAccount = BankAccountBuilder.aBankAccount()
                 .accountNumber(accountNumber)
                 .balance(balance)
                 .build();
@@ -26,7 +26,7 @@ public class BankAccountRepositoryAssert {
     }
 
     public void containsBankAccount(String accountNumber, String firstName, String lastName, int initialBalance) {
-        var expectedBankAccount = aBankAccount()
+        var expectedBankAccount = BankAccountBuilder.aBankAccount()
                 .accountNumber(accountNumber)
                 .firstName(firstName)
                 .lastName(lastName)

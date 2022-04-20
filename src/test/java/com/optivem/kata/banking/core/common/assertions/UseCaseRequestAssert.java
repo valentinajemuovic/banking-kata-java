@@ -1,8 +1,8 @@
-package com.optivem.kata.banking.core.assertions;
+package com.optivem.kata.banking.core.common.assertions;
 
 import com.optivem.kata.banking.core.usecases.UseCase;
 
-import static com.optivem.kata.banking.core.assertions.Assertions.assertThatExecutable;
+import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatExecutable;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UseCaseRequestAssert<R, P> {

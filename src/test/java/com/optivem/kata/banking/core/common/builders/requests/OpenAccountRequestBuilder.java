@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.builders.requests;
+package com.optivem.kata.banking.core.common.builders.requests;
 
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 

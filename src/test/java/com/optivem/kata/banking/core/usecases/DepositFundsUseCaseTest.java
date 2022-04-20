@@ -9,12 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static com.optivem.kata.banking.core.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
-import static com.optivem.kata.banking.core.assertions.Assertions.assertThatRepository;
-import static com.optivem.kata.banking.core.assertions.Assertions.assertThatUseCase;
-import static com.optivem.kata.banking.core.givens.Givens.givenThatRepository;
-import static com.optivem.kata.banking.core.data.MethodSources.NON_POSITIVE_INTEGERS;
-import static com.optivem.kata.banking.core.data.MethodSources.NULL_EMPTY_WHITESPACE;
+import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
+import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatRepository;
+import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.common.givens.Givens.givenThatRepository;
+import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_INTEGERS;
+import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class DepositFundsUseCaseTest {
 

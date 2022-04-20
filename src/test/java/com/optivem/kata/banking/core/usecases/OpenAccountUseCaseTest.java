@@ -13,12 +13,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
-import static com.optivem.kata.banking.core.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
-import static com.optivem.kata.banking.core.assertions.Assertions.assertThatRepository;
-import static com.optivem.kata.banking.core.assertions.Assertions.assertThatUseCase;
-import static com.optivem.kata.banking.core.data.MethodSources.NEGATIVE_INTEGERS;
-import static com.optivem.kata.banking.core.data.MethodSources.NULL_EMPTY_WHITESPACE;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
+import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatRepository;
+import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_INTEGERS;
+import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class OpenAccountUseCaseTest {
 

@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.builders.entities;
+package com.optivem.kata.banking.core.common.builders.entities;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountHolderName;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
