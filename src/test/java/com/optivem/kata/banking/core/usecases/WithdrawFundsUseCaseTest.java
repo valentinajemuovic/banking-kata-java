@@ -39,12 +39,7 @@ class WithdrawFundsUseCaseTest {
         var amount = 30;
         var expectedFinalBalance = 40;
 
-        var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(initialBalance)
-                .build();
-
-        repository.add(bankAccount);
+        givenBankAccount(accountNumber, initialBalance);
 
         var request = new WithdrawFundsRequest();
         request.setAccountNumber(accountNumber);
@@ -55,13 +50,7 @@ class WithdrawFundsUseCaseTest {
 
         assertSuccess(request, expectedResponse);
 
-        var expectedBankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(expectedFinalBalance)
-                .build();
-
-        var retrievedBankAccount = findBankAccount(accountNumber);
-        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
+        assertContainsBankAccount(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -106,18 +95,15 @@ class WithdrawFundsUseCaseTest {
         var balance = 140;
         var amount = 141;
 
-        var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
-                .build();
-
-        repository.add(bankAccount);
+        givenBankAccount(accountNumber, balance);
 
         var request = new WithdrawFundsRequest();
         request.setAccountNumber(accountNumber);
         request.setAmount(amount);
 
         assertThrows(request, ValidationMessages.INSUFFICIENT_FUNDS);
+
+        assertContainsBankAccount(accountNumber, balance);
     }
 
     private void assertSuccess(WithdrawFundsRequest request, WithdrawFundsResponse expectedResponse) {
@@ -130,5 +116,24 @@ class WithdrawFundsUseCaseTest {
 
     private Optional<BankAccount> findBankAccount(String accountNumber) {
         return repository.find(new AccountNumber(accountNumber));
+    }
+
+    private void givenBankAccount(String accountNumber, int balance) {
+        var bankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(balance)
+                .build();
+
+        repository.add(bankAccount);
+    }
+
+    private void assertContainsBankAccount(String accountNumber, int balance) {
+        var expectedBankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(balance)
+                .build();
+
+        var retrievedBankAccount = findBankAccount(accountNumber);
+        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
 }
