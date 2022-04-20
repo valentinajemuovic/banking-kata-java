@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
@@ -13,16 +12,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
-import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
-import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
+import static com.optivem.kata.banking.core.common.Assertions.*;
 import static com.optivem.kata.banking.core.common.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class OpenAccountUseCaseTest {
 
@@ -60,8 +56,7 @@ class OpenAccountUseCaseTest {
 
         assertSuccess(request, expectedResponse);
 
-        var retrievedBankAccount = findBankAccount(accountNumber);
-        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
+        assertThatRepository(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
     }
 
     private static Stream<Arguments> should_open_account_given_request_is_valid() {
@@ -109,9 +104,5 @@ class OpenAccountUseCaseTest {
 
     private void setupNextRandomAccountNumber(String accountNumber) {
         accountNumberGenerator.add(new AccountNumber(accountNumber));
-    }
-
-    private Optional<BankAccount> findBankAccount(String accountNumber) {
-        return bankAccountRepository.find(new AccountNumber(accountNumber));
     }
 }

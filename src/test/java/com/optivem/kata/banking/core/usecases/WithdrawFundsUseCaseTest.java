@@ -1,7 +1,5 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsRequest;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsResponse;
@@ -13,16 +11,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.builders.entities.BankAccountBuilder.aBankAccount;
 import static com.optivem.kata.banking.core.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
-import static com.optivem.kata.banking.core.common.Assertions.assertResponse;
-import static com.optivem.kata.banking.core.common.Assertions.assertThrowsValidationException;
+import static com.optivem.kata.banking.core.common.Assertions.*;
 import static com.optivem.kata.banking.core.common.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.MethodSources.NULL_EMPTY_WHITESPACE;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class WithdrawFundsUseCaseTest {
 
@@ -50,7 +45,7 @@ class WithdrawFundsUseCaseTest {
 
         assertSuccess(request, expectedResponse);
 
-        assertContainsBankAccount(accountNumber, expectedFinalBalance);
+        assertThatRepository(repository).containsBankAccount(accountNumber, expectedFinalBalance);
     }
 
     private static Stream<Arguments> should_withdraw_funds_given_valid_request() {
@@ -101,7 +96,7 @@ class WithdrawFundsUseCaseTest {
 
         assertThrows(request, ValidationMessages.INSUFFICIENT_FUNDS);
 
-        assertContainsBankAccount(accountNumber, balance);
+        assertThatRepository(repository).containsBankAccount(accountNumber, balance);
     }
 
     private void assertSuccess(WithdrawFundsRequest request, WithdrawFundsResponse expectedResponse) {
@@ -112,10 +107,6 @@ class WithdrawFundsUseCaseTest {
         assertThrowsValidationException(useCase, request, message);
     }
 
-    private Optional<BankAccount> findBankAccount(String accountNumber) {
-        return repository.find(new AccountNumber(accountNumber));
-    }
-
     private void givenBankAccount(String accountNumber, int balance) {
         var bankAccount = aBankAccount()
                 .accountNumber(accountNumber)
@@ -123,15 +114,5 @@ class WithdrawFundsUseCaseTest {
                 .build();
 
         repository.add(bankAccount);
-    }
-
-    private void assertContainsBankAccount(String accountNumber, int balance) {
-        var expectedBankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
-                .build();
-
-        var retrievedBankAccount = findBankAccount(accountNumber);
-        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(expectedBankAccount));
     }
 }
