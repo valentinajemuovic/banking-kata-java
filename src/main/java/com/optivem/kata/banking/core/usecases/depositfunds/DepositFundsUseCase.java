@@ -1,9 +1,6 @@
 package com.optivem.kata.banking.core.usecases.depositfunds;
 
-import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
+import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.UseCase;
@@ -40,7 +37,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
     private DepositFundsResponse getResponse(BankAccount bankAccount) {
         var response = new DepositFundsResponse();
-        response.setBalance(bankAccount.getBalance().getValue());
+        response.setBalance(bankAccount.getBalance().getValue().getValue());
         return response;
     }
 }

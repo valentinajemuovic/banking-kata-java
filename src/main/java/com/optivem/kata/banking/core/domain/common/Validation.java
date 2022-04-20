@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.common;
+package com.optivem.kata.banking.core.domain.common;
 
 public class Validation {
 

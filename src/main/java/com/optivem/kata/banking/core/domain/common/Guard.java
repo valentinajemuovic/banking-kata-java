@@ -1,5 +1,6 @@
-package com.optivem.kata.banking.core.common;
+package com.optivem.kata.banking.core.domain.common;
 
+import com.optivem.kata.banking.core.domain.accounts.Money;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 
 import java.util.function.IntPredicate;
@@ -29,8 +30,15 @@ public class Guard {
         against(Validation::isNegative, value, message);
     }
 
+    public static void againstNegative(Money value, String message) {
+        againstNegative(value.getValue(), message);
+    }
+
     public static void againstNonPositive(int value, String message) {
         against(Validation::isNonPositive, value, message);
     }
 
+    public static void againstNonPositive(Money value, String message) {
+        againstNonPositive(value.getValue(), message);
+    }
 }
