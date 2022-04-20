@@ -22,7 +22,12 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
         var bankAccount = getBankAccount(request);
 
-        return new DepositFundsResponse();
+        var balance = bankAccount.getBalance();
+        balance += request.getAmount();
+
+        var response = new DepositFundsResponse();
+        response.setBalance(balance);
+        return response;
     }
 
     private BankAccount getBankAccount(DepositFundsRequest request) {

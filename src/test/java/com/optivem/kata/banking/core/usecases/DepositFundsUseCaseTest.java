@@ -31,13 +31,19 @@ class DepositFundsUseCaseTest {
     @Test
     void should_deposit_funds_given_valid_request() {
         var accountNumber = "GB41OMQP68570038161775";
-        givenBankAccount(accountNumber);
+        var initialBalance = 100;
+        var depositAmount = 50;
+        var expectedFinalBalance = 150;
+
+        givenBankAccount(accountNumber, initialBalance);
 
         var request = aDepositFundsRequest()
                 .accountNumber(accountNumber)
+                .amount(depositAmount)
                 .build();
 
         var expectedResponse = new DepositFundsResponse();
+        expectedResponse.setBalance(expectedFinalBalance);
 
         assertSuccess(request, expectedResponse);
     }
@@ -78,9 +84,10 @@ class DepositFundsUseCaseTest {
         assertThrowsValidationException(useCase, request, message);
     }
 
-    private void givenBankAccount(String accountNumber) {
+    private void givenBankAccount(String accountNumber, int initialBalance) {
         var bankAccount = aBankAccount()
                 .accountNumber(accountNumber)
+                .balance(initialBalance)
                 .build();
 
         repository.add(bankAccount);
