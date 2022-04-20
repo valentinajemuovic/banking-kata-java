@@ -8,7 +8,7 @@ public class Givens {
         return new BankAccountRepositoryGiven(repository);
     }
 
-    public static AccountNumberGeneratorGiven givenThatGenerator(FakeAccountNumberGenerator generator) {
-        return new AccountNumberGeneratorGiven(generator);
+    public static FakeAccountNumberGeneratorGiven givenThatGenerator(FakeAccountNumberGenerator generator) {
+        return new FakeAccountNumberGeneratorGiven(generator);
     }
 }

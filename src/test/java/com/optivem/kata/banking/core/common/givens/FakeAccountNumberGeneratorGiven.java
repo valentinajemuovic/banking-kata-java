@@ -3,11 +3,11 @@ package com.optivem.kata.banking.core.common.givens;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
 
-public class AccountNumberGeneratorGiven {
+public class FakeAccountNumberGeneratorGiven {
 
     private FakeAccountNumberGenerator generator;
 
-    public AccountNumberGeneratorGiven(FakeAccountNumberGenerator generator) {
+    public FakeAccountNumberGeneratorGiven(FakeAccountNumberGenerator generator) {
         this.generator = generator;
     }
 

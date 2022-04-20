@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.common.assertions;
 
+import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.usecases.UseCase;
 import org.junit.jupiter.api.function.Executable;
@@ -16,5 +17,9 @@ public class Assertions {
 
     public static BankAccountRepositoryAssert assertThatRepository(BankAccountRepository repository) {
         return new BankAccountRepositoryAssert(repository);
+    }
+
+    public static AccountNumberGeneratorAssert assertThatGenerator(AccountNumberGenerator generator) {
+        return new AccountNumberGeneratorAssert(generator);
     }
 }
