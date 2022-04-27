@@ -2,14 +2,14 @@ package com.optivem.kata.banking.core.domain.accounts;
 
 public record Money(int value) {
 
-    public static final Money ZERO = new Money(0);
+    public static final Money ZERO = Money.of(0);
 
     public Money add(Money other) {
-        return new Money(value + other.value());
+        return Money.of(value + other.value());
     }
 
     public Money subtract(Money other) {
-        return new Money(value - other.value());
+        return Money.of(value - other.value());
     }
 
     public boolean greaterThan(Money other) {

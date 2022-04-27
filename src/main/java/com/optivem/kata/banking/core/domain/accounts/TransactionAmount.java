@@ -13,4 +13,12 @@ public record TransactionAmount(Money value) {
     public boolean greaterThan(Balance balance) {
         return value.greaterThan(balance.value());
     }
+
+    public static TransactionAmount of(Money value) {
+        return new TransactionAmount(value);
+    }
+
+    public static TransactionAmount of(int value) {
+        return new TransactionAmount(Money.of(value));
+    }
 }

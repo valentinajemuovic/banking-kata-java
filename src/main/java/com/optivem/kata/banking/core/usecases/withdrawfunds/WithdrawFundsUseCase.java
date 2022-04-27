@@ -1,6 +1,9 @@
 package com.optivem.kata.banking.core.usecases.withdrawfunds;
 
-import com.optivem.kata.banking.core.domain.accounts.*;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
@@ -30,7 +33,7 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     }
 
     private TransactionAmount getTransactionAmount(WithdrawFundsRequest request) {
-        return new TransactionAmount(new Money(request.getAmount()));
+        return TransactionAmount.of(request.getAmount());
     }
 
     private BankAccount findBankAccount(AccountNumber accountNumber) {

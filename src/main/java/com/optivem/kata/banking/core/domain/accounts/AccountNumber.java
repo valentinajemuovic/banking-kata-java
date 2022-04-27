@@ -11,6 +11,6 @@ public record AccountNumber(Text value) {
     }
 
     public static AccountNumber of(String value) {
-        return new AccountNumber(new Text(value));
+        return new AccountNumber(Text.of(value));
     }
 }

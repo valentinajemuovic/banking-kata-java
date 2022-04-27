@@ -12,6 +12,6 @@ public record AccountHolderName(Text firstName, Text lastName) {
     }
 
     public static AccountHolderName of(String firstName, String lastName) {
-        return new AccountHolderName(new Text(firstName), new Text(lastName));
+        return new AccountHolderName(Text.of(firstName), Text.of(lastName));
     }
 }

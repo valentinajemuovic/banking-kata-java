@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.infra.fake.bankaccounts;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.Money;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -56,8 +55,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        var transactionAmount = getTransactionAmount(60);
-        bankAccount.deposit(transactionAmount);
+        bankAccount.deposit(TransactionAmount.of(60));
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -80,8 +78,7 @@ class FakeBankAccountRepositoryTest {
 
         var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber)).get();
 
-        var transactionAmount = getTransactionAmount(20);
-        retrievedBankAccount.deposit(transactionAmount);
+        retrievedBankAccount.deposit(TransactionAmount.of(20));
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -106,8 +103,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.update(retrievedBankAccount);
 
-        var transactionAmount = getTransactionAmount(10);
-        retrievedBankAccount.deposit(transactionAmount);
+        retrievedBankAccount.deposit(TransactionAmount.of(10));
 
         assertThatRepository(repository).containsBankAccount(expectedBankAccount);
     }
@@ -131,8 +127,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        var transactionAmount = getTransactionAmount(10);
-        bankAccount.deposit(transactionAmount);
+        bankAccount.deposit(TransactionAmount.of(10));
 
         repository.update(bankAccount);
 
@@ -169,9 +164,5 @@ class FakeBankAccountRepositoryTest {
                 .build();
 
         assertThatExecutable(() -> repository.update(bankAccount)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
-    }
-
-    private TransactionAmount getTransactionAmount(int value) {
-        return new TransactionAmount(new Money(10));
     }
 }
