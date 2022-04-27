@@ -8,7 +8,7 @@ public class StringGuard extends BaseGuard<String> {
         super(value);
     }
 
-    public void againstNullOrWhitespace(String message) {
-        against(validate(value)::isNullOrWhitespace, message);
+    public String againstNullOrWhitespace(String message) {
+        return against(validate(value)::isNullOrWhitespace, message);
     }
 }
