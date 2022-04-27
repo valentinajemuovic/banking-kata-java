@@ -2,15 +2,29 @@ package com.optivem.kata.banking.core.domain.accounts;
 
 public record Money(int value) {
 
-    public Money add(Money amount) {
-        return new Money(value + amount.value());
+    public static final Money ZERO = new Money(0);
+
+    public Money add(Money other) {
+        return new Money(value + other.value());
     }
 
-    public Money subtract(Money amount) {
-        return new Money(value - amount.value());
+    public Money subtract(Money other) {
+        return new Money(value - other.value());
     }
 
-    public boolean greaterThan(Money balance) {
-        return value > balance.value();
+    public boolean greaterThan(Money other) {
+        return value > other.value();
+    }
+
+    public boolean lessThan(Money other) { return value < other.value(); }
+
+    public boolean lessThanOrEqualTo(Money other) { return value <= other.value(); }
+
+    public boolean isNegative() {
+        return lessThan(ZERO);
+    }
+
+    public boolean isNonPositive() {
+        return lessThanOrEqualTo(ZERO);
     }
 }

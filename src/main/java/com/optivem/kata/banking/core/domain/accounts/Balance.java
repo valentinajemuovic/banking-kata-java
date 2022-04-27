@@ -1,13 +1,14 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
-import com.optivem.kata.banking.core.domain.common.Guard;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+
+import static com.optivem.kata.banking.core.domain.common.Guard.guard;
 
 public class Balance {
     private final Money value;
 
     private Balance(Money value) {
-        Guard.againstNegative(value, ValidationMessages.BALANCE_NEGATIVE);
+        guard(value).againstNegative(ValidationMessages.BALANCE_NEGATIVE);
         this.value = value;
     }
 
