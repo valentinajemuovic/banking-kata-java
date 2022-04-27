@@ -17,17 +17,25 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     }
 
     public WithdrawFundsResponse handle(WithdrawFundsRequest request) {
-        var accountNumber = new AccountNumber(request.getAccountNumber());
-        var amount = new TransactionAmount(request.getAmount());
+        var accountNumber = getAccountNumber(request);
+        var amount = getTransactionAmount(request);
 
-        var bankAccount = getBankAccount(accountNumber);
+        var bankAccount = findBankAccount(accountNumber);
         bankAccount.withdraw(amount);
         repository.update(bankAccount);
 
         return getResponse(bankAccount);
     }
 
-    private BankAccount getBankAccount(AccountNumber accountNumber) {
+    private AccountNumber getAccountNumber(WithdrawFundsRequest request) {
+        return new AccountNumber(request.getAccountNumber());
+    }
+
+    private TransactionAmount getTransactionAmount(WithdrawFundsRequest request) {
+        return new TransactionAmount(request.getAmount());
+    }
+
+    private BankAccount findBankAccount(AccountNumber accountNumber) {
         var optionalBankAccount = repository.find(accountNumber);
         Guard.againstEmpty(optionalBankAccount, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
         return optionalBankAccount.get();

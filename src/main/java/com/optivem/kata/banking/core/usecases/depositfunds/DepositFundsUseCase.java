@@ -18,17 +18,25 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
     @Override
     public DepositFundsResponse handle(DepositFundsRequest request) {
-        var accountNumber = new AccountNumber(request.getAccountNumber());
-        var amount = new TransactionAmount(request.getAmount());
+        var accountNumber = getAccountNumber(request);
+        var amount = getTransactionAmount(request);
 
-        var bankAccount = getBankAccount(accountNumber);
+        var bankAccount = findBankAccount(accountNumber);
         bankAccount.deposit(amount);
         repository.update(bankAccount);
 
         return getResponse(bankAccount);
     }
 
-    private BankAccount getBankAccount(AccountNumber accountNumber) {
+    private AccountNumber getAccountNumber(DepositFundsRequest request) {
+        return new AccountNumber(request.getAccountNumber());
+    }
+
+    private TransactionAmount getTransactionAmount(DepositFundsRequest request) {
+        return new TransactionAmount(request.getAmount());
+    }
+
+    private BankAccount findBankAccount(AccountNumber accountNumber) {
         var optionalBankAccount = repository.find(accountNumber);
         Guard.againstEmpty(optionalBankAccount, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
         return optionalBankAccount.get();

@@ -14,16 +14,24 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
     }
 
     public OpenAccountResponse handle(OpenAccountRequest request) {
-        var accountHolderName = new AccountHolderName(request.getFirstName(), request.getLastName());
-        var balance = new Balance(request.getInitialBalance());
+        var accountHolderName = getAccountHolderName(request);
+        var balance = getBalance(request);
 
-        var bankAccount = getBankAccount(accountHolderName, balance);
+        var bankAccount = createBankAccount(accountHolderName, balance);
         bankAccountRepository.add(bankAccount);
 
         return getResponse(bankAccount);
     }
 
-    private BankAccount getBankAccount(AccountHolderName accountHolderName, Balance balance) {
+    private AccountHolderName getAccountHolderName(OpenAccountRequest request) {
+        return new AccountHolderName(request.getFirstName(), request.getLastName());
+    }
+
+    private Balance getBalance(OpenAccountRequest request) {
+        return new Balance(request.getInitialBalance());
+    }
+
+    private BankAccount createBankAccount(AccountHolderName accountHolderName, Balance balance) {
         var accountNumber = accountNumberGenerator.next();
         return new BankAccount(accountNumber, accountHolderName, balance);
     }
