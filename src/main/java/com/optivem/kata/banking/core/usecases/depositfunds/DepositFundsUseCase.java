@@ -4,10 +4,9 @@ import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
-import static com.optivem.kata.banking.core.domain.common.Guard.guard;
+import static com.optivem.kata.banking.core.domain.extensions.Extension.extend;
 
 public class DepositFundsUseCase implements UseCase<DepositFundsRequest, DepositFundsResponse> {
 
@@ -38,8 +37,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
     }
 
     private BankAccount findBankAccount(AccountNumber accountNumber) {
-        var optionalBankAccount = repository.find(accountNumber);
-        return guard(optionalBankAccount).againstEmpty(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        return extend(repository).findRequired(accountNumber);
     }
 
     private DepositFundsResponse getResponse(BankAccount bankAccount) {
