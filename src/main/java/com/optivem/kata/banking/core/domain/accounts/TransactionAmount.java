@@ -11,6 +11,6 @@ public record TransactionAmount(Money value) {
     }
 
     public boolean greaterThan(Balance balance) {
-        return value.greaterThan(balance.getValue());
+        return value.greaterThan(balance.value());
     }
 }

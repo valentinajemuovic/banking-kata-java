@@ -4,20 +4,10 @@ import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 
 import static com.optivem.kata.banking.core.domain.common.Guard.guard;
 
-public class Balance {
-    private final Money value;
+public record Balance(Money value) {
 
-    private Balance(Money value) {
+    public Balance {
         guard(value).againstNegative(ValidationMessages.BALANCE_NEGATIVE);
-        this.value = value;
-    }
-
-    public Balance(int value) {
-        this(new Money(value));
-    }
-
-    public Money getValue() {
-        return value;
     }
 
     public Balance add(TransactionAmount amount) {

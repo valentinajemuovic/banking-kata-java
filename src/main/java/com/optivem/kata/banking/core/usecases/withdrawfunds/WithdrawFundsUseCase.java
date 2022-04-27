@@ -41,7 +41,7 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
 
     private WithdrawFundsResponse getResponse(BankAccount bankAccount) {
         var response = new WithdrawFundsResponse();
-        response.setBalance(bankAccount.getBalance().getValue().value());
+        response.setBalance(bankAccount.getBalance().value().value());
         return response;
     }
 }
