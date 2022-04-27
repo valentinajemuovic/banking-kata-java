@@ -10,13 +10,13 @@ public class DepositFundsRequestBuilder {
     private String accountNumber;
     private int amount;
 
-    public static DepositFundsRequestBuilder aDepositFundsRequest() {
-        return new DepositFundsRequestBuilder();
-    }
-
     public DepositFundsRequestBuilder() {
         accountNumber(ACCOUNT_NUMBER);
         amount(AMOUNT);
+    }
+
+    public static DepositFundsRequestBuilder aDepositFundsRequest() {
+        return new DepositFundsRequestBuilder();
     }
 
     public DepositFundsRequestBuilder accountNumber(String accountNumber) {

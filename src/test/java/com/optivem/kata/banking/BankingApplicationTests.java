@@ -8,9 +8,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class BankingApplicationTests {
 
-	@Test
-	void contextLoads() {
-		assertThat(1 == 1).isSameAs(true);
-	}
+    @Test
+    void contextLoads() {
+        assertThat(1 == 1).isSameAs(true);
+    }
 
 }

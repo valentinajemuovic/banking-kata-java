@@ -12,14 +12,14 @@ public class OpenAccountRequestBuilder {
     private String lastName;
     private int balance;
 
-    public static OpenAccountRequestBuilder anOpenAccountRequest() {
-        return new OpenAccountRequestBuilder();
-    }
-
     public OpenAccountRequestBuilder() {
         firstName(FIRST_NAME);
         lastName(LAST_NAME);
         initialBalance(INITIAL_BALANCE);
+    }
+
+    public static OpenAccountRequestBuilder anOpenAccountRequest() {
+        return new OpenAccountRequestBuilder();
     }
 
     public OpenAccountRequestBuilder firstName(String firstName) {

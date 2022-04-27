@@ -20,7 +20,7 @@ public class FakeBankAccountRepository implements BankAccountRepository {
 
     @Override
     public Optional<BankAccount> find(AccountNumber accountNumber) {
-        if(!contains(accountNumber)) {
+        if (!contains(accountNumber)) {
             return Optional.empty();
         }
 
@@ -35,7 +35,7 @@ public class FakeBankAccountRepository implements BankAccountRepository {
         var accountName = bankAccount.getAccountNumber();
         var clonedBankAccount = new BankAccount(bankAccount);
 
-        if(contains(accountName)) {
+        if (contains(accountName)) {
             throw new RepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
         }
 
@@ -46,7 +46,7 @@ public class FakeBankAccountRepository implements BankAccountRepository {
     public void update(BankAccount bankAccount) {
         var accountNumber = bankAccount.getAccountNumber();
 
-        if(!contains(accountNumber)) {
+        if (!contains(accountNumber)) {
             throw new RepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
         }
 

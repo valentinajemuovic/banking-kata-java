@@ -22,7 +22,9 @@ public class BankAccount {
         return accountNumber;
     }
 
-    public AccountHolderName getAccountHolderName() { return accountHolderName; }
+    public AccountHolderName getAccountHolderName() {
+        return accountHolderName;
+    }
 
     public Balance getBalance() {
         return balance;
@@ -33,7 +35,7 @@ public class BankAccount {
     }
 
     public void withdraw(TransactionAmount amount) {
-        if(amount.greaterThan(balance)) {
+        if (amount.greaterThan(balance)) {
             throw new ValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
         }
 

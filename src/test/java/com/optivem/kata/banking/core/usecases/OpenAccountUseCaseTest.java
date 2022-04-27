@@ -25,6 +25,11 @@ class OpenAccountUseCaseTest {
     private FakeBankAccountRepository bankAccountRepository;
     private OpenAccountUseCase useCase;
 
+    private static Stream<Arguments> should_open_account_given_request_is_valid() {
+        return Stream.of(Arguments.of("John", "Smith", 0, "GB41OMQP68570038161775"),
+                Arguments.of("Mary", "McDonald", 50, "GB36BMFK75394735916876"));
+    }
+
     @BeforeEach
     void init() {
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
@@ -49,11 +54,6 @@ class OpenAccountUseCaseTest {
         assertThatUseCase(useCase).withRequest(request).assertResponse(expectedResponse);
 
         assertThatRepository(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
-    }
-
-    private static Stream<Arguments> should_open_account_given_request_is_valid() {
-        return Stream.of(Arguments.of("John", "Smith", 0, "GB41OMQP68570038161775"),
-                Arguments.of("Mary", "McDonald", 50, "GB36BMFK75394735916876"));
     }
 
     @ParameterizedTest

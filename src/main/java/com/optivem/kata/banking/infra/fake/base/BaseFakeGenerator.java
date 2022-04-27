@@ -17,7 +17,7 @@ public abstract class BaseFakeGenerator<T> implements Generator<T> {
 
     @Override
     public T next() {
-        if(queue.isEmpty()) {
+        if (queue.isEmpty()) {
             throw new FakeException(FakeMessages.GENERATOR_DOES_NOT_HAVE_NEXT);
         }
 

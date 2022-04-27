@@ -14,13 +14,13 @@ public class BaseGuard<T> {
     }
 
     protected void against(Predicate<T> tester, String message) {
-        if(tester.test(value)) {
+        if (tester.test(value)) {
             throw new ValidationException(message);
         }
     }
 
     protected void against(BooleanSupplier tester, String message) {
-        if(tester.getAsBoolean()) {
+        if (tester.getAsBoolean()) {
             throw new ValidationException(message);
         }
     }

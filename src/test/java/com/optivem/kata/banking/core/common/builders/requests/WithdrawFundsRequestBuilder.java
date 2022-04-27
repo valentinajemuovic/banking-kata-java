@@ -10,13 +10,13 @@ public class WithdrawFundsRequestBuilder {
     private String accountNumber;
     private int amount;
 
-    public static WithdrawFundsRequestBuilder aWithdrawFundsRequest() {
-        return new WithdrawFundsRequestBuilder();
-    }
-
     public WithdrawFundsRequestBuilder() {
         accountNumber(ACCOUNT_NUMBER);
         amount(AMOUNT);
+    }
+
+    public static WithdrawFundsRequestBuilder aWithdrawFundsRequest() {
+        return new WithdrawFundsRequestBuilder();
     }
 
     public WithdrawFundsRequestBuilder accountNumber(String accountNumber) {

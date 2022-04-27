@@ -16,9 +16,13 @@ public record Money(int value) {
         return value > other.value();
     }
 
-    public boolean lessThan(Money other) { return value < other.value(); }
+    public boolean lessThan(Money other) {
+        return value < other.value();
+    }
 
-    public boolean lessThanOrEqualTo(Money other) { return value <= other.value(); }
+    public boolean lessThanOrEqualTo(Money other) {
+        return value <= other.value();
+    }
 
     public boolean isNegative() {
         return lessThan(ZERO);

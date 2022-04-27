@@ -10,7 +10,8 @@ import java.util.Optional;
 
 public class Guard {
 
-    private Guard() {}
+    private Guard() {
+    }
 
     public static StringGuard guard(String value) {
         return new StringGuard(value);

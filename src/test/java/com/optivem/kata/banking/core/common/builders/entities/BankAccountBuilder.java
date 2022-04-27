@@ -17,15 +17,15 @@ public class BankAccountBuilder {
     private String lastName;
     private int balance;
 
-    public static BankAccountBuilder aBankAccount() {
-        return new BankAccountBuilder();
-    }
-
     public BankAccountBuilder() {
         accountNumber(ACCOUNT_NUMBER);
         firstName(FIRST_NAME);
         lastName(LAST_NAME);
         balance(BALANCE);
+    }
+
+    public static BankAccountBuilder aBankAccount() {
+        return new BankAccountBuilder();
     }
 
     public BankAccountBuilder accountNumber(String accountNumber) {
