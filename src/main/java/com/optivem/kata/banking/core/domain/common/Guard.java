@@ -1,8 +1,8 @@
 package com.optivem.kata.banking.core.domain.common;
 
-import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.Money;
 import com.optivem.kata.banking.core.domain.common.guards.IntegerGuard;
+import com.optivem.kata.banking.core.domain.common.guards.OptionalGuard;
 import com.optivem.kata.banking.core.domain.common.guards.StringGuard;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 
@@ -21,6 +21,10 @@ public class Guard {
         return new IntegerGuard(value);
     }
 
+    public static <V> OptionalGuard guard(Optional<V> value) {
+        return new OptionalGuard(value);
+    }
+
     // TODO: VC: Pending delete after refactoring out all the guards
     public static <T> void against(Predicate<T> tester, T value, String message) {
         if(tester.test(value)) {
@@ -36,7 +40,5 @@ public class Guard {
         guard(value.value()).againstNonPositive(message);
     }
 
-    public static void againstEmpty(Optional<BankAccount> value, String message) {
-        against(Validation::isEmpty, value, message);
-    }
+
 }
