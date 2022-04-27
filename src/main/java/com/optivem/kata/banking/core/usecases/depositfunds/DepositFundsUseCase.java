@@ -1,7 +1,10 @@
 package com.optivem.kata.banking.core.usecases.depositfunds;
 
-import com.optivem.kata.banking.core.domain.accounts.*;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
+import com.optivem.kata.banking.core.domain.common.Guard;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
@@ -27,11 +30,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
     private BankAccount getBankAccount(AccountNumber accountNumber) {
         var optionalBankAccount = repository.find(accountNumber);
-
-        if(optionalBankAccount.isEmpty()) {
-            throw new ValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
-        }
-
+        Guard.againstEmpty(optionalBankAccount, ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
         return optionalBankAccount.get();
     }
 

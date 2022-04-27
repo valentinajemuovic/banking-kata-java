@@ -1,22 +1,17 @@
 package com.optivem.kata.banking.core.domain.common;
 
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.Money;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 
-import java.util.function.IntPredicate;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class Guard {
 
     private Guard() {}
 
-    public static void against(Predicate<String> tester, String value, String message) {
-        if(tester.test(value)) {
-            throw new ValidationException(message);
-        }
-    }
-
-    public static void against(IntPredicate tester, int value, String message) {
+    public static <T> void against(Predicate<T> tester, T value, String message) {
         if(tester.test(value)) {
             throw new ValidationException(message);
         }
@@ -40,5 +35,9 @@ public class Guard {
 
     public static void againstNonPositive(Money value, String message) {
         againstNonPositive(value.value(), message);
+    }
+
+    public static void againstEmpty(Optional<BankAccount> value, String message) {
+        against(Validation::isEmpty, value, message);
     }
 }
