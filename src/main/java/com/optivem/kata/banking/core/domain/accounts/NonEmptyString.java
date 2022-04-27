@@ -1,14 +1,15 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
-import com.optivem.kata.banking.core.domain.common.Guard;
 import lombok.EqualsAndHashCode;
+
+import static com.optivem.kata.banking.core.domain.common.Guard.guard;
 
 @EqualsAndHashCode
 class NonEmptyString {
     private final String value;
 
     public NonEmptyString(String value, String message) {
-        Guard.againstNullOrWhitespace(value, message);
+        guard(value).againstNullOrWhitespace(message);
         this.value = value;
     }
 
