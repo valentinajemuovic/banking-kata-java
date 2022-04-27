@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.domain.common;
 
 import com.optivem.kata.banking.core.domain.accounts.Money;
+import com.optivem.kata.banking.core.domain.common.validators.StringValidator;
 
 import java.util.Optional;
 
@@ -8,8 +9,8 @@ public class Validation {
 
     private Validation() {}
 
-    public static boolean isNullOrWhitespace(String value) {
-        return value == null || value.trim().equals("");
+    public static StringValidator validate(String value) {
+        return new StringValidator(value);
     }
 
     public static boolean isNegative(int value) {

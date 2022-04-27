@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.domain.common.guards;
 
-import com.optivem.kata.banking.core.domain.common.Validation;
+import static com.optivem.kata.banking.core.domain.common.Validation.validate;
 
 public class StringGuard extends BaseGuard<String> {
 
@@ -9,6 +9,6 @@ public class StringGuard extends BaseGuard<String> {
     }
 
     public void againstNullOrWhitespace(String message) {
-        against(Validation::isNullOrWhitespace, message);
+        against(validate(value)::isNullOrWhitespace, message);
     }
 }
