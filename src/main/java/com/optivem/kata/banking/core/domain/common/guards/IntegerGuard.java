@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.domain.common.guards;
 
-import com.optivem.kata.banking.core.domain.common.Validation;
+import static com.optivem.kata.banking.core.domain.common.Validation.validate;
 
 public class IntegerGuard extends BaseGuard<Integer> {
     public IntegerGuard(Integer value) {
@@ -8,10 +8,10 @@ public class IntegerGuard extends BaseGuard<Integer> {
     }
 
     public void againstNegative(String message) {
-        against(Validation::isNegative, message);
+        against(validate(value)::isNegative, message);
     }
 
     public void againstNonPositive(String message) {
-        against(Validation::isNonPositive, message);
+        against(validate(value)::isNonPositive, message);
     }
 }

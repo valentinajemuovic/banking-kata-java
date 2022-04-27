@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.domain.common;
 
 import com.optivem.kata.banking.core.domain.accounts.Money;
+import com.optivem.kata.banking.core.domain.common.validators.IntegerValidator;
 import com.optivem.kata.banking.core.domain.common.validators.StringValidator;
 
 import java.util.Optional;
@@ -13,12 +14,8 @@ public class Validation {
         return new StringValidator(value);
     }
 
-    public static boolean isNegative(int value) {
-        return value < 0;
-    }
-
-    public static boolean isNonPositive(int value) {
-        return value <= 0;
+    public static IntegerValidator validate(int value) {
+        return new IntegerValidator(value);
     }
 
     public static boolean isNegative(Money value) {
