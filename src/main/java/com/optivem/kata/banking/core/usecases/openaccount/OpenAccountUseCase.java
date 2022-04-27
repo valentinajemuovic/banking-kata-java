@@ -24,11 +24,11 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
     }
 
     private AccountHolderName getAccountHolderName(OpenAccountRequest request) {
-        return new AccountHolderName(new Text(request.getFirstName()), new Text(request.getLastName()));
+        return AccountHolderName.of(request.getFirstName(), request.getLastName());
     }
 
     private Balance getBalance(OpenAccountRequest request) {
-        return new Balance(new Money(request.getInitialBalance()));
+        return Balance.of(request.getInitialBalance());
     }
 
     private BankAccount createBankAccount(AccountHolderName accountHolderName, Balance balance) {

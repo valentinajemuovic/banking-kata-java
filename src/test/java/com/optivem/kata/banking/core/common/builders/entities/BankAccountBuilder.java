@@ -1,6 +1,9 @@
 package com.optivem.kata.banking.core.common.builders.entities;
 
-import com.optivem.kata.banking.core.domain.accounts.*;
+import com.optivem.kata.banking.core.domain.accounts.AccountHolderName;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.Balance;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 
 public class BankAccountBuilder {
 
@@ -48,7 +51,7 @@ public class BankAccountBuilder {
     public BankAccount build() {
         var accountNumber = AccountNumber.of(this.accountNumber);
         var accountHolderName = AccountHolderName.of(firstName, lastName);
-        var balance = new Balance(new Money(this.balance));
+        var balance = Balance.of(this.balance);
         return new BankAccount(accountNumber, accountHolderName, balance);
     }
 }

@@ -11,10 +11,18 @@ public record Balance(Money value) {
     }
 
     public Balance add(TransactionAmount amount) {
-        return new Balance(value.add(amount.value()));
+        return Balance.of(value.add(amount.value()));
     }
 
     public Balance subtract(TransactionAmount amount) {
-        return new Balance(value.subtract(amount.value()));
+        return Balance.of(value.subtract(amount.value()));
+    }
+
+    public static Balance of(Money value) {
+        return new Balance(value);
+    }
+
+    public static Balance of(int value) {
+        return new Balance(Money.of(value));
     }
 }

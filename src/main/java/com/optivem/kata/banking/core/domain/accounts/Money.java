@@ -31,4 +31,8 @@ public record Money(int value) {
     public boolean isNonPositive() {
         return lessThanOrEqualTo(ZERO);
     }
+
+    public static Money of(int value) {
+        return new Money(value);
+    }
 }
