@@ -36,8 +36,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
 
     private BankAccount findBankAccount(AccountNumber accountNumber) {
         var optionalBankAccount = repository.find(accountNumber);
-        guard(optionalBankAccount).againstEmpty(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
-        return optionalBankAccount.get();
+        return guard(optionalBankAccount).againstEmpty(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     private DepositFundsResponse getResponse(BankAccount bankAccount) {

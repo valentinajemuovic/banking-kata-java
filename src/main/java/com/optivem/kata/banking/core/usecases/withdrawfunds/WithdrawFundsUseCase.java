@@ -35,8 +35,7 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
 
     private BankAccount findBankAccount(AccountNumber accountNumber) {
         var optionalBankAccount = repository.find(accountNumber);
-        guard(optionalBankAccount).againstEmpty(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
-        return optionalBankAccount.get();
+        return guard(optionalBankAccount).againstEmpty(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     private WithdrawFundsResponse getResponse(BankAccount bankAccount) {

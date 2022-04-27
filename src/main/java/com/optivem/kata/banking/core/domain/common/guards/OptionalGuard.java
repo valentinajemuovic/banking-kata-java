@@ -7,7 +7,7 @@ public class OptionalGuard<V> extends BaseGuard<Optional<V>> {
         super(value);
     }
 
-    public void againstEmpty(String message) {
-        against(value::isEmpty, message);
+    public V againstEmpty(String message) {
+        return against(value::isEmpty, message).get();
     }
 }
