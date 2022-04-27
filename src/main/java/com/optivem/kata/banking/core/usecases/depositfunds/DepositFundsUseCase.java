@@ -27,7 +27,7 @@ public class DepositFundsUseCase implements UseCase<DepositFundsRequest, Deposit
     }
 
     private AccountNumber getAccountNumber(DepositFundsRequest request) {
-        return new AccountNumber(request.getAccountNumber());
+        return AccountNumber.of(request.getAccountNumber());
     }
 
     private TransactionAmount getTransactionAmount(DepositFundsRequest request) {

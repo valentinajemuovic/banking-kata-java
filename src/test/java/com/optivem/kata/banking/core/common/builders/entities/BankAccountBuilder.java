@@ -46,8 +46,8 @@ public class BankAccountBuilder {
     }
 
     public BankAccount build() {
-        var accountNumber = new AccountNumber(this.accountNumber);
-        var accountHolderName = new AccountHolderName(firstName, lastName);
+        var accountNumber = AccountNumber.of(this.accountNumber);
+        var accountHolderName = AccountHolderName.of(firstName, lastName);
         var balance = new Balance(new Money(this.balance));
         return new BankAccount(accountNumber, accountHolderName, balance);
     }

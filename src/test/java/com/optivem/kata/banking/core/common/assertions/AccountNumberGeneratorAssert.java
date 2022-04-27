@@ -15,6 +15,6 @@ public class AccountNumberGeneratorAssert {
 
     public void generatesNext(String expectedValue) {
         var next = generator.next();
-        assertThat(next).isEqualTo(new AccountNumber(expectedValue));
+        assertThat(next).isEqualTo(AccountNumber.of(expectedValue));
     }
 }

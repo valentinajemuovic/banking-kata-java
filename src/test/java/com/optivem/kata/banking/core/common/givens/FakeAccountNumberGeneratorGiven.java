@@ -12,7 +12,7 @@ public class FakeAccountNumberGeneratorGiven {
     }
 
     public void willGenerate(String number) {
-        var accountNumber = new AccountNumber(number);
+        var accountNumber = AccountNumber.of(number);
         generator.add(accountNumber);
     }
 }

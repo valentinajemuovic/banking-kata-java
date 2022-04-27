@@ -26,7 +26,7 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
     }
 
     private AccountNumber getAccountNumber(WithdrawFundsRequest request) {
-        return new AccountNumber(request.getAccountNumber());
+        return AccountNumber.of(request.getAccountNumber());
     }
 
     private TransactionAmount getTransactionAmount(WithdrawFundsRequest request) {

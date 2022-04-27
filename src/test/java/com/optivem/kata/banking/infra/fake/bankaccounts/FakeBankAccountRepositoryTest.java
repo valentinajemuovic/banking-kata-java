@@ -78,7 +78,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        var retrievedBankAccount = repository.find(new AccountNumber(accountNumber)).get();
+        var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber)).get();
 
         var transactionAmount = getTransactionAmount(20);
         retrievedBankAccount.deposit(transactionAmount);

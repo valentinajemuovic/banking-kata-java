@@ -4,10 +4,14 @@ import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 
 import static com.optivem.kata.banking.core.domain.common.Guard.guard;
 
-public record AccountHolderName(String firstName, String lastName) {
+public record AccountHolderName(Text firstName, Text lastName) {
 
-    public AccountHolderName(String firstName, String lastName) {
-        this.firstName = guard(firstName).againstNullOrWhitespace(ValidationMessages.FIRST_NAME_EMPTY);
-        this.lastName = guard(lastName).againstNullOrWhitespace(ValidationMessages.LAST_NAME_EMPTY);
+    public AccountHolderName {
+        guard(firstName).againstNullOrWhitespace(ValidationMessages.FIRST_NAME_EMPTY);
+        guard(lastName).againstNullOrWhitespace(ValidationMessages.LAST_NAME_EMPTY);
+    }
+
+    public static AccountHolderName of(String firstName, String lastName) {
+        return new AccountHolderName(new Text(firstName), new Text(lastName));
     }
 }

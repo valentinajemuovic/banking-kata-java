@@ -45,13 +45,13 @@ public class BankAccountRepositoryAssert {
     }
 
     public BankAccount containsBankAccount(String accountNumber) {
-        var retrievedBankAccount = repository.find(new AccountNumber(accountNumber));
+        var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber));
         assertThat(retrievedBankAccount).usingRecursiveComparison().isNotEqualTo(Optional.empty());
         return retrievedBankAccount.get();
     }
 
     public void doesNotContain(String accountNumber) {
-        var retrievedBankAccount = repository.find(new AccountNumber(accountNumber));
+        var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber));
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.empty());
     }
 }

@@ -87,6 +87,6 @@ class OpenAccountUseCaseTest {
     }
 
     private void setupNextRandomAccountNumber(String accountNumber) {
-        accountNumberGenerator.add(new AccountNumber(accountNumber));
+        accountNumberGenerator.add(AccountNumber.of(accountNumber));
     }
 }

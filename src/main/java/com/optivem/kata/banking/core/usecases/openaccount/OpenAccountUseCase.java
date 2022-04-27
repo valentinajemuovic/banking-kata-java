@@ -24,7 +24,7 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
     }
 
     private AccountHolderName getAccountHolderName(OpenAccountRequest request) {
-        return new AccountHolderName(request.getFirstName(), request.getLastName());
+        return new AccountHolderName(new Text(request.getFirstName()), new Text(request.getLastName()));
     }
 
     private Balance getBalance(OpenAccountRequest request) {
@@ -38,7 +38,7 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
 
     private OpenAccountResponse getResponse(BankAccount bankAccount) {
         var response = new OpenAccountResponse();
-        response.setAccountNumber(bankAccount.getAccountNumber().value());
+        response.setAccountNumber(bankAccount.getAccountNumber().value().value());
         return response;
     }
 }
