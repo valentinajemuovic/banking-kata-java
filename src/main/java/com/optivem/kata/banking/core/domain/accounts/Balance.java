@@ -21,10 +21,10 @@ public class Balance {
     }
 
     public Balance add(TransactionAmount amount) {
-        return new Balance(value.add(amount.getValue()));
+        return new Balance(value.add(amount.value()));
     }
 
     public Balance subtract(TransactionAmount amount) {
-        return new Balance(value.subtract(amount.getValue()));
+        return new Balance(value.subtract(amount.value()));
     }
 }
