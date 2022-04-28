@@ -48,7 +48,7 @@ class WithdrawFundsUseCaseTest {
         var expectedResponse = new WithdrawFundsResponse();
         expectedResponse.setBalance(expectedFinalBalance);
 
-        assertThatUseCase(useCase).withRequest(request).assertResponse(expectedResponse);
+        assertThatUseCase(useCase).withRequest(request).returnsResponse(expectedResponse);
 
         assertThatRepository(repository).containsBankAccount(accountNumber, expectedFinalBalance);
     }

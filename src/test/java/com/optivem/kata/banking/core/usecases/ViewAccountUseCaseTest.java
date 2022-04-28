@@ -24,6 +24,6 @@ class ViewAccountUseCaseTest {
 
         var expectedResponse = new ViewAccountResponse();
 
-        assertThatUseCase(useCase).withRequest(request).assertResponse(expectedResponse);
+        assertThatUseCase(useCase).withRequest(request).returnsResponse(expectedResponse);
     }
 }

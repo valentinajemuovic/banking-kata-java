@@ -51,7 +51,7 @@ class OpenAccountUseCaseTest {
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
 
-        assertThatUseCase(useCase).withRequest(request).assertResponse(expectedResponse);
+        assertThatUseCase(useCase).withRequest(request).returnsResponse(expectedResponse);
 
         assertThatRepository(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
     }

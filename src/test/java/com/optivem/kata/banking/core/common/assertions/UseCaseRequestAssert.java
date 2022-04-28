@@ -15,7 +15,7 @@ public class UseCaseRequestAssert<R, P> {
         this.request = request;
     }
 
-    public void assertResponse(P expectedResponse) {
+    public void returnsResponse(P expectedResponse) {
         var response = useCase.handle(request);
         assertThat(response).isEqualTo(expectedResponse);
     }
