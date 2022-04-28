@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
@@ -16,7 +17,7 @@ import static com.optivem.kata.banking.core.common.givens.Givens.givenThatReposi
 
 class ViewAccountUseCaseTest {
 
-    private FakeBankAccountRepository repository;
+    private BankAccountRepository repository;
     private ViewAccountUseCase useCase;
 
     @BeforeEach

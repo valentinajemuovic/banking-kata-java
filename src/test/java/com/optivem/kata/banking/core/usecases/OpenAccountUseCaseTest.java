@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
@@ -22,7 +23,7 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY
 class OpenAccountUseCaseTest {
 
     private FakeAccountNumberGenerator accountNumberGenerator;
-    private FakeBankAccountRepository bankAccountRepository;
+    private BankAccountRepository bankAccountRepository;
     private OpenAccountUseCase useCase;
 
     private static Stream<Arguments> should_open_account_given_request_is_valid() {

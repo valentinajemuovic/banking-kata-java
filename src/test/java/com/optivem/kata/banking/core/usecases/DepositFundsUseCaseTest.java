@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsResponse;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
@@ -18,7 +19,7 @@ import static com.optivem.kata.banking.core.common.givens.Givens.givenThatReposi
 
 class DepositFundsUseCaseTest {
 
-    private FakeBankAccountRepository repository;
+    private BankAccountRepository repository;
     private DepositFundsUseCase useCase;
 
     @BeforeEach
