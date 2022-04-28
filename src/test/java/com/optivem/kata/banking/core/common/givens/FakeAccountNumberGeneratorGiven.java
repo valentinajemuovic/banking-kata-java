@@ -5,7 +5,7 @@ import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
 
 public class FakeAccountNumberGeneratorGiven {
 
-    private FakeAccountNumberGenerator generator;
+    private final FakeAccountNumberGenerator generator;
 
     public FakeAccountNumberGeneratorGiven(FakeAccountNumberGenerator generator) {
         this.generator = generator;

@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
 public record Text(String value) {
-    private static Text SPACE = Text.of(" ");
+    private static final Text SPACE = Text.of(" ");
 
     public boolean isNullOrWhitespace() {
         return value == null || value.trim().equals("");
