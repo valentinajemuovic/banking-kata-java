@@ -3,6 +3,7 @@ package com.optivem.kata.banking.core.usecases;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
+import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,19 +12,30 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatUseCase;
 import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.aViewAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
+import static com.optivem.kata.banking.core.common.givens.Givens.givenThatRepository;
 
 class ViewAccountUseCaseTest {
 
+    private FakeBankAccountRepository repository;
     private ViewAccountUseCase useCase;
 
     @BeforeEach
     void init() {
-        this.useCase = new ViewAccountUseCase();
+        this.repository = new FakeBankAccountRepository();
+        this.useCase = new ViewAccountUseCase(repository);
     }
 
     @Test
     void nothing() {
+        var accountNumber = "3223fsfds";
+        var firstName = "Kelly";
+        var lastName = "McDonald";
+        var initialBalance = 400;
+
+        givenThatRepository(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
+
         var request = aViewAccountRequest()
+                .accountNumber(accountNumber)
                 .build();
 
         var expectedResponse = new ViewAccountResponse();
@@ -39,5 +51,13 @@ class ViewAccountUseCaseTest {
                 .build();
 
         assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+    }
+
+    @Test
+    void should_throw_exception_given_non_existent_account_number() {
+        var request = aViewAccountRequest()
+                .build();
+
+        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 }

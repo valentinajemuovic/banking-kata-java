@@ -20,4 +20,15 @@ public class BankAccountRepositoryGiven {
 
         repository.add(bankAccount);
     }
+
+    public void alreadyHasBankAccount(String accountNumber, String firstName, String lastName, int balance) {
+        var bankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .firstName(firstName)
+                .lastName(lastName)
+                .balance(balance)
+                .build();
+
+        repository.add(bankAccount);
+    }
 }
