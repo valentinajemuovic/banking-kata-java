@@ -7,16 +7,16 @@ public class DepositFundsRequestBuilder {
     private static final String ACCOUNT_NUMBER = "GB51BARC20031816295685";
     private static final int AMOUNT = 600;
 
+    public static DepositFundsRequestBuilder aDepositFundsRequest() {
+        return new DepositFundsRequestBuilder();
+    }
+
     private String accountNumber;
     private int amount;
 
     public DepositFundsRequestBuilder() {
         accountNumber(ACCOUNT_NUMBER);
         amount(AMOUNT);
-    }
-
-    public static DepositFundsRequestBuilder aDepositFundsRequest() {
-        return new DepositFundsRequestBuilder();
     }
 
     public DepositFundsRequestBuilder accountNumber(String accountNumber) {
@@ -30,9 +30,9 @@ public class DepositFundsRequestBuilder {
     }
 
     public DepositFundsRequest build() {
-        var request = new DepositFundsRequest();
-        request.setAccountNumber(accountNumber);
-        request.setAmount(amount);
-        return request;
+        return DepositFundsRequest.builder()
+                .accountNumber(accountNumber)
+                .amount(amount)
+                .build();
     }
 }

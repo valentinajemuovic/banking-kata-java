@@ -1,12 +1,12 @@
 package com.optivem.kata.banking.core.usecases.viewaccount;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class ViewAccountRequest {
     private String accountNumber;
 }

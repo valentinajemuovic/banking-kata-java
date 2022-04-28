@@ -38,10 +38,10 @@ public class OpenAccountRequestBuilder {
     }
 
     public OpenAccountRequest build() {
-        var request = new OpenAccountRequest();
-        request.setFirstName(firstName);
-        request.setLastName(lastName);
-        request.setInitialBalance(balance);
-        return request;
+        return OpenAccountRequest.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .initialBalance(balance)
+                .build();
     }
 }

@@ -7,16 +7,16 @@ public class WithdrawFundsRequestBuilder {
     private static final String ACCOUNT_NUMBER = "GB51BARC20031816295685";
     private static final int AMOUNT = 300;
 
+    public static WithdrawFundsRequestBuilder aWithdrawFundsRequest() {
+        return new WithdrawFundsRequestBuilder();
+    }
+
     private String accountNumber;
     private int amount;
 
     public WithdrawFundsRequestBuilder() {
         accountNumber(ACCOUNT_NUMBER);
         amount(AMOUNT);
-    }
-
-    public static WithdrawFundsRequestBuilder aWithdrawFundsRequest() {
-        return new WithdrawFundsRequestBuilder();
     }
 
     public WithdrawFundsRequestBuilder accountNumber(String accountNumber) {
@@ -30,9 +30,9 @@ public class WithdrawFundsRequestBuilder {
     }
 
     public WithdrawFundsRequest build() {
-        var request = new WithdrawFundsRequest();
-        request.setAccountNumber(accountNumber);
-        request.setAmount(amount);
-        return request;
+        return WithdrawFundsRequest.builder()
+                .accountNumber(accountNumber)
+                .amount(amount)
+                .build();
     }
 }
