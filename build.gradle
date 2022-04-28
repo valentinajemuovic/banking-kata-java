@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'info.solidsoft.pitest' version '1.7.4'
 }
 
 group = 'com.optivem'
