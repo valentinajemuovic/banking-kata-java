@@ -12,7 +12,7 @@ public class BankAccountRepositoryGiven {
         this.repository = repository;
     }
 
-    public void containsBankAccount(String accountNumber, int balance) {
+    public void alreadyHasBankAccount(String accountNumber, int balance) {
         var bankAccount = aBankAccount()
                 .accountNumber(accountNumber)
                 .balance(balance)

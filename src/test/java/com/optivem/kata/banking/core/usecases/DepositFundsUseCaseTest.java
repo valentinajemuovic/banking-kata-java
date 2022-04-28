@@ -34,7 +34,7 @@ class DepositFundsUseCaseTest {
         var depositAmount = 50;
         var expectedFinalBalance = 150;
 
-        givenThatRepository(repository).containsBankAccount(accountNumber, initialBalance);
+        givenThatRepository(repository).alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = aDepositFundsRequest()
                 .accountNumber(accountNumber)

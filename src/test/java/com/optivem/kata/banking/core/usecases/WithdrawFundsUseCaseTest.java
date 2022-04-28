@@ -38,7 +38,7 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_withdraw_funds_given_valid_request(String accountNumber, int initialBalance, int amount, int expectedFinalBalance) {
-        givenThatRepository(repository).containsBankAccount(accountNumber, initialBalance);
+        givenThatRepository(repository).alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = aWithdrawFundsRequest()
                 .accountNumber(accountNumber)
@@ -87,7 +87,7 @@ class WithdrawFundsUseCaseTest {
         var balance = 140;
         var amount = 141;
 
-        givenThatRepository(repository).containsBankAccount(accountNumber, balance);
+        givenThatRepository(repository).alreadyHasBankAccount(accountNumber, balance);
 
         var request = aWithdrawFundsRequest()
                 .accountNumber(accountNumber)
