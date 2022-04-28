@@ -26,11 +26,12 @@ class ViewAccountUseCaseTest {
     }
 
     @Test
-    void nothing() {
+    void should_view_account_given_valid_request() {
         var accountNumber = "3223fsfds";
         var firstName = "Kelly";
         var lastName = "McDonald";
         var initialBalance = 400;
+        var fullName = "Kelly McDonald";
 
         givenThatRepository(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
 
@@ -39,6 +40,9 @@ class ViewAccountUseCaseTest {
                 .build();
 
         var expectedResponse = new ViewAccountResponse();
+        expectedResponse.setAccountNumber("3223fsfds");
+        expectedResponse.setFullName(fullName);
+        expectedResponse.setBalance(initialBalance);
 
         assertThatUseCase(useCase).withRequest(request).returnsResponse(expectedResponse);
     }

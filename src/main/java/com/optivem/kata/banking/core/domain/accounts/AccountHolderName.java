@@ -14,4 +14,8 @@ public record AccountHolderName(Text firstName, Text lastName) {
     public static AccountHolderName of(String firstName, String lastName) {
         return new AccountHolderName(Text.of(firstName), Text.of(lastName));
     }
+
+    public Text getFullName() {
+        return firstName.addSpace().add(lastName);
+    }
 }

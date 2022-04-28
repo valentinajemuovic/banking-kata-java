@@ -18,10 +18,8 @@ public class ViewAccountUseCase implements UseCase<ViewAccountRequest, ViewAccou
     @Override
     public ViewAccountResponse handle(ViewAccountRequest request) {
         var accountNumber = getAccountNumber(request);
-
         var bankAccount = findBankAccount(accountNumber);
-
-        return new ViewAccountResponse();
+        return getResponse(bankAccount);
     }
 
     private AccountNumber getAccountNumber(ViewAccountRequest request) {
@@ -30,5 +28,13 @@ public class ViewAccountUseCase implements UseCase<ViewAccountRequest, ViewAccou
 
     private BankAccount findBankAccount(AccountNumber accountNumber) {
         return extend(repository).findRequired(accountNumber);
+    }
+
+    private ViewAccountResponse getResponse(BankAccount bankAccount) {
+        var response = new ViewAccountResponse();
+        response.setAccountNumber(bankAccount.getAccountNumber().value().value());
+        response.setFullName(bankAccount.getAccountHolderName().getFullName().value());
+        response.setBalance(bankAccount.getBalance().value().value());
+        return response;
     }
 }

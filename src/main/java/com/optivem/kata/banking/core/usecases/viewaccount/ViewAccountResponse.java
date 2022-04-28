@@ -8,4 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class ViewAccountResponse {
+    private String accountNumber;
+    private String fullName;
+    private int balance;
 }
