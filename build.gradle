@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'info.solidsoft.pitest' version '1.7.4'
+    id 'jacoco'
 }
 
 pitest {
