@@ -12,7 +12,6 @@ pitest {
 
 jacoco {
     toolVersion = "0.8.7"
-    reportsDir = file("$buildDir/jacoco")
 }
 
 test {
