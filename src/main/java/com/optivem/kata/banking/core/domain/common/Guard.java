@@ -4,11 +4,10 @@ import com.optivem.kata.banking.core.domain.accounts.Money;
 import com.optivem.kata.banking.core.domain.accounts.Text;
 import com.optivem.kata.banking.core.domain.common.guards.MoneyGuard;
 import com.optivem.kata.banking.core.domain.common.guards.TextGuard;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class Guard {
-
-    private Guard() {
-    }
 
     public static TextGuard guard(Text value) {
         return new TextGuard(value);
