@@ -16,6 +16,6 @@ public record AccountHolderName(Text firstName, Text lastName) {
     }
 
     public Text getFullName() {
-        return firstName.addSpace().add(lastName);
+        return firstName().addSpace().add(lastName());
     }
 }
