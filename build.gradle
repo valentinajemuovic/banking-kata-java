@@ -5,6 +5,10 @@ plugins {
     id 'info.solidsoft.pitest' version '1.7.4'
 }
 
+pitest {
+    junit5PluginVersion = '0.15'
+}
+
 group = 'com.optivem'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
