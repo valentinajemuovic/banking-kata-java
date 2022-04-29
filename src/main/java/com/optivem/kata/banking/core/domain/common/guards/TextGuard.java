@@ -8,7 +8,7 @@ public class TextGuard extends BaseGuard<Text> {
         super(value);
     }
 
-    public Text againstNullOrWhitespace(String message) {
-        return against(value::isNullOrWhitespace, message);
+    public void againstNullOrWhitespace(String message) {
+        against(value::isNullOrWhitespace, message);
     }
 }

@@ -19,6 +19,6 @@ public record TransactionAmount(Money value) {
     }
 
     public static TransactionAmount of(int value) {
-        return new TransactionAmount(Money.of(value));
+        return of(Money.of(value));
     }
 }

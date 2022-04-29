@@ -12,11 +12,9 @@ public class BaseGuard<T> {
         this.value = value;
     }
 
-    protected T against(BooleanSupplier tester, String message) {
+    protected void against(BooleanSupplier tester, String message) {
         if (tester.getAsBoolean()) {
             throw new ValidationException(message);
         }
-
-        return value;
     }
 }
