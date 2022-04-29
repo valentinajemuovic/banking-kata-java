@@ -45,13 +45,9 @@ class DepositFundsUseCaseTest {
                 .amount(depositAmount)
                 .build();
 
-        var expectedResponse = DepositFundsResponse.builder()
-                .balance(expectedFinalBalance)
-                .build();
-
         assertThatUseCase(useCase)
                 .withRequest(request)
-                .returnsResponse(expectedResponse);
+                .executeSuccessfully();
 
         assertThatRepository(repository)
                 .containsBankAccount(accountNumber, expectedFinalBalance);

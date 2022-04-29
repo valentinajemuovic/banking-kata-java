@@ -4,11 +4,11 @@ import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
-import com.optivem.kata.banking.core.usecases.UseCase;
+import com.optivem.kata.banking.core.usecases.VoidUseCase;
 
 import static com.optivem.kata.banking.core.domain.extensions.Extension.extend;
 
-public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, WithdrawFundsResponse> {
+public class WithdrawFundsUseCase implements VoidUseCase<WithdrawFundsRequest> {
 
     private final BankAccountRepository repository;
 
@@ -16,15 +16,13 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
         this.repository = repository;
     }
 
-    public WithdrawFundsResponse handle(WithdrawFundsRequest request) {
+    public void handle(WithdrawFundsRequest request) {
         var accountNumber = getAccountNumber(request);
         var amount = getTransactionAmount(request);
 
         var bankAccount = findBankAccount(accountNumber);
         bankAccount.withdraw(amount);
         repository.update(bankAccount);
-
-        return getResponse(bankAccount);
     }
 
     private AccountNumber getAccountNumber(WithdrawFundsRequest request) {
@@ -37,11 +35,5 @@ public class WithdrawFundsUseCase implements UseCase<WithdrawFundsRequest, Withd
 
     private BankAccount findBankAccount(AccountNumber accountNumber) {
         return extend(repository).findRequired(accountNumber);
-    }
-
-    private WithdrawFundsResponse getResponse(BankAccount bankAccount) {
-        var response = new WithdrawFundsResponse();
-        response.setBalance(bankAccount.getBalance().value().value());
-        return response;
     }
 }
