@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases.openaccount;
 
-import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
@@ -17,6 +16,7 @@ import static com.optivem.kata.banking.core.common.assertions.Assertions.assertT
 import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
+import static com.optivem.kata.banking.core.common.givens.Givens.givenThatGenerator;
 
 class OpenAccountUseCaseTest {
 
@@ -39,7 +39,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_open_account_given_request_is_valid(String firstName, String lastName, int initialBalance, String accountNumber) {
-        setupNextRandomAccountNumber(accountNumber);
+        givenThatGenerator(accountNumberGenerator).willGenerate(accountNumber);
 
         var request = anOpenAccountRequest()
                 .firstName(firstName)
@@ -83,9 +83,5 @@ class OpenAccountUseCaseTest {
                 .build();
 
         assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.BALANCE_NEGATIVE);
-    }
-
-    private void setupNextRandomAccountNumber(String accountNumber) {
-        accountNumberGenerator.add(AccountNumber.of(accountNumber));
     }
 }
