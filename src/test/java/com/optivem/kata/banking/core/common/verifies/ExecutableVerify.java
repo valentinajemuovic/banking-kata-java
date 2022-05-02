@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.common.assertions;
+package com.optivem.kata.banking.core.common.verifies;
 
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
@@ -7,11 +7,11 @@ import org.junit.jupiter.api.function.Executable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ExecutableAssert {
+public class ExecutableVerify {
 
     private final Executable executable;
 
-    public ExecutableAssert(Executable executable) {
+    public ExecutableVerify(Executable executable) {
         this.executable = executable;
     }
 

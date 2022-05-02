@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases.viewaccount;
 
+import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -8,10 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.aViewAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
-import static com.optivem.kata.banking.core.common.givens.Givens.givenThatRepository;
 
 class ViewAccountUseCaseTest {
 
@@ -32,7 +32,7 @@ class ViewAccountUseCaseTest {
         var initialBalance = 400;
         var fullName = "Kelly McDonald";
 
-        givenThatRepository(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
+        givenThat(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
 
         var request = aViewAccountRequest()
                 .accountNumber(accountNumber)
@@ -43,7 +43,7 @@ class ViewAccountUseCaseTest {
         expectedResponse.setFullName(fullName);
         expectedResponse.setBalance(initialBalance);
 
-        assertThatUseCase(useCase).withRequest(request).returnsResponse(expectedResponse);
+        Verifications.verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
     }
 
     @ParameterizedTest
@@ -53,7 +53,7 @@ class ViewAccountUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -61,6 +61,6 @@ class ViewAccountUseCaseTest {
         var request = aViewAccountRequest()
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 }

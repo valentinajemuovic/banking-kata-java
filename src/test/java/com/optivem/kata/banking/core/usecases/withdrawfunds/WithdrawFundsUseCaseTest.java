@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases.withdrawfunds;
 
+import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -11,12 +12,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatRepository;
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
-import static com.optivem.kata.banking.core.common.givens.Givens.givenThatRepository;
 
 class WithdrawFundsUseCaseTest {
 
@@ -37,16 +36,16 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_withdraw_funds_given_valid_request(String accountNumber, int initialBalance, int amount, int expectedFinalBalance) {
-        givenThatRepository(repository).alreadyHasBankAccount(accountNumber, initialBalance);
+        givenThat(repository).alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = aWithdrawFundsRequest()
                 .accountNumber(accountNumber)
                 .amount(amount)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).executeSuccessfully();
+        Verifications.verifyThat(useCase).withRequest(request).executeSuccessfully();
 
-        assertThatRepository(repository).containsBankAccount(accountNumber, expectedFinalBalance);
+        Verifications.verifyThat(repository).containsBankAccount(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -56,7 +55,7 @@ class WithdrawFundsUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -64,7 +63,7 @@ class WithdrawFundsUseCaseTest {
         var request = aWithdrawFundsRequest()
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @ParameterizedTest
@@ -74,7 +73,7 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
     @Test
@@ -83,15 +82,15 @@ class WithdrawFundsUseCaseTest {
         var balance = 140;
         var amount = 141;
 
-        givenThatRepository(repository).alreadyHasBankAccount(accountNumber, balance);
+        givenThat(repository).alreadyHasBankAccount(accountNumber, balance);
 
         var request = aWithdrawFundsRequest()
                 .accountNumber(accountNumber)
                 .amount(amount)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
-        assertThatRepository(repository).containsBankAccount(accountNumber, balance);
+        Verifications.verifyThat(repository).containsBankAccount(accountNumber, balance);
     }
 }

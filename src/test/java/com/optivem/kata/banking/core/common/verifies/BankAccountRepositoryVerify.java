@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.common.assertions;
+package com.optivem.kata.banking.core.common.verifies;
 
 import com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
@@ -9,11 +9,11 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BankAccountRepositoryAssert {
+public class BankAccountRepositoryVerify {
 
     private final BankAccountRepository repository;
 
-    public BankAccountRepositoryAssert(BankAccountRepository repository) {
+    public BankAccountRepositoryVerify(BankAccountRepository repository) {
         this.repository = repository;
     }
 

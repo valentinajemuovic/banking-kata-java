@@ -1,16 +1,16 @@
-package com.optivem.kata.banking.core.common.assertions;
+package com.optivem.kata.banking.core.common.verifies;
 
+import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatExecutable;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UseCaseRequestAssert<R, P> {
+public class UseCaseRequestVerify<R, P> {
 
     private final UseCase<R, P> useCase;
     private final R request;
 
-    public UseCaseRequestAssert(UseCase<R, P> useCase, R request) {
+    public UseCaseRequestVerify(UseCase<R, P> useCase, R request) {
         this.useCase = useCase;
         this.request = request;
     }
@@ -21,6 +21,6 @@ public class UseCaseRequestAssert<R, P> {
     }
 
     public void throwsValidationException(String message) {
-        assertThatExecutable(() -> useCase.handle(request)).throwsValidationException(message);
+        Verifications.verifyThat(() -> useCase.handle(request)).throwsValidationException(message);
     }
 }

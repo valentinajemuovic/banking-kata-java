@@ -6,8 +6,8 @@ import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatGenerator;
-import static com.optivem.kata.banking.core.common.givens.Givens.givenThatGenerator;
+import static com.optivem.kata.banking.core.common.Givens.givenThat;
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -30,9 +30,9 @@ class FakeAccountNumberGeneratorTest {
     void should_return_next_element_when_there_is_one_element() {
         var expectedValue = "GB54BARC20032611545669";
 
-        givenThatGenerator(generator).willGenerate(expectedValue);
+        givenThat(generator).willGenerate(expectedValue);
 
-        assertThatGenerator(generator).generatesNext(expectedValue);
+        verifyThat(generator).generatesNext(expectedValue);
 
         assertNextThrowsException();
     }
@@ -43,13 +43,13 @@ class FakeAccountNumberGeneratorTest {
         var expectedValue2 = "GB36BARC20038032622823";
         var expectedValue3 = "GB10BARC20040184197751";
 
-        givenThatGenerator(generator).willGenerate(expectedValue1);
-        givenThatGenerator(generator).willGenerate(expectedValue2);
-        givenThatGenerator(generator).willGenerate(expectedValue3);
+        givenThat(generator).willGenerate(expectedValue1);
+        givenThat(generator).willGenerate(expectedValue2);
+        givenThat(generator).willGenerate(expectedValue3);
 
-        assertThatGenerator(generator).generatesNext(expectedValue1);
-        assertThatGenerator(generator).generatesNext(expectedValue2);
-        assertThatGenerator(generator).generatesNext(expectedValue3);
+        verifyThat(generator).generatesNext(expectedValue1);
+        verifyThat(generator).generatesNext(expectedValue2);
+        verifyThat(generator).generatesNext(expectedValue3);
 
         assertNextThrowsException();
     }

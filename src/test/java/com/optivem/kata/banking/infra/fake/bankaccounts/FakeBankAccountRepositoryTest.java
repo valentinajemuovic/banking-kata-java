@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.infra.fake.bankaccounts;
 
+import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryMessages;
@@ -7,8 +8,6 @@ import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatExecutable;
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatRepository;
 import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.aBankAccount;
 
 class FakeBankAccountRepositoryTest {
@@ -24,7 +23,7 @@ class FakeBankAccountRepositoryTest {
     void should_return_empty_result_when_account_number_does_not_exist() {
         var accountNumber = "GB36BARC20038032622823";
 
-        assertThatRepository(repository).doesNotContain(accountNumber);
+        Verifications.verifyThat(repository).doesNotContain(accountNumber);
     }
 
     @Test
@@ -36,7 +35,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        assertThatRepository(repository).containsBankAccount(bankAccount);
+        Verifications.verifyThat(repository).containsBankAccount(bankAccount);
     }
 
     @Test
@@ -57,7 +56,7 @@ class FakeBankAccountRepositoryTest {
 
         bankAccount.deposit(TransactionAmount.of(60));
 
-        assertThatRepository(repository).containsBankAccount(expectedBankAccount);
+        Verifications.verifyThat(repository).containsBankAccount(expectedBankAccount);
     }
 
     @Test
@@ -80,7 +79,7 @@ class FakeBankAccountRepositoryTest {
 
         retrievedBankAccount.deposit(TransactionAmount.of(20));
 
-        assertThatRepository(repository).containsBankAccount(expectedBankAccount);
+        Verifications.verifyThat(repository).containsBankAccount(expectedBankAccount);
     }
 
     @Test
@@ -99,13 +98,13 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        var retrievedBankAccount = assertThatRepository(repository).containsBankAccount(accountNumber);
+        var retrievedBankAccount = Verifications.verifyThat(repository).containsBankAccount(accountNumber);
 
         repository.update(retrievedBankAccount);
 
         retrievedBankAccount.deposit(TransactionAmount.of(10));
 
-        assertThatRepository(repository).containsBankAccount(expectedBankAccount);
+        Verifications.verifyThat(repository).containsBankAccount(expectedBankAccount);
     }
 
     @Test
@@ -131,7 +130,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.update(bankAccount);
 
-        assertThatRepository(repository).containsBankAccount(expectedUpdatedBankAccount);
+        Verifications.verifyThat(repository).containsBankAccount(expectedUpdatedBankAccount);
     }
 
     @Test
@@ -152,7 +151,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        assertThatExecutable(() -> repository.add(bankAccount2)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
+        Verifications.verifyThat(() -> repository.add(bankAccount2)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
     }
 
     @Test
@@ -163,6 +162,6 @@ class FakeBankAccountRepositoryTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        assertThatExecutable(() -> repository.update(bankAccount)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+        Verifications.verifyThat(() -> repository.update(bankAccount)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }
 }

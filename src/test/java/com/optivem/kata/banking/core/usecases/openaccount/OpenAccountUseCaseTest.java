@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases.openaccount;
 
+import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
@@ -11,12 +12,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatRepository;
-import static com.optivem.kata.banking.core.common.assertions.Assertions.assertThatUseCase;
+import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
-import static com.optivem.kata.banking.core.common.givens.Givens.givenThatGenerator;
 
 class OpenAccountUseCaseTest {
 
@@ -39,7 +38,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_open_account_given_request_is_valid(String firstName, String lastName, int initialBalance, String accountNumber) {
-        givenThatGenerator(accountNumberGenerator).willGenerate(accountNumber);
+        givenThat(accountNumberGenerator).willGenerate(accountNumber);
 
         var request = anOpenAccountRequest()
                 .firstName(firstName)
@@ -50,9 +49,9 @@ class OpenAccountUseCaseTest {
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(accountNumber);
 
-        assertThatUseCase(useCase).withRequest(request).returnsResponse(expectedResponse);
+        Verifications.verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
 
-        assertThatRepository(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
+        Verifications.verifyThat(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
     }
 
     @ParameterizedTest
@@ -62,7 +61,7 @@ class OpenAccountUseCaseTest {
                 .firstName(firstName)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.FIRST_NAME_EMPTY);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.FIRST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -72,7 +71,7 @@ class OpenAccountUseCaseTest {
                 .lastName(lastName)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.LAST_NAME_EMPTY);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.LAST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -82,6 +81,6 @@ class OpenAccountUseCaseTest {
                 .initialBalance(initialBalance)
                 .build();
 
-        assertThatUseCase(useCase).withRequest(request).throwsValidationException(ValidationMessages.BALANCE_NEGATIVE);
+        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.BALANCE_NEGATIVE);
     }
 }
