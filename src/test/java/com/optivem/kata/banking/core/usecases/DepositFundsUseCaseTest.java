@@ -84,6 +84,6 @@ class DepositFundsUseCaseTest {
 
         verifyThat(useCase)
                 .withRequest(request)
-                .throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+                .throwsValidationException(ValidationMessages.AMOUNT_NOT_POSITIVE);
     }
 }

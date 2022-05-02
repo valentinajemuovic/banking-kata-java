@@ -59,14 +59,6 @@ class WithdrawFundsUseCaseTest {
         verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
-    @Test
-    void should_throw_exception_given_non_existent_account_number() {
-        var request = aWithdrawFundsRequest()
-                .build();
-
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
-    }
-
     @ParameterizedTest
     @MethodSource(NON_POSITIVE_INTEGERS)
     void should_throw_exception_given_non_positive_amount(int amount) {
@@ -74,7 +66,15 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.AMOUNT_NOT_POSITIVE);
+    }
+
+    @Test
+    void should_throw_exception_given_non_existent_account_number() {
+        var request = aWithdrawFundsRequest()
+                .build();
+
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @Test
