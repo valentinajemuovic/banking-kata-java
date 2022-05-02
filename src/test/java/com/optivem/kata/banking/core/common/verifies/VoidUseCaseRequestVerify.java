@@ -1,7 +1,8 @@
 package com.optivem.kata.banking.core.common.verifies;
 
-import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.usecases.VoidUseCase;
+
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 
 public class VoidUseCaseRequestVerify<R> {
     private final VoidUseCase<R> useCase;
@@ -17,6 +18,6 @@ public class VoidUseCaseRequestVerify<R> {
     }
 
     public void throwsValidationException(String message) {
-        Verifications.verifyThat(() -> useCase.handle(request)).throwsValidationException(message);
+        verifyThat(() -> useCase.handle(request)).throwsValidationException(message);
     }
 }

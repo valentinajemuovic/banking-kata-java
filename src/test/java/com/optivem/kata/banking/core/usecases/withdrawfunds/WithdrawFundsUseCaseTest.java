@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases.withdrawfunds;
 
-import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -13,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
@@ -43,9 +43,9 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        Verifications.verifyThat(useCase).withRequest(request).executeSuccessfully();
+        verifyThat(useCase).withRequest(request).executeSuccessfully();
 
-        Verifications.verifyThat(repository).containsBankAccount(accountNumber, expectedFinalBalance);
+        verifyThat(repository).containsBankAccount(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -55,7 +55,7 @@ class WithdrawFundsUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -63,7 +63,7 @@ class WithdrawFundsUseCaseTest {
         var request = aWithdrawFundsRequest()
                 .build();
 
-        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @ParameterizedTest
@@ -73,7 +73,7 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }
 
     @Test
@@ -89,8 +89,8 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
-        Verifications.verifyThat(repository).containsBankAccount(accountNumber, balance);
+        verifyThat(repository).containsBankAccount(accountNumber, balance);
     }
 }

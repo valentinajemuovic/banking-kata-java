@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases.viewaccount;
 
-import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -10,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.aViewAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -43,7 +43,7 @@ class ViewAccountUseCaseTest {
         expectedResponse.setFullName(fullName);
         expectedResponse.setBalance(initialBalance);
 
-        Verifications.verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
+        verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
     }
 
     @ParameterizedTest
@@ -53,7 +53,7 @@ class ViewAccountUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -61,6 +61,6 @@ class ViewAccountUseCaseTest {
         var request = aViewAccountRequest()
                 .build();
 
-        Verifications.verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 }

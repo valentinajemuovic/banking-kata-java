@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.usecases.depositfunds;
 
-import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
@@ -13,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
@@ -44,11 +44,11 @@ class DepositFundsUseCaseTest {
                 .amount(depositAmount)
                 .build();
 
-        Verifications.verifyThat(useCase)
+        verifyThat(useCase)
                 .withRequest(request)
                 .executeSuccessfully();
 
-        Verifications.verifyThat(repository)
+        verifyThat(repository)
                 .containsBankAccount(accountNumber, expectedFinalBalance);
     }
 
@@ -59,7 +59,7 @@ class DepositFundsUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        Verifications.verifyThat(useCase)
+        verifyThat(useCase)
                 .withRequest(request)
                 .throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
@@ -69,7 +69,7 @@ class DepositFundsUseCaseTest {
         var request = aDepositFundsRequest()
                 .build();
 
-        Verifications.verifyThat(useCase)
+        verifyThat(useCase)
                 .withRequest(request)
                 .throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
@@ -81,7 +81,7 @@ class DepositFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        Verifications.verifyThat(useCase)
+        verifyThat(useCase)
                 .withRequest(request)
                 .throwsValidationException(ValidationMessages.NON_POSITIVE_TRANSACTION_AMOUNT);
     }

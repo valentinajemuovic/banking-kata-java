@@ -1,8 +1,8 @@
 package com.optivem.kata.banking.core.common.verifies;
 
-import com.optivem.kata.banking.core.common.Verifications;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UseCaseRequestVerify<R, P> {
@@ -21,6 +21,6 @@ public class UseCaseRequestVerify<R, P> {
     }
 
     public void throwsValidationException(String message) {
-        Verifications.verifyThat(() -> useCase.handle(request)).throwsValidationException(message);
+        verifyThat(() -> useCase.handle(request)).throwsValidationException(message);
     }
 }
