@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.infra.fake.bankaccounts;
 
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeException;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
-import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,7 +32,7 @@ class FakeAccountNumberGeneratorTest {
 
         givenThat(generator).willGenerate(expectedValue);
 
-        verifyThat(generator).generatesNext(expectedValue);
+        assertGeneratesNext(expectedValue);
 
         assertNextThrowsException();
     }
@@ -47,11 +47,16 @@ class FakeAccountNumberGeneratorTest {
         givenThat(generator).willGenerate(expectedValue2);
         givenThat(generator).willGenerate(expectedValue3);
 
-        verifyThat(generator).generatesNext(expectedValue1);
-        verifyThat(generator).generatesNext(expectedValue2);
-        verifyThat(generator).generatesNext(expectedValue3);
+        assertGeneratesNext(expectedValue1);
+        assertGeneratesNext(expectedValue2);
+        assertGeneratesNext(expectedValue3);
 
         assertNextThrowsException();
+    }
+
+    private void assertGeneratesNext(String expectedValue) {
+        var next = generator.next();
+        assertThat(next).isEqualTo(AccountNumber.of(expectedValue));
     }
 
     private void assertNextThrowsException() {

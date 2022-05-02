@@ -25,7 +25,7 @@ class OpenAccountUseCaseTest {
     private BankAccountRepository bankAccountRepository;
     private OpenAccountUseCase useCase;
 
-    private static Stream<Arguments> should_open_account_given_request_is_valid() {
+    private static Stream<Arguments> should_open_account_given_valid_request() {
         return Stream.of(Arguments.of("John", "Smith", 0, "GB41OMQP68570038161775"),
                 Arguments.of("Mary", "McDonald", 50, "GB36BMFK75394735916876"));
     }
@@ -39,13 +39,13 @@ class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource
-    void should_open_account_given_request_is_valid(String firstName, String lastName, int initialBalance, String accountNumber) {
+    void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, String accountNumber) {
         givenThat(accountNumberGenerator).willGenerate(accountNumber);
 
         var request = anOpenAccountRequest()
                 .firstName(firstName)
                 .lastName(lastName)
-                .initialBalance(initialBalance)
+                .balance(initialBalance)
                 .build();
 
         var expectedResponse = new OpenAccountResponse();
@@ -58,7 +58,7 @@ class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
-    void should_throw_exception_given_first_name_is_empty(String firstName) {
+    void should_throw_exception_given_empty_first_name(String firstName) {
         var request = anOpenAccountRequest()
                 .firstName(firstName)
                 .build();
@@ -68,7 +68,7 @@ class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
-    void should_throw_exception_given_last_name_is_empty(String lastName) {
+    void should_throw_exception_given_empty_last_name(String lastName) {
         var request = anOpenAccountRequest()
                 .lastName(lastName)
                 .build();
@@ -78,9 +78,9 @@ class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource(NEGATIVE_INTEGERS)
-    void should_throw_exception_given_initial_balance_is_negative(int initialBalance) {
+    void should_throw_exception_given_negative_balance(int balance) {
         var request = anOpenAccountRequest()
-                .initialBalance(initialBalance)
+                .balance(balance)
                 .build();
 
         verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.BALANCE_NEGATIVE);

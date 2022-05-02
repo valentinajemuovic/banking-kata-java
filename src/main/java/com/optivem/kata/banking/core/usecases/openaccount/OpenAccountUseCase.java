@@ -28,7 +28,7 @@ public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccou
     }
 
     private Balance getBalance(OpenAccountRequest request) {
-        return Balance.of(request.getInitialBalance());
+        return Balance.of(request.getBalance());
     }
 
     private BankAccount createBankAccount(AccountHolderName accountHolderName, Balance balance) {

@@ -15,7 +15,7 @@ public class OpenAccountRequestBuilder {
     public OpenAccountRequestBuilder() {
         firstName(FIRST_NAME);
         lastName(LAST_NAME);
-        initialBalance(INITIAL_BALANCE);
+        balance(INITIAL_BALANCE);
     }
 
     public static OpenAccountRequestBuilder anOpenAccountRequest() {
@@ -32,8 +32,8 @@ public class OpenAccountRequestBuilder {
         return this;
     }
 
-    public OpenAccountRequestBuilder initialBalance(int initialBalance) {
-        this.balance = initialBalance;
+    public OpenAccountRequestBuilder balance(int balance) {
+        this.balance = balance;
         return this;
     }
 
@@ -41,7 +41,7 @@ public class OpenAccountRequestBuilder {
         return OpenAccountRequest.builder()
                 .firstName(firstName)
                 .lastName(lastName)
-                .initialBalance(balance)
+                .balance(balance)
                 .build();
     }
 }
