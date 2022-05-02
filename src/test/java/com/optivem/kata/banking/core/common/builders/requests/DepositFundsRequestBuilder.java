@@ -4,8 +4,8 @@ import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 
 public class DepositFundsRequestBuilder {
 
-    private static final String ACCOUNT_NUMBER = "GB51BARC20031816295685";
-    private static final int AMOUNT = 600;
+    private static final String DEFAULT_ACCOUNT_NUMBER = "GB51BARC20031816295685";
+    private static final int DEFAULT_AMOUNT = 600;
 
     public static DepositFundsRequestBuilder aDepositFundsRequest() {
         return new DepositFundsRequestBuilder();
@@ -15,8 +15,8 @@ public class DepositFundsRequestBuilder {
     private int amount;
 
     public DepositFundsRequestBuilder() {
-        accountNumber(ACCOUNT_NUMBER);
-        amount(AMOUNT);
+        accountNumber(DEFAULT_ACCOUNT_NUMBER);
+        amount(DEFAULT_AMOUNT);
     }
 
     public DepositFundsRequestBuilder accountNumber(String accountNumber) {

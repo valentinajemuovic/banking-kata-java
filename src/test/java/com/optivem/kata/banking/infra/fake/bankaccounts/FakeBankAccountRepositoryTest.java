@@ -27,7 +27,7 @@ class FakeBankAccountRepositoryTest {
     }
 
     @Test
-    void show_return_bank_account_when_account_number_exists() {
+    void should_return_bank_account_when_account_number_exists() {
         var accountNumber = "GB36BARC20038032622823";
         var bankAccount = aBankAccount()
                 .accountNumber(accountNumber)
@@ -35,7 +35,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        verifyThat(repository).containsBankAccount(bankAccount);
+        verifyThat(repository).contains(bankAccount);
     }
 
     @Test
@@ -56,7 +56,7 @@ class FakeBankAccountRepositoryTest {
 
         bankAccount.deposit(TransactionAmount.of(60));
 
-        verifyThat(repository).containsBankAccount(expectedBankAccount);
+        verifyThat(repository).contains(expectedBankAccount);
     }
 
     @Test
@@ -79,7 +79,7 @@ class FakeBankAccountRepositoryTest {
 
         retrievedBankAccount.deposit(TransactionAmount.of(20));
 
-        verifyThat(repository).containsBankAccount(expectedBankAccount);
+        verifyThat(repository).contains(expectedBankAccount);
     }
 
     @Test
@@ -98,13 +98,13 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        var retrievedBankAccount = verifyThat(repository).containsBankAccount(accountNumber);
+        var retrievedBankAccount = verifyThat(repository).contains(accountNumber);
 
         repository.update(retrievedBankAccount);
 
         retrievedBankAccount.deposit(TransactionAmount.of(10));
 
-        verifyThat(repository).containsBankAccount(expectedBankAccount);
+        verifyThat(repository).contains(expectedBankAccount);
     }
 
     @Test
@@ -130,7 +130,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.update(bankAccount);
 
-        verifyThat(repository).containsBankAccount(expectedUpdatedBankAccount);
+        verifyThat(repository).contains(expectedUpdatedBankAccount);
     }
 
     @Test

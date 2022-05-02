@@ -7,10 +7,14 @@ import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 
 public class BankAccountBuilder {
 
-    private static final String ACCOUNT_NUMBER = "GB10BARC20040184197751";
-    private static final String FIRST_NAME = "John";
-    private static final String LAST_NAME = "Smith";
-    private static final int BALANCE = 100;
+    private static final String DEFAULT_ACCOUNT_NUMBER = "GB10BARC20040184197751";
+    private static final String DEFAULT_FIRST_NAME = "John";
+    private static final String DEFAULT_LAST_NAME = "Smith";
+    private static final int DEFAULT_BALANCE = 100;
+
+    public static BankAccountBuilder aBankAccount() {
+        return new BankAccountBuilder();
+    }
 
     private String accountNumber;
     private String firstName;
@@ -18,14 +22,10 @@ public class BankAccountBuilder {
     private int balance;
 
     public BankAccountBuilder() {
-        accountNumber(ACCOUNT_NUMBER);
-        firstName(FIRST_NAME);
-        lastName(LAST_NAME);
-        balance(BALANCE);
-    }
-
-    public static BankAccountBuilder aBankAccount() {
-        return new BankAccountBuilder();
+        accountNumber(DEFAULT_ACCOUNT_NUMBER);
+        firstName(DEFAULT_FIRST_NAME);
+        lastName(DEFAULT_LAST_NAME);
+        balance(DEFAULT_BALANCE);
     }
 
     public BankAccountBuilder accountNumber(String accountNumber) {

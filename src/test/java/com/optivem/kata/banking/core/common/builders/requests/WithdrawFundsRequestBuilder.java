@@ -4,8 +4,8 @@ import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsRequest
 
 public class WithdrawFundsRequestBuilder {
 
-    private static final String ACCOUNT_NUMBER = "GB51BARC20031816295685";
-    private static final int AMOUNT = 300;
+    private static final String DEFAULT_ACCOUNT_NUMBER = "GB51BARC20031816295685";
+    private static final int DEFAULT_AMOUNT = 300;
 
     public static WithdrawFundsRequestBuilder aWithdrawFundsRequest() {
         return new WithdrawFundsRequestBuilder();
@@ -15,8 +15,8 @@ public class WithdrawFundsRequestBuilder {
     private int amount;
 
     public WithdrawFundsRequestBuilder() {
-        accountNumber(ACCOUNT_NUMBER);
-        amount(AMOUNT);
+        accountNumber(DEFAULT_ACCOUNT_NUMBER);
+        amount(DEFAULT_AMOUNT);
     }
 
     public WithdrawFundsRequestBuilder accountNumber(String accountNumber) {

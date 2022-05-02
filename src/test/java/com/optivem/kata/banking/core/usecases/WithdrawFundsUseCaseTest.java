@@ -46,7 +46,7 @@ class WithdrawFundsUseCaseTest {
 
         verifyThat(useCase).withRequest(request).executeSuccessfully();
 
-        verifyThat(repository).containsBankAccount(accountNumber, expectedFinalBalance);
+        verifyThat(repository).contains(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -92,6 +92,6 @@ class WithdrawFundsUseCaseTest {
 
         verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
-        verifyThat(repository).containsBankAccount(accountNumber, balance);
+        verifyThat(repository).contains(accountNumber, balance);
     }
 }

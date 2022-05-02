@@ -17,23 +17,23 @@ public class BankAccountRepositoryVerify {
         this.repository = repository;
     }
 
-    public BankAccount containsBankAccount(BankAccount bankAccount) {
+    public BankAccount contains(BankAccount bankAccount) {
         var accountNumber = bankAccount.getAccountNumber();
         var retrievedBankAccount = repository.find(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(bankAccount));
         return retrievedBankAccount.get();
     }
 
-    public BankAccount containsBankAccount(String accountNumber, int balance) {
+    public BankAccount contains(String accountNumber, int balance) {
         var expectedBankAccount = BankAccountBuilder.aBankAccount()
                 .accountNumber(accountNumber)
                 .balance(balance)
                 .build();
 
-        return containsBankAccount(expectedBankAccount);
+        return contains(expectedBankAccount);
     }
 
-    public BankAccount containsBankAccount(String accountNumber, String firstName, String lastName, int initialBalance) {
+    public BankAccount contains(String accountNumber, String firstName, String lastName, int initialBalance) {
         var expectedBankAccount = BankAccountBuilder.aBankAccount()
                 .accountNumber(accountNumber)
                 .firstName(firstName)
@@ -41,10 +41,10 @@ public class BankAccountRepositoryVerify {
                 .balance(initialBalance)
                 .build();
 
-        return containsBankAccount(expectedBankAccount);
+        return contains(expectedBankAccount);
     }
 
-    public BankAccount containsBankAccount(String accountNumber) {
+    public BankAccount contains(String accountNumber) {
         var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber));
         assertThat(retrievedBankAccount).usingRecursiveComparison().isNotEqualTo(Optional.empty());
         return retrievedBankAccount.get();

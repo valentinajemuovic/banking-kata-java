@@ -4,7 +4,7 @@ import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountRequest;
 
 public class ViewAccountRequestBuilder {
 
-    private static final String ACCOUNT_NUMBER = "GB51BARC20031816295685";
+    private static final String DEFAULT_ACCOUNT_NUMBER = "GB51BARC20031816295685";
 
     public static ViewAccountRequestBuilder aViewAccountRequest() {
         return new ViewAccountRequestBuilder();
@@ -13,7 +13,7 @@ public class ViewAccountRequestBuilder {
     private String accountNumber;
 
     public ViewAccountRequestBuilder() {
-        accountNumber(ACCOUNT_NUMBER);
+        accountNumber(DEFAULT_ACCOUNT_NUMBER);
     }
 
     public ViewAccountRequestBuilder accountNumber(String accountNumber) {

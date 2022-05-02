@@ -4,18 +4,18 @@ import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
 
 public class OpenAccountRequestBuilder {
 
-    private static final String FIRST_NAME = "Mary";
-    private static final String LAST_NAME = "Jackson";
-    private static final int INITIAL_BALANCE = 200;
+    private static final String DEFAULT_FIRST_NAME = "Mary";
+    private static final String DEFAULT_LAST_NAME = "Jackson";
+    private static final int DEFAULT_INITIAL_BALANCE = 200;
 
     private String firstName;
     private String lastName;
     private int balance;
 
     public OpenAccountRequestBuilder() {
-        firstName(FIRST_NAME);
-        lastName(LAST_NAME);
-        balance(INITIAL_BALANCE);
+        firstName(DEFAULT_FIRST_NAME);
+        lastName(DEFAULT_LAST_NAME);
+        balance(DEFAULT_INITIAL_BALANCE);
     }
 
     public static OpenAccountRequestBuilder anOpenAccountRequest() {

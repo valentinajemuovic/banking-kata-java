@@ -53,7 +53,7 @@ class OpenAccountUseCaseTest {
 
         verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
 
-        verifyThat(bankAccountRepository).containsBankAccount(accountNumber, firstName, lastName, initialBalance);
+        verifyThat(bankAccountRepository).contains(accountNumber, firstName, lastName, initialBalance);
     }
 
     @ParameterizedTest

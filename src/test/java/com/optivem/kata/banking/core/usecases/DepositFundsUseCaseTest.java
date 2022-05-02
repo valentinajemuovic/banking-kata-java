@@ -50,7 +50,7 @@ class DepositFundsUseCaseTest {
                 .executeSuccessfully();
 
         verifyThat(repository)
-                .containsBankAccount(accountNumber, expectedFinalBalance);
+                .contains(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
