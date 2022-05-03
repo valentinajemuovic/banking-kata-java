@@ -31,10 +31,14 @@ public class ViewAccountUseCase implements UseCase<ViewAccountRequest, ViewAccou
     }
 
     private ViewAccountResponse getResponse(BankAccount bankAccount) {
-        var response = new ViewAccountResponse();
-        response.setAccountNumber(bankAccount.getAccountNumber().toString());
-        response.setFullName(bankAccount.getAccountHolderName().toString());
-        response.setBalance(bankAccount.getBalance().toInt());
-        return response;
+        var accountNumber = bankAccount.getAccountNumber().toString();
+        var fullName = bankAccount.getAccountHolderName().toString();
+        var balance = bankAccount.getBalance().toInt();
+
+        return ViewAccountResponse.builder()
+                .accountNumber(accountNumber)
+                .fullName(fullName)
+                .balance(balance)
+                .build();
     }
 }
