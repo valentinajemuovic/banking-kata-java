@@ -1,6 +1,9 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.Score;
+import com.optivem.kata.banking.core.domain.accounts.ScoringService;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
@@ -14,16 +17,20 @@ import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.aViewAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ViewAccountUseCaseTest {
 
     private BankAccountRepository repository;
+    private ScoringService scoringService;
     private ViewAccountUseCase useCase;
 
     @BeforeEach
     void init() {
         this.repository = new FakeBankAccountRepository();
-        this.useCase = new ViewAccountUseCase(repository);
+        this.scoringService = mock(ScoringService.class);
+        this.useCase = new ViewAccountUseCase(repository, scoringService);
     }
 
     @Test
@@ -33,8 +40,18 @@ class ViewAccountUseCaseTest {
         var lastName = "McDonald";
         var initialBalance = 400;
         var fullName = "Kelly McDonald";
+        var score = Score.A;
 
         givenThat(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
+
+        var bankAccount = BankAccountBuilder.aBankAccount()
+                .accountNumber(accountNumber)
+                .firstName(firstName)
+                .lastName(lastName)
+                .balance(initialBalance)
+                .build();
+
+        when(scoringService.calculateScore(bankAccount)).thenReturn(score);
 
         var request = aViewAccountRequest()
                 .accountNumber(accountNumber)
@@ -44,6 +61,7 @@ class ViewAccountUseCaseTest {
         expectedResponse.setAccountNumber("3223fsfds");
         expectedResponse.setFullName(fullName);
         expectedResponse.setBalance(initialBalance);
+        expectedResponse.setScore(score);
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
     }

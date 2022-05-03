@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases.viewaccount;
 
+import com.optivem.kata.banking.core.domain.accounts.Score;
 import lombok.*;
 
 @Data
@@ -11,4 +12,5 @@ public class ViewAccountResponse {
     private String accountNumber;
     private String fullName;
     private int balance;
+    private Score score;
 }
