@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.usecases;
 import com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.scoring.Score;
-import com.optivem.kata.banking.core.domain.accounts.scoring.ScoringService;
+import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
@@ -23,14 +23,14 @@ import static org.mockito.Mockito.mock;
 class ViewAccountUseCaseTest {
 
     private BankAccountRepository repository;
-    private ScoringService scoringService;
+    private ScoreCalculator scoreCalculator;
     private ViewAccountUseCase useCase;
 
     @BeforeEach
     void init() {
         this.repository = new FakeBankAccountRepository();
-        this.scoringService = mock(ScoringService.class);
-        this.useCase = new ViewAccountUseCase(repository, scoringService);
+        this.scoreCalculator = mock(ScoreCalculator.class);
+        this.useCase = new ViewAccountUseCase(repository, scoreCalculator);
     }
 
     @Test
@@ -51,7 +51,7 @@ class ViewAccountUseCaseTest {
                 .balance(initialBalance)
                 .build();
 
-        given(scoringService.calculateScore(bankAccount)).willReturn(score);
+        given(scoreCalculator.calculate(bankAccount)).willReturn(score);
 
         var request = aViewAccountRequest()
                 .accountNumber(accountNumber)

@@ -2,16 +2,16 @@ package com.optivem.kata.banking.core.domain.accounts.scoring;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 
-public class ScoringServiceImpl implements ScoringService {
+public class ScoreCalculatorImpl implements ScoreCalculator {
 
     private FactorAggregator factorAggregator;
 
-    public ScoringServiceImpl(FactorAggregator factorAggregator) {
+    public ScoreCalculatorImpl(FactorAggregator factorAggregator) {
         this.factorAggregator = factorAggregator;
     }
 
     @Override
-    public Score calculateScore(BankAccount bankAccount) {
+    public Score calculate(BankAccount bankAccount) {
         var aggregationResult = factorAggregator.aggregate(bankAccount);
 
         if (aggregationResult <= 0) {
