@@ -44,9 +44,9 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        verifyThat(useCase).withRequest(request).executeSuccessfully();
+        verifyThat(useCase).withRequest(request).shouldExecuteSuccessfully();
 
-        verifyThat(repository).contains(accountNumber, expectedFinalBalance);
+        verifyThat(repository).shouldContain(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -56,7 +56,7 @@ class WithdrawFundsUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @ParameterizedTest
@@ -66,7 +66,7 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.AMOUNT_NOT_POSITIVE);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.AMOUNT_NOT_POSITIVE);
     }
 
     @Test
@@ -74,7 +74,7 @@ class WithdrawFundsUseCaseTest {
         var request = aWithdrawFundsRequest()
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @Test
@@ -90,8 +90,8 @@ class WithdrawFundsUseCaseTest {
                 .amount(amount)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
-        verifyThat(repository).contains(accountNumber, balance);
+        verifyThat(repository).shouldContain(accountNumber, balance);
     }
 }

@@ -45,7 +45,7 @@ class ViewAccountUseCaseTest {
         expectedResponse.setFullName(fullName);
         expectedResponse.setBalance(initialBalance);
 
-        verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
+        verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
     }
 
     @ParameterizedTest
@@ -55,7 +55,7 @@ class ViewAccountUseCaseTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -63,6 +63,6 @@ class ViewAccountUseCaseTest {
         var request = aViewAccountRequest()
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 }

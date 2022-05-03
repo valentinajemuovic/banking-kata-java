@@ -13,11 +13,11 @@ public class VoidUseCaseRequestVerify<R> {
         this.request = request;
     }
 
-    public void executeSuccessfully() {
+    public void shouldExecuteSuccessfully() {
         useCase.handle(request);
     }
 
-    public void throwsValidationException(String message) {
-        verifyThat(() -> useCase.handle(request)).throwsValidationException(message);
+    public void shouldThrowValidationException(String message) {
+        verifyThat(() -> useCase.handle(request)).shouldThrowValidationException(message);
     }
 }

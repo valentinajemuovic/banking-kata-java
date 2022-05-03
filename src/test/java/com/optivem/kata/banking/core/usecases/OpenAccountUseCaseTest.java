@@ -51,9 +51,9 @@ class OpenAccountUseCaseTest {
         var expectedResponse = new OpenAccountResponse();
         expectedResponse.setAccountNumber(generatedAccountNumber);
 
-        verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
+        verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
 
-        verifyThat(bankAccountRepository).contains(generatedAccountNumber, firstName, lastName, initialBalance);
+        verifyThat(bankAccountRepository).shouldContain(generatedAccountNumber, firstName, lastName, initialBalance);
     }
 
     @ParameterizedTest
@@ -63,7 +63,7 @@ class OpenAccountUseCaseTest {
                 .firstName(firstName)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.FIRST_NAME_EMPTY);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.FIRST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -73,7 +73,7 @@ class OpenAccountUseCaseTest {
                 .lastName(lastName)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.LAST_NAME_EMPTY);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.LAST_NAME_EMPTY);
     }
 
     @ParameterizedTest
@@ -83,6 +83,6 @@ class OpenAccountUseCaseTest {
                 .balance(balance)
                 .build();
 
-        verifyThat(useCase).withRequest(request).throwsValidationException(ValidationMessages.BALANCE_NEGATIVE);
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.BALANCE_NEGATIVE);
     }
 }

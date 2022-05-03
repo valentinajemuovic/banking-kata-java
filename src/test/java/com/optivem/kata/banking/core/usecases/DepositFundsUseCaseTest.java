@@ -47,10 +47,10 @@ class DepositFundsUseCaseTest {
 
         verifyThat(useCase)
                 .withRequest(request)
-                .executeSuccessfully();
+                .shouldExecuteSuccessfully();
 
         verifyThat(repository)
-                .contains(accountNumber, expectedFinalBalance);
+                .shouldContain(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -62,7 +62,7 @@ class DepositFundsUseCaseTest {
 
         verifyThat(useCase)
                 .withRequest(request)
-                .throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+                .shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 
     @Test
@@ -72,7 +72,7 @@ class DepositFundsUseCaseTest {
 
         verifyThat(useCase)
                 .withRequest(request)
-                .throwsValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+                .shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
     }
 
     @ParameterizedTest
@@ -84,6 +84,6 @@ class DepositFundsUseCaseTest {
 
         verifyThat(useCase)
                 .withRequest(request)
-                .throwsValidationException(ValidationMessages.AMOUNT_NOT_POSITIVE);
+                .shouldThrowValidationException(ValidationMessages.AMOUNT_NOT_POSITIVE);
     }
 }

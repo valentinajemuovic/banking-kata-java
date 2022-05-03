@@ -15,12 +15,12 @@ public class UseCaseRequestVerify<R, P> {
         this.request = request;
     }
 
-    public void returnsResponse(P expectedResponse) {
+    public void shouldReturnResponse(P expectedResponse) {
         var response = useCase.handle(request);
         assertThat(response).isEqualTo(expectedResponse);
     }
 
-    public void throwsValidationException(String message) {
-        verifyThat(() -> useCase.handle(request)).throwsValidationException(message);
+    public void shouldThrowValidationException(String message) {
+        verifyThat(() -> useCase.handle(request)).shouldThrowValidationException(message);
     }
 }

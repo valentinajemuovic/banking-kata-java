@@ -15,12 +15,12 @@ public class ExecutableVerify {
         this.executable = executable;
     }
 
-    public void throwsRepositoryException(String message) {
+    public void shouldThrowRepositoryException(String message) {
         var exception = assertThrows(RepositoryException.class, executable);
         assertThat(exception.getMessage()).isEqualTo(message);
     }
 
-    public void throwsValidationException(String message) {
+    public void shouldThrowValidationException(String message) {
         var exception = assertThrows(ValidationException.class, executable);
         assertThat(exception.getMessage()).isEqualTo(message);
     }

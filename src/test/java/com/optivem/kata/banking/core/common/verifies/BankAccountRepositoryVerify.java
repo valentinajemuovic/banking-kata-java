@@ -17,23 +17,23 @@ public class BankAccountRepositoryVerify {
         this.repository = repository;
     }
 
-    public BankAccount contains(BankAccount bankAccount) {
+    public BankAccount shouldContain(BankAccount bankAccount) {
         var accountNumber = bankAccount.getAccountNumber();
         var retrievedBankAccount = repository.find(accountNumber);
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(bankAccount));
         return retrievedBankAccount.get();
     }
 
-    public BankAccount contains(String accountNumber, int balance) {
+    public BankAccount shouldContain(String accountNumber, int balance) {
         var expectedBankAccount = BankAccountBuilder.aBankAccount()
                 .accountNumber(accountNumber)
                 .balance(balance)
                 .build();
 
-        return contains(expectedBankAccount);
+        return shouldContain(expectedBankAccount);
     }
 
-    public BankAccount contains(String accountNumber, String firstName, String lastName, int initialBalance) {
+    public BankAccount shouldContain(String accountNumber, String firstName, String lastName, int initialBalance) {
         var expectedBankAccount = BankAccountBuilder.aBankAccount()
                 .accountNumber(accountNumber)
                 .firstName(firstName)
@@ -41,16 +41,16 @@ public class BankAccountRepositoryVerify {
                 .balance(initialBalance)
                 .build();
 
-        return contains(expectedBankAccount);
+        return shouldContain(expectedBankAccount);
     }
 
-    public BankAccount contains(String accountNumber) {
+    public BankAccount shouldContain(String accountNumber) {
         var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber));
         assertThat(retrievedBankAccount).usingRecursiveComparison().isNotEqualTo(Optional.empty());
         return retrievedBankAccount.get();
     }
 
-    public void doesNotContain(String accountNumber) {
+    public void shouldNotContain(String accountNumber) {
         var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber));
         assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.empty());
     }

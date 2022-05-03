@@ -23,7 +23,7 @@ class FakeBankAccountRepositoryTest {
     void should_return_empty_result_when_account_number_does_not_exist() {
         var accountNumber = "GB36BARC20038032622823";
 
-        verifyThat(repository).doesNotContain(accountNumber);
+        verifyThat(repository).shouldNotContain(accountNumber);
     }
 
     @Test
@@ -35,7 +35,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        verifyThat(repository).contains(bankAccount);
+        verifyThat(repository).shouldContain(bankAccount);
     }
 
     @Test
@@ -61,7 +61,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.update(bankAccount);
 
-        verifyThat(repository).contains(expectedUpdatedBankAccount);
+        verifyThat(repository).shouldContain(expectedUpdatedBankAccount);
     }
 
     @Test
@@ -82,7 +82,7 @@ class FakeBankAccountRepositoryTest {
 
         bankAccount.deposit(TransactionAmount.of(60));
 
-        verifyThat(repository).contains(expectedBankAccount);
+        verifyThat(repository).shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -105,7 +105,7 @@ class FakeBankAccountRepositoryTest {
 
         retrievedBankAccount.deposit(TransactionAmount.of(20));
 
-        verifyThat(repository).contains(expectedBankAccount);
+        verifyThat(repository).shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -124,13 +124,13 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        var retrievedBankAccount = verifyThat(repository).contains(accountNumber);
+        var retrievedBankAccount = verifyThat(repository).shouldContain(accountNumber);
 
         repository.update(retrievedBankAccount);
 
         retrievedBankAccount.deposit(TransactionAmount.of(10));
 
-        verifyThat(repository).contains(expectedBankAccount);
+        verifyThat(repository).shouldContain(expectedBankAccount);
     }
 
 
@@ -152,7 +152,7 @@ class FakeBankAccountRepositoryTest {
 
         repository.add(bankAccount);
 
-        verifyThat(() -> repository.add(bankAccount2)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
+        verifyThat(() -> repository.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
     }
 
     @Test
@@ -163,6 +163,6 @@ class FakeBankAccountRepositoryTest {
                 .accountNumber(accountNumber)
                 .build();
 
-        verifyThat(() -> repository.update(bankAccount)).throwsRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+        verifyThat(() -> repository.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }
 }
