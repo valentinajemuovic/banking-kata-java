@@ -27,33 +27,24 @@ public class ScoreCalculatorTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 7})
     void should_return_score_A_given_positive_odd_aggregation(int aggregationResult) {
-        var bankAccount = aBankAccount().build();
-        given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
-        var expectedScore = Score.A;
-
-        var score = scoreCalculator.calculate(bankAccount);
-
-        assertThat(score).isEqualTo(expectedScore);
+        assertScore(aggregationResult, Score.A);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {2, 4, 10})
     void should_return_score_B_given_positive_even_aggregation(int aggregationResult) {
-        var bankAccount = aBankAccount().build();
-        given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
-        var expectedScore = Score.B;
-
-        var score = scoreCalculator.calculate(bankAccount);
-
-        assertThat(score).isEqualTo(expectedScore);
+        assertScore(aggregationResult, Score.B);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, -1, -2, -5, -10})
     void should_return_score_C_given_non_positive_aggregation(int aggregationResult) {
+        assertScore(aggregationResult, Score.C);
+    }
+
+    private void assertScore(int aggregationResult, Score expectedScore) {
         var bankAccount = aBankAccount().build();
         given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
-        var expectedScore = Score.C;
 
         var score = scoreCalculator.calculate(bankAccount);
 
