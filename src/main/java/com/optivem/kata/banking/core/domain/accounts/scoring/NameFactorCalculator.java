@@ -14,6 +14,10 @@ public class NameFactorCalculator implements FactorCalculator {
             return 5;
         }
 
+        if (length > 10) {
+            return length * 3;
+        }
+
         return length;
     }
 }

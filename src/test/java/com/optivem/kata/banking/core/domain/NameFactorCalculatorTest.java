@@ -62,8 +62,8 @@ public class NameFactorCalculatorTest {
     }
 
     private static Stream<Arguments> should_return_total_name_length_times_3_given_that_total_name_length_is_greater_than_10() {
-        return Stream.of(Arguments.of("Ja", "McDonalds", 11),
-                Arguments.of("Joannes", "Smith", 12));
+        return Stream.of(Arguments.of("Ja", "McDonalds", 33),
+                Arguments.of("Joannes", "Smith", 36));
     }
 
     @ParameterizedTest
