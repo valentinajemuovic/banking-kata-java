@@ -60,4 +60,22 @@ public class NameFactorCalculatorTest {
 
         assertThat(result).isEqualTo(expectedResult);
     }
+
+    private static Stream<Arguments> should_return_total_name_length_times_3_given_that_total_name_length_is_greater_than_10() {
+        return Stream.of(Arguments.of("Ja", "McDonalds", 11),
+                Arguments.of("Joannes", "Smith", 12));
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void should_return_total_name_length_times_3_given_that_total_name_length_is_greater_than_10(String firstName, String lastName, int expectedResult) {
+        var bankAccount = aBankAccount()
+                .firstName(firstName)
+                .lastName(lastName)
+                .build();
+
+        var result = factorCalculator.calculate(bankAccount);
+
+        assertThat(result).isEqualTo(expectedResult);
+    }
 }
