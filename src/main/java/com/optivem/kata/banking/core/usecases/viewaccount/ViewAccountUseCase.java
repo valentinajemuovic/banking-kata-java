@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.usecases.viewaccount;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.domain.accounts.ScoringService;
+import com.optivem.kata.banking.core.domain.accounts.scoring.ScoringService;
 import com.optivem.kata.banking.core.usecases.UseCase;
 
 import static com.optivem.kata.banking.core.domain.extensions.Extension.extend;

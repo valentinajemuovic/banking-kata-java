@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.usecases.viewaccount;
 
-import com.optivem.kata.banking.core.domain.accounts.Score;
+import com.optivem.kata.banking.core.domain.accounts.scoring.Score;
 import lombok.*;
 
 @Data
