@@ -5,6 +5,7 @@ import com.optivem.kata.banking.core.domain.accounts.scoring.Score;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoringService;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoringServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -29,6 +30,18 @@ public class ScoringServiceTest {
     void should_return_score_A_given_positive_odd_aggregation(int aggregationResult) {
         given(factorAggregator.aggregate()).willReturn(aggregationResult);
         var expectedScore = Score.A;
+
+        var score = scoringService.calculateScore(aBankAccount().build());
+
+        assertThat(score).isEqualTo(expectedScore);
+    }
+
+    @Test
+    void should_return_score_B_given_positive_even_aggregation() {
+        int aggregationResult = 2;
+
+        given(factorAggregator.aggregate()).willReturn(aggregationResult);
+        var expectedScore = Score.B;
 
         var score = scoringService.calculateScore(aBankAccount().build());
 

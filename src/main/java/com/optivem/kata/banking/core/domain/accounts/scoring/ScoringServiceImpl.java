@@ -12,6 +12,12 @@ public class ScoringServiceImpl implements ScoringService {
 
     @Override
     public Score calculateScore(BankAccount bankAccount) {
+        var aggregationResult = factorAggregator.aggregate();
+
+        if (aggregationResult == 2) {
+            return Score.B;
+        }
+
         return Score.A;
     }
 }
