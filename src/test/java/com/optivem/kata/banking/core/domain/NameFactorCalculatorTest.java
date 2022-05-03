@@ -3,7 +3,11 @@ package com.optivem.kata.banking.core.domain;
 import com.optivem.kata.banking.core.domain.accounts.scoring.FactorCalculator;
 import com.optivem.kata.banking.core.domain.accounts.scoring.NameFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.aBankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,11 +20,19 @@ public class NameFactorCalculatorTest {
         factorCalculator = new NameFactorCalculator();
     }
 
-    @Test
-    void should_return_5_given_that_total_name_length_is_less_than_or_equal_to_5() {
+    private static Stream<Arguments> should_return_5_given_that_total_name_length_is_less_than_or_equal_to_5() {
+        return Stream.of(Arguments.of("M", "S"),
+                Arguments.of("Ma", "S"),
+                Arguments.of("Mary", "S"),
+                Arguments.of("Ja", "Smi"));
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void should_return_5_given_that_total_name_length_is_less_than_or_equal_to_5(String firstName, String lastName) {
         var bankAccount = aBankAccount()
-                .firstName("M")
-                .lastName("S")
+                .firstName(firstName)
+                .lastName(lastName)
                 .build();
 
         var expectedResult = 5;
@@ -30,14 +42,19 @@ public class NameFactorCalculatorTest {
         assertThat(result).isEqualTo(expectedResult);
     }
 
-    @Test
-    void should_return_total_name_length_given_that_total_name_length_is_greater_than_5_or_less_than_equal_to_10() {
-        var bankAccount = aBankAccount()
-                .firstName("Mary")
-                .lastName("McD")
-                .build();
+    private static Stream<Arguments> should_return_total_name_length_given_that_total_name_length_is_greater_than_5_or_less_than_equal_to_10() {
+        return Stream.of(Arguments.of("Mary", "Sm", 6),
+                Arguments.of("Mary", "Smith", 9),
+                Arguments.of("Ja", "McDonald", 10));
+    }
 
-        var expectedResult = 7;
+    @ParameterizedTest
+    @MethodSource
+    void should_return_total_name_length_given_that_total_name_length_is_greater_than_5_or_less_than_equal_to_10(String firstName, String lastName, int expectedResult) {
+        var bankAccount = aBankAccount()
+                .firstName(firstName)
+                .lastName(lastName)
+                .build();
 
         var result = factorCalculator.calculate(bankAccount);
 
