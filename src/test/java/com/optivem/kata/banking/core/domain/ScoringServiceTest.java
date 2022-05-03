@@ -5,7 +5,6 @@ import com.optivem.kata.banking.core.domain.accounts.scoring.Score;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoringService;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoringServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -28,22 +27,35 @@ public class ScoringServiceTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 7})
     void should_return_score_A_given_positive_odd_aggregation(int aggregationResult) {
-        given(factorAggregator.aggregate()).willReturn(aggregationResult);
+        var bankAccount = aBankAccount().build();
+        given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
         var expectedScore = Score.A;
 
-        var score = scoringService.calculateScore(aBankAccount().build());
+        var score = scoringService.calculateScore(bankAccount);
 
         assertThat(score).isEqualTo(expectedScore);
     }
 
-    @Test
-    void should_return_score_B_given_positive_even_aggregation() {
-        int aggregationResult = 2;
-
-        given(factorAggregator.aggregate()).willReturn(aggregationResult);
+    @ParameterizedTest
+    @ValueSource(ints = {2, 4, 10})
+    void should_return_score_B_given_positive_even_aggregation(int aggregationResult) {
+        var bankAccount = aBankAccount().build();
+        given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
         var expectedScore = Score.B;
 
-        var score = scoringService.calculateScore(aBankAccount().build());
+        var score = scoringService.calculateScore(bankAccount);
+
+        assertThat(score).isEqualTo(expectedScore);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, -2, -5, -10})
+    void should_return_score_C_given_non_positive_aggregation(int aggregationResult) {
+        var bankAccount = aBankAccount().build();
+        given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
+        var expectedScore = Score.C;
+
+        var score = scoringService.calculateScore(bankAccount);
 
         assertThat(score).isEqualTo(expectedScore);
     }
