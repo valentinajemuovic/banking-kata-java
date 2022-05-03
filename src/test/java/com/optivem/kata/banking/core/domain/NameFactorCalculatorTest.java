@@ -17,13 +17,27 @@ public class NameFactorCalculatorTest {
     }
 
     @Test
-    void should_return_5_given_total_name_length_is_less_than_or_equal_to_5() {
+    void should_return_5_given_that_total_name_length_is_less_than_or_equal_to_5() {
         var bankAccount = aBankAccount()
                 .firstName("M")
                 .lastName("S")
                 .build();
 
         var expectedResult = 5;
+
+        var result = factorCalculator.calculate(bankAccount);
+
+        assertThat(result).isEqualTo(expectedResult);
+    }
+
+    @Test
+    void should_return_total_name_length_given_that_total_name_length_is_greater_than_5_or_less_than_equal_to_10() {
+        var bankAccount = aBankAccount()
+                .firstName("Mary")
+                .lastName("McD")
+                .build();
+
+        var expectedResult = 7;
 
         var result = factorCalculator.calculate(bankAccount);
 

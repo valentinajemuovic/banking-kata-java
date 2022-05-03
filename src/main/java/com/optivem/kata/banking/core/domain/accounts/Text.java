@@ -18,4 +18,8 @@ public record Text(String value) {
     public Text addSpace() {
         return add(SPACE);
     }
+
+    public int getLength() {
+        return value.length();
+    }
 }

@@ -5,6 +5,15 @@ import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 public class NameFactorCalculator implements FactorCalculator {
     @Override
     public int calculate(BankAccount bankAccount) {
-        return 5;
+        var firstName = bankAccount.getAccountHolderName().firstName();
+        var lastName = bankAccount.getAccountHolderName().lastName();
+
+        var length = firstName.getLength() + lastName.getLength();
+
+        if (length <= 5) {
+            return 5;
+        }
+
+        return length;
     }
 }
