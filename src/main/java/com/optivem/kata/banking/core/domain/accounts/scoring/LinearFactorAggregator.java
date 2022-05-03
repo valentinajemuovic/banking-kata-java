@@ -15,6 +15,10 @@ public class LinearFactorAggregator implements FactorAggregator {
 
     @Override
     public int aggregate(BankAccount bankAccount) {
-        return 35;
+        var nameFactor = nameFactorCalculator.calculate(bankAccount);
+        var balanceFactor = balanceFactorCalculator.calculate(bankAccount);
+        var timeFactor = timeFactorCalculator.calculate(bankAccount);
+
+        return nameFactor + balanceFactor - timeFactor;
     }
 }
