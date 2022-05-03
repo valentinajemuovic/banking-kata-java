@@ -11,7 +11,7 @@ public class NameFactorCalculator implements FactorCalculator {
         var length = firstName.getLength() + lastName.getLength();
 
         if (length <= 5) {
-            return 5;
+            return 3;
         }
 
         if (length > 10) {

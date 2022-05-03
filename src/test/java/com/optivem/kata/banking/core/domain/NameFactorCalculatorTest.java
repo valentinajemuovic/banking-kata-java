@@ -35,7 +35,7 @@ public class NameFactorCalculatorTest {
                 .lastName(lastName)
                 .build();
 
-        var expectedResult = 5;
+        var expectedResult = 3;
 
         var result = factorCalculator.calculate(bankAccount);
 
