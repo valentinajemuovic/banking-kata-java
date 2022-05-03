@@ -18,4 +18,9 @@ public record AccountHolderName(Text firstName, Text lastName) {
     public Text getFullName() {
         return firstName().addSpace().add(lastName());
     }
+
+    @Override
+    public String toString() {
+        return getFullName().value();
+    }
 }

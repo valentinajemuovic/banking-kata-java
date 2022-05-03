@@ -39,8 +39,8 @@ class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource
-    void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, String accountNumber) {
-        givenThat(accountNumberGenerator).willGenerate(accountNumber);
+    void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, String generatedAccountNumber) {
+        givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
 
         var request = anOpenAccountRequest()
                 .firstName(firstName)
@@ -49,11 +49,11 @@ class OpenAccountUseCaseTest {
                 .build();
 
         var expectedResponse = new OpenAccountResponse();
-        expectedResponse.setAccountNumber(accountNumber);
+        expectedResponse.setAccountNumber(generatedAccountNumber);
 
         verifyThat(useCase).withRequest(request).returnsResponse(expectedResponse);
 
-        verifyThat(bankAccountRepository).contains(accountNumber, firstName, lastName, initialBalance);
+        verifyThat(bankAccountRepository).contains(generatedAccountNumber, firstName, lastName, initialBalance);
     }
 
     @ParameterizedTest

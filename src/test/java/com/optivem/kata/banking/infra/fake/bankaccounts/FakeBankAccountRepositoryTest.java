@@ -39,6 +39,32 @@ class FakeBankAccountRepositoryTest {
     }
 
     @Test
+    void should_retrieve_updated_bank_account_after_update() {
+        var accountNumber = "GB36BARC20038032622823";
+        var balance = 40;
+
+        var bankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(balance)
+                .build();
+
+        var updateBalance = 50;
+
+        var expectedUpdatedBankAccount = aBankAccount()
+                .accountNumber(accountNumber)
+                .balance(updateBalance)
+                .build();
+
+        repository.add(bankAccount);
+
+        bankAccount.deposit(TransactionAmount.of(10));
+
+        repository.update(bankAccount);
+
+        verifyThat(repository).contains(expectedUpdatedBankAccount);
+    }
+
+    @Test
     void should_not_be_able_to_change_bank_account_after_add() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
@@ -107,31 +133,6 @@ class FakeBankAccountRepositoryTest {
         verifyThat(repository).contains(expectedBankAccount);
     }
 
-    @Test
-    void should_retrieve_updated_bank_account_after_update() {
-        var accountNumber = "GB36BARC20038032622823";
-        var balance = 40;
-
-        var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
-                .build();
-
-        var updateBalance = 50;
-
-        var expectedUpdatedBankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(updateBalance)
-                .build();
-
-        repository.add(bankAccount);
-
-        bankAccount.deposit(TransactionAmount.of(10));
-
-        repository.update(bankAccount);
-
-        verifyThat(repository).contains(expectedUpdatedBankAccount);
-    }
 
     @Test
     void should_throw_exception_when_attempt_add_bank_account_with_same_account_number_twice() {

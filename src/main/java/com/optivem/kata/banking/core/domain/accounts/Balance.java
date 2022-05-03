@@ -25,4 +25,8 @@ public record Balance(Money value) {
     public static Balance of(int value) {
         return new Balance(Money.of(value));
     }
+
+    public int toInt() {
+        return value().value();
+    }
 }

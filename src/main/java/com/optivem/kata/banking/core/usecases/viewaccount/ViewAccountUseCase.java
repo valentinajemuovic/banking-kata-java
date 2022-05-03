@@ -32,9 +32,9 @@ public class ViewAccountUseCase implements UseCase<ViewAccountRequest, ViewAccou
 
     private ViewAccountResponse getResponse(BankAccount bankAccount) {
         var response = new ViewAccountResponse();
-        response.setAccountNumber(bankAccount.getAccountNumber().value().value());
-        response.setFullName(bankAccount.getAccountHolderName().getFullName().value());
-        response.setBalance(bankAccount.getBalance().value().value());
+        response.setAccountNumber(bankAccount.getAccountNumber().toString());
+        response.setFullName(bankAccount.getAccountHolderName().toString());
+        response.setBalance(bankAccount.getBalance().toInt());
         return response;
     }
 }

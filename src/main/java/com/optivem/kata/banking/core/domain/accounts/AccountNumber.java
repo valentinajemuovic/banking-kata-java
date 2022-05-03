@@ -13,4 +13,9 @@ public record AccountNumber(Text value) {
     public static AccountNumber of(String value) {
         return new AccountNumber(Text.of(value));
     }
+
+    @Override
+    public String toString() {
+        return value.value();
+    }
 }
