@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'groovy'
     id 'info.solidsoft.pitest' version '1.7.4'
     id 'jacoco'
 }
@@ -41,6 +42,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.codehaus.groovy:groovy-all:3.0.10'
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
 }
 
 tasks.named('test') {
