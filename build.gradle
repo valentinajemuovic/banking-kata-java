@@ -44,6 +44,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.10'
     testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    testImplementation 'com.athaydes:spock-reports:2.3.0-groovy-3.0', { transitive = false }
 }
 
 tasks.named('test') {
