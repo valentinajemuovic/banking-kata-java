@@ -1,9 +1,7 @@
 package com.optivem.kata.banking.core.common;
 
-import com.optivem.kata.banking.core.common.verifies.BankAccountRepositoryVerify;
-import com.optivem.kata.banking.core.common.verifies.ExecutableVerify;
-import com.optivem.kata.banking.core.common.verifies.UseCaseVerify;
-import com.optivem.kata.banking.core.common.verifies.VoidUseCaseVerify;
+import com.optivem.kata.banking.core.Facade;
+import com.optivem.kata.banking.core.common.verifies.*;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.usecases.UseCase;
 import com.optivem.kata.banking.core.usecases.VoidUseCase;
@@ -26,4 +24,9 @@ public class Verifications {
     public static BankAccountRepositoryVerify verifyThat(BankAccountRepository repository) {
         return new BankAccountRepositoryVerify(repository);
     }
+
+    public static FacadeVerify verifyThat(Facade facade) {
+        return new FacadeVerify(facade);
+    }
+
 }
