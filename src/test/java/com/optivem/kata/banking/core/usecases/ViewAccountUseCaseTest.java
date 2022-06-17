@@ -21,7 +21,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 class ViewAccountUseCaseTest {
-
     private BankAccountRepository repository;
     private ScoreCalculator scoreCalculator;
     private ViewAccountUseCase useCase;
