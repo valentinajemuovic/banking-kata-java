@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.core.domain;
 
 import com.optivem.kata.banking.core.domain.accounts.scoring.BalanceFactorCalculator;
-import com.optivem.kata.banking.core.domain.accounts.scoring.NameFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,7 @@ public class BalanceFactoryCalculatorTest {
         var balance = 10;
 
         var bankAccount = aBankAccount()
-                .balance(balance)
+                .withBalance(balance)
                 .build();
 
         var expectedResult = 15;

@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.core.domain;
 
-import com.optivem.kata.banking.core.domain.accounts.scoring.FactorCalculator;
 import com.optivem.kata.banking.core.domain.accounts.scoring.NameFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,8 +30,8 @@ public class NameFactorCalculatorTest {
     @MethodSource
     void should_return_5_given_that_total_name_length_is_less_than_or_equal_to_5(String firstName, String lastName) {
         var bankAccount = aBankAccount()
-                .firstName(firstName)
-                .lastName(lastName)
+                .withFirstName(firstName)
+                .withLastName(lastName)
                 .build();
 
         var expectedResult = 3;
@@ -52,8 +51,8 @@ public class NameFactorCalculatorTest {
     @MethodSource
     void should_return_total_name_length_given_that_total_name_length_is_greater_than_5_or_less_than_equal_to_10(String firstName, String lastName, int expectedResult) {
         var bankAccount = aBankAccount()
-                .firstName(firstName)
-                .lastName(lastName)
+                .withFirstName(firstName)
+                .withLastName(lastName)
                 .build();
 
         var result = factorCalculator.calculate(bankAccount);
@@ -70,8 +69,8 @@ public class NameFactorCalculatorTest {
     @MethodSource
     void should_return_total_name_length_times_3_given_that_total_name_length_is_greater_than_10(String firstName, String lastName, int expectedResult) {
         var bankAccount = aBankAccount()
-                .firstName(firstName)
-                .lastName(lastName)
+                .withFirstName(firstName)
+                .withLastName(lastName)
                 .build();
 
         var result = factorCalculator.calculate(bankAccount);

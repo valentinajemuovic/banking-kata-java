@@ -44,16 +44,16 @@ class ViewAccountUseCaseTest {
         givenThat(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
 
         var bankAccount = BankAccountBuilder.aBankAccount()
-                .accountNumber(accountNumber)
-                .firstName(firstName)
-                .lastName(lastName)
-                .balance(initialBalance)
+                .withAccountNumber(accountNumber)
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withBalance(initialBalance)
                 .build();
 
         given(scoreCalculator.calculate(bankAccount)).willReturn(score);
 
         var request = aViewAccountRequest()
-                .accountNumber(accountNumber)
+                .withAccountNumber(accountNumber)
                 .build();
 
         var expectedResponse = new ViewAccountResponse();
@@ -69,7 +69,7 @@ class ViewAccountUseCaseTest {
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
         var request = aViewAccountRequest()
-                .accountNumber(accountNumber)
+                .withAccountNumber(accountNumber)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);

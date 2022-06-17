@@ -43,9 +43,9 @@ class OpenAccountUseCaseTest {
         givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
 
         var request = anOpenAccountRequest()
-                .firstName(firstName)
-                .lastName(lastName)
-                .balance(initialBalance)
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withBalance(initialBalance)
                 .build();
 
         var expectedResponse = new OpenAccountResponse();
@@ -60,7 +60,7 @@ class OpenAccountUseCaseTest {
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_first_name(String firstName) {
         var request = anOpenAccountRequest()
-                .firstName(firstName)
+                .withFirstName(firstName)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.FIRST_NAME_EMPTY);
@@ -70,7 +70,7 @@ class OpenAccountUseCaseTest {
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_last_name(String lastName) {
         var request = anOpenAccountRequest()
-                .lastName(lastName)
+                .withLastName(lastName)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.LAST_NAME_EMPTY);
@@ -80,7 +80,7 @@ class OpenAccountUseCaseTest {
     @MethodSource(NEGATIVE_INTEGERS)
     void should_throw_exception_given_negative_balance(int balance) {
         var request = anOpenAccountRequest()
-                .balance(balance)
+                .withBalance(balance)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.BALANCE_NEGATIVE);

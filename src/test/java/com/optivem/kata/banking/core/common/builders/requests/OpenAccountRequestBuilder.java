@@ -13,26 +13,26 @@ public class OpenAccountRequestBuilder {
     private int balance;
 
     public OpenAccountRequestBuilder() {
-        firstName(DEFAULT_FIRST_NAME);
-        lastName(DEFAULT_LAST_NAME);
-        balance(DEFAULT_INITIAL_BALANCE);
+        withFirstName(DEFAULT_FIRST_NAME);
+        withLastName(DEFAULT_LAST_NAME);
+        withBalance(DEFAULT_INITIAL_BALANCE);
     }
 
     public static OpenAccountRequestBuilder anOpenAccountRequest() {
         return new OpenAccountRequestBuilder();
     }
 
-    public OpenAccountRequestBuilder firstName(String firstName) {
+    public OpenAccountRequestBuilder withFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public OpenAccountRequestBuilder lastName(String lastName) {
+    public OpenAccountRequestBuilder withLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public OpenAccountRequestBuilder balance(int balance) {
+    public OpenAccountRequestBuilder withBalance(int balance) {
         this.balance = balance;
         return this;
     }

@@ -26,8 +26,8 @@ public class BankAccountRepositoryVerify {
 
     public BankAccount shouldContain(String accountNumber, int balance) {
         var expectedBankAccount = BankAccountBuilder.aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         return shouldContain(expectedBankAccount);
@@ -35,10 +35,10 @@ public class BankAccountRepositoryVerify {
 
     public BankAccount shouldContain(String accountNumber, String firstName, String lastName, int initialBalance) {
         var expectedBankAccount = BankAccountBuilder.aBankAccount()
-                .accountNumber(accountNumber)
-                .firstName(firstName)
-                .lastName(lastName)
-                .balance(initialBalance)
+                .withAccountNumber(accountNumber)
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withBalance(initialBalance)
                 .build();
 
         return shouldContain(expectedBankAccount);

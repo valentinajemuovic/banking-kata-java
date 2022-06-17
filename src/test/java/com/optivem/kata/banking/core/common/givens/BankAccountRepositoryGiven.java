@@ -14,8 +14,8 @@ public class BankAccountRepositoryGiven {
 
     public void alreadyHasBankAccount(String accountNumber, int balance) {
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         repository.add(bankAccount);
@@ -23,10 +23,10 @@ public class BankAccountRepositoryGiven {
 
     public void alreadyHasBankAccount(String accountNumber, String firstName, String lastName, int balance) {
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .firstName(firstName)
-                .lastName(lastName)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withBalance(balance)
                 .build();
 
         repository.add(bankAccount);

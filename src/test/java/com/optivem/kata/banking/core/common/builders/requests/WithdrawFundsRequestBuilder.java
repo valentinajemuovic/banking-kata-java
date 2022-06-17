@@ -15,16 +15,16 @@ public class WithdrawFundsRequestBuilder {
     private int amount;
 
     public WithdrawFundsRequestBuilder() {
-        accountNumber(DEFAULT_ACCOUNT_NUMBER);
-        amount(DEFAULT_AMOUNT);
+        withAccountNumber(DEFAULT_ACCOUNT_NUMBER);
+        withAmount(DEFAULT_AMOUNT);
     }
 
-    public WithdrawFundsRequestBuilder accountNumber(String accountNumber) {
+    public WithdrawFundsRequestBuilder withAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
         return this;
     }
 
-    public WithdrawFundsRequestBuilder amount(int amount) {
+    public WithdrawFundsRequestBuilder withAmount(int amount) {
         this.amount = amount;
         return this;
     }

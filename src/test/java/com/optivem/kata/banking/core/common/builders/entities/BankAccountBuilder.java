@@ -22,28 +22,28 @@ public class BankAccountBuilder {
     private int balance;
 
     public BankAccountBuilder() {
-        accountNumber(DEFAULT_ACCOUNT_NUMBER);
-        firstName(DEFAULT_FIRST_NAME);
-        lastName(DEFAULT_LAST_NAME);
-        balance(DEFAULT_BALANCE);
+        withAccountNumber(DEFAULT_ACCOUNT_NUMBER);
+        withFirstName(DEFAULT_FIRST_NAME);
+        withLastName(DEFAULT_LAST_NAME);
+        withBalance(DEFAULT_BALANCE);
     }
 
-    public BankAccountBuilder accountNumber(String accountNumber) {
+    public BankAccountBuilder withAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
         return this;
     }
 
-    public BankAccountBuilder firstName(String firstName) {
+    public BankAccountBuilder withFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public BankAccountBuilder lastName(String lastName) {
+    public BankAccountBuilder withLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public BankAccountBuilder balance(int balance) {
+    public BankAccountBuilder withBalance(int balance) {
         this.balance = balance;
         return this;
     }

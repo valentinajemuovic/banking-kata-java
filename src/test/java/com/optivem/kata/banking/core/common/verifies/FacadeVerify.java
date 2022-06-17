@@ -19,7 +19,7 @@ public class FacadeVerify {
 
     public void shouldContain(String accountNumber, int expectedFinalBalance) {
         var request = aViewAccountRequest()
-                .accountNumber(accountNumber)
+                .withAccountNumber(accountNumber)
                 .build();
 
         var response = facade.execute(request);

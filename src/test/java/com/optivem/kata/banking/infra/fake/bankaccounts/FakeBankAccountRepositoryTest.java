@@ -30,7 +30,7 @@ class FakeBankAccountRepositoryTest {
     void should_return_bank_account_when_account_number_exists() {
         var accountNumber = "GB36BARC20038032622823";
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
+                .withAccountNumber(accountNumber)
                 .build();
 
         repository.add(bankAccount);
@@ -44,15 +44,15 @@ class FakeBankAccountRepositoryTest {
         var balance = 40;
 
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         var updateBalance = 50;
 
         var expectedUpdatedBankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(updateBalance)
+                .withAccountNumber(accountNumber)
+                .withBalance(updateBalance)
                 .build();
 
         repository.add(bankAccount);
@@ -69,13 +69,13 @@ class FakeBankAccountRepositoryTest {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         var expectedBankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         repository.add(bankAccount);
@@ -90,13 +90,13 @@ class FakeBankAccountRepositoryTest {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         var expectedBankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         repository.add(bankAccount);
@@ -113,13 +113,13 @@ class FakeBankAccountRepositoryTest {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         var expectedBankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         repository.add(bankAccount);
@@ -141,13 +141,13 @@ class FakeBankAccountRepositoryTest {
         var balance2 = 60;
 
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance)
                 .build();
 
         var bankAccount2 = aBankAccount()
-                .accountNumber(accountNumber)
-                .balance(balance2)
+                .withAccountNumber(accountNumber)
+                .withBalance(balance2)
                 .build();
 
         repository.add(bankAccount);
@@ -160,7 +160,7 @@ class FakeBankAccountRepositoryTest {
         var accountNumber = "GB36BARC20038032622823";
 
         var bankAccount = aBankAccount()
-                .accountNumber(accountNumber)
+                .withAccountNumber(accountNumber)
                 .build();
 
         verifyThat(() -> repository.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);

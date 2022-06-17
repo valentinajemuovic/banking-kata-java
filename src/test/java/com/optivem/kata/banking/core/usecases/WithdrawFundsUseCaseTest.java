@@ -40,8 +40,8 @@ class WithdrawFundsUseCaseTest {
         givenThat(repository).alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = aWithdrawFundsRequest()
-                .accountNumber(accountNumber)
-                .amount(amount)
+                .withAccountNumber(accountNumber)
+                .withAmount(amount)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldExecuteSuccessfully();
@@ -53,7 +53,7 @@ class WithdrawFundsUseCaseTest {
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
         var request = aWithdrawFundsRequest()
-                .accountNumber(accountNumber)
+                .withAccountNumber(accountNumber)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
@@ -63,7 +63,7 @@ class WithdrawFundsUseCaseTest {
     @MethodSource(NON_POSITIVE_INTEGERS)
     void should_throw_exception_given_non_positive_amount(int amount) {
         var request = aWithdrawFundsRequest()
-                .amount(amount)
+                .withAmount(amount)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.AMOUNT_NOT_POSITIVE);
@@ -86,8 +86,8 @@ class WithdrawFundsUseCaseTest {
         givenThat(repository).alreadyHasBankAccount(accountNumber, balance);
 
         var request = aWithdrawFundsRequest()
-                .accountNumber(accountNumber)
-                .amount(amount)
+                .withAccountNumber(accountNumber)
+                .withAmount(amount)
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.INSUFFICIENT_FUNDS);

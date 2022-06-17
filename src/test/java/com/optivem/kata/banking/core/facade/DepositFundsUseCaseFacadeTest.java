@@ -39,8 +39,8 @@ class DepositFundsUseCaseFacadeTest {
                 .alreadyHasBankAccount(initialBalance);
 
         var request = aDepositFundsRequest()
-                .accountNumber(accountNumber)
-                .amount(depositAmount)
+                .withAccountNumber(accountNumber)
+                .withAmount(depositAmount)
                 .build();
 
         verifyThat(facade)
@@ -55,7 +55,7 @@ class DepositFundsUseCaseFacadeTest {
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
         var request = aDepositFundsRequest()
-                .accountNumber(accountNumber)
+                .withAccountNumber(accountNumber)
                 .build();
 
         verifyThat(facade)
