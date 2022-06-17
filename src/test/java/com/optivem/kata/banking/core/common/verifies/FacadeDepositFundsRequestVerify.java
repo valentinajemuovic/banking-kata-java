@@ -3,6 +3,7 @@ package com.optivem.kata.banking.core.common.verifies;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FacadeDepositFundsRequestVerify {
@@ -16,5 +17,9 @@ public class FacadeDepositFundsRequestVerify {
 
     public void shouldExecuteSuccessfully() {
         facade.execute(request);
+    }
+
+    public void shouldThrowValidationException(String message) {
+        verifyThat(() -> facade.execute(request)).shouldThrowValidationException(message);
     }
 }
