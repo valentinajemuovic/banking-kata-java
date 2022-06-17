@@ -4,20 +4,26 @@ import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @EqualsAndHashCode
 public class BankAccount {
     private final AccountNumber accountNumber;
     private final AccountHolderName accountHolderName;
+
+    private final LocalDate openingDate;
     private Balance balance;
 
-    public BankAccount(AccountNumber accountNumber, AccountHolderName accountHolderName, Balance balance) {
+    public BankAccount(AccountNumber accountNumber, AccountHolderName accountHolderName, LocalDate openingDate, Balance balance) {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
+        this.openingDate = openingDate;
         this.balance = balance;
     }
 
     public BankAccount(BankAccount other) {
-        this(other.getAccountNumber(), other.getAccountHolderName(), other.getBalance());
+        this(other.getAccountNumber(), other.getAccountHolderName(), other.getOpeningDate(), other.getBalance());
     }
 
     public AccountNumber getAccountNumber() {
@@ -27,6 +33,8 @@ public class BankAccount {
     public AccountHolderName getAccountHolderName() {
         return accountHolderName;
     }
+
+    public LocalDate getOpeningDate() { return openingDate; }
 
     public Balance getBalance() {
         return balance;

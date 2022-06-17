@@ -8,10 +8,10 @@ import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
 
-public abstract class BaseFakeGenerator<T> implements Generator<T> {
+public class FakeGenerator<T> implements Generator<T> {
     private final Queue<T> queue;
 
-    protected BaseFakeGenerator() {
+    public FakeGenerator() {
         this.queue = new ArrayDeque<>();
     }
 

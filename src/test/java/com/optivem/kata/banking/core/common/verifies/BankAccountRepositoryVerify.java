@@ -5,6 +5,7 @@ import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,11 +34,12 @@ public class BankAccountRepositoryVerify {
         return shouldContain(expectedBankAccount);
     }
 
-    public BankAccount shouldContain(String accountNumber, String firstName, String lastName, int initialBalance) {
+    public BankAccount shouldContain(String accountNumber, String firstName, String lastName, LocalDate openingDate, int initialBalance) {
         var expectedBankAccount = BankAccountBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)
+                .withOpeningDate(openingDate)
                 .withBalance(initialBalance)
                 .build();
 

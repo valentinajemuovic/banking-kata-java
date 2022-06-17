@@ -5,11 +5,14 @@ import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.Balance;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 
+import java.time.LocalDate;
+
 public class BankAccountBuilder {
 
     private static final String DEFAULT_ACCOUNT_NUMBER = "GB10BARC20040184197751";
     private static final String DEFAULT_FIRST_NAME = "John";
     private static final String DEFAULT_LAST_NAME = "Smith";
+    private static final LocalDate DEFAULT_OPENING_DATE = LocalDate.of(2022, 2, 15);
     private static final int DEFAULT_BALANCE = 100;
 
     public static BankAccountBuilder bankAccount() {
@@ -19,6 +22,7 @@ public class BankAccountBuilder {
     private String accountNumber;
     private String firstName;
     private String lastName;
+    private LocalDate openingDate;
     private int balance;
 
     public BankAccountBuilder() {
@@ -43,6 +47,11 @@ public class BankAccountBuilder {
         return this;
     }
 
+    public BankAccountBuilder withOpeningDate(LocalDate openingDate) {
+        this.openingDate = openingDate;
+        return this;
+    }
+
     public BankAccountBuilder withBalance(int balance) {
         this.balance = balance;
         return this;
@@ -52,6 +61,6 @@ public class BankAccountBuilder {
         var accountNumber = AccountNumber.of(this.accountNumber);
         var accountHolderName = AccountHolderName.of(firstName, lastName);
         var balance = Balance.of(this.balance);
-        return new BankAccount(accountNumber, accountHolderName, balance);
+        return new BankAccount(accountNumber, accountHolderName, openingDate, balance);
     }
 }
