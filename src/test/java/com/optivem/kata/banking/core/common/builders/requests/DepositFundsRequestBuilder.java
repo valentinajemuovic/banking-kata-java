@@ -7,7 +7,7 @@ public class DepositFundsRequestBuilder {
     private static final String DEFAULT_ACCOUNT_NUMBER = "GB51BARC20031816295685";
     private static final int DEFAULT_AMOUNT = 600;
 
-    public static DepositFundsRequestBuilder aDepositFundsRequest() {
+    public static DepositFundsRequestBuilder depositFundsRequest() {
         return new DepositFundsRequestBuilder();
     }
 

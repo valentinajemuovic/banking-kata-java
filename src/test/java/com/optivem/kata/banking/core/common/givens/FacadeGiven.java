@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.common.givens;
 
 import com.optivem.kata.banking.core.Facade;
 
-import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
+import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.openAccountRequest;
 
 public class FacadeGiven {
     private final Facade facade;
@@ -12,7 +12,7 @@ public class FacadeGiven {
     }
 
     public String alreadyHasBankAccount(int balance) {
-        var openAccountRequest = anOpenAccountRequest()
+        var openAccountRequest = openAccountRequest()
                 .withBalance(balance)
                 .build();
 

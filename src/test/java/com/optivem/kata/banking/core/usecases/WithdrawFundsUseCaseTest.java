@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.requests.WithdrawFundsRequestBuilder.aWithdrawFundsRequest;
+import static com.optivem.kata.banking.core.common.builders.requests.WithdrawFundsRequestBuilder.withdrawFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -39,7 +39,7 @@ class WithdrawFundsUseCaseTest {
     void should_withdraw_funds_given_valid_request(String accountNumber, int initialBalance, int amount, int expectedFinalBalance) {
         givenThat(repository).alreadyHasBankAccount(accountNumber, initialBalance);
 
-        var request = aWithdrawFundsRequest()
+        var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
                 .withAmount(amount)
                 .build();
@@ -52,7 +52,7 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
-        var request = aWithdrawFundsRequest()
+        var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
                 .build();
 
@@ -62,7 +62,7 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource(NON_POSITIVE_INTEGERS)
     void should_throw_exception_given_non_positive_amount(int amount) {
-        var request = aWithdrawFundsRequest()
+        var request = withdrawFundsRequest()
                 .withAmount(amount)
                 .build();
 
@@ -71,7 +71,7 @@ class WithdrawFundsUseCaseTest {
 
     @Test
     void should_throw_exception_given_non_existent_account_number() {
-        var request = aWithdrawFundsRequest()
+        var request = withdrawFundsRequest()
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
@@ -85,7 +85,7 @@ class WithdrawFundsUseCaseTest {
 
         givenThat(repository).alreadyHasBankAccount(accountNumber, balance);
 
-        var request = aWithdrawFundsRequest()
+        var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
                 .withAmount(amount)
                 .build();

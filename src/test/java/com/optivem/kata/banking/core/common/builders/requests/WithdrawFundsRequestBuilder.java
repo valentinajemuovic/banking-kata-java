@@ -7,7 +7,7 @@ public class WithdrawFundsRequestBuilder {
     private static final String DEFAULT_ACCOUNT_NUMBER = "GB51BARC20031816295685";
     private static final int DEFAULT_AMOUNT = 300;
 
-    public static WithdrawFundsRequestBuilder aWithdrawFundsRequest() {
+    public static WithdrawFundsRequestBuilder withdrawFundsRequest() {
         return new WithdrawFundsRequestBuilder();
     }
 

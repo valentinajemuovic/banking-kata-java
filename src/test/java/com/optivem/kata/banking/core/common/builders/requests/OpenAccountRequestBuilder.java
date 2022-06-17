@@ -18,7 +18,7 @@ public class OpenAccountRequestBuilder {
         withBalance(DEFAULT_INITIAL_BALANCE);
     }
 
-    public static OpenAccountRequestBuilder anOpenAccountRequest() {
+    public static OpenAccountRequestBuilder openAccountRequest() {
         return new OpenAccountRequestBuilder();
     }
 

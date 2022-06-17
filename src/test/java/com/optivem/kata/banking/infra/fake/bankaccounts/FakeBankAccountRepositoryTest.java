@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
 
 class FakeBankAccountRepositoryTest {
 
@@ -29,7 +29,7 @@ class FakeBankAccountRepositoryTest {
     @Test
     void should_return_bank_account_when_account_number_exists() {
         var accountNumber = "GB36BARC20038032622823";
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .build();
 
@@ -43,14 +43,14 @@ class FakeBankAccountRepositoryTest {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
 
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
         var updateBalance = 50;
 
-        var expectedUpdatedBankAccount = aBankAccount()
+        var expectedUpdatedBankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(updateBalance)
                 .build();
@@ -68,12 +68,12 @@ class FakeBankAccountRepositoryTest {
     void should_not_be_able_to_change_bank_account_after_add() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var expectedBankAccount = aBankAccount()
+        var expectedBankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -89,12 +89,12 @@ class FakeBankAccountRepositoryTest {
     void should_not_be_able_to_change_bank_account_after_find() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var expectedBankAccount = aBankAccount()
+        var expectedBankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -112,12 +112,12 @@ class FakeBankAccountRepositoryTest {
     void should_not_be_able_to_change_bank_account_after_update() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var expectedBankAccount = aBankAccount()
+        var expectedBankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -140,12 +140,12 @@ class FakeBankAccountRepositoryTest {
         var balance = 40;
         var balance2 = 60;
 
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var bankAccount2 = aBankAccount()
+        var bankAccount2 = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance2)
                 .build();
@@ -159,7 +159,7 @@ class FakeBankAccountRepositoryTest {
     void should_throw_exception_when_attempt_to_update_non_existent_bank_account() {
         var accountNumber = "GB36BARC20038032622823";
 
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .build();
 

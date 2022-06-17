@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.anOpenAccountRequest;
+import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.openAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -42,7 +42,7 @@ class OpenAccountUseCaseTest {
     void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, String generatedAccountNumber) {
         givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
 
-        var request = anOpenAccountRequest()
+        var request = openAccountRequest()
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withBalance(initialBalance)
@@ -59,7 +59,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_first_name(String firstName) {
-        var request = anOpenAccountRequest()
+        var request = openAccountRequest()
                 .withFirstName(firstName)
                 .build();
 
@@ -69,7 +69,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_last_name(String lastName) {
-        var request = anOpenAccountRequest()
+        var request = openAccountRequest()
                 .withLastName(lastName)
                 .build();
 
@@ -79,7 +79,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NEGATIVE_INTEGERS)
     void should_throw_exception_given_negative_balance(int balance) {
-        var request = anOpenAccountRequest()
+        var request = openAccountRequest()
                 .withBalance(balance)
                 .build();
 

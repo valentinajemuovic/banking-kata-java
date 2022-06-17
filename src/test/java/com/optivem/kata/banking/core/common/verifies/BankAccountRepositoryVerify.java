@@ -25,7 +25,7 @@ public class BankAccountRepositoryVerify {
     }
 
     public BankAccount shouldContain(String accountNumber, int balance) {
-        var expectedBankAccount = BankAccountBuilder.aBankAccount()
+        var expectedBankAccount = BankAccountBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -34,7 +34,7 @@ public class BankAccountRepositoryVerify {
     }
 
     public BankAccount shouldContain(String accountNumber, String firstName, String lastName, int initialBalance) {
-        var expectedBankAccount = BankAccountBuilder.aBankAccount()
+        var expectedBankAccount = BankAccountBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)

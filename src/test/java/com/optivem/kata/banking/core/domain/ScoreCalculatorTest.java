@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -43,7 +43,7 @@ public class ScoreCalculatorTest {
     }
 
     private void assertScore(int aggregationResult, Score expectedScore) {
-        var bankAccount = aBankAccount().build();
+        var bankAccount = bankAccount().build();
         given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
 
         var score = scoreCalculator.calculate(bankAccount);

@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
+import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.depositFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
@@ -40,7 +40,7 @@ class DepositFundsUseCaseTest {
         givenThat(repository)
                 .alreadyHasBankAccount(accountNumber, initialBalance);
 
-        var request = aDepositFundsRequest()
+        var request = depositFundsRequest()
                 .withAccountNumber(accountNumber)
                 .withAmount(depositAmount)
                 .build();
@@ -56,7 +56,7 @@ class DepositFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
-        var request = aDepositFundsRequest()
+        var request = depositFundsRequest()
                 .withAccountNumber(accountNumber)
                 .build();
 
@@ -67,7 +67,7 @@ class DepositFundsUseCaseTest {
 
     @Test
     void should_throw_exception_given_non_existent_account_number() {
-        var request = aDepositFundsRequest()
+        var request = depositFundsRequest()
                 .build();
 
         verifyThat(useCase)
@@ -78,7 +78,7 @@ class DepositFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource(NON_POSITIVE_INTEGERS)
     void should_throw_exception_given_non_positive_amount(int amount) {
-        var request = aDepositFundsRequest()
+        var request = depositFundsRequest()
                 .withAmount(amount)
                 .build();
 

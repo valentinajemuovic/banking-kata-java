@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
+import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.depositFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 /**
@@ -38,7 +38,7 @@ class DepositFundsUseCaseFacadeTest {
         var accountNumber = givenThat(facade)
                 .alreadyHasBankAccount(initialBalance);
 
-        var request = aDepositFundsRequest()
+        var request = depositFundsRequest()
                 .withAccountNumber(accountNumber)
                 .withAmount(depositAmount)
                 .build();
@@ -54,7 +54,7 @@ class DepositFundsUseCaseFacadeTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
-        var request = aDepositFundsRequest()
+        var request = depositFundsRequest()
                 .withAccountNumber(accountNumber)
                 .build();
 

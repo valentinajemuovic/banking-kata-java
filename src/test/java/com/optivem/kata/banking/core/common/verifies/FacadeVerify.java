@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.common.verifies;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 
-import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.aViewAccountRequest;
+import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.viewAccountRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FacadeVerify {
@@ -18,7 +18,7 @@ public class FacadeVerify {
     }
 
     public void shouldContain(String accountNumber, int expectedFinalBalance) {
-        var request = aViewAccountRequest()
+        var request = viewAccountRequest()
                 .withAccountNumber(accountNumber)
                 .build();
 

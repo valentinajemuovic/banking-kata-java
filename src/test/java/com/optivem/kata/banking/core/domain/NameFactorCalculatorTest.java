@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NameFactorCalculatorTest {
@@ -29,7 +29,7 @@ public class NameFactorCalculatorTest {
     @ParameterizedTest
     @MethodSource
     void should_return_5_given_that_total_name_length_is_less_than_or_equal_to_5(String firstName, String lastName) {
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .build();
@@ -50,7 +50,7 @@ public class NameFactorCalculatorTest {
     @ParameterizedTest
     @MethodSource
     void should_return_total_name_length_given_that_total_name_length_is_greater_than_5_or_less_than_equal_to_10(String firstName, String lastName, int expectedResult) {
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .build();
@@ -68,7 +68,7 @@ public class NameFactorCalculatorTest {
     @ParameterizedTest
     @MethodSource
     void should_return_total_name_length_times_3_given_that_total_name_length_is_greater_than_10(String firstName, String lastName, int expectedResult) {
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .build();

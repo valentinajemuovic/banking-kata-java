@@ -12,7 +12,7 @@ public class BankAccountBuilder {
     private static final String DEFAULT_LAST_NAME = "Smith";
     private static final int DEFAULT_BALANCE = 100;
 
-    public static BankAccountBuilder aBankAccount() {
+    public static BankAccountBuilder bankAccount() {
         return new BankAccountBuilder();
     }
 

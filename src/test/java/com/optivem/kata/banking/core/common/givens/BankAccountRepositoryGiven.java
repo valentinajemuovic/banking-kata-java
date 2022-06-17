@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.common.givens;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.aBankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
 
 public class BankAccountRepositoryGiven {
 
@@ -13,7 +13,7 @@ public class BankAccountRepositoryGiven {
     }
 
     public void alreadyHasBankAccount(String accountNumber, int balance) {
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -22,7 +22,7 @@ public class BankAccountRepositoryGiven {
     }
 
     public void alreadyHasBankAccount(String accountNumber, String firstName, String lastName, int balance) {
-        var bankAccount = aBankAccount()
+        var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)

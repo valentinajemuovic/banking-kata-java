@@ -6,7 +6,7 @@ public class ViewAccountRequestBuilder {
 
     private static final String DEFAULT_ACCOUNT_NUMBER = "GB51BARC20031816295685";
 
-    public static ViewAccountRequestBuilder aViewAccountRequest() {
+    public static ViewAccountRequestBuilder viewAccountRequest() {
         return new ViewAccountRequestBuilder();
     }
 

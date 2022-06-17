@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.aViewAccountRequest;
+import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.viewAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -43,7 +43,7 @@ class ViewAccountUseCaseTest {
 
         givenThat(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
 
-        var bankAccount = BankAccountBuilder.aBankAccount()
+        var bankAccount = BankAccountBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)
@@ -52,7 +52,7 @@ class ViewAccountUseCaseTest {
 
         given(scoreCalculator.calculate(bankAccount)).willReturn(score);
 
-        var request = aViewAccountRequest()
+        var request = viewAccountRequest()
                 .withAccountNumber(accountNumber)
                 .build();
 
@@ -68,7 +68,7 @@ class ViewAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_account_number(String accountNumber) {
-        var request = aViewAccountRequest()
+        var request = viewAccountRequest()
                 .withAccountNumber(accountNumber)
                 .build();
 
@@ -77,7 +77,7 @@ class ViewAccountUseCaseTest {
 
     @Test
     void should_throw_exception_given_non_existent_account_number() {
-        var request = aViewAccountRequest()
+        var request = viewAccountRequest()
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
