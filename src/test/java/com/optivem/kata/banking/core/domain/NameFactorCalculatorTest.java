@@ -13,7 +13,7 @@ import static com.optivem.kata.banking.core.common.builders.entities.BankAccount
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NameFactorCalculatorTest {
-    private FactorCalculator factorCalculator;
+    private NameFactorCalculator factorCalculator;
 
     @BeforeEach
     void init() {
