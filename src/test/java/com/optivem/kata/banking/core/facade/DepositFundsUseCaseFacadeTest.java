@@ -15,7 +15,10 @@ import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.aDepositFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
-public class DepositFundsUseCaseFacadeTest {
+/**
+ * This test is an alternative approach to DepositFundsUseCaseTest, so we would use either of these, but not both
+ */
+class DepositFundsUseCaseFacadeTest {
     private Facade facade;
 
     private static Stream<Arguments> should_deposit_funds_given_valid_request() {
