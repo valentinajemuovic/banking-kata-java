@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.domain;
 import com.optivem.kata.banking.core.domain.accounts.scoring.FactorAggregator;
 import com.optivem.kata.banking.core.domain.accounts.scoring.Score;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculatorImpl;
+import com.optivem.kata.banking.core.domain.accounts.scoring.DefaultScoreCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,7 +21,7 @@ public class ScoreCalculatorTest {
     @BeforeEach
     void init() {
         factorAggregator = mock(FactorAggregator.class);
-        scoreCalculator = new ScoreCalculatorImpl(factorAggregator);
+        scoreCalculator = new DefaultScoreCalculator(factorAggregator);
     }
 
     @ParameterizedTest

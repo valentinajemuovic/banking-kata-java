@@ -21,12 +21,7 @@ public class Facade {
 
     // TODO: VC: Perhaps server-side API facade? And server-side API facade?
     public Facade(AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountRepository bankAccountRepository) {
-        var nameFactorCalculator = new NameFactorCalculator();
-        var balanceFactorCalculator = new BalanceFactorCalculator();
-        var timeFactorCalculator = new TimeFactorCalculator(dateTimeService);
-
-        var factorAggregator = new LinearFactorAggregator(nameFactorCalculator, balanceFactorCalculator, timeFactorCalculator);
-        var scoreCalculator = new ScoreCalculatorImpl(factorAggregator);
+        var scoreCalculator = DefaultScoreCalculator.create(dateTimeService);
 
         this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository);
         this.openAccountUseCase = new OpenAccountUseCase(accountNumberGenerator, dateTimeService, bankAccountRepository);

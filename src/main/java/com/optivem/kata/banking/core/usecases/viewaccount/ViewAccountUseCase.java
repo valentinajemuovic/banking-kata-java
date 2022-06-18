@@ -5,9 +5,11 @@ import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
+import org.springframework.stereotype.Component;
 
 import static com.optivem.kata.banking.core.domain.extensions.Extension.extend;
 
+@Component
 public class ViewAccountUseCase implements Command.Handler<ViewAccountRequest, ViewAccountResponse> {
 
     private final BankAccountRepository repository;

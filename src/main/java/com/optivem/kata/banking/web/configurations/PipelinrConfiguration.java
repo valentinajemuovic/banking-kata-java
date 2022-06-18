@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class PipelinrConfiguration {
-
-    // TODO: VC: Make GitHub ticket regarding code coverage
     @Bean
     public Pipeline pipeline(ObjectProvider<Command.Handler> commandHandlers,
                              ObjectProvider<Notification.Handler> notificationHandlers,
