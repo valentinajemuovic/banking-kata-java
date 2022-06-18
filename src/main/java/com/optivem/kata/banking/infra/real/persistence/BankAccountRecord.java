@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.infra.real;
+package com.optivem.kata.banking.infra.real.persistence;
 
 import lombok.Data;
 

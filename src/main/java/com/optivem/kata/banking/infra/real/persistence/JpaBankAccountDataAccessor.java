@@ -1,9 +1,8 @@
-package com.optivem.kata.banking.infra.real;
+package com.optivem.kata.banking.infra.real.persistence;
 
+import com.optivem.kata.banking.infra.real.persistence.BankAccountRecord;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface JpaBankAccountDataAccessor extends CrudRepository<BankAccountRecord, Long> {

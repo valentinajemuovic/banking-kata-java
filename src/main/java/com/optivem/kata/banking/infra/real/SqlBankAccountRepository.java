@@ -1,6 +1,8 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.*;
+import com.optivem.kata.banking.infra.real.persistence.BankAccountRecord;
+import com.optivem.kata.banking.infra.real.persistence.JpaBankAccountDataAccessor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

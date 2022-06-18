@@ -3,7 +3,9 @@ package com.optivem.kata.banking.core.usecases.openaccount;
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.time.DateTimeService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
 
     private final AccountNumberGenerator accountNumberGenerator;

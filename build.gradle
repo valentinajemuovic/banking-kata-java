@@ -44,11 +44,13 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
     implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0'
     implementation 'net.sizovs:pipelinr:0.7'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.11'
     testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
     testImplementation 'com.athaydes:spock-reports:2.3.0-groovy-3.0', { transitive = false }
