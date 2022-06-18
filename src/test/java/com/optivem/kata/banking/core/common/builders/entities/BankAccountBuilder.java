@@ -26,10 +26,10 @@ public class BankAccountBuilder {
     private int balance;
 
     public BankAccountBuilder() {
-        withAccountNumber(DEFAULT_ACCOUNT_NUMBER);
-        withFirstName(DEFAULT_FIRST_NAME);
-        withLastName(DEFAULT_LAST_NAME);
-        withBalance(DEFAULT_BALANCE);
+        this.accountNumber = DEFAULT_ACCOUNT_NUMBER;
+        this.firstName = DEFAULT_FIRST_NAME;
+        this.lastName = DEFAULT_LAST_NAME;
+        this.balance = DEFAULT_BALANCE;
     }
 
     public BankAccountBuilder withAccountNumber(String accountNumber) {

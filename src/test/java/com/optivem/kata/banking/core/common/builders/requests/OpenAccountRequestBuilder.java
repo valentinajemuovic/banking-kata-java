@@ -13,9 +13,9 @@ public class OpenAccountRequestBuilder {
     private int balance;
 
     public OpenAccountRequestBuilder() {
-        withFirstName(DEFAULT_FIRST_NAME);
-        withLastName(DEFAULT_LAST_NAME);
-        withBalance(DEFAULT_INITIAL_BALANCE);
+        this.firstName = DEFAULT_FIRST_NAME;
+        this.lastName = DEFAULT_LAST_NAME;
+        this.balance = DEFAULT_INITIAL_BALANCE;
     }
 
     public static OpenAccountRequestBuilder openAccountRequest() {

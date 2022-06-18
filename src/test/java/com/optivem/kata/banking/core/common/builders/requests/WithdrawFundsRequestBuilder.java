@@ -15,8 +15,8 @@ public class WithdrawFundsRequestBuilder {
     private int amount;
 
     public WithdrawFundsRequestBuilder() {
-        withAccountNumber(DEFAULT_ACCOUNT_NUMBER);
-        withAmount(DEFAULT_AMOUNT);
+        this.accountNumber = DEFAULT_ACCOUNT_NUMBER;
+        this.amount = DEFAULT_AMOUNT;
     }
 
     public WithdrawFundsRequestBuilder withAccountNumber(String accountNumber) {

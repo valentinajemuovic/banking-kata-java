@@ -15,8 +15,8 @@ public class DepositFundsRequestBuilder {
     private int amount;
 
     public DepositFundsRequestBuilder() {
-        withAccountNumber(DEFAULT_ACCOUNT_NUMBER);
-        withAmount(DEFAULT_AMOUNT);
+        this.accountNumber = DEFAULT_ACCOUNT_NUMBER;
+        this.amount = DEFAULT_AMOUNT;
     }
 
     public DepositFundsRequestBuilder withAccountNumber(String accountNumber) {

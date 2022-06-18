@@ -13,7 +13,7 @@ public class ViewAccountRequestBuilder {
     private String accountNumber;
 
     public ViewAccountRequestBuilder() {
-        withAccountNumber(DEFAULT_ACCOUNT_NUMBER);
+        this.accountNumber = DEFAULT_ACCOUNT_NUMBER;
     }
 
     public ViewAccountRequestBuilder withAccountNumber(String accountNumber) {
