@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BalanceFactoryCalculatorTest {
+public class BalanceFactorCalculatorTest {
     private BalanceFactorCalculator factorCalculator;
 
     @BeforeEach

@@ -14,12 +14,12 @@ public class FakeDateTimeService implements DateTimeService {
         this.dateGenerator = new FakeGenerator<>();
     }
 
-    public void add(LocalDateTime dateTime) {
-        dateGenerator.add(dateTime);
-    }
-
     @Override
     public LocalDateTime getCurrent() {
         return dateGenerator.next();
+    }
+
+    public void add(LocalDateTime dateTime) {
+        dateGenerator.add(dateTime);
     }
 }
