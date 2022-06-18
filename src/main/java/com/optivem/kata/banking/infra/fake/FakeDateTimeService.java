@@ -15,7 +15,7 @@ public class FakeDateTimeService implements DateTimeService {
     }
 
     @Override
-    public LocalDateTime getCurrent() {
+    public LocalDateTime now() {
         return dateGenerator.next();
     }
 

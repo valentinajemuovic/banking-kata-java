@@ -47,7 +47,7 @@ class OpenAccountUseCaseTest {
     @MethodSource
     void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, String generatedAccountNumber, LocalDate openingDate) {
         givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
-        givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.of(5, 31))); // TODO: VC: Remove constants
+        givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withFirstName(firstName)

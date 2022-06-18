@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Component
 public class SysDateTimeService implements DateTimeService {
     @Override
-    public LocalDateTime getCurrent() {
+    public LocalDateTime now() {
         return LocalDateTime.now();
     }
 }

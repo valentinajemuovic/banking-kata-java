@@ -38,7 +38,7 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
     private BankAccount createBankAccount(AccountHolderName accountHolderName, Balance balance) {
         var accountNumber = accountNumberGenerator.next();
-        var dateTime = dateTimeService.getCurrent();
+        var dateTime = dateTimeService.now();
         var openingDate = dateTime.toLocalDate();
         return new BankAccount(accountNumber, accountHolderName, openingDate, balance);
     }

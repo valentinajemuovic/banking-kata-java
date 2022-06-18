@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.infra.fake;
 
-import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +26,7 @@ class FakeDateTimeServiceTest {
     }
 
     private void assertReturnsNext(LocalDateTime dateTime) {
-        var current = service.getCurrent();
+        var current = service.now();
         assertThat(current).isEqualTo(dateTime);
     }
 }

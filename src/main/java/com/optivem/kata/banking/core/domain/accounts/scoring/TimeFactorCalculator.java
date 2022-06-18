@@ -13,7 +13,7 @@ public class TimeFactorCalculator implements FactorCalculator {
     @Override
     public int calculate(BankAccount bankAccount) {
         var openingDate = bankAccount.getOpeningDate();
-        var currentDateTime = dateTimeService.getCurrent();
+        var currentDateTime = dateTimeService.now();
         var currentDate = currentDateTime.toLocalDate();
         var period = openingDate.until(currentDate);
         return period.getDays();
