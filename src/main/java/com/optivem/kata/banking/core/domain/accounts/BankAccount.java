@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import static com.optivem.kata.banking.core.domain.common.Guard.guard;
+
 @EqualsAndHashCode
 public class BankAccount {
     private final AccountNumber accountNumber;
@@ -16,6 +18,11 @@ public class BankAccount {
     private Balance balance;
 
     public BankAccount(AccountNumber accountNumber, AccountHolderName accountHolderName, LocalDate openingDate, Balance balance) {
+        guard(accountNumber).againstNull(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
+        guard(accountHolderName).againstNull(ValidationMessages.ACCOUNT_HOLDER_NAME_EMPTY);
+        guard(openingDate).againstNull(ValidationMessages.OPENING_DATE_EMPTY);
+        guard(balance).againstNull(ValidationMessages.BALANCE_EMPTY);
+
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.openingDate = openingDate;

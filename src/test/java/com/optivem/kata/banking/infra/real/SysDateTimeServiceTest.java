@@ -10,6 +10,9 @@ import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SysDateTimeServiceTest {
+
+    private static final int SLEEP = 1;
+
     private SysDateTimeService service;
 
     @BeforeEach
@@ -24,13 +27,17 @@ public class SysDateTimeServiceTest {
     }
 
     @Test
-    void should_return_different_date_times() {
+    void should_return_different_date_times() throws InterruptedException {
         var dateTime1 = service.getCurrent();
         assertThat(dateTime1).isNotNull();
+
+        Thread.sleep(SLEEP);
 
         var dateTime2 = service.getCurrent();
         assertThat(dateTime2).isNotNull();
         assertThat(dateTime2).isAfter(dateTime1);
+
+        Thread.sleep(SLEEP);
 
         var dateTime3 = service.getCurrent();
         assertThat(dateTime3).isNotNull();

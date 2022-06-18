@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NameFactorCalculatorTest {

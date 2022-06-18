@@ -3,12 +3,11 @@ package com.optivem.kata.banking.infra.fake;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.domain.exceptions.RepositoryMessages;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
 
 class FakeBankAccountRepositoryTest {
 

@@ -12,4 +12,7 @@ public class ValidationMessages {
     public static final String ACCOUNT_NUMBER_NOT_EXIST = "Account number does not exist";
     public static final String AMOUNT_NOT_POSITIVE = "Amount is not positive";
     public static final String INSUFFICIENT_FUNDS = "Insufficient funds";
+    public static final String ACCOUNT_HOLDER_NAME_EMPTY = "Account holder name is empty";
+    public static final String OPENING_DATE_EMPTY = "Opening date is empty";
+    public static final String BALANCE_EMPTY = "Balance is empty";
 }

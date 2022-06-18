@@ -22,4 +22,9 @@ public record Text(String value) {
     public int getLength() {
         return value.length();
     }
+
+    @Override
+    public String toString() {
+        return value();
+    }
 }

@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.common.givens;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
 
 public class BankAccountRepositoryGiven {
 

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TimeFactorCalculatorTest {

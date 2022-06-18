@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.common.builders.entities.BankAccountBuilder;
+import com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.scoring.Score;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
@@ -43,7 +43,7 @@ class ViewAccountUseCaseTest {
 
         givenThat(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
 
-        var bankAccount = BankAccountBuilder.bankAccount()
+        var bankAccount = BankAccountTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)
