@@ -45,6 +45,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
+    implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.11'

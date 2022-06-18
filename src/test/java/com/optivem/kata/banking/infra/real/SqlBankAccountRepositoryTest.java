@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import org.junit.jupiter.api.Test;
@@ -19,14 +20,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SqlBankAccountRepositoryTest {
     private BankAccountRepository repository;
 
+    private AccountNumberGenerator accountNumberGenerator;
+
     @Autowired
-    public SqlBankAccountRepositoryTest(BankAccountRepository repository) {
+    public SqlBankAccountRepositoryTest(BankAccountRepository repository, AccountNumberGenerator accountNumberGenerator) {
         this.repository = repository;
+        this.accountNumberGenerator = accountNumberGenerator;
     }
 
     @Test
     void should_return_empty_given_non_existent_account_number() {
-        var accountNumber = AccountNumber.of("1234abc");
+        var accountNumber = accountNumberGenerator.next();
         var bankAccount = repository.find(accountNumber);
         assertThat(bankAccount).isEqualTo(Optional.empty());
     }
@@ -59,7 +63,7 @@ public class SqlBankAccountRepositoryTest {
     }
 
     private BankAccount createSomeBankAccount() {
-        var accountNumber = UUID.randomUUID().toString();
+        var accountNumber = accountNumberGenerator.next().toString();
         return bankAccount()
                 .withAccountNumber(accountNumber)
                 .build();
