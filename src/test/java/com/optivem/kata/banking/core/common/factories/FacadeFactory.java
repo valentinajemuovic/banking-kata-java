@@ -15,6 +15,8 @@ public class FacadeFactory {
     private static final String ACCOUNT_NUMBER_2 = "GB41OMQP68570038161776";
 
     private static final LocalDateTime DATE_TIME_1 = LocalDateTime.of(2022, 3, 28, 10, 50);
+    private static final LocalDateTime DATE_TIME_2 = LocalDateTime.of(2022, 4, 15, 9, 1);
+
 
     public Facade create() {
         var accountNumberGenerator = new FakeAccountNumberGenerator();
@@ -23,6 +25,7 @@ public class FacadeFactory {
 
         var dateTimeService = new FakeDateTimeService();
         givenThat(dateTimeService).willReturn(DATE_TIME_1);
+        givenThat(dateTimeService).willReturn(DATE_TIME_2);
 
         var bankAccountRepository = new FakeBankAccountRepository();
 

@@ -2,9 +2,7 @@ package com.optivem.kata.banking.core;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.domain.accounts.scoring.LinearFactorAggregator;
-import com.optivem.kata.banking.core.domain.accounts.scoring.NameFactorCalculator;
-import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculatorImpl;
+import com.optivem.kata.banking.core.domain.accounts.scoring.*;
 import com.optivem.kata.banking.core.domain.time.DateTimeService;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
@@ -24,8 +22,8 @@ public class Facade {
     // TODO: VC: Perhaps server-side API facade? And server-side API facade?
     public Facade(AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountRepository bankAccountRepository) {
         var nameFactorCalculator = new NameFactorCalculator();
-        var balanceFactorCalculator = new NameFactorCalculator(); // TODO: VC: Replace
-        var timeFactorCalculator = new NameFactorCalculator(); // TODO: VC: Replace
+        var balanceFactorCalculator = new BalanceFactorCalculator();
+        var timeFactorCalculator = new TimeFactorCalculator(dateTimeService);
 
         var factorAggregator = new LinearFactorAggregator(nameFactorCalculator, balanceFactorCalculator, timeFactorCalculator);
         var scoreCalculator = new ScoreCalculatorImpl(factorAggregator);
