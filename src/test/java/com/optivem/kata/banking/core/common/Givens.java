@@ -6,8 +6,8 @@ import com.optivem.kata.banking.core.common.givens.FacadeGiven;
 import com.optivem.kata.banking.core.common.givens.FakeAccountNumberGeneratorGiven;
 import com.optivem.kata.banking.core.common.givens.FakeDateTimeServiceGiven;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.infra.fake.accounts.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.infra.fake.time.FakeDateTimeService;
+import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 
 public class Givens {
     public static BankAccountRepositoryGiven givenThat(BankAccountRepository repository) {

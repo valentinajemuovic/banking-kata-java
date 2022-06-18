@@ -1,8 +1,7 @@
 package com.optivem.kata.banking.core.domain;
 
-import com.optivem.kata.banking.core.domain.accounts.scoring.BalanceFactorCalculator;
 import com.optivem.kata.banking.core.domain.accounts.scoring.TimeFactorCalculator;
-import com.optivem.kata.banking.infra.fake.time.FakeDateTimeService;
+import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

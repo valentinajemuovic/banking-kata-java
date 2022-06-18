@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.infra.fake.accounts;
+package com.optivem.kata.banking.infra.fake;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;

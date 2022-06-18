@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.infra.fake.time;
+package com.optivem.kata.banking.infra.fake;
 
 import com.optivem.kata.banking.core.domain.time.DateTimeService;
 import com.optivem.kata.banking.infra.fake.base.FakeGenerator;

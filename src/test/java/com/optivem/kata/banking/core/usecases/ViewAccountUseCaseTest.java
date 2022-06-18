@@ -7,7 +7,7 @@ import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
-import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

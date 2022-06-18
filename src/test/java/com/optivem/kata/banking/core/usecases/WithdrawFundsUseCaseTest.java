@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.usecases;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsUseCase;
-import com.optivem.kata.banking.infra.fake.accounts.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
