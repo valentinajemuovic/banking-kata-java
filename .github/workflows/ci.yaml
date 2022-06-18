@@ -1,9 +1,34 @@
 name: CI
-on: [ push ]
+on: [push]
 jobs:
   build-job:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: postgres_db
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: postgres_usr
+          POSTGRES_PASSWORD: postgres_pwd
+        ports:
+          - 5432:5432
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
     steps:
+      - name: Update Packages
+        run:
+          sudo apt-get update
+      - name: Install Postgresql client
+        run:
+          sudo apt-get install --yes postgresql-client
+      - name: Check database connectivity
+        run: psql -h localhost -d postgres_db -U postgres_usr -c 'SELECT 1;'
+        env:
+          PGPASSWORD: postgres_pwd
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Java
@@ -13,3 +38,7 @@ jobs:
           distribution: 'adopt'
       - name: Gradle Build
         run: ./gradlew build
+        env:
+          POSTGRES_URL: jdbc:postgresql://localhost:5432/postgres_db
+          POSTGRES_USER: postgres_usr
+          POSTGRES_PASSWORD: postgres_pwd
