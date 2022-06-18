@@ -44,7 +44,7 @@ class WithdrawFundsUseCaseTest {
                 .withAmount(amount)
                 .build();
 
-        verifyThat(useCase).withRequest(request).shouldExecuteSuccessfully();
+        verifyThat(useCase).withRequest(request).shouldReturnVoidResponse();
 
         verifyThat(repository).shouldContain(accountNumber, expectedFinalBalance);
     }

@@ -25,7 +25,7 @@ public class UseCaseRequestVerify<R extends Command<P>, P> {
         verifyThat(() -> useCase.handle(request)).shouldThrowValidationException(message);
     }
 
-    public void shouldExecuteSuccessfully() {
+    public void shouldReturnVoidResponse() {
         var response = useCase.handle(request);
         assertThat(response).isInstanceOf(VoidResponse.class);
         assertThat(response).isEqualTo(VoidResponse.EMPTY);

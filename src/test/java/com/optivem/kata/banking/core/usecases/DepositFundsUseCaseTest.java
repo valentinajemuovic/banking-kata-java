@@ -47,7 +47,7 @@ class DepositFundsUseCaseTest {
 
         verifyThat(useCase)
                 .withRequest(request)
-                .shouldExecuteSuccessfully();
+                .shouldReturnVoidResponse();
 
         verifyThat(repository)
                 .shouldContain(accountNumber, expectedFinalBalance);
