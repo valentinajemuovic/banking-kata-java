@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +33,35 @@ public class SqlBankAccountRepositoryTest {
 
     @Test
     void should_return_added_bank_account() {
-        var accountNumber = UUID.randomUUID().toString();
-        var bankAccount = bankAccount()
-                .withAccountNumber(accountNumber)
-                .build();
+        var bankAccount = createSomeBankAccount();
+        shouldRetrieveAddedAccount(bankAccount);
+    }
 
+    @Test
+    void should_find_multiple_added_bank_accounts() {
+        var bankAccount1 = createSomeBankAccount();
+        shouldRetrieveAddedAccount(bankAccount1);
+
+        var bankAccount2 = createSomeBankAccount();
+        shouldRetrieveAddedAccount(bankAccount2);
+
+        var bankAccount3 = createSomeBankAccount();
+        shouldRetrieveAddedAccount(bankAccount3);
+    }
+
+    private void shouldRetrieveAddedAccount(BankAccount bankAccount) {
         repository.add(bankAccount);
 
         var retrievedBankAccount = repository.find(bankAccount.getAccountNumber());
 
         assertThat(retrievedBankAccount).isNotNull();
         assertThat(retrievedBankAccount.get()).isEqualTo(bankAccount);
+    }
+
+    private BankAccount createSomeBankAccount() {
+        var accountNumber = UUID.randomUUID().toString();
+        return bankAccount()
+                .withAccountNumber(accountNumber)
+                .build();
     }
 }
