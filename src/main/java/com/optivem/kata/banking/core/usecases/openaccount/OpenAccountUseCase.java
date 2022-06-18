@@ -1,10 +1,10 @@
 package com.optivem.kata.banking.core.usecases.openaccount;
 
+import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.time.DateTimeService;
-import com.optivem.kata.banking.core.usecases.UseCase;
 
-public class OpenAccountUseCase implements UseCase<OpenAccountRequest, OpenAccountResponse> {
+public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
 
     private final AccountNumberGenerator accountNumberGenerator;
     private final DateTimeService dateTimeService;

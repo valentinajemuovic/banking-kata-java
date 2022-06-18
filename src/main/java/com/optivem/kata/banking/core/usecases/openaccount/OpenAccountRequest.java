@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases.openaccount;
 
+import an.awesome.pipelinr.Command;
 import lombok.*;
 
 @Data
@@ -7,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class OpenAccountRequest {
+public class OpenAccountRequest implements Command<OpenAccountResponse> {
     private String firstName;
     private String lastName;
     private int balance;

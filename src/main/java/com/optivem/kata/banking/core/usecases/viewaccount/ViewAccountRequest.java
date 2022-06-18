@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases.viewaccount;
 
+import an.awesome.pipelinr.Command;
 import lombok.*;
 
 @Data
@@ -7,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class ViewAccountRequest {
+public class ViewAccountRequest implements Command<ViewAccountResponse> {
     private String accountNumber;
 }

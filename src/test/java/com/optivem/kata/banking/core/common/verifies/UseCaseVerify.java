@@ -1,12 +1,12 @@
 package com.optivem.kata.banking.core.common.verifies;
 
-import com.optivem.kata.banking.core.usecases.UseCase;
+import an.awesome.pipelinr.Command;
 
-public class UseCaseVerify<R, P> {
+public class UseCaseVerify<R extends Command<P>, P> {
 
-    private final UseCase<R, P> useCase;
+    private final Command.Handler<R, P> useCase;
 
-    public UseCaseVerify(UseCase<R, P> useCase) {
+    public UseCaseVerify(Command.Handler<R, P> useCase) {
         this.useCase = useCase;
     }
 
