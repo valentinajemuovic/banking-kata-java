@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.infra.fake.bankaccounts;
+package com.optivem.kata.banking.infra.fake;
 
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
