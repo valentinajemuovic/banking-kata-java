@@ -48,6 +48,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
     implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0'
     implementation 'net.sizovs:pipelinr:0.7'
+    implementation 'de.mkammerer.snowflake-id:snowflake-id:0.0.1'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
