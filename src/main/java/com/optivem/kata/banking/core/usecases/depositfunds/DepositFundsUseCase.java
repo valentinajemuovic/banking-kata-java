@@ -1,14 +1,13 @@
 package com.optivem.kata.banking.core.usecases.depositfunds;
 
 import an.awesome.pipelinr.Command;
-import an.awesome.pipelinr.Voidy;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.usecases.VoidResponse;
 
-import static com.optivem.kata.banking.core.domain.extensions.Extension.extend;
+import static com.optivem.kata.banking.core.domain.common.extensions.Extension.extend;
 
 public class DepositFundsUseCase implements Command.Handler<DepositFundsRequest, VoidResponse> {
 

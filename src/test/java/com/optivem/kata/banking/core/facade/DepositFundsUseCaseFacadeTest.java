@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.facade;
 
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.factories.FacadeFactory;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

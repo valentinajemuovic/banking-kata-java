@@ -1,8 +1,7 @@
 package com.optivem.kata.banking.core.domain;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountId;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
-import org.junit.jupiter.api.Test;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 

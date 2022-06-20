@@ -1,13 +1,11 @@
 package com.optivem.kata.banking.core.domain;
 
-import com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder;
 import com.optivem.kata.banking.core.common.builders.entities.BankAccountDefaults;
 import com.optivem.kata.banking.core.domain.accounts.*;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.domain.accounts.BankAccountBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BankAccountTest {

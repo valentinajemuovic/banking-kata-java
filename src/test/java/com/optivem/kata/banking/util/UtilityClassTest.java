@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.util;
 
 import com.optivem.kata.banking.core.domain.common.Guard;
-import com.optivem.kata.banking.core.domain.exceptions.RepositoryMessages;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.domain.extensions.Extension;
+import com.optivem.kata.banking.core.domain.common.exceptions.RepositoryMessages;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.domain.common.extensions.Extension;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
 import org.junit.jupiter.api.Test;
 

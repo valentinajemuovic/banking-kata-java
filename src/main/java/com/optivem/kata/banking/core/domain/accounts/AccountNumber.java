@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 
 import static com.optivem.kata.banking.core.domain.common.Guard.guard;
 

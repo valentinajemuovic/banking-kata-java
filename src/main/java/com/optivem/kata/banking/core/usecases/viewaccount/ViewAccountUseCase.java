@@ -7,7 +7,7 @@ import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
 import org.springframework.stereotype.Component;
 
-import static com.optivem.kata.banking.core.domain.extensions.Extension.extend;
+import static com.optivem.kata.banking.core.domain.common.extensions.Extension.extend;
 
 @Component
 public class ViewAccountUseCase implements Command.Handler<ViewAccountRequest, ViewAccountResponse> {

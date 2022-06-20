@@ -4,7 +4,7 @@ import com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBui
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.scoring.Score;
 import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
 import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;

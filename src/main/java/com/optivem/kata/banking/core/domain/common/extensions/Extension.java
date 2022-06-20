@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.domain.extensions;
+package com.optivem.kata.banking.core.domain.common.extensions;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import lombok.experimental.UtilityClass;

@@ -1,11 +1,10 @@
 package com.optivem.kata.banking.core.domain.accounts;
 
-import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
-import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationException;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static com.optivem.kata.banking.core.domain.common.Guard.guard;
 

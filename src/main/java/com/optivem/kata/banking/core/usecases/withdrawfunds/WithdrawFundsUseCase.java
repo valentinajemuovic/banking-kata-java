@@ -7,7 +7,7 @@ import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.usecases.VoidResponse;
 
-import static com.optivem.kata.banking.core.domain.extensions.Extension.extend;
+import static com.optivem.kata.banking.core.domain.common.extensions.Extension.extend;
 
 public class WithdrawFundsUseCase implements Command.Handler<WithdrawFundsRequest, VoidResponse> {
 

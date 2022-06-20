@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.domain.exceptions;
+package com.optivem.kata.banking.core.domain.common.exceptions;
 
 public class RepositoryException extends RuntimeException {
     public RepositoryException(String message) {

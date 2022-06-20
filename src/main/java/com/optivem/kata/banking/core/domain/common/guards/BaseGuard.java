@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.domain.common.guards;
 
-import com.optivem.kata.banking.core.domain.exceptions.ValidationException;
+import com.optivem.kata.banking.core.domain.common.exceptions.ValidationException;
 
 import java.util.function.BooleanSupplier;
 

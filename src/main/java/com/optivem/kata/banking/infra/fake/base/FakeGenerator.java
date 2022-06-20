@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.infra.fake.base;
 
-import com.optivem.kata.banking.core.domain.base.Generator;
+import com.optivem.kata.banking.core.domain.common.base.Generator;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeException;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
 
