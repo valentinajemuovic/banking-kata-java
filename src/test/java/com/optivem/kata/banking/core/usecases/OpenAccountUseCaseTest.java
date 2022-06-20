@@ -5,6 +5,7 @@ import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,28 +25,30 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_I
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class OpenAccountUseCaseTest {
-
+    private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeDateTimeService dateTimeService;
     private BankAccountRepository bankAccountRepository;
     private OpenAccountUseCase useCase;
 
     private static Stream<Arguments> should_open_account_given_valid_request() {
-        return Stream.of(Arguments.of("John", "Smith", 0, "GB41OMQP68570038161775", LocalDate.of(2022, 5, 20)),
-                Arguments.of("Mary", "McDonald", 50, "GB36BMFK75394735916876", LocalDate.of(2021, 6, 15)));
+        return Stream.of(Arguments.of("John", "Smith", 0, 3456, "GB41OMQP68570038161775", LocalDate.of(2022, 5, 20)),
+                Arguments.of("Mary", "McDonald", 50, 735353, "GB36BMFK75394735916876", LocalDate.of(2021, 6, 15)));
     }
 
     @BeforeEach
     void init() {
+        this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
         this.dateTimeService = new FakeDateTimeService();
         this.bankAccountRepository = new FakeBankAccountRepository();
-        this.useCase = new OpenAccountUseCase(accountNumberGenerator, dateTimeService, bankAccountRepository);
+        this.useCase = new OpenAccountUseCase(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository);
     }
 
     @ParameterizedTest
     @MethodSource
-    void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, String generatedAccountNumber, LocalDate openingDate) {
+    void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
+        givenThat(accountIdGenerator).willGenerate(generatedAccountId);
         givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
         givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
 
@@ -60,7 +63,7 @@ class OpenAccountUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
 
-        verifyThat(bankAccountRepository).shouldContain(generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        verifyThat(bankAccountRepository).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
     }
 
     @ParameterizedTest

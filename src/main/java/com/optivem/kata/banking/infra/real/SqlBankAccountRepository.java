@@ -42,6 +42,7 @@ public class SqlBankAccountRepository implements BankAccountRepository {
     }
 
     private BankAccountRecord create(BankAccount bankAccount) {
+        var accountId = bankAccount.getAccountId().toLong();
         var accountNumber = bankAccount.getAccountNumber().toString();
         var firstName = bankAccount.getAccountHolderName().firstName().toString();
         var lastName = bankAccount.getAccountHolderName().lastName().toString();
@@ -49,6 +50,7 @@ public class SqlBankAccountRepository implements BankAccountRepository {
         var balance = bankAccount.getBalance().toInt();
 
         var record = new BankAccountRecord();
+        record.setId(accountId);
         record.setAccountNumber(accountNumber);
         record.setFirstName(firstName);
         record.setLastName(lastName);
@@ -59,11 +61,12 @@ public class SqlBankAccountRepository implements BankAccountRepository {
     }
 
     private BankAccount get(BankAccountRecord record) {
+        var accountId = AccountId.of(record.getId());
         var accountNumber = AccountNumber.of(record.getAccountNumber());
         var accountHolderName = AccountHolderName.of(record.getFirstName(), record.getLastName());
         var openingDate = record.getOpeningDate();
         var balance = Balance.of(record.getBalance());
 
-        return new BankAccount(accountNumber, accountHolderName, openingDate, balance);
+        return new BankAccount(accountId, accountNumber, accountHolderName, openingDate, balance);
     }
 }

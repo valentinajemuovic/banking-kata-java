@@ -15,4 +15,6 @@ public class ValidationMessages {
     public static final String ACCOUNT_HOLDER_NAME_EMPTY = "Account holder name is empty";
     public static final String OPENING_DATE_EMPTY = "Opening date is empty";
     public static final String BALANCE_EMPTY = "Balance is empty";
+    public static final String ACCOUNT_ID_EMPTY = "Account ID is empty";
+    public static final String ACCOUNT_ID_NON_POSITIVE = "Account ID is not positive";
 }

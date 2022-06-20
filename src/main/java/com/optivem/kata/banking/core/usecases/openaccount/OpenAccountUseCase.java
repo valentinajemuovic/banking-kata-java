@@ -7,12 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
-
+    private final AccountIdGenerator accountIdGenerator;
     private final AccountNumberGenerator accountNumberGenerator;
     private final DateTimeService dateTimeService;
     private final BankAccountRepository bankAccountRepository;
 
-    public OpenAccountUseCase(AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountRepository bankAccountRepository) {
+    public OpenAccountUseCase(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountRepository bankAccountRepository) {
+        this.accountIdGenerator = accountIdGenerator;
         this.accountNumberGenerator = accountNumberGenerator;
         this.dateTimeService = dateTimeService;
         this.bankAccountRepository = bankAccountRepository;
@@ -37,10 +38,11 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     }
 
     private BankAccount createBankAccount(AccountHolderName accountHolderName, Balance balance) {
+        var accountId = accountIdGenerator.next();
         var accountNumber = accountNumberGenerator.next();
         var dateTime = dateTimeService.now();
         var openingDate = dateTime.toLocalDate();
-        return new BankAccount(accountNumber, accountHolderName, openingDate, balance);
+        return new BankAccount(accountId, accountNumber, accountHolderName, openingDate, balance);
     }
 
     private OpenAccountResponse getResponse(BankAccount bankAccount) {

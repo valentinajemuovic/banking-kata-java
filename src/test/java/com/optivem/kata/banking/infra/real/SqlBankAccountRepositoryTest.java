@@ -1,9 +1,6 @@
 package com.optivem.kata.banking.infra.real;
 
-import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
-import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,11 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration
 public class SqlBankAccountRepositoryTest {
     private BankAccountRepository repository;
-
+    private AccountIdGenerator accountIdGenerator;
     private AccountNumberGenerator accountNumberGenerator;
 
     @Autowired
-    public SqlBankAccountRepositoryTest(BankAccountRepository repository, AccountNumberGenerator accountNumberGenerator) {
+    public SqlBankAccountRepositoryTest(BankAccountRepository repository, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator) {
+        this.accountIdGenerator = accountIdGenerator;
         this.repository = repository;
         this.accountNumberGenerator = accountNumberGenerator;
     }
@@ -63,8 +61,10 @@ public class SqlBankAccountRepositoryTest {
     }
 
     private BankAccount createSomeBankAccount() {
+        var accountId = accountIdGenerator.next().toLong();
         var accountNumber = accountNumberGenerator.next().toString();
         return bankAccount()
+                .withAccountId(accountId)
                 .withAccountNumber(accountNumber)
                 .build();
     }

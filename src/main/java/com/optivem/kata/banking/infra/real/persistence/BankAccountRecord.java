@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class BankAccountRecord {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "account_number", unique = true, nullable = false)

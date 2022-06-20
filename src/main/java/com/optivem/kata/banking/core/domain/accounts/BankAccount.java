@@ -11,18 +11,20 @@ import static com.optivem.kata.banking.core.domain.common.Guard.guard;
 
 @EqualsAndHashCode
 public class BankAccount {
+    private final AccountId accountId;
     private final AccountNumber accountNumber;
     private final AccountHolderName accountHolderName;
-
     private final LocalDate openingDate;
     private Balance balance;
 
-    public BankAccount(AccountNumber accountNumber, AccountHolderName accountHolderName, LocalDate openingDate, Balance balance) {
+    public BankAccount(AccountId accountId, AccountNumber accountNumber, AccountHolderName accountHolderName, LocalDate openingDate, Balance balance) {
+        guard(accountId).againstNull(ValidationMessages.ACCOUNT_ID_EMPTY);
         guard(accountNumber).againstNull(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
         guard(accountHolderName).againstNull(ValidationMessages.ACCOUNT_HOLDER_NAME_EMPTY);
         guard(openingDate).againstNull(ValidationMessages.OPENING_DATE_EMPTY);
         guard(balance).againstNull(ValidationMessages.BALANCE_EMPTY);
 
+        this.accountId = accountId;
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.openingDate = openingDate;
@@ -30,8 +32,10 @@ public class BankAccount {
     }
 
     public BankAccount(BankAccount other) {
-        this(other.getAccountNumber(), other.getAccountHolderName(), other.getOpeningDate(), other.getBalance());
+        this(other.getAccountId(), other.getAccountNumber(), other.getAccountHolderName(), other.getOpeningDate(), other.getBalance());
     }
+
+    public AccountId getAccountId() { return accountId; }
 
     public AccountNumber getAccountNumber() {
         return accountNumber;

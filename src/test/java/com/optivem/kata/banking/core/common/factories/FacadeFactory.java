@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.common.factories;
 
 import com.optivem.kata.banking.core.Facade;
+import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
@@ -11,6 +12,9 @@ import static com.optivem.kata.banking.core.common.Givens.givenThat;
 
 public class FacadeFactory {
 
+    private static final long ACCOUNT_ID_1 = 35236234;
+    private static final long ACCOUNT_ID_2 = 63242343;
+
     private static final String ACCOUNT_NUMBER_1 = "GB41OMQP68570038161775";
     private static final String ACCOUNT_NUMBER_2 = "GB41OMQP68570038161776";
 
@@ -19,6 +23,10 @@ public class FacadeFactory {
 
 
     public Facade create() {
+        var accountIdGenerator = new FakeAccountIdGenerator();
+        givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_1);
+        givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_2);
+
         var accountNumberGenerator = new FakeAccountNumberGenerator();
         givenThat(accountNumberGenerator).willGenerate(ACCOUNT_NUMBER_1);
         givenThat(accountNumberGenerator).willGenerate(ACCOUNT_NUMBER_2);
@@ -29,6 +37,6 @@ public class FacadeFactory {
 
         var bankAccountRepository = new FakeBankAccountRepository();
 
-        return new Facade(accountNumberGenerator, dateTimeService, bankAccountRepository);
+        return new Facade(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository);
     }
 }

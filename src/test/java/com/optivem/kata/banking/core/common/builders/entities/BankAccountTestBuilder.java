@@ -9,6 +9,7 @@ public class BankAccountTestBuilder {
         return new BankAccountTestBuilder();
     }
 
+    private long accountId;
     private String accountNumber;
     private String firstName;
     private String lastName;
@@ -16,11 +17,17 @@ public class BankAccountTestBuilder {
     private int balance;
 
     public BankAccountTestBuilder() {
+        this.accountId = BankAccountDefaults.DEFAULT_ACCOUNT_ID;
         this.accountNumber = BankAccountDefaults.DEFAULT_ACCOUNT_NUMBER;
         this.firstName = BankAccountDefaults.DEFAULT_FIRST_NAME;
         this.lastName = BankAccountDefaults.DEFAULT_LAST_NAME;
         this.openingDate = BankAccountDefaults.DEFAULT_OPENING_DATE;
         this.balance = BankAccountDefaults.DEFAULT_BALANCE;
+    }
+
+    public BankAccountTestBuilder withAccountId(long accountId) {
+        this.accountId = accountId;
+        return this;
     }
 
     public BankAccountTestBuilder withAccountNumber(String accountNumber) {
@@ -49,15 +56,19 @@ public class BankAccountTestBuilder {
     }
 
     public BankAccount build() {
+        var accountId = AccountId.of(this.accountId);
         var accountNumber = AccountNumber.of(this.accountNumber);
         var accountHolderName = AccountHolderName.of(firstName, lastName);
         var balance = Balance.of(this.balance);
 
         return BankAccountBuilder.bankAccount()
+                .withAccountId(accountId)
                 .withAccountNumber(accountNumber)
                 .withAccountHolderName(accountHolderName)
                 .withOpeningDate(openingDate)
                 .withBalance(balance)
                 .build();
     }
+
+
 }

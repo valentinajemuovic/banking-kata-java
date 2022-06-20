@@ -34,8 +34,9 @@ public class BankAccountRepositoryVerify {
         return shouldContain(expectedBankAccount);
     }
 
-    public BankAccount shouldContain(String accountNumber, String firstName, String lastName, LocalDate openingDate, int initialBalance) {
+    public BankAccount shouldContain(long accountId, String accountNumber, String firstName, String lastName, LocalDate openingDate, int initialBalance) {
         var expectedBankAccount = BankAccountTestBuilder.bankAccount()
+                .withAccountId(accountId)
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)

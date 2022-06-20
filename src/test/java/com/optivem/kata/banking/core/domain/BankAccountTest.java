@@ -2,10 +2,7 @@ package com.optivem.kata.banking.core.domain;
 
 import com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder;
 import com.optivem.kata.banking.core.common.builders.entities.BankAccountDefaults;
-import com.optivem.kata.banking.core.domain.accounts.AccountHolderName;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.Balance;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountBuilder;
+import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.exceptions.ValidationMessages;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +16,12 @@ class BankAccountTest {
     void should_construct_given_valid_data() {
         var bankAccount = getDefaultBuilder().build();
         assertThat(bankAccount).isNotNull();
+    }
+
+    @Test
+    void should_throw_exception_given_null_account_id() {
+        verifyThat(() -> getDefaultBuilder().withAccountId(null).build())
+                .shouldThrowValidationException(ValidationMessages.ACCOUNT_ID_EMPTY);
     }
 
     @Test
@@ -47,12 +50,15 @@ class BankAccountTest {
     }
 
     private BankAccountBuilder getDefaultBuilder() {
+        var accountId = AccountId.of(BankAccountDefaults.DEFAULT_ACCOUNT_ID);
         var accountNumber = AccountNumber.of(BankAccountDefaults.DEFAULT_ACCOUNT_NUMBER);
         var accountHolderName = AccountHolderName.of(BankAccountDefaults.DEFAULT_FIRST_NAME, BankAccountDefaults.DEFAULT_LAST_NAME);
         var openingDate = BankAccountDefaults.DEFAULT_OPENING_DATE;
         var balance = Balance.of(BankAccountDefaults.DEFAULT_BALANCE);
 
-        return BankAccountBuilder.bankAccount().withAccountNumber(accountNumber)
+        return BankAccountBuilder.bankAccount()
+                .withAccountId(accountId)
+                .withAccountNumber(accountNumber)
                 .withAccountHolderName(accountHolderName)
                 .withOpeningDate(openingDate)
                 .withBalance(balance);

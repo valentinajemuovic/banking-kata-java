@@ -7,11 +7,16 @@ public class BankAccountBuilder {
     public static BankAccountBuilder bankAccount() {
         return new BankAccountBuilder();
     }
-
+    private AccountId accountId;
     private AccountNumber accountNumber;
     private AccountHolderName accountHolderName;
     private LocalDate openingDate;
     private Balance balance;
+
+    public BankAccountBuilder withAccountId(AccountId accountId) {
+        this.accountId = accountId;
+        return this;
+    }
 
     public BankAccountBuilder withAccountNumber(AccountNumber accountNumber) {
         this.accountNumber = accountNumber;
@@ -34,6 +39,8 @@ public class BankAccountBuilder {
     }
 
     public BankAccount build() {
-        return new BankAccount(accountNumber, accountHolderName, openingDate, balance);
+        return new BankAccount(accountId, accountNumber, accountHolderName, openingDate, balance);
     }
+
+
 }
