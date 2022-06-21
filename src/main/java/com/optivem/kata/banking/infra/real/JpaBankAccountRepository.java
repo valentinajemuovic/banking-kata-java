@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class SqlBankAccountRepository implements BankAccountRepository {
+public class JpaBankAccountRepository implements BankAccountRepository {
 
     private JpaBankAccountDataAccessor dataAccessor;
 
-    public SqlBankAccountRepository(JpaBankAccountDataAccessor dataAccessor) {
+    public JpaBankAccountRepository(JpaBankAccountDataAccessor dataAccessor) {
         this.dataAccessor = dataAccessor;
     }
     

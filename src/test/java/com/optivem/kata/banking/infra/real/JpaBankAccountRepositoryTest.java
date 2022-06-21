@@ -14,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ContextConfiguration
-public class SqlBankAccountRepositoryTest {
+public class JpaBankAccountRepositoryTest {
     private BankAccountRepository repository;
     private AccountIdGenerator accountIdGenerator;
     private AccountNumberGenerator accountNumberGenerator;
 
     @Autowired
-    public SqlBankAccountRepositoryTest(BankAccountRepository repository, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator) {
+    public JpaBankAccountRepositoryTest(BankAccountRepository repository, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator) {
         this.accountIdGenerator = accountIdGenerator;
         this.repository = repository;
         this.accountNumberGenerator = accountNumberGenerator;
