@@ -1,4 +1,3 @@
-
 # Contribute to the Banking Kata (Java)
 
 Do you find something is missing in the Banking Kata (e.g. something which you commonly do at work, but don't see it in the Kata)?
