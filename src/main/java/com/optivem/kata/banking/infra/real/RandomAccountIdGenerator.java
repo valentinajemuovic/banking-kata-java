@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RandomAccountIdGenerator implements AccountIdGenerator {
-    private static final int GENERATOR_ID = 0; // TODO: VC: Make configurable
+    private static final int GENERATOR_ID = 0;
 
     private SnowflakeIdGenerator generator;
 

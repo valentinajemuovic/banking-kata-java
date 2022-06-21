@@ -18,7 +18,6 @@ public class JpaBankAccountRepository implements BankAccountRepository {
     
     @Override
     public Optional<BankAccount> find(AccountNumber accountNumber) {
-        // TODO: VC: Replace by findByAccountNumber
         var accountNumberValue = accountNumber.toString();
         var record = dataAccessor.findByAccountNumber(accountNumberValue);
 
