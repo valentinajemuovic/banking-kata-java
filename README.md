@@ -44,6 +44,14 @@ Please update the environment variable values based on your local settings.
 
 ## Running build
 
+Environment Variables
+
+```
+$env:POSTGRES_URL='jdbc:postgresql://localhost:5432/banking_kata'
+$env:POSTGRES_USER='postgres'
+$env:POSTGRES_PASSWORD='admin'
+```
+
 Running build with automated tests:
 
 ```
