@@ -45,8 +45,10 @@ class OpenAccountUseCaseTest {
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
         this.dateTimeService = new FakeDateTimeService();
-        // this.useCase = createCleanArchHandler();
-        this.useCase = createCrudHandler();
+        this.useCase = createCleanArchHandler();
+        // this.useCase = createCrudHandler();
+
+        // TODO: VC: Make configurable so that we can run same test twice
     }
 
     private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCleanArchHandler() {
