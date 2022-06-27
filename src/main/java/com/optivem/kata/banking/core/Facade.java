@@ -5,7 +5,7 @@ import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.scoring.*;
-import com.optivem.kata.banking.core.gateways.DateTimeService;
+import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
@@ -22,7 +22,7 @@ public class Facade {
     private final ViewAccountUseCase viewAccountUseCase;
 
     // TODO: VC: Perhaps server-side API facade? And server-side API facade?
-    public Facade(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountRepository bankAccountRepository) {
+    public Facade(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeServicePort dateTimeService, BankAccountRepository bankAccountRepository) {
         var scoreCalculator = DefaultScoreCalculator.create(dateTimeService);
 
         this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository);

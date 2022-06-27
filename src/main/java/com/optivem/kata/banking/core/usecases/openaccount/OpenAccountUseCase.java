@@ -5,17 +5,17 @@ import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.gateways.DateTimeService;
+import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
     private final AccountIdGenerator accountIdGenerator;
     private final AccountNumberGenerator accountNumberGenerator;
-    private final DateTimeService dateTimeService;
+    private final DateTimeServicePort dateTimeService;
     private final BankAccountRepository bankAccountRepository;
 
-    public OpenAccountUseCase(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountRepository bankAccountRepository) {
+    public OpenAccountUseCase(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeServicePort dateTimeService, BankAccountRepository bankAccountRepository) {
         this.accountIdGenerator = accountIdGenerator;
         this.accountNumberGenerator = accountNumberGenerator;
         this.dateTimeService = dateTimeService;

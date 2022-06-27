@@ -2,7 +2,7 @@ package com.optivem.kata.banking.web.configurations;
 
 import com.optivem.kata.banking.core.domain.scoring.ScoreCalculator;
 import com.optivem.kata.banking.core.domain.scoring.DefaultScoreCalculator;
-import com.optivem.kata.banking.core.gateways.DateTimeService;
+import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class DomainConfiguration {
 
     @Autowired
-    private DateTimeService dateTimeService;
+    private DateTimeServicePort dateTimeService;
 
     @Bean
     public ScoreCalculator scoreCalculator() {
