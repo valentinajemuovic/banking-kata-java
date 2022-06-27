@@ -6,14 +6,14 @@ import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
-import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
-import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
-import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
-import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
-import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
-import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountRequest;
-import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
-import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
+import com.optivem.kata.banking.core.ports.driver.depositfunds.DepositFundsRequest;
+import com.optivem.kata.banking.core.usecases.DepositFundsUseCase;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
+import com.optivem.kata.banking.core.usecases.OpenAccountUseCase;
+import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.core.usecases.ViewAccountUseCase;
 
 public class Facade {
 

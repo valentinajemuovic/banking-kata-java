@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.usecases.viewaccount;
+package com.optivem.kata.banking.core.ports.driver.viewaccount;
 
 import an.awesome.pipelinr.Command;
 import lombok.*;

@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.common.builders.requests;
 
-import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
 
 public class OpenAccountRequestBuilder {
 

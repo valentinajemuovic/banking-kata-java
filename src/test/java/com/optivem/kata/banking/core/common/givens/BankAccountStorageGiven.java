@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.common.givens;
 
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 
 public class BankAccountStorageGiven {
 

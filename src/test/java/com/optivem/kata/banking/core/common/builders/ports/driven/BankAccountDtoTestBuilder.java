@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.common.builders.entities;
+package com.optivem.kata.banking.core.common.builders.ports.driven;
 
 import com.optivem.kata.banking.core.acl.BankAccountConverter;
 import com.optivem.kata.banking.core.domain.accounts.*;

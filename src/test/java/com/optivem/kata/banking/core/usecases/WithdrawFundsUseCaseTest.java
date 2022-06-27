@@ -3,7 +3,6 @@ package com.optivem.kata.banking.core.usecases;
 import com.optivem.kata.banking.core.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsUseCase;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;

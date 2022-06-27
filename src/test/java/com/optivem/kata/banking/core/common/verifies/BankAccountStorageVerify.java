@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.common.verifies;
 
-import com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 

@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.common.builders.requests;
 
-import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsRequest;
+import com.optivem.kata.banking.core.ports.driver.withdrawfunds.WithdrawFundsRequest;
 
 public class WithdrawFundsRequestBuilder {
 

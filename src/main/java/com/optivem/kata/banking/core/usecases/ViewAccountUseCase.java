@@ -1,10 +1,12 @@
-package com.optivem.kata.banking.core.usecases.viewaccount;
+package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.scoring.ScoreCalculator;
+import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
 import org.springframework.stereotype.Component;
 
 import static com.optivem.kata.banking.core.domain.common.extensions.Extension.extend;

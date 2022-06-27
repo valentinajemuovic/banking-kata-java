@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.web.controllers;
 
-import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
-import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
-import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountRequest;
-import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.web.controllers.base.BaseController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

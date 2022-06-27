@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.common.builders.requests;
 
-import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
+import com.optivem.kata.banking.core.ports.driver.depositfunds.DepositFundsRequest;
 
 public class DepositFundsRequestBuilder {
 

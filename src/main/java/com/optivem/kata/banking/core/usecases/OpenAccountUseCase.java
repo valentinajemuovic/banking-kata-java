@@ -1,9 +1,11 @@
-package com.optivem.kata.banking.core.usecases.openaccount;
+package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
 import org.springframework.stereotype.Component;
 
 @Component

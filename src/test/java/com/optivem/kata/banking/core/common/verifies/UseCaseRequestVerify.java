@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.core.common.verifies;
 
 import an.awesome.pipelinr.Command;
-import com.optivem.kata.banking.core.usecases.VoidResponse;
+import com.optivem.kata.banking.core.ports.driver.VoidResponse;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static org.assertj.core.api.Assertions.assertThat;

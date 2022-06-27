@@ -1,8 +1,7 @@
-package com.optivem.kata.banking.core.usecases.depositfunds;
+package com.optivem.kata.banking.core.ports.driver.depositfunds;
 
 import an.awesome.pipelinr.Command;
-import an.awesome.pipelinr.Voidy;
-import com.optivem.kata.banking.core.usecases.VoidResponse;
+import com.optivem.kata.banking.core.ports.driver.VoidResponse;
 import lombok.*;
 
 @Data

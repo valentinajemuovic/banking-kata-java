@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

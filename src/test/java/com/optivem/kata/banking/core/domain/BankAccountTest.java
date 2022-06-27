@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.domain;
 
-import com.optivem.kata.banking.core.common.builders.entities.BankAccountDefaults;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDefaults;
 import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import org.junit.jupiter.api.Test;

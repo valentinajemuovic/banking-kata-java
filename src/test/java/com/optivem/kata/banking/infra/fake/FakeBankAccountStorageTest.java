@@ -1,13 +1,11 @@
 package com.optivem.kata.banking.infra.fake;
 
-import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.domain.common.exceptions.RepositoryMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 
 class FakeBankAccountStorageTest {
 

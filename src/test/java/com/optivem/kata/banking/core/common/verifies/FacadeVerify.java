@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.core.common.verifies;
 
 import com.optivem.kata.banking.core.Facade;
-import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
+import com.optivem.kata.banking.core.ports.driver.depositfunds.DepositFundsRequest;
 
 import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.viewAccountRequest;
 import static org.assertj.core.api.Assertions.assertThat;
