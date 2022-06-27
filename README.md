@@ -25,14 +25,6 @@ We implement a Banking system with the following use cases:
 
 ## Environment variables
 
-When you open up the file `application.yml` we can see the usage of the following environment variables for the Postgres Database
-
-```
-url: ${POSTGRES_URL}
-username: ${POSTGRES_USER}
-password: ${POSTGRES_PASSWORD}
-```
-
 To be able to run the tests (since some of the tests are dependent on the database - the integration tests), we then need to set the environment variables.
 
 In IntelliJ, for the `Tests in 'banking-kata.test'` configuration, you can copy this into the `Environment variables`
