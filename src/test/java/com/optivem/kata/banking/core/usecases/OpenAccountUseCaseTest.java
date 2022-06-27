@@ -1,9 +1,11 @@
 package com.optivem.kata.banking.core.usecases;
 
+import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.OpenAccountUseCase;
+import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
@@ -30,8 +32,7 @@ class OpenAccountUseCaseTest {
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeDateTimeService dateTimeService;
-    private BankAccountRepository repository;
-    private OpenAccountUseCase useCase;
+    private Command.Handler<OpenAccountRequest, OpenAccountResponse> useCase;
 
     private static Stream<Arguments> should_open_account_given_valid_request() {
         return Stream.of(Arguments.of("John", "Smith", 0, 3456, "GB41OMQP68570038161775", LocalDate.of(2022, 5, 20)),
@@ -43,9 +44,19 @@ class OpenAccountUseCaseTest {
         this.storage = new FakeBankAccountStorage();
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
-        this.repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
         this.dateTimeService = new FakeDateTimeService();
-        this.useCase = new OpenAccountUseCase(repository, dateTimeService);
+        // this.useCase = createCleanArchHandler();
+        this.useCase = createCrudHandler();
+    }
+
+    private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCleanArchHandler() {
+        var repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
+        this.dateTimeService = new FakeDateTimeService();
+        return new OpenAccountUseCase(repository, dateTimeService);
+    }
+
+    private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCrudHandler() {
+        return new com.optivem.kata.banking.core.internal.crud.OpenAccountUseCase(storage, accountIdGenerator, accountNumberGenerator, dateTimeService);
     }
 
     @ParameterizedTest
