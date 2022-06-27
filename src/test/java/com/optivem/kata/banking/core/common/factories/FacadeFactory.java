@@ -1,10 +1,12 @@
 package com.optivem.kata.banking.core.common.factories;
 
 import com.optivem.kata.banking.core.Facade;
+import com.optivem.kata.banking.core.domain.common.events.EventPublisher;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +23,8 @@ public class FacadeFactory {
     private static final LocalDateTime DATE_TIME_1 = LocalDateTime.of(2022, 3, 28, 10, 50);
     private static final LocalDateTime DATE_TIME_2 = LocalDateTime.of(2022, 4, 15, 9, 1);
 
+    @Autowired
+    private EventPublisher eventPublisher;
 
     public Facade create() {
         var accountIdGenerator = new FakeAccountIdGenerator();
@@ -37,6 +41,6 @@ public class FacadeFactory {
 
         var bankAccountRepository = new FakeBankAccountRepository();
 
-        return new Facade(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository);
+        return new Facade(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository,eventPublisher);
     }
 }

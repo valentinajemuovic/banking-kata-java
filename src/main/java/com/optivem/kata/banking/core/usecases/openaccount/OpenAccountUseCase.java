@@ -5,6 +5,8 @@ import com.optivem.kata.banking.core.domain.accounts.*;
 import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.common.events.EventPublisher;
+import com.optivem.kata.banking.core.domain.common.events.UseCaseEvents.AccountOpenedUseCaseEvent;
 import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
 import org.springframework.stereotype.Component;
 
@@ -14,12 +16,14 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     private final AccountNumberGenerator accountNumberGenerator;
     private final DateTimeServicePort dateTimeService;
     private final BankAccountRepository bankAccountRepository;
+    private final EventPublisher eventPublisher;
 
-    public OpenAccountUseCase(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeServicePort dateTimeService, BankAccountRepository bankAccountRepository) {
+    public OpenAccountUseCase(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeServicePort dateTimeService, BankAccountRepository bankAccountRepository,EventPublisher eventPublisher) {
         this.accountIdGenerator = accountIdGenerator;
         this.accountNumberGenerator = accountNumberGenerator;
         this.dateTimeService = dateTimeService;
         this.bankAccountRepository = bankAccountRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     public OpenAccountResponse handle(OpenAccountRequest request) {
@@ -28,6 +32,8 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
         var bankAccount = createBankAccount(accountHolderName, balance);
         bankAccountRepository.add(bankAccount);
+
+        eventPublisher.publishEvent(AccountOpenedUseCaseEvent.generateEventOnSuccess(bankAccount.getAccountId()));
 
         return getResponse(bankAccount);
     }
