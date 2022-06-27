@@ -2,9 +2,9 @@ package com.optivem.kata.banking.core.usecases.openaccount;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.*;
-import com.optivem.kata.banking.core.gateways.AccountIdGenerator;
-import com.optivem.kata.banking.core.gateways.AccountNumberGenerator;
-import com.optivem.kata.banking.core.gateways.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.gateways.DateTimeService;
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.core;
 
 import com.optivem.kata.banking.core.domain.scoring.DefaultScoreCalculator;
-import com.optivem.kata.banking.core.gateways.AccountIdGenerator;
-import com.optivem.kata.banking.core.gateways.AccountNumberGenerator;
-import com.optivem.kata.banking.core.gateways.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.scoring.*;
 import com.optivem.kata.banking.core.gateways.DateTimeService;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;

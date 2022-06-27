@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.usecases.depositfunds;
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.gateways.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.usecases.VoidResponse;
 

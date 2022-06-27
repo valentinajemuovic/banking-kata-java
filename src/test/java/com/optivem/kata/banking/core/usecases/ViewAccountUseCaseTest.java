@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder;
-import com.optivem.kata.banking.core.gateways.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.scoring.Score;
 import com.optivem.kata.banking.core.domain.scoring.ScoreCalculator;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;

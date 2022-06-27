@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.*;
-import com.optivem.kata.banking.core.gateways.AccountIdGenerator;
-import com.optivem.kata.banking.core.gateways.AccountNumberGenerator;
-import com.optivem.kata.banking.core.gateways.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
+import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

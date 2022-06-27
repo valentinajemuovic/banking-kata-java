@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.domain.common.extensions;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.gateways.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationException;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 
