@@ -1,12 +1,12 @@
 package com.optivem.kata.banking.core.domain.scoring;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
+import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 
 public class TimeFactorCalculator implements FactorCalculator {
-    private final DateTimeServicePort dateTimeService;
+    private final DateTimeService dateTimeService;
 
-    public TimeFactorCalculator(DateTimeServicePort dateTimeService) {
+    public TimeFactorCalculator(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }
 

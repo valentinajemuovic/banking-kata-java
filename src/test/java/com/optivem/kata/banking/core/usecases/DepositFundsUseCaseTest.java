@@ -1,9 +1,12 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,6 +23,7 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY
 
 class DepositFundsUseCaseTest {
 
+    private FakeBankAccountStorage storage;
     private BankAccountRepository repository;
     private DepositFundsUseCase useCase;
 
@@ -30,14 +34,17 @@ class DepositFundsUseCaseTest {
 
     @BeforeEach
     void init() {
-        this.repository = new FakeBankAccountRepository();
+        this.storage = new FakeBankAccountStorage();
+        var accountIdGenerator = new FakeAccountIdGenerator();
+        var accountNumberGenerator = new FakeAccountNumberGenerator();
+        this.repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
         this.useCase = new DepositFundsUseCase(repository);
     }
 
     @ParameterizedTest
     @MethodSource
     void should_deposit_funds_given_valid_request(String accountNumber, int initialBalance, int depositAmount, int expectedFinalBalance) {
-        givenThat(repository)
+        givenThat(storage)
                 .alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = depositFundsRequest()
@@ -49,7 +56,7 @@ class DepositFundsUseCaseTest {
                 .withRequest(request)
                 .shouldReturnVoidResponse();
 
-        verifyThat(repository)
+        verifyThat(storage)
                 .shouldContain(accountNumber, expectedFinalBalance);
     }
 

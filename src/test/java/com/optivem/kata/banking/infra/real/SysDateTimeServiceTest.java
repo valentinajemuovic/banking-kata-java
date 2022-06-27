@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SysDateTimeServicePortTest {
+public class SysDateTimeServiceTest {
     private static final int SLEEP = 1;
 
     private SysDateTimeService service;

@@ -56,7 +56,7 @@ class FakeAccountNumberGeneratorTest {
 
     private void assertGeneratesNext(String expectedValue) {
         var next = generator.next();
-        assertThat(next).isEqualTo(AccountNumber.of(expectedValue));
+        assertThat(next).isEqualTo(expectedValue);
     }
 
     private void assertNextThrowsException() {

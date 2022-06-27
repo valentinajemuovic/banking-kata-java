@@ -2,24 +2,19 @@ package com.optivem.kata.banking.core.usecases.openaccount;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.*;
-import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
+import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
-    private final AccountIdGenerator accountIdGenerator;
-    private final AccountNumberGenerator accountNumberGenerator;
-    private final DateTimeServicePort dateTimeService;
     private final BankAccountRepository bankAccountRepository;
+    private final DateTimeService dateTimeService;
 
-    public OpenAccountUseCase(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeServicePort dateTimeService, BankAccountRepository bankAccountRepository) {
-        this.accountIdGenerator = accountIdGenerator;
-        this.accountNumberGenerator = accountNumberGenerator;
-        this.dateTimeService = dateTimeService;
+
+    public OpenAccountUseCase(BankAccountRepository bankAccountRepository, DateTimeService dateTimeService) {
         this.bankAccountRepository = bankAccountRepository;
+        this.dateTimeService = dateTimeService;
     }
 
     public OpenAccountResponse handle(OpenAccountRequest request) {
@@ -41,8 +36,8 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     }
 
     private BankAccount createBankAccount(AccountHolderName accountHolderName, Balance balance) {
-        var accountId = accountIdGenerator.next();
-        var accountNumber = accountNumberGenerator.next();
+        var accountId = bankAccountRepository.nextAccountId();
+        var accountNumber = bankAccountRepository.nextAccountNumber();
         var dateTime = dateTimeService.now();
         var openingDate = dateTime.toLocalDate();
         return new BankAccount(accountId, accountNumber, accountHolderName, openingDate, balance);

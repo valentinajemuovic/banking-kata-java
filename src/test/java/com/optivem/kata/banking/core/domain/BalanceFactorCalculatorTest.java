@@ -4,7 +4,7 @@ import com.optivem.kata.banking.core.domain.scoring.BalanceFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BalanceFactorCalculatorTest {
@@ -21,7 +21,7 @@ public class BalanceFactorCalculatorTest {
 
         var bankAccount = bankAccount()
                 .withBalance(balance)
-                .build();
+                .buildEntity();
 
         var expectedResult = 15;
 

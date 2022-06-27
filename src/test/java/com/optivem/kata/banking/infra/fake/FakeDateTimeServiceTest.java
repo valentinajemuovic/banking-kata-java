@@ -9,7 +9,7 @@ import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class FakeDateTimeServicePortTest {
+class FakeDateTimeServiceTest {
     private FakeDateTimeService service;
 
     @BeforeEach

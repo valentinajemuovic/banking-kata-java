@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.common.factories;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 
 import java.time.LocalDateTime;
@@ -35,8 +35,8 @@ public class FacadeFactory {
         givenThat(dateTimeService).willReturn(DATE_TIME_1);
         givenThat(dateTimeService).willReturn(DATE_TIME_2);
 
-        var bankAccountRepository = new FakeBankAccountRepository();
+        var bankAccountStorage = new FakeBankAccountStorage();
 
-        return new Facade(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository);
+        return new Facade(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountStorage);
     }
 }

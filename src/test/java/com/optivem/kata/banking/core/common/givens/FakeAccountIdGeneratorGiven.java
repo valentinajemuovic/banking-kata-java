@@ -10,8 +10,7 @@ public class FakeAccountIdGeneratorGiven {
         this.generator = generator;
     }
 
-    public void willGenerate(long value) {
-        var bankAccountId = AccountId.of(value);
+    public void willGenerate(long bankAccountId) {
         generator.add(bankAccountId);
     }
 }

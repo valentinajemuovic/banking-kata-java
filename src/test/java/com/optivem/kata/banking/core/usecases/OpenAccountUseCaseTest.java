@@ -1,12 +1,13 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,10 +26,11 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_I
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class OpenAccountUseCaseTest {
+    private FakeBankAccountStorage storage;
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeDateTimeService dateTimeService;
-    private BankAccountRepository bankAccountRepository;
+    private BankAccountRepository repository;
     private OpenAccountUseCase useCase;
 
     private static Stream<Arguments> should_open_account_given_valid_request() {
@@ -38,11 +40,12 @@ class OpenAccountUseCaseTest {
 
     @BeforeEach
     void init() {
+        this.storage = new FakeBankAccountStorage();
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
+        this.repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
         this.dateTimeService = new FakeDateTimeService();
-        this.bankAccountRepository = new FakeBankAccountRepository();
-        this.useCase = new OpenAccountUseCase(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository);
+        this.useCase = new OpenAccountUseCase(repository, dateTimeService);
     }
 
     @ParameterizedTest
@@ -63,7 +66,7 @@ class OpenAccountUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
 
-        verifyThat(bankAccountRepository).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
     }
 
     @ParameterizedTest

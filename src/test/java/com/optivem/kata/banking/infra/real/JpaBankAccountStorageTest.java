@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.infra.real;
 
-import com.optivem.kata.banking.core.domain.accounts.*;
-import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
+import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
+import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
+import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,27 +11,27 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ContextConfiguration
-public class JpaBankAccountRepositoryTest {
-    private BankAccountRepository repository;
+public class JpaBankAccountStorageTest {
+    private BankAccountStorage storage;
     private AccountIdGenerator accountIdGenerator;
     private AccountNumberGenerator accountNumberGenerator;
 
     @Autowired
-    public JpaBankAccountRepositoryTest(BankAccountRepository repository, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator) {
+    public JpaBankAccountStorageTest(BankAccountStorage storage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator) {
         this.accountIdGenerator = accountIdGenerator;
-        this.repository = repository;
+        this.storage = storage;
         this.accountNumberGenerator = accountNumberGenerator;
     }
 
     @Test
     void should_return_empty_given_non_existent_account_number() {
         var accountNumber = accountNumberGenerator.next();
-        var bankAccount = repository.find(accountNumber);
+        var bankAccount = storage.find(accountNumber);
         assertThat(bankAccount).isEqualTo(Optional.empty());
     }
 
@@ -53,18 +53,18 @@ public class JpaBankAccountRepositoryTest {
         shouldRetrieveAddedAccount(bankAccount3);
     }
 
-    private void shouldRetrieveAddedAccount(BankAccount bankAccount) {
-        repository.add(bankAccount);
+    private void shouldRetrieveAddedAccount(BankAccountDto bankAccount) {
+        storage.add(bankAccount);
 
-        var retrievedBankAccount = repository.find(bankAccount.getAccountNumber());
+        var retrievedBankAccount = storage.find(bankAccount.getAccountNumber());
 
         assertThat(retrievedBankAccount).isNotNull();
         assertThat(retrievedBankAccount.get()).isEqualTo(bankAccount);
     }
 
-    private BankAccount createSomeBankAccount() {
-        var accountId = accountIdGenerator.next().toLong();
-        var accountNumber = accountNumberGenerator.next().toString();
+    private BankAccountDto createSomeBankAccount() {
+        var accountId = accountIdGenerator.next();
+        var accountNumber = accountNumberGenerator.next();
         return bankAccount()
                 .withAccountId(accountId)
                 .withAccountNumber(accountNumber)

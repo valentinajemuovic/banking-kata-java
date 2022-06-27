@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.core.domain.scoring;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
+import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 
 public class DefaultScoreCalculator implements ScoreCalculator {
 
@@ -26,7 +26,7 @@ public class DefaultScoreCalculator implements ScoreCalculator {
         return Score.A;
     }
 
-    public static DefaultScoreCalculator create(DateTimeServicePort dateTimeService) {
+    public static DefaultScoreCalculator create(DateTimeService dateTimeService) {
         var nameFactorCalculator = new NameFactorCalculator();
         var balanceFactorCalculator = new BalanceFactorCalculator();
         var timeFactorCalculator = new TimeFactorCalculator(dateTimeService);

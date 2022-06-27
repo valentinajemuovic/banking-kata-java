@@ -1,9 +1,12 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.withdrawfunds.WithdrawFundsUseCase;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +22,7 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITI
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
 
 class WithdrawFundsUseCaseTest {
-
+    private FakeBankAccountStorage storage;
     private BankAccountRepository repository;
     private WithdrawFundsUseCase useCase;
 
@@ -30,14 +33,17 @@ class WithdrawFundsUseCaseTest {
 
     @BeforeEach
     void init() {
-        this.repository = new FakeBankAccountRepository();
+        this.storage = new FakeBankAccountStorage();
+        var accountIdGenerator = new FakeAccountIdGenerator();
+        var accountNumberGenerator = new FakeAccountNumberGenerator();
+        this.repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
         this.useCase = new WithdrawFundsUseCase(repository);
     }
 
     @ParameterizedTest
     @MethodSource
     void should_withdraw_funds_given_valid_request(String accountNumber, int initialBalance, int amount, int expectedFinalBalance) {
-        givenThat(repository).alreadyHasBankAccount(accountNumber, initialBalance);
+        givenThat(storage).alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
@@ -46,7 +52,7 @@ class WithdrawFundsUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldReturnVoidResponse();
 
-        verifyThat(repository).shouldContain(accountNumber, expectedFinalBalance);
+        verifyThat(storage).shouldContain(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -83,7 +89,7 @@ class WithdrawFundsUseCaseTest {
         var balance = 140;
         var amount = 141;
 
-        givenThat(repository).alreadyHasBankAccount(accountNumber, balance);
+        givenThat(storage).alreadyHasBankAccount(accountNumber, balance);
 
         var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
@@ -92,6 +98,6 @@ class WithdrawFundsUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
-        verifyThat(repository).shouldContain(accountNumber, balance);
+        verifyThat(storage).shouldContain(accountNumber, balance);
     }
 }
