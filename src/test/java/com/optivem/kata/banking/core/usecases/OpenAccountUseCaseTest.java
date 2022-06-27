@@ -1,22 +1,18 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.core.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.domain.common.events.EventPublisher;
-import com.optivem.kata.banking.core.domain.common.events.UseCaseEvent;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountUseCase;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
-import com.optivem.kata.banking.infra.real.inmemory.EventQueue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,20 +24,14 @@ import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.openAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
-import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
 class OpenAccountUseCaseTest {
+    private FakeBankAccountStorage storage;
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeDateTimeService dateTimeService;
-    private BankAccountRepository bankAccountRepository;
+    private BankAccountRepository repository;
     private OpenAccountUseCase useCase;
-
-    @Autowired
-    private EventPublisher eventPublisher;
-    @Autowired
-    private EventQueue<UseCaseEvent> eventQueue;
 
     private static Stream<Arguments> should_open_account_given_valid_request() {
         return Stream.of(Arguments.of("John", "Smith", 0, 3456, "GB41OMQP68570038161775", LocalDate.of(2022, 5, 20)),
@@ -50,11 +40,12 @@ class OpenAccountUseCaseTest {
 
     @BeforeEach
     void init() {
+        this.storage = new FakeBankAccountStorage();
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
+        this.repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
         this.dateTimeService = new FakeDateTimeService();
-        this.bankAccountRepository = new FakeBankAccountRepository();
-        this.useCase = new OpenAccountUseCase(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository, eventPublisher);
+        this.useCase = new OpenAccountUseCase(repository, dateTimeService);
     }
 
     @ParameterizedTest
@@ -75,7 +66,7 @@ class OpenAccountUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
 
-        verifyThat(bankAccountRepository).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
     }
 
     @ParameterizedTest
@@ -106,30 +97,5 @@ class OpenAccountUseCaseTest {
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.BALANCE_NEGATIVE);
-    }
-
-    @ParameterizedTest
-    @MethodSource("should_open_account_given_valid_request")
-    void should_generate_event_given_valid_request(String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
-        givenThat(accountIdGenerator).willGenerate(generatedAccountId);
-        givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
-        givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
-
-        var request = openAccountRequest()
-                .withFirstName(firstName)
-                .withLastName(lastName)
-                .withBalance(initialBalance)
-                .build();
-
-        var expectedResponse = new OpenAccountResponse();
-        expectedResponse.setAccountNumber(generatedAccountNumber);
-
-        verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
-
-        verifyThat(bankAccountRepository).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
-
-
-        assertThat(eventQueue.next().getEventName()).isEqualTo("AccountOpened");
-
     }
 }

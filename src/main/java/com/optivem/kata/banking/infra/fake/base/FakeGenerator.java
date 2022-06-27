@@ -24,7 +24,7 @@ public class FakeGenerator<T> implements Generator<T> {
         return queue.remove();
     }
 
-    public void add(T... values) {
-        queue.addAll(List.of(values));
+    public void add(T value) {
+        queue.add(value);
     }
 }

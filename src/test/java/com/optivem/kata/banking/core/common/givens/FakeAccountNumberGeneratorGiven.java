@@ -10,8 +10,7 @@ public class FakeAccountNumberGeneratorGiven {
         this.generator = generator;
     }
 
-    public void willGenerate(String number) {
-        var accountNumber = AccountNumber.of(number);
+    public void willGenerate(String accountNumber) {
         generator.add(accountNumber);
     }
 }

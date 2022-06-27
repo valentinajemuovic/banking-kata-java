@@ -6,7 +6,7 @@ import com.optivem.kata.banking.core.domain.scoring.LinearFactorAggregator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -27,7 +27,7 @@ public class LinearFactorAggregatorTest {
 
     @Test
     void should_return_name_factor_plus_balance_factor_minus_time_factor() {
-        var bankAccount = bankAccount().build();
+        var bankAccount = bankAccount().buildEntity();
 
         var nameFactor = 10;
         var balanceFactor = 40;

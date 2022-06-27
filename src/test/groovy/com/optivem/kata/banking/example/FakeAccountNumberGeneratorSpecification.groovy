@@ -28,13 +28,13 @@ class FakeAccountNumberGeneratorSpecification extends Specification {
 
     def "return next element when there is one element"() {
         given: "the following expected value"
-            def exepectedValue = "GB54BARC20032611545669"
+            def expectedValue = "GB54BARC20032611545669"
 
         when: "the next account number is generated"
-            new FakeAccountNumberGeneratorGiven(generator).willGenerate(exepectedValue)
+            new FakeAccountNumberGeneratorGiven(generator).willGenerate(expectedValue)
 
         then: "the generated account number should be equal to the expected value"
-            generator.next() == AccountNumber.of(exepectedValue)
+            generator.next() == expectedValue
     }
 
     @Unroll
@@ -45,7 +45,7 @@ class FakeAccountNumberGeneratorSpecification extends Specification {
             new FakeAccountNumberGeneratorGiven(generator).willGenerate(expectedValue)
 
         then: "the generated account number should be equal to #expectedValue"
-            generator.next() == AccountNumber.of(expectedValue)
+            generator.next() == expectedValue
 
         where: "these are the expected values"
             _ | expectedValue

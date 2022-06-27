@@ -12,4 +12,8 @@ public interface BankAccountRepository {
     void add(BankAccount bankAccount);
 
     void update(BankAccount bankAccount);
+
+    AccountId nextAccountId();
+
+    AccountNumber nextAccountNumber();
 }

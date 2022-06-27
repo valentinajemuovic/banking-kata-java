@@ -7,22 +7,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
 
-class FakeBankAccountRepositoryTest {
+class FakeBankAccountStorageTest {
 
-    private FakeBankAccountRepository repository;
+    private FakeBankAccountStorage storage;
 
     @BeforeEach
     private void init() {
-        this.repository = new FakeBankAccountRepository();
+        this.storage = new FakeBankAccountStorage();
     }
 
     @Test
     void should_return_empty_result_when_account_number_does_not_exist() {
         var accountNumber = "GB36BARC20038032622823";
 
-        verifyThat(repository).shouldNotContain(accountNumber);
+        verifyThat(storage).shouldNotContain(accountNumber);
     }
 
     @Test
@@ -32,35 +32,34 @@ class FakeBankAccountRepositoryTest {
                 .withAccountNumber(accountNumber)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
 
-        verifyThat(repository).shouldContain(bankAccount);
+        verifyThat(storage).shouldContain(bankAccount);
     }
 
     @Test
     void should_retrieve_updated_bank_account_after_update() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
+        var updateBalance = 50;
 
         var bankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var updateBalance = 50;
-
         var expectedUpdatedBankAccount = bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(updateBalance)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
 
-        bankAccount.deposit(TransactionAmount.of(10));
+        bankAccount.setBalance(updateBalance);
 
-        repository.update(bankAccount);
+        storage.update(bankAccount);
 
-        verifyThat(repository).shouldContain(expectedUpdatedBankAccount);
+        verifyThat(storage).shouldContain(expectedUpdatedBankAccount);
     }
 
     @Test
@@ -77,11 +76,11 @@ class FakeBankAccountRepositoryTest {
                 .withBalance(balance)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
 
-        bankAccount.deposit(TransactionAmount.of(60));
+        bankAccount.setBalance(20);
 
-        verifyThat(repository).shouldContain(expectedBankAccount);
+        verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -98,13 +97,13 @@ class FakeBankAccountRepositoryTest {
                 .withBalance(balance)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
 
-        var retrievedBankAccount = repository.find(AccountNumber.of(accountNumber)).get();
+        var retrievedBankAccount = storage.find(accountNumber).get();
 
-        retrievedBankAccount.deposit(TransactionAmount.of(20));
+        retrievedBankAccount.setBalance(20);
 
-        verifyThat(repository).shouldContain(expectedBankAccount);
+        verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -121,15 +120,15 @@ class FakeBankAccountRepositoryTest {
                 .withBalance(balance)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
 
-        var retrievedBankAccount = verifyThat(repository).shouldContain(accountNumber);
+        var retrievedBankAccount = verifyThat(storage).shouldContain(accountNumber);
 
-        repository.update(retrievedBankAccount);
+        storage.update(retrievedBankAccount);
 
-        retrievedBankAccount.deposit(TransactionAmount.of(10));
+        retrievedBankAccount.setBalance(20);
 
-        verifyThat(repository).shouldContain(expectedBankAccount);
+        verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
 
@@ -149,9 +148,9 @@ class FakeBankAccountRepositoryTest {
                 .withBalance(balance2)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
 
-        verifyThat(() -> repository.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
+        verifyThat(() -> storage.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
     }
 
     @Test
@@ -162,6 +161,6 @@ class FakeBankAccountRepositoryTest {
                 .withAccountNumber(accountNumber)
                 .build();
 
-        verifyThat(() -> repository.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+        verifyThat(() -> storage.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }
 }

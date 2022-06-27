@@ -1,13 +1,16 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder;
+import com.optivem.kata.banking.core.acl.BankAccountRepositoryImpl;
+import com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.scoring.Score;
 import com.optivem.kata.banking.core.domain.scoring.ScoreCalculator;
 import com.optivem.kata.banking.core.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.usecases.viewaccount.ViewAccountUseCase;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountRepository;
+import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,13 +24,17 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 class ViewAccountUseCaseTest {
+    private FakeBankAccountStorage storage;
     private BankAccountRepository repository;
     private ScoreCalculator scoreCalculator;
     private ViewAccountUseCase useCase;
 
     @BeforeEach
     void init() {
-        this.repository = new FakeBankAccountRepository();
+        this.storage = new FakeBankAccountStorage();
+        var accountIdGenerator = new FakeAccountIdGenerator();
+        var accountNumberGenerator = new FakeAccountNumberGenerator();
+        this.repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
         this.scoreCalculator = mock(ScoreCalculator.class);
         this.useCase = new ViewAccountUseCase(repository, scoreCalculator);
     }
@@ -41,14 +48,14 @@ class ViewAccountUseCaseTest {
         var fullName = "Kelly McDonald";
         var score = Score.A;
 
-        givenThat(repository).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
+        givenThat(storage).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
 
-        var bankAccount = BankAccountTestBuilder.bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withBalance(initialBalance)
-                .build();
+                .buildEntity();
 
         given(scoreCalculator.calculate(bankAccount)).willReturn(score);
 

@@ -3,13 +3,14 @@ package com.optivem.kata.banking.core.common;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.givens.*;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
 
 public class Givens {
-    public static BankAccountRepositoryGiven givenThat(BankAccountRepository repository) {
-        return new BankAccountRepositoryGiven(repository);
+    public static BankAccountStorageGiven givenThat(BankAccountStorage storage) {
+        return new BankAccountStorageGiven(storage);
     }
 
     public static FakeAccountNumberGeneratorGiven givenThat(FakeAccountNumberGenerator generator) {

@@ -1,7 +1,8 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountId;
-import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
+import com.optivem.kata.banking.core.domain.common.base.Generator;
+import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import de.mkammerer.snowflakeid.SnowflakeIdGenerator;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +17,7 @@ public class RandomAccountIdGenerator implements AccountIdGenerator {
     }
 
     @Override
-    public AccountId next() {
-        var value = generator.next();
-        return AccountId.of(value);
+    public Long next() {
+        return generator.next();
     }
 }

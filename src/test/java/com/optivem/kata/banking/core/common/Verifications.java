@@ -4,6 +4,7 @@ import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.verifies.*;
 import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import org.junit.jupiter.api.function.Executable;
 
 public class Verifications {
@@ -16,8 +17,8 @@ public class Verifications {
         return new UseCaseVerify<>(useCase);
     }
 
-    public static BankAccountRepositoryVerify verifyThat(BankAccountRepository repository) {
-        return new BankAccountRepositoryVerify(repository);
+    public static BankAccountStorageVerify verifyThat(BankAccountStorage storage) {
+        return new BankAccountStorageVerify(storage);
     }
 
     public static FacadeVerify verifyThat(Facade facade) {

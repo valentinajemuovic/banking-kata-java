@@ -1,15 +1,15 @@
 package com.optivem.kata.banking.core.common.givens;
 
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
 
-public class BankAccountRepositoryGiven {
+public class BankAccountStorageGiven {
 
-    private final BankAccountRepository repository;
+    private final BankAccountStorage storage;
 
-    public BankAccountRepositoryGiven(BankAccountRepository repository) {
-        this.repository = repository;
+    public BankAccountStorageGiven(BankAccountStorage storage) {
+        this.storage = storage;
     }
 
     public void alreadyHasBankAccount(String accountNumber, int balance) {
@@ -18,7 +18,7 @@ public class BankAccountRepositoryGiven {
                 .withBalance(balance)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
     }
 
     public void alreadyHasBankAccount(String accountNumber, String firstName, String lastName, int balance) {
@@ -29,6 +29,6 @@ public class BankAccountRepositoryGiven {
                 .withBalance(balance)
                 .build();
 
-        repository.add(bankAccount);
+        storage.add(bankAccount);
     }
 }

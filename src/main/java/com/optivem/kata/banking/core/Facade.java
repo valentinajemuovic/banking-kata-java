@@ -1,11 +1,11 @@
 package com.optivem.kata.banking.core;
 
-import com.optivem.kata.banking.core.domain.common.events.EventPublisher;
+import com.optivem.kata.banking.core.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.domain.scoring.DefaultScoreCalculator;
-import com.optivem.kata.banking.core.domain.accounts.AccountIdGenerator;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.ports.driven.DateTimeServicePort;
+import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
+import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
+import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.usecases.depositfunds.DepositFundsUseCase;
 import com.optivem.kata.banking.core.usecases.openaccount.OpenAccountRequest;
@@ -22,11 +22,12 @@ public class Facade {
     private final ViewAccountUseCase viewAccountUseCase;
 
     // TODO: VC: Perhaps server-side API facade? And server-side API facade?
-    public Facade(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeServicePort dateTimeService, BankAccountRepository bankAccountRepository, EventPublisher eventPublisher) {
+    public Facade(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountStorage bankAccountStorage) {
         var scoreCalculator = DefaultScoreCalculator.create(dateTimeService);
+        var bankAccountRepository = new BankAccountRepositoryImpl(bankAccountStorage, accountIdGenerator, accountNumberGenerator);
 
         this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository);
-        this.openAccountUseCase = new OpenAccountUseCase(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountRepository, eventPublisher);
+        this.openAccountUseCase = new OpenAccountUseCase(bankAccountRepository, dateTimeService);
         this.viewAccountUseCase = new ViewAccountUseCase(bankAccountRepository, scoreCalculator);
     }
 

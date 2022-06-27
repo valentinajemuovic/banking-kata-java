@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
+import static com.optivem.kata.banking.core.common.builders.entities.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NameFactorCalculatorTest {
@@ -32,7 +32,7 @@ public class NameFactorCalculatorTest {
         var bankAccount = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
-                .build();
+                .buildEntity();
 
         var expectedResult = 3;
 
@@ -53,7 +53,7 @@ public class NameFactorCalculatorTest {
         var bankAccount = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
-                .build();
+                .buildEntity();
 
         var result = factorCalculator.calculate(bankAccount);
 
@@ -71,7 +71,7 @@ public class NameFactorCalculatorTest {
         var bankAccount = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
-                .build();
+                .buildEntity();
 
         var result = factorCalculator.calculate(bankAccount);
 

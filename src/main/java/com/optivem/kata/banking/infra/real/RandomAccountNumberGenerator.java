@@ -1,7 +1,8 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
+import com.optivem.kata.banking.core.domain.common.base.Generator;
+import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import de.huxhorn.sulky.ulid.ULID;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +15,7 @@ public class RandomAccountNumberGenerator implements AccountNumberGenerator {
     }
 
     @Override
-    public AccountNumber next() {
-        var value = ulid.nextULID();
-        return AccountNumber.of(value);
+    public String next() {
+        return ulid.nextULID();
     }
 }
