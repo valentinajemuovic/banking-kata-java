@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.domain;
 
-import com.optivem.kata.banking.core.cleanarch.domain.scoring.NameFactorCalculator;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.NameFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

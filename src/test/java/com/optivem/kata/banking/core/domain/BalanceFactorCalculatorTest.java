@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.domain;
 
-import com.optivem.kata.banking.core.cleanarch.domain.scoring.BalanceFactorCalculator;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.BalanceFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

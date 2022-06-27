@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.infra.fake;
 
-import com.optivem.kata.banking.core.cleanarch.domain.common.exceptions.RepositoryException;
-import com.optivem.kata.banking.core.cleanarch.domain.common.exceptions.RepositoryMessages;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryException;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 

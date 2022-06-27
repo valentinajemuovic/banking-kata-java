@@ -1,12 +1,12 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.core.cleanarch.acl.BankAccountRepositoryImpl;
+import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
-import com.optivem.kata.banking.core.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.cleanarch.domain.scoring.Score;
-import com.optivem.kata.banking.core.cleanarch.domain.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.cleanarch.domain.common.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.cleanarch.usecases.ViewAccountUseCase;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.ScoreCalculator;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.internal.cleanarch.usecases.ViewAccountUseCase;
 import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;

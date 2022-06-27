@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.infra.fake;
 
-import com.optivem.kata.banking.core.cleanarch.domain.common.exceptions.RepositoryMessages;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
