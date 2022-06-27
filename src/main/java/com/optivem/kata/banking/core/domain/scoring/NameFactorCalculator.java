@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.domain.accounts.scoring;
+package com.optivem.kata.banking.core.domain.scoring;
 
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 

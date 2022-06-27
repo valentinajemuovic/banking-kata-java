@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.infra.real;
 
-import com.optivem.kata.banking.core.domain.time.DateTimeService;
+import com.optivem.kata.banking.core.gateways.DateTimeService;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

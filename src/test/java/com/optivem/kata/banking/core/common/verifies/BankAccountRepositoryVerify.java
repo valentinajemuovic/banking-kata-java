@@ -3,7 +3,7 @@ package com.optivem.kata.banking.core.common.verifies;
 import com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.gateways.BankAccountRepository;
 
 import java.time.LocalDate;
 import java.util.Optional;

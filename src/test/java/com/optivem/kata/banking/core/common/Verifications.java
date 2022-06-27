@@ -3,8 +3,7 @@ package com.optivem.kata.banking.core.common;
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.verifies.*;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.usecases.VoidResponse;
+import com.optivem.kata.banking.core.gateways.BankAccountRepository;
 import org.junit.jupiter.api.function.Executable;
 
 public class Verifications {

@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.common;
 
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.givens.*;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.gateways.BankAccountRepository;
 import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.infra.fake.FakeDateTimeService;

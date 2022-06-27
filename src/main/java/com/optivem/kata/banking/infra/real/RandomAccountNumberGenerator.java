@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumberGenerator;
+import com.optivem.kata.banking.core.gateways.AccountNumberGenerator;
 import de.huxhorn.sulky.ulid.ULID;
 import org.springframework.stereotype.Component;
 

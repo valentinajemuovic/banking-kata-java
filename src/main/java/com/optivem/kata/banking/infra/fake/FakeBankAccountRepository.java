@@ -2,7 +2,7 @@ package com.optivem.kata.banking.infra.fake;
 
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.gateways.BankAccountRepository;
 import com.optivem.kata.banking.core.domain.common.exceptions.RepositoryException;
 import com.optivem.kata.banking.core.domain.common.exceptions.RepositoryMessages;
 

@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.domain.time;
+package com.optivem.kata.banking.core.gateways;
 
 import java.time.LocalDateTime;
 

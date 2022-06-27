@@ -1,4 +1,7 @@
-package com.optivem.kata.banking.core.domain.accounts;
+package com.optivem.kata.banking.core.gateways;
+
+import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
+import com.optivem.kata.banking.core.domain.accounts.BankAccount;
 
 import java.util.Optional;
 

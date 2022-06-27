@@ -3,8 +3,8 @@ package com.optivem.kata.banking.core.usecases.viewaccount;
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.domain.accounts.BankAccount;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
+import com.optivem.kata.banking.core.gateways.BankAccountRepository;
+import com.optivem.kata.banking.core.domain.scoring.ScoreCalculator;
 import org.springframework.stereotype.Component;
 
 import static com.optivem.kata.banking.core.domain.common.extensions.Extension.extend;

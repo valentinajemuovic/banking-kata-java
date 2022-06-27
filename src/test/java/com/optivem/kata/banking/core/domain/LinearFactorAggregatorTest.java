@@ -1,8 +1,8 @@
 package com.optivem.kata.banking.core.domain;
 
-import com.optivem.kata.banking.core.domain.accounts.scoring.FactorAggregator;
-import com.optivem.kata.banking.core.domain.accounts.scoring.FactorCalculator;
-import com.optivem.kata.banking.core.domain.accounts.scoring.LinearFactorAggregator;
+import com.optivem.kata.banking.core.domain.scoring.FactorAggregator;
+import com.optivem.kata.banking.core.domain.scoring.FactorCalculator;
+import com.optivem.kata.banking.core.domain.scoring.LinearFactorAggregator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

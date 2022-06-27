@@ -1,9 +1,8 @@
 package com.optivem.kata.banking.infra.fake;
 
-import com.optivem.kata.banking.core.domain.time.DateTimeService;
+import com.optivem.kata.banking.core.gateways.DateTimeService;
 import com.optivem.kata.banking.infra.fake.base.FakeGenerator;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class FakeDateTimeService implements DateTimeService {

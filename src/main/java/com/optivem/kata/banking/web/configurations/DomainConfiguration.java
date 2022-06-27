@@ -1,8 +1,8 @@
 package com.optivem.kata.banking.web.configurations;
 
-import com.optivem.kata.banking.core.domain.accounts.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.domain.accounts.scoring.DefaultScoreCalculator;
-import com.optivem.kata.banking.core.domain.time.DateTimeService;
+import com.optivem.kata.banking.core.domain.scoring.ScoreCalculator;
+import com.optivem.kata.banking.core.domain.scoring.DefaultScoreCalculator;
+import com.optivem.kata.banking.core.gateways.DateTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

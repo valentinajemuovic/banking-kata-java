@@ -1,13 +1,15 @@
 package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.domain.accounts.*;
+import com.optivem.kata.banking.core.gateways.AccountIdGenerator;
+import com.optivem.kata.banking.core.gateways.AccountNumberGenerator;
+import com.optivem.kata.banking.core.gateways.BankAccountRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import static com.optivem.kata.banking.core.common.builders.entities.BankAccountTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
