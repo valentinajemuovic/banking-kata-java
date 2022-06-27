@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.ports.driver.viewaccount;
 
-import com.optivem.kata.banking.core.domain.scoring.Score;
+import com.optivem.kata.banking.core.cleanarch.domain.scoring.Score;
 import lombok.*;
 
 @Data

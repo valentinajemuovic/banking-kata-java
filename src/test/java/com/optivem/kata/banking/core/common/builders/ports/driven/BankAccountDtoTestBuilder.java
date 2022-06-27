@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.core.common.builders.ports.driven;
 
-import com.optivem.kata.banking.core.acl.BankAccountConverter;
-import com.optivem.kata.banking.core.domain.accounts.*;
+import com.optivem.kata.banking.core.cleanarch.acl.BankAccountConverter;
+import com.optivem.kata.banking.core.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 
 import java.time.LocalDate;

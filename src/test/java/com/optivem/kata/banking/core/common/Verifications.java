@@ -3,7 +3,6 @@ package com.optivem.kata.banking.core.common;
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.verifies.*;
-import com.optivem.kata.banking.core.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import org.junit.jupiter.api.function.Executable;
 

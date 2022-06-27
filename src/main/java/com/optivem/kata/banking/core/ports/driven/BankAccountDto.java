@@ -1,9 +1,5 @@
 package com.optivem.kata.banking.core.ports.driven;
 
-import com.optivem.kata.banking.core.domain.accounts.AccountHolderName;
-import com.optivem.kata.banking.core.domain.accounts.AccountId;
-import com.optivem.kata.banking.core.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.domain.accounts.Balance;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

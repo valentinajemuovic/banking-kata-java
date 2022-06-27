@@ -1,7 +1,5 @@
 package com.optivem.kata.banking.infra.real;
 
-import com.optivem.kata.banking.core.domain.accounts.AccountId;
-import com.optivem.kata.banking.core.domain.common.base.Generator;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import de.mkammerer.snowflakeid.SnowflakeIdGenerator;
 import org.springframework.stereotype.Component;

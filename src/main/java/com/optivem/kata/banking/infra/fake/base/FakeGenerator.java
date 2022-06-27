@@ -1,11 +1,10 @@
 package com.optivem.kata.banking.infra.fake.base;
 
-import com.optivem.kata.banking.core.domain.common.base.Generator;
+import com.optivem.kata.banking.core.cleanarch.domain.common.base.Generator;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeException;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
 
 import java.util.ArrayDeque;
-import java.util.List;
 import java.util.Queue;
 
 public class FakeGenerator<T> implements Generator<T> {
