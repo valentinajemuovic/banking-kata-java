@@ -5,6 +5,8 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountH
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.Balance;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.EventPublisher;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.UseCaseEvents.AccountOpenedUseCaseEvent;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
@@ -15,10 +17,13 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     private final BankAccountRepository bankAccountRepository;
     private final DateTimeService dateTimeService;
 
+    private final EventPublisher eventPublisher;
 
-    public OpenAccountUseCase(BankAccountRepository bankAccountRepository, DateTimeService dateTimeService) {
+
+    public OpenAccountUseCase(BankAccountRepository bankAccountRepository, DateTimeService dateTimeService, EventPublisher eventPublisher) {
         this.bankAccountRepository = bankAccountRepository;
         this.dateTimeService = dateTimeService;
+        this.eventPublisher = eventPublisher;
     }
 
     public OpenAccountResponse handle(OpenAccountRequest request) {
@@ -27,6 +32,8 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
         var bankAccount = createBankAccount(accountHolderName, balance);
         bankAccountRepository.add(bankAccount);
+
+        eventPublisher.publishEvent(AccountOpenedUseCaseEvent.generateEventOnSuccess(bankAccount.getAccountId()));
 
         return getResponse(bankAccount);
     }

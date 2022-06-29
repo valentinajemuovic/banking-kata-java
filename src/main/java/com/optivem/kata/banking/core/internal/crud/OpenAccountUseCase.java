@@ -1,6 +1,9 @@
 package com.optivem.kata.banking.core.internal.crud;
 
 import an.awesome.pipelinr.Command;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountId;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.EventPublisher;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.UseCaseEvents.AccountOpenedUseCaseEvent;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driven.*;
 import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
@@ -16,11 +19,14 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     private AccountNumberGenerator accountNumberGenerator;
     private DateTimeService dateTimeService;
 
-    public OpenAccountUseCase(BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService) {
+    private EventPublisher eventPublisher;
+
+    public OpenAccountUseCase(BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventPublisher eventPublisher) {
         this.bankAccountStorage = bankAccountStorage;
         this.accountIdGenerator = accountIdGenerator;
         this.accountNumberGenerator = accountNumberGenerator;
         this.dateTimeService = dateTimeService;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -43,6 +49,9 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
                 .build();
 
         bankAccountStorage.add(account);
+
+        // TODO: VC: Ports
+        eventPublisher.publishEvent(AccountOpenedUseCaseEvent.generateEventOnSuccess(AccountId.of(accountId)));
 
         return OpenAccountResponse.builder()
                 .accountNumber(accountNumber)

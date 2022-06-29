@@ -1,6 +1,7 @@
-package com.optivem.kata.banking.core.internal.cleanarch.domain.common.events;
+package com.optivem.kata.banking.infra.real.events;
 
-import com.optivem.kata.banking.infra.real.inmemory.EventQueue;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.UseCaseEvent;
+import com.optivem.kata.banking.infra.real.events.EventQueue;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 

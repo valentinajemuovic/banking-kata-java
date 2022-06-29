@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core;
 
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.EventPublisher;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.DefaultScoreCalculator;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
@@ -22,12 +23,12 @@ public class Facade {
     private final ViewAccountUseCase viewAccountUseCase;
 
     // TODO: VC: Perhaps server-side API facade? And server-side API facade?
-    public Facade(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountStorage bankAccountStorage) {
+    public Facade(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountStorage bankAccountStorage, EventPublisher eventPublisher) {
         var scoreCalculator = DefaultScoreCalculator.create(dateTimeService);
         var bankAccountRepository = new BankAccountRepositoryImpl(bankAccountStorage, accountIdGenerator, accountNumberGenerator);
 
         this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository);
-        this.openAccountUseCase = new OpenAccountUseCase(bankAccountRepository, dateTimeService);
+        this.openAccountUseCase = new OpenAccountUseCase(bankAccountRepository, dateTimeService, eventPublisher);
         this.viewAccountUseCase = new ViewAccountUseCase(bankAccountRepository, scoreCalculator);
     }
 

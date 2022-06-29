@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.infra.real.inmemory;
+package com.optivem.kata.banking.infra.real.events;
 
 import org.springframework.stereotype.Component;
 
