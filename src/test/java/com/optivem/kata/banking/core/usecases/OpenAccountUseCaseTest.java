@@ -2,9 +2,11 @@ package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
+import com.optivem.kata.banking.core.internal.cleanarch.acl.EventPublisherImpl;
+import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
+import com.optivem.kata.banking.infra.fake.FakeEventBus;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountId;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.EventPublisher;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.UseCaseEvent;
+import com.optivem.kata.banking.infra.real.events.DomainApplicationEvent;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.OpenAccountUseCase;
 import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
@@ -34,7 +36,7 @@ class OpenAccountUseCaseTest {
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeDateTimeService dateTimeService;
 
-    private FakeEventPublisher eventPublisher;
+    private FakeEventBus eventBus;
 
     private Command.Handler<OpenAccountRequest, OpenAccountResponse> useCase;
 
@@ -51,21 +53,22 @@ class OpenAccountUseCaseTest {
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
         this.dateTimeService = new FakeDateTimeService();
-        this.eventPublisher = new FakeEventPublisher();
-        this.useCase = createCleanArchHandler();
-        // this.useCase = createCrudHandler();
+        this.eventBus = new FakeEventBus();
 
         // TODO: VC: Make configurable so that we can run same test twice
+        this.useCase = createCleanArchHandler();
+        // this.useCase = createCrudHandler();
     }
 
     private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCleanArchHandler() {
         var repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
+        var eventPublisher = new EventPublisherImpl(eventBus);
         this.dateTimeService = new FakeDateTimeService();
         return new OpenAccountUseCase(repository, dateTimeService, eventPublisher);
     }
 
     private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCrudHandler() {
-        return new com.optivem.kata.banking.core.internal.crud.OpenAccountUseCase(storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventPublisher);
+        return new com.optivem.kata.banking.core.internal.crud.OpenAccountUseCase(storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 
     @ParameterizedTest
@@ -88,11 +91,19 @@ class OpenAccountUseCaseTest {
 
         verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
 
-        var expectedPublishedEvents = List.of(new UseCaseEvent(AccountId.of(generatedAccountId), "AccountOpened"));
+        var expectedEvent = AccountOpenedDto.builder()
+                .timestamp(LocalDateTime.of(openingDate, LocalTime.MIN))
+                .accountId(generatedAccountId)
+                .firstName(firstName)
+                .lastName(lastName)
+                .balance(initialBalance)
+                .build();
 
-        var publishedEvents = eventPublisher.getPublishedEvents();
+        var publishedEvents = eventBus.getPublishedEvents();
 
-        assertThat(publishedEvents.stream().findFirst().get().getEventName()).isEqualTo(expectedPublishedEvents.stream().findFirst().get().getEventName());
+        assertThat(publishedEvents.size()).isEqualTo(1);
+
+        assertThat(publishedEvents.stream().findFirst().get()).isEqualTo(expectedEvent);
     }
 
     @ParameterizedTest

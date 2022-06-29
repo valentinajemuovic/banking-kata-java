@@ -1,7 +1,5 @@
 package com.optivem.kata.banking.infra.real.events;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.UseCaseEvent;
-import com.optivem.kata.banking.infra.real.events.EventQueue;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -12,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class UseCaseEventHandler{
 
-    private final EventQueue<UseCaseEvent> queue;
+    private final EventQueue<DomainApplicationEvent> queue;
 
-    public UseCaseEventHandler(EventQueue<UseCaseEvent> eventEventQueue){
+    public UseCaseEventHandler(EventQueue<DomainApplicationEvent> eventEventQueue){
         this.queue = eventEventQueue;
     }
 
     @EventListener
-    public void handleEvent(UseCaseEvent event){
+    public void handleEvent(DomainApplicationEvent event){
             queue.addEvent(event);
 
             // var eventFromQueue = queue.next();
