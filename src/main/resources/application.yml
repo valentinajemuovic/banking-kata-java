@@ -17,3 +17,12 @@ spring:
           lob:
             non_contextual_creation: true
         format_sql: true
+
+  data:
+    mongodb:
+      authentication-database: admin
+      username: ${MONGO_INITDB_ROOT_USERNAME}
+      password: ${MONGO_INITDB_ROOT_PASSWORD}
+      database: ${ME_CONFIG_MONGODB_SERVER}
+      port: 27017
+      host: localhost
