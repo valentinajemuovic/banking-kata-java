@@ -1,10 +1,10 @@
 package com.optivem.kata.banking.adapters.driver.web.controllers;
 
 import com.optivem.kata.banking.adapters.driver.web.controllers.base.BaseController;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountRequest;
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -8,9 +8,8 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAcco
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.AccountOpened;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
-import com.optivem.kata.banking.core.ports.driven.EventBus;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

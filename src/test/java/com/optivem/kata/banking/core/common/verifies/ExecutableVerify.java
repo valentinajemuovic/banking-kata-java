@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.core.common.verifies;
 
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryException;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationException;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
 import org.junit.jupiter.api.function.Executable;
 
 import static org.assertj.core.api.Assertions.assertThat;

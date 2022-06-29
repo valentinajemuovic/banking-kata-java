@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions;
+package com.optivem.kata.banking.core.ports.driver.exceptions;
 
 public class ValidationException extends RuntimeException {
     public ValidationException(String message) {

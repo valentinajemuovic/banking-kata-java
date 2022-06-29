@@ -1,12 +1,11 @@
 package com.optivem.kata.banking.core.internal.crud;
 
 import an.awesome.pipelinr.Command;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountId;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driven.*;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 
 import static com.optivem.kata.banking.core.internal.crud.common.Guard.guard;
 

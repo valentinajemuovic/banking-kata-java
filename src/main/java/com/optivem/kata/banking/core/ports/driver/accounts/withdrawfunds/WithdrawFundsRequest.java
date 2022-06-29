@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.ports.driver.depositfunds;
+package com.optivem.kata.banking.core.ports.driver.accounts.withdrawfunds;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.ports.driver.VoidResponse;
@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class DepositFundsRequest implements Command<VoidResponse> {
+public class WithdrawFundsRequest implements Command<VoidResponse> {
     private String accountNumber;
     private int amount;
 }

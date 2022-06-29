@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.internal.cleanarch.domain.common.guards;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationException;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
 
 import java.util.function.BooleanSupplier;
 

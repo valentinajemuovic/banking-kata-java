@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.ports.driver.openaccount;
+package com.optivem.kata.banking.core.ports.driver.accounts.openaccount;
 
 import lombok.*;
 

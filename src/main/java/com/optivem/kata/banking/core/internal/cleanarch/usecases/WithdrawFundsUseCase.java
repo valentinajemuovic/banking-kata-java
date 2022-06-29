@@ -5,7 +5,7 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountN
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.TransactionAmount;
 import com.optivem.kata.banking.core.ports.driver.VoidResponse;
-import com.optivem.kata.banking.core.ports.driver.withdrawfunds.WithdrawFundsRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.withdrawfunds.WithdrawFundsRequest;
 
 public class WithdrawFundsUseCase implements Command.Handler<WithdrawFundsRequest, VoidResponse> {
 

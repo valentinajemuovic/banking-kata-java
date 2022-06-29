@@ -5,8 +5,8 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountN
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountRequest;
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import org.springframework.stereotype.Component;
 
 @Component

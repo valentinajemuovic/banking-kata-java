@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.common.builders.requests;
 
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
 
 public class ViewAccountRequestBuilder {
 

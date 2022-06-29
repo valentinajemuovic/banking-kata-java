@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.usecases;
 
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.DepositFundsUseCase;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;

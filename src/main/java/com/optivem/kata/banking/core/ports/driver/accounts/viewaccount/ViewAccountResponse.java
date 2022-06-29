@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.ports.driver.viewaccount;
+package com.optivem.kata.banking.core.ports.driver.accounts.viewaccount;
 
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import lombok.*;
