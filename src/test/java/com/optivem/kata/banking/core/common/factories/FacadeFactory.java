@@ -1,10 +1,7 @@
 package com.optivem.kata.banking.core.common.factories;
 
+import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.core.Facade;
-import com.optivem.kata.banking.infra.fake.FakeEventBus;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
-import com.optivem.kata.banking.infra.fake.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 

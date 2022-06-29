@@ -1,17 +1,14 @@
 package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
+import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.EventPublisherImpl;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
-import com.optivem.kata.banking.infra.fake.FakeEventBus;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountId;
-import com.optivem.kata.banking.infra.real.events.DomainApplicationEvent;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.OpenAccountUseCase;
 import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
-import com.optivem.kata.banking.infra.fake.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +17,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Givens.givenThat;

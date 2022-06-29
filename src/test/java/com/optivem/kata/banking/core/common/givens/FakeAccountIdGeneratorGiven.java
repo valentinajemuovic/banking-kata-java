@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.common.givens;
 
-import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
 
 public class FakeAccountIdGeneratorGiven {
     private final FakeAccountIdGenerator generator;

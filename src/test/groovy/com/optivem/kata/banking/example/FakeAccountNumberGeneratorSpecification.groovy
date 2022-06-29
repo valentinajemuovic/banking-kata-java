@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.example
 
 import com.optivem.kata.banking.core.common.givens.FakeAccountNumberGeneratorGiven
-import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator
-import com.optivem.kata.banking.infra.fake.exceptions.FakeException
-import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages
+import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator
+import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeException
+import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeMessages
 import spock.lang.Specification
 import spock.lang.Unroll
 
