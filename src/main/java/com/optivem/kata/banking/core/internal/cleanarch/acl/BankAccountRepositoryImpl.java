@@ -4,6 +4,8 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountI
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationException;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
@@ -33,6 +35,17 @@ public class BankAccountRepositoryImpl implements BankAccountRepository {
 
         var entity = BankAccountConverter.toEntity(dto.get());
         return Optional.of(entity);
+    }
+
+    @Override
+    public BankAccount findRequired(AccountNumber accountNumber) {
+        var optionalBankAccount = find(accountNumber);
+
+        if (optionalBankAccount.isEmpty()) {
+            throw new ValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
+        }
+
+        return optionalBankAccount.get();
     }
 
     @Override

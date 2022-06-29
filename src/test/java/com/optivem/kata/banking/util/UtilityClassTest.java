@@ -3,7 +3,6 @@ package com.optivem.kata.banking.util;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.extensions.Extension;
 import com.optivem.kata.banking.infra.fake.exceptions.FakeMessages;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,6 @@ public class UtilityClassTest {
         assertPrivateConstructor(Guard.class);
         assertPrivateConstructor(RepositoryMessages.class);
         assertPrivateConstructor(ValidationMessages.class);
-        assertPrivateConstructor(Extension.class);
     }
 
     private <T> void assertPrivateConstructor(Class<T> clazz) throws NoSuchMethodException {
