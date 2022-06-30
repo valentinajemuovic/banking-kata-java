@@ -19,7 +19,6 @@ public class Facade {
     private final OpenAccountUseCase openAccountUseCase;
     private final ViewAccountUseCase viewAccountUseCase;
 
-    // TODO: VC: Perhaps server-side API facade? And server-side API facade?
     public Facade(AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountStorage bankAccountStorage, EventBus eventBus) {
         var scoreCalculator = DefaultScoreCalculator.create(dateTimeService);
         var bankAccountRepository = new BankAccountRepositoryImpl(bankAccountStorage, accountIdGenerator, accountNumberGenerator);
