@@ -2,11 +2,9 @@ package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
-import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
-import com.optivem.kata.banking.core.internal.cleanarch.acl.EventPublisherImpl;
+import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.internal.cleanarch.usecases.OpenAccountUseCase;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,12 +29,9 @@ class OpenAccountUseCaseTest {
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeDateTimeService dateTimeService;
-
     private FakeEventBus eventBus;
 
     private Command.Handler<OpenAccountRequest, OpenAccountResponse> useCase;
-
-
 
     private static Stream<Arguments> should_open_account_given_valid_request() {
         return Stream.of(Arguments.of("John", "Smith", 0, 3456, "GB41OMQP68570038161775", LocalDate.of(2022, 5, 20)),
@@ -51,20 +46,8 @@ class OpenAccountUseCaseTest {
         this.dateTimeService = new FakeDateTimeService();
         this.eventBus = new FakeEventBus();
 
-        // TODO: VC: Make configurable so that we can run same test twice
-        this.useCase = createCleanArchHandler();
-        // this.useCase = createCrudHandler();
-    }
-
-    private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCleanArchHandler() {
-        var repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
-        var eventPublisher = new EventPublisherImpl(eventBus);
-        this.dateTimeService = new FakeDateTimeService();
-        return new OpenAccountUseCase(repository, dateTimeService, eventPublisher);
-    }
-
-    private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCrudHandler() {
-        return new com.optivem.kata.banking.core.internal.crud.OpenAccountUseCase(storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
+        var useCaseFactory = new CleanArchUseCaseFactory(); // TODO: VC: Make configurable so that we can run same test twice
+        this.useCase = useCaseFactory.createOpenAccountHandler(storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 
     @ParameterizedTest

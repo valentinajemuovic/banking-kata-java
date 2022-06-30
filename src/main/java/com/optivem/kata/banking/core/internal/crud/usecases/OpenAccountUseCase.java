@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.internal.crud;
+package com.optivem.kata.banking.core.internal.crud.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
