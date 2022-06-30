@@ -3,12 +3,9 @@ package com.optivem.kata.banking.core.internal.cleanarch.acl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.AccountOpened;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.DomainEvent;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
-import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 import com.optivem.kata.banking.core.ports.driven.EventBus;
 import com.optivem.kata.banking.core.ports.driven.events.EventDto;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.NotSupportedException;
 
 @Component
 public class EventPublisherImpl implements EventPublisher {
@@ -22,7 +19,7 @@ public class EventPublisherImpl implements EventPublisher {
     @Override
     public void publishEvent(DomainEvent event) {
         var eventDto = getEventDto(event);
-        eventBus.send(eventDto);
+        eventBus.publish(eventDto);
     }
 
     private EventDto getEventDto(DomainEvent event) {

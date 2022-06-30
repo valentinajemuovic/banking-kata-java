@@ -10,9 +10,7 @@ import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccou
 import static com.optivem.kata.banking.core.internal.crud.common.Guard.guard;
 
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
-
     private BankAccountStorage bankAccountStorage;
-
     private AccountIdGenerator accountIdGenerator;
     private AccountNumberGenerator accountNumberGenerator;
     private DateTimeService dateTimeService;
@@ -51,7 +49,7 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
         var eventDto = new AccountOpenedDto(timestamp, accountId, firstName, lastName, balance);
 
-        eventBus.send(eventDto);
+        eventBus.publish(eventDto);
 
         return OpenAccountResponse.builder()
                 .accountNumber(accountNumber)

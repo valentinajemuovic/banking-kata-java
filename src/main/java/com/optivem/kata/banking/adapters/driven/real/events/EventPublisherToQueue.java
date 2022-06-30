@@ -17,7 +17,7 @@ public class EventPublisherToQueue implements EventBus {
     }
 
     @Override
-    public void send(EventDto event) {
+    public void publish(EventDto event) {
         applicationEventPublisher.publishEvent(event);
     }
 }

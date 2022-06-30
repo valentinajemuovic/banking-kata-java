@@ -3,6 +3,7 @@ package com.optivem.kata.banking.core.usecases;
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
+import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
@@ -46,7 +47,9 @@ class OpenAccountUseCaseTest {
         this.dateTimeService = new FakeDateTimeService();
         this.eventBus = new FakeEventBus();
 
-        var useCaseFactory = new CleanArchUseCaseFactory(); // TODO: VC: Make configurable so that we can run same test twice
+        // TODO: VC: Make configurable so that we can run same test twice
+        var useCaseFactory = new CrudUseCaseFactory();
+        // var useCaseFactory = new CleanArchUseCaseFactory();
         this.useCase = useCaseFactory.createOpenAccountHandler(storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 

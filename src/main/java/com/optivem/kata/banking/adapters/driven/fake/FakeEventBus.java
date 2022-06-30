@@ -20,7 +20,7 @@ public class FakeEventBus implements EventBus {
     }
 
     @Override
-    public void send(EventDto event) {
+    public void publish(EventDto event) {
         events.add(event);
     }
 }
