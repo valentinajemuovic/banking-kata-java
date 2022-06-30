@@ -66,12 +66,9 @@ class OpenAccountUseCaseTest {
                 .withBalance(initialBalance)
                 .build();
 
-        var expectedResponse = new OpenAccountResponse();
-        expectedResponse.setAccountNumber(generatedAccountNumber);
-
-        verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
-
-        verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        var expectedResponse = OpenAccountResponse.builder()
+                .accountNumber(generatedAccountNumber)
+                .build();
 
         var expectedEvent = AccountOpenedDto.builder()
                 .timestamp(LocalDateTime.of(openingDate, LocalTime.MIN))
@@ -81,11 +78,9 @@ class OpenAccountUseCaseTest {
                 .balance(initialBalance)
                 .build();
 
-        var publishedEvents = eventBus.getPublishedEvents();
-
-        assertThat(publishedEvents.size()).isEqualTo(1);
-
-        assertThat(publishedEvents.stream().findFirst().get()).isEqualTo(expectedEvent);
+        verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
+        verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        verifyThat(eventBus).shouldHavePublishedExactly(expectedEvent);
     }
 
     @ParameterizedTest
