@@ -30,10 +30,16 @@ To be able to run the tests (since some of the tests are dependent on the databa
 In IntelliJ, for the `Tests in 'banking-kata.test'` configuration, you can copy this into the `Environment variables`
 
 ```
-POSTGRES_URL=jdbc:postgresql://localhost:5432/banking_kata;POSTGRES_USER=postgres;POSTGRES_PASSWORD=admin
+POSTGRES_URL=jdbc:postgresql://localhost:5432/banking_kata;POSTGRES_USER=postgres;POSTGRES_PASSWORD=admin;
+KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata;KEYCLOAK_TEST_CLIENT_ID=test-client;
+KEYCLOAK_TEST_CLIENT_SECRET=XXXX
 ```
 
 You need to have created the database, in the example I had created a database called `banking_kata`. 
+
+Also, you need to have created a keycloak realm with client_credentials flow enabled.
+
+In the example I had created a realm called `banking-kata` with a client_id `test-client`.
 
 Please update the environment variable values based on your local settings.
 
@@ -45,6 +51,9 @@ Environment Variables
 $env:POSTGRES_URL='jdbc:postgresql://localhost:5432/banking_kata'
 $env:POSTGRES_USER='postgres'
 $env:POSTGRES_PASSWORD='admin'
+$env:KEYCLOAK_REALM_URL='http://localhost:10000/auth/realms/banking-kata'
+$env:KEYCLOAK_TEST_CLIENT_ID='test-client'
+$env:KEYCLOAK_TEST_CLIENT_SECRET='XXXX'
 ```
 
 Running build with automated tests:
