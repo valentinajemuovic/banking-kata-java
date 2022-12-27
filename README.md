@@ -21,16 +21,18 @@ We implement a Banking system with the following use cases:
 ## Prerequisites
 
 - OpenJDK 17
-- If you don't use Docker:
-    - [PostgresSQL 14.4](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
-    - [pgAdmin 4](https://www.pgadmin.org/download/)
-- If you prefer to use Docker:
-    - Make sure Docker Desktop is running 
-    - See [running with docker](./running_with_docker.md)
+- Docker
+
+Note: If you also want to run without Docker, you can install:
+- [PostgresSQL 14.4](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+- [pgAdmin 4](https://www.pgadmin.org/download/)
+- [Keycloak](https://www.keycloak.org/docs/11.0/getting_started/)
 
 ## Environment variables
 
 To be able to run the tests (since some of the tests are dependent on the database - the integration tests), we then need to set the environment variables.
+
+Note: Soon we plan to also separate the tests so that they can be run separately.
 
 In IntelliJ, for the `Tests in 'banking-kata.test'` configuration, you can copy this into the `Environment variables`
 
@@ -42,9 +44,9 @@ KEYCLOAK_TEST_CLIENT_SECRET=XXXX
 
 You need to have created the database, in the example I had created a database called `banking_kata`. 
 
-Also, you need to have created a keycloak realm with client_credentials flow enabled.
-
-In the example I had created a realm called `banking-kata` with a client_id `test-client`.
+Keycloak settings:
+- You need to have created a keycloak realm with client_credentials flow enabled.
+- In the example I had created a realm called `banking-kata` with a client_id `test-client`.
 
 Please update the environment variable values based on your local settings.
 
