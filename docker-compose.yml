@@ -8,6 +8,8 @@ services:
       - POSTGRES_PASSWORD=admin
     ports:
       - '5432:5432'
+    networks:
+      - local
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -16,8 +18,31 @@ services:
     restart: always
     ports:
       - '9000:8080'
+    networks:
+      - local
     depends_on:
       - db
+
+  keycloak:
+    image: jboss/keycloak:16.1.1
+    container_name: keycloak
+    environment:
+      - DB_VENDOR=postgres
+      - DB_ADDR=db
+      - DB_DATABASE=keycloak
+      - DB_USER=postgres
+      - DB_PASSWORD=admin
+    ports:
+      - "10000:8080"
+    restart: unless-stopped
+    networks:
+      - local
+    depends_on:
+      - db
+
 volumes:
   db:
     driver: local
+
+networks:
+  local:
