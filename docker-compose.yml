@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=admin
     ports:
       - '5432:5432'
     networks:
@@ -31,7 +31,7 @@ services:
       - DB_ADDR=db
       - DB_DATABASE=keycloak
       - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - DB_PASSWORD=admin
     ports:
       - "10000:8080"
     restart: unless-stopped
