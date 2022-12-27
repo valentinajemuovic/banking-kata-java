@@ -25,6 +25,7 @@ We implement a Banking system with the following use cases:
     - [PostgresSQL 14.4](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
     - [pgAdmin 4](https://www.pgadmin.org/download/)
 - If you prefer to use Docker:
+    - Make sure Docker Desktop is running 
     - See [running with docker](./running_with_docker.md)
 
 ## Environment variables
