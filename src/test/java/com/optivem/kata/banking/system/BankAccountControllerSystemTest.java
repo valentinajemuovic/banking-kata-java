@@ -3,6 +3,7 @@ package com.optivem.kata.banking.system;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,6 +57,7 @@ class BankAccountControllerSystemTest {
             .blockFirst();
     }
 
+    @Disabled("TODO: Re-enable test after this issue is resolved https://github.com/valentinacupac/banking-kata-java/issues/58")
     @Test
     void should_open_account_given_valid_request() {
         var request = openAccountRequest().build();
