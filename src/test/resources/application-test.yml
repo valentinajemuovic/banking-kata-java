@@ -1,0 +1,3 @@
+token-uri: ${KEYCLOAK_REALM_URL}/protocol/openid-connect/token
+client-id: ${KEYCLOAK_TEST_CLIENT_ID}
+client-secret: ${KEYCLOAK_TEST_CLIENT_SECRET}
