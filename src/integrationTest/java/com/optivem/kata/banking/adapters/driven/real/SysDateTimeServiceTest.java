@@ -4,7 +4,6 @@ import com.optivem.kata.banking.adapters.driven.real.SysDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SysDateTimeServiceTest {

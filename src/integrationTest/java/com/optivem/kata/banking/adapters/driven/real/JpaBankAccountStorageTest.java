@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.adapters.driven.real;
 
+import com.optivem.kata.banking.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
@@ -11,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
 
-import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -65,7 +65,7 @@ public class JpaBankAccountStorageTest {
     private BankAccountDto createSomeBankAccount() {
         var accountId = accountIdGenerator.next();
         var accountNumber = accountNumberGenerator.next();
-        return bankAccount()
+        return BankAccountDtoTestBuilder.bankAccount()
                 .withAccountId(accountId)
                 .withAccountNumber(accountNumber)
                 .build();

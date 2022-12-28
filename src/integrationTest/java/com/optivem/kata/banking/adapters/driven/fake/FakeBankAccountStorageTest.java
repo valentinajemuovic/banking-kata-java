@@ -1,12 +1,11 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
+import com.optivem.kata.banking.common.Verifications;
+import com.optivem.kata.banking.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 
 class FakeBankAccountStorageTest {
 
@@ -21,19 +20,19 @@ class FakeBankAccountStorageTest {
     void should_return_empty_result_when_account_number_does_not_exist() {
         var accountNumber = "GB36BARC20038032622823";
 
-        verifyThat(storage).shouldNotContain(accountNumber);
+        Verifications.verifyThat(storage).shouldNotContain(accountNumber);
     }
 
     @Test
     void should_return_bank_account_when_account_number_exists() {
         var accountNumber = "GB36BARC20038032622823";
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .build();
 
         storage.add(bankAccount);
 
-        verifyThat(storage).shouldContain(bankAccount);
+        Verifications.verifyThat(storage).shouldContain(bankAccount);
     }
 
     @Test
@@ -42,12 +41,12 @@ class FakeBankAccountStorageTest {
         var balance = 40;
         var updateBalance = 50;
 
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var expectedUpdatedBankAccount = bankAccount()
+        var expectedUpdatedBankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(updateBalance)
                 .build();
@@ -58,19 +57,19 @@ class FakeBankAccountStorageTest {
 
         storage.update(bankAccount);
 
-        verifyThat(storage).shouldContain(expectedUpdatedBankAccount);
+        Verifications.verifyThat(storage).shouldContain(expectedUpdatedBankAccount);
     }
 
     @Test
     void should_not_be_able_to_change_bank_account_after_add() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var expectedBankAccount = bankAccount()
+        var expectedBankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -79,19 +78,19 @@ class FakeBankAccountStorageTest {
 
         bankAccount.setBalance(20);
 
-        verifyThat(storage).shouldContain(expectedBankAccount);
+        Verifications.verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
     @Test
     void should_not_be_able_to_change_bank_account_after_find() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var expectedBankAccount = bankAccount()
+        var expectedBankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -102,32 +101,32 @@ class FakeBankAccountStorageTest {
 
         retrievedBankAccount.setBalance(20);
 
-        verifyThat(storage).shouldContain(expectedBankAccount);
+        Verifications.verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
     @Test
     void should_not_be_able_to_change_bank_account_after_update() {
         var accountNumber = "GB36BARC20038032622823";
         var balance = 40;
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var expectedBankAccount = bankAccount()
+        var expectedBankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
         storage.add(bankAccount);
 
-        var retrievedBankAccount = verifyThat(storage).shouldContain(accountNumber);
+        var retrievedBankAccount = Verifications.verifyThat(storage).shouldContain(accountNumber);
 
         storage.update(retrievedBankAccount);
 
         retrievedBankAccount.setBalance(20);
 
-        verifyThat(storage).shouldContain(expectedBankAccount);
+        Verifications.verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
 
@@ -137,29 +136,29 @@ class FakeBankAccountStorageTest {
         var balance = 40;
         var balance2 = 60;
 
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
 
-        var bankAccount2 = bankAccount()
+        var bankAccount2 = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance2)
                 .build();
 
         storage.add(bankAccount);
 
-        verifyThat(() -> storage.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
+        Verifications.verifyThat(() -> storage.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
     }
 
     @Test
     void should_throw_exception_when_attempt_to_update_non_existent_bank_account() {
         var accountNumber = "GB36BARC20038032622823";
 
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .build();
 
-        verifyThat(() -> storage.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+        Verifications.verifyThat(() -> storage.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }
 }

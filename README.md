@@ -84,6 +84,7 @@ Running build with automated tests:
 
 ```
 ./gradlew build
+./gradlew integrationTest
 ```
 
 Running JaCoCo code coverage:
