@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.system;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.optivem.kata.banking.common.builders.requests.OpenAccountRequestBuilder;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
@@ -19,6 +18,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 
+import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.openAccountRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -65,7 +65,7 @@ class BankAccountControllerSystemTest {
 
     @Test
     void should_open_account_given_valid_request() {
-        var request = OpenAccountRequestBuilder.openAccountRequest().build();
+        var request = openAccountRequest().build();
 
         var response =
             client

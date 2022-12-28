@@ -1,11 +1,11 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
-import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
-import com.optivem.kata.banking.common.Verifications;
-import com.optivem.kata.banking.common.builders.ports.driven.BankAccountDtoTestBuilder;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 
 class FakeBankAccountStorageTest {
 
@@ -20,7 +20,7 @@ class FakeBankAccountStorageTest {
     void should_return_empty_result_when_account_number_does_not_exist() {
         var accountNumber = "GB36BARC20038032622823";
 
-        Verifications.verifyThat(storage).shouldNotContain(accountNumber);
+        verifyThat(storage).shouldNotContain(accountNumber);
     }
 
     @Test
@@ -32,7 +32,7 @@ class FakeBankAccountStorageTest {
 
         storage.add(bankAccount);
 
-        Verifications.verifyThat(storage).shouldContain(bankAccount);
+        verifyThat(storage).shouldContain(bankAccount);
     }
 
     @Test
@@ -57,7 +57,7 @@ class FakeBankAccountStorageTest {
 
         storage.update(bankAccount);
 
-        Verifications.verifyThat(storage).shouldContain(expectedUpdatedBankAccount);
+        verifyThat(storage).shouldContain(expectedUpdatedBankAccount);
     }
 
     @Test
@@ -78,7 +78,7 @@ class FakeBankAccountStorageTest {
 
         bankAccount.setBalance(20);
 
-        Verifications.verifyThat(storage).shouldContain(expectedBankAccount);
+        verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -101,7 +101,7 @@ class FakeBankAccountStorageTest {
 
         retrievedBankAccount.setBalance(20);
 
-        Verifications.verifyThat(storage).shouldContain(expectedBankAccount);
+        verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -120,13 +120,13 @@ class FakeBankAccountStorageTest {
 
         storage.add(bankAccount);
 
-        var retrievedBankAccount = Verifications.verifyThat(storage).shouldContain(accountNumber);
+        var retrievedBankAccount = verifyThat(storage).shouldContain(accountNumber);
 
         storage.update(retrievedBankAccount);
 
         retrievedBankAccount.setBalance(20);
 
-        Verifications.verifyThat(storage).shouldContain(expectedBankAccount);
+        verifyThat(storage).shouldContain(expectedBankAccount);
     }
 
 
@@ -148,7 +148,7 @@ class FakeBankAccountStorageTest {
 
         storage.add(bankAccount);
 
-        Verifications.verifyThat(() -> storage.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
+        verifyThat(() -> storage.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
     }
 
     @Test
@@ -159,6 +159,6 @@ class FakeBankAccountStorageTest {
                 .withAccountNumber(accountNumber)
                 .build();
 
-        Verifications.verifyThat(() -> storage.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+        verifyThat(() -> storage.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }
 }

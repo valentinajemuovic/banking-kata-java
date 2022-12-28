@@ -1,12 +1,11 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
-import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeException;
 import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeMessages;
-import com.optivem.kata.banking.common.Givens;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -29,7 +28,7 @@ class FakeAccountNumberGeneratorTest {
     void should_return_next_element_when_there_is_one_element() {
         var expectedValue = "GB54BARC20032611545669";
 
-        Givens.givenThat(generator).willGenerate(expectedValue);
+        givenThat(generator).willGenerate(expectedValue);
 
         assertGeneratesNext(expectedValue);
 
@@ -42,9 +41,9 @@ class FakeAccountNumberGeneratorTest {
         var expectedValue2 = "GB36BARC20038032622823";
         var expectedValue3 = "GB10BARC20040184197751";
 
-        Givens.givenThat(generator).willGenerate(expectedValue1);
-        Givens.givenThat(generator).willGenerate(expectedValue2);
-        Givens.givenThat(generator).willGenerate(expectedValue3);
+        givenThat(generator).willGenerate(expectedValue1);
+        givenThat(generator).willGenerate(expectedValue2);
+        givenThat(generator).willGenerate(expectedValue3);
 
         assertGeneratesNext(expectedValue1);
         assertGeneratesNext(expectedValue2);
