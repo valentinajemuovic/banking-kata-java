@@ -21,10 +21,9 @@ jobs:
 
       mongodb:
         image: mongo
-        container_name: mongodb
         ports:
           - 27017:27017
-        environment:
+        env:
           MONGO_INITDB_ROOT_USERNAME: rootuser
           MONGO_INITDB_ROOT_PASSWORD: rootpass
 
