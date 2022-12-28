@@ -37,6 +37,16 @@ repositories {
     mavenCentral()
 }
 
+def integrationTest = sourceSets.create('integrationTest')
+configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
+configurations[integrationTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly)
+
+tasks.register('integrationTest', Test) {
+    useJUnitPlatform()
+    testClassesDirs = integrationTest.output.classesDirs
+    classpath = configurations[integrationTest.runtimeClasspathConfigurationName] + integrationTest.output
+}
+
 dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql:42.3.6'
@@ -58,8 +68,14 @@ dependencies {
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.11'
     testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
     testImplementation 'com.athaydes:spock-reports:2.3.0-groovy-3.0', { transitive = false }
+
+    integrationTestImplementation project
 }
 
 tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named('integrationTest') {
     useJUnitPlatform()
 }
