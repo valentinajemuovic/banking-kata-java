@@ -57,7 +57,6 @@ class BankAccountControllerSystemTest {
             .blockFirst();
     }
 
-    @Disabled("TODO: Re-enable test after this issue is resolved https://github.com/valentinacupac/banking-kata-java/issues/58")
     @Test
     void should_open_account_given_valid_request() {
         var request = openAccountRequest().build();
