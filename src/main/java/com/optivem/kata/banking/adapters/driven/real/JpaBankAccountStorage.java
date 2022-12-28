@@ -4,8 +4,6 @@ import com.optivem.kata.banking.adapters.driven.real.persistence.BankAccountReco
 import com.optivem.kata.banking.adapters.driven.real.persistence.JpaBankAccountDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
-import com.optivem.kata.banking.infra.real.persistence.BankAccountRecord;
-import com.optivem.kata.banking.infra.real.persistence.JpaBankAccountDataAccessor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 

@@ -2,7 +2,6 @@ package com.optivem.kata.banking.infra.real;
 
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
-import com.optivem.kata.banking.infra.real.persistence.BankAccountRecord;
 import com.optivem.kata.banking.infra.real.persistence.MongoTemplateCustomDataAccessor;
 import org.springframework.stereotype.Component;
 
@@ -32,15 +31,4 @@ public class MongoBankAccountStorage implements BankAccountStorage {
     public void update(BankAccountDto bankAccount) {
         //To Be Implemented
     }
-
-    private BankAccountRecord create(BankAccountDto bankAccount) {
-        //To Be Implemented
-        return null;
-    }
-
-    private BankAccountDto get(BankAccountRecord record) {
-        //To Be Implemented
-        return null;
-    }
-
 }

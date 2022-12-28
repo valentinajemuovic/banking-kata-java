@@ -37,10 +37,22 @@ Note: Soon we plan to also separate the tests so that they can be run separately
 In IntelliJ, for the `Tests in 'banking-kata.test'` configuration, you can copy this into the `Environment variables`
 
 ```
-POSTGRES_URL=jdbc:postgresql://localhost:5432/banking_kata;POSTGRES_USER=postgres;POSTGRES_PASSWORD=admin;
-KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata;KEYCLOAK_TEST_CLIENT_ID=test-client;
+POSTGRES_URL=jdbc:postgresql://localhost:5432/banking_kata;
+POSTGRES_USER=postgres;
+POSTGRES_PASSWORD=admin;
+MONGO_INITDB_ROOT_USERNAME=rootuser;
+MONGO_INITDB_ROOT_PASSWORD=rootpass;
+ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser;
+ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass;
+ME_CONFIG_MONGODB_SERVER=mongodb;
+KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata;
+KEYCLOAK_TEST_CLIENT_ID=test-client;
 KEYCLOAK_TEST_CLIENT_SECRET=XXXX
 ```
+
+
+
+
 
 You need to have created the database, in the example I had created a database called `banking_kata`. 
 
@@ -58,6 +70,11 @@ Environment Variables
 $env:POSTGRES_URL='jdbc:postgresql://localhost:5432/banking_kata'
 $env:POSTGRES_USER='postgres'
 $env:POSTGRES_PASSWORD='admin'
+$env:MONGO_INITDB_ROOT_USERNAME='rootuser'
+$env:MONGO_INITDB_ROOT_PASSWORD='rootpass'
+$env:ME_CONFIG_MONGODB_ADMINUSERNAME='rootuser'
+$env:ME_CONFIG_MONGODB_ADMINPASSWORD='rootpass'
+$env:ME_CONFIG_MONGODB_SERVER='mongodb'
 $env:KEYCLOAK_REALM_URL='http://localhost:10000/auth/realms/banking-kata'
 $env:KEYCLOAK_TEST_CLIENT_ID='test-client'
 $env:KEYCLOAK_TEST_CLIENT_SECRET='XXXX'

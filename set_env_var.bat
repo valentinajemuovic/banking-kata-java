@@ -2,6 +2,13 @@ set POSTGRES_USER=postgres
 set POSTGRES_PASSWORD=admin
 set POSTGRES_DB=banking_kata
 set POSTGRES_URL=jdbc:postgresql://localhost:5432/$POSTGRES_DB;POSTGRES_USER=$POSTGRES_USER;POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+
+set export MONGO_INITDB_ROOT_USERNAME=rootuser
+set export MONGO_INITDB_ROOT_PASSWORD=rootpass
+set export ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+set export ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+set export ME_CONFIG_MONGODB_SERVER=mongodb
+
 set KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata
 set KEYCLOAK_TEST_CLIENT_ID=test-client
 set KEYCLOAK_TEST_CLIENT_SECRET=XXXX
