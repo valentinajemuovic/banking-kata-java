@@ -15,10 +15,6 @@ jacoco {
     toolVersion = "0.8.7"
 }
 
-test {
-    finalizedBy jacocoTestReport
-}
-
 jacocoTestReport {
     dependsOn test
 }
