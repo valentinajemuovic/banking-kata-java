@@ -2,7 +2,6 @@ package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
-import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;

@@ -5,6 +5,7 @@ plugins {
     id 'groovy'
     id 'info.solidsoft.pitest' version '1.7.4'
     id 'jacoco'
+    id 'java-test-fixtures'
 }
 
 pitest {
@@ -66,6 +67,17 @@ dependencies {
     testImplementation 'com.athaydes:spock-reports:2.3.0-groovy-3.0', { transitive = false }
 
     integrationTestImplementation project
+
+    // TODO: Check if any of these are redundant and then remove
+    testFixturesImplementation 'net.sizovs:pipelinr:0.7'
+    testFixturesImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testFixturesImplementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
+    testFixturesImplementation 'org.codehaus.groovy:groovy-all:3.0.11'
+    testFixturesImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    testFixturesImplementation 'com.athaydes:spock-reports:2.3.0-groovy-3.0', { transitive = false }
+    testFixturesImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testFixturesImplementation 'org.assertj:assertj-core'
+    // testFixturesCompileOnly 'org.junit.jupiter:junit-jupiter-api'
 }
 
 tasks.named('test') {

@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.core.common.factories;
 
 import an.awesome.pipelinr.Command;
-import com.optivem.kata.banking.adapters.driven.fake.FakeDateTimeService;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.EventPublisherImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.OpenAccountUseCase;
