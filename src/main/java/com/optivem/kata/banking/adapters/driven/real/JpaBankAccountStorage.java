@@ -4,11 +4,13 @@ import com.optivem.kata.banking.adapters.driven.real.persistence.BankAccountReco
 import com.optivem.kata.banking.adapters.driven.real.persistence.JpaBankAccountDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@Primary
 public class JpaBankAccountStorage implements BankAccountStorage {
 
     private JpaBankAccountDataAccessor dataAccessor;

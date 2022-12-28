@@ -1,18 +1,46 @@
+# TODO: Clean-up this file, the comments were added due to merge
 version: '3.8'
 services:
   db:
+# postgres:
     image: postgres:14.1-alpine
+#    image: postgres:latest
+    container_name: postgres
     restart: always
+#    restart: unless-stopped
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - '5432:5432'
     networks:
       - local
+# NOTE: The networks was ommitted in the commit without the db volumnes
     volumes:
       - db:/var/lib/postgresql/data
+#      - ./db_persist:/var/lib/postgresql/data
+  mongodb:
+    image: mongo
+    container_name: bk-mongo-db
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
 
+  mongo-express:
+    image: mongo-express #TODO: Perhaps explicit version?
+    container_name: bk-mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=${ME_CONFIG_MONGODB_SERVER}
   adminer:
     image: adminer
     restart: always
@@ -46,3 +74,6 @@ volumes:
 
 networks:
   local:
+
+# NOTE: In the case of ./db_persist:/var/lib/postgresql/data, then the volumes section is ommitted
+# TODO: Reconcile environment variables above

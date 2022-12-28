@@ -4,6 +4,13 @@ export POSTGRES_USER=postgres
 export POSTGRES_PASSWORD=admin
 export POSTGRES_DB=banking_kata
 export POSTGRES_URL=jdbc:postgresql://localhost:5432/$POSTGRES_DB;POSTGRES_USER=$POSTGRES_USER;POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+
+export MONGO_INITDB_ROOT_USERNAME=rootuser
+export MONGO_INITDB_ROOT_PASSWORD=rootpass
+export ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+export ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+export ME_CONFIG_MONGODB_SERVER=mongodb
+
 export KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata
 export KEYCLOAK_TEST_CLIENT_ID=test-client
 export KEYCLOAK_TEST_CLIENT_SECRET=XXXX
