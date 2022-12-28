@@ -1,5 +1,7 @@
 package com.optivem.kata.banking.adapters.driver.web.configurations;
 
+// TODO: #58: Bring back code after issue is resolved https://github.com/valentinacupac/banking-kata-java/issues/58
+/*
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,3 +37,4 @@ public class SecurityConfiguration {
         return http.build();
     }
 }
+*/

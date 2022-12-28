@@ -45,6 +45,10 @@ class BankAccountControllerSystemTest {
     }
 
     private String getToken() {
+        return "TEMP";
+
+        // TODO: #58: Bring back code after issue is resolved https://github.com/valentinacupac/banking-kata-java/issues/58
+        /*
         return "Bearer "
             + client
             .post()
@@ -55,6 +59,7 @@ class BankAccountControllerSystemTest {
             .getResponseBody()
             .map(tokenResponse -> tokenResponse.get("access_token").textValue())
             .blockFirst();
+         */
     }
 
     @Test

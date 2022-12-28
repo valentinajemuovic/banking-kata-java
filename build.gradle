@@ -46,7 +46,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:2.7.3'
+    // TODO: #58: Bring back code after issue is resolved https://github.com/valentinacupac/banking-kata-java/issues/58
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:2.7.3'
     implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0'
     implementation 'net.sizovs:pipelinr:0.7'
     implementation 'de.mkammerer.snowflake-id:snowflake-id:0.0.1'
