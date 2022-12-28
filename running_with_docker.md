@@ -11,10 +11,20 @@ Set environment variables (Windows):
 2. From the main directory run `.\set_env_var.bat`
 
 Set Environment Variables (IntelliJ):
+
 1. See README file -> Running build -> Environment variables
 2. Copy paste it into IntelliJ terminal
+
+Build keycloak image on Mac M1:
+
+1. Execute ./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
 
 Run Docker & Gradle Build:
 
 3. From the same shell run `docker-compose up -d`
+4. From the same shell now you can run gradle scripts (e.g. `./gradlew test`)
+
+Run Docker & Gradle Build (with `.env.local` file):
+
+3. From the same shell run `docker-compose --env-file=.env.local up -d`
 4. From the same shell now you can run gradle scripts (e.g. `./gradlew test`)

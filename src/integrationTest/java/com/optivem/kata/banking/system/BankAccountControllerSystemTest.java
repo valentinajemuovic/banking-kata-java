@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,10 +30,10 @@ class BankAccountControllerSystemTest {
     private final MultiValueMap<String, String> tokenRequestData;
 
     public BankAccountControllerSystemTest(
-        @Autowired WebTestClient client,
-        @Value("${token-uri}") String tokenUri,
-        @Value("${client-id}") String clientId,
-        @Value("${client-secret}") String clientSecret) {
+        @Autowired final WebTestClient client,
+        @Value("${token-uri}") final String tokenUri,
+        @Value("${client-id}") final String clientId,
+        @Value("${client-secret}") final String clientSecret) {
 
         this.client = client;
         this.tokenUri = tokenUri;
@@ -46,10 +45,6 @@ class BankAccountControllerSystemTest {
     }
 
     private String getToken() {
-        return "TEMP";
-
-        // TODO: #58: Bring back code after issue is resolved https://github.com/valentinacupac/banking-kata-java/issues/58
-        /*
         return "Bearer "
             + client
             .post()
@@ -60,14 +55,13 @@ class BankAccountControllerSystemTest {
             .getResponseBody()
             .map(tokenResponse -> tokenResponse.get("access_token").textValue())
             .blockFirst();
-         */
     }
 
     @Test
     void should_open_account_given_valid_request() {
         var request = openAccountRequest().build();
 
-        var response =
+        final var response =
             client
                 .post()
                 .uri("bank-accounts")
@@ -85,9 +79,9 @@ class BankAccountControllerSystemTest {
         assertThat(response).isNotNull();
         assertThat(response.getAccountNumber()).isNotBlank();
 
-        var accountNumber = response.getAccountNumber();
+        final var accountNumber = response.getAccountNumber();
 
-        var viewResponse =
+        final var viewResponse =
             client
                 .get()
                 .uri("bank-accounts/" + accountNumber)
