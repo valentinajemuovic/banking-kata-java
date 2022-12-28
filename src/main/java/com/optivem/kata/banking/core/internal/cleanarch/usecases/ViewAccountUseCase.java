@@ -4,10 +4,9 @@ import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.extensions.Extension;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountRequest;
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,16 +23,12 @@ public class ViewAccountUseCase implements Command.Handler<ViewAccountRequest, V
     @Override
     public ViewAccountResponse handle(ViewAccountRequest request) {
         var accountNumber = getAccountNumber(request);
-        var bankAccount = findBankAccount(accountNumber);
+        var bankAccount = repository.findRequired(accountNumber);
         return getResponse(bankAccount);
     }
 
     private AccountNumber getAccountNumber(ViewAccountRequest request) {
         return AccountNumber.of(request.getAccountNumber());
-    }
-
-    private BankAccount findBankAccount(AccountNumber accountNumber) {
-        return Extension.extend(repository).findRequired(accountNumber);
     }
 
     private ViewAccountResponse getResponse(BankAccount bankAccount) {

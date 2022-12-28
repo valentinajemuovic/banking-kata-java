@@ -1,0 +1,7 @@
+set POSTGRES_USER=postgres
+set POSTGRES_PASSWORD=admin
+set POSTGRES_DB=banking_kata
+set POSTGRES_URL=jdbc:postgresql://localhost:5432/$POSTGRES_DB;POSTGRES_USER=$POSTGRES_USER;POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+set KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata
+set KEYCLOAK_TEST_CLIENT_ID=test-client
+set KEYCLOAK_TEST_CLIENT_SECRET=XXXX

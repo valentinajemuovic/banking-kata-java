@@ -6,6 +6,8 @@ public interface BankAccountRepository {
 
     Optional<BankAccount> find(AccountNumber accountNumber);
 
+    BankAccount findRequired(AccountNumber accountNumber);
+
     void add(BankAccount bankAccount);
 
     void update(BankAccount bankAccount);

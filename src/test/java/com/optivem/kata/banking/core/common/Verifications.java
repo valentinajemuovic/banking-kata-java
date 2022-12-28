@@ -1,9 +1,11 @@
 package com.optivem.kata.banking.core.common;
 
 import an.awesome.pipelinr.Command;
+import com.optivem.kata.banking.adapters.driven.fake.FakeEventBus;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.verifies.*;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import com.optivem.kata.banking.core.ports.driven.EventBus;
 import org.junit.jupiter.api.function.Executable;
 
 public class Verifications {
@@ -24,4 +26,7 @@ public class Verifications {
         return new FacadeVerify(facade);
     }
 
+    public static FakeEventBusVerify verifyThat(FakeEventBus eventBus) {
+        return new FakeEventBusVerify(eventBus);
+    }
 }

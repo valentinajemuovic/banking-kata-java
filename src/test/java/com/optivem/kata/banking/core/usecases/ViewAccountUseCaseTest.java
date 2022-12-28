@@ -5,12 +5,12 @@ import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDto
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.ViewAccountUseCase;
-import com.optivem.kata.banking.core.ports.driver.viewaccount.ViewAccountResponse;
-import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

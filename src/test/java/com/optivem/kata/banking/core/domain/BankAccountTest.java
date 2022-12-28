@@ -2,7 +2,7 @@ package com.optivem.kata.banking.core.domain;
 
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDefaults;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.*;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;

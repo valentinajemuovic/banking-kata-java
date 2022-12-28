@@ -64,7 +64,9 @@ jobs:
           POSTGRES_URL: jdbc:postgresql://localhost:5432/postgres_db
           POSTGRES_USER: postgres_usr
           POSTGRES_PASSWORD: postgres_pwd
-
           MONGO_USER: rootuser
           MONGO_PASSWORD: rootpass
           MONGO_DB: mongo_db
+          KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
+          KEYCLOAK_TEST_CLIENT_ID: test-client
+          KEYCLOAK_TEST_CLIENT_SECRET: XXXX

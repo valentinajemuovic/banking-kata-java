@@ -1,16 +1,13 @@
 package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
-import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.internal.cleanarch.usecases.OpenAccountUseCase;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountRequest;
-import com.optivem.kata.banking.core.ports.driver.openaccount.OpenAccountResponse;
-import com.optivem.kata.banking.infra.fake.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.infra.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.infra.fake.FakeBankAccountStorage;
-import com.optivem.kata.banking.infra.fake.FakeDateTimeService;
+import com.optivem.kata.banking.adapters.driven.fake.*;
+import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
+import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
+import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -26,12 +23,15 @@ import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.openAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_INTEGERS;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class OpenAccountUseCaseTest {
     private FakeBankAccountStorage storage;
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
     private FakeDateTimeService dateTimeService;
+    private FakeEventBus eventBus;
+
     private Command.Handler<OpenAccountRequest, OpenAccountResponse> useCase;
 
     private static Stream<Arguments> should_open_account_given_valid_request() {
@@ -45,20 +45,12 @@ class OpenAccountUseCaseTest {
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
         this.dateTimeService = new FakeDateTimeService();
-        this.useCase = createCleanArchHandler();
-        // this.useCase = createCrudHandler();
+        this.eventBus = new FakeEventBus();
 
         // TODO: VC: Make configurable so that we can run same test twice
-    }
-
-    private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCleanArchHandler() {
-        var repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
-        this.dateTimeService = new FakeDateTimeService();
-        return new OpenAccountUseCase(repository, dateTimeService);
-    }
-
-    private Command.Handler<OpenAccountRequest, OpenAccountResponse> createCrudHandler() {
-        return new com.optivem.kata.banking.core.internal.crud.OpenAccountUseCase(storage, accountIdGenerator, accountNumberGenerator, dateTimeService);
+        var useCaseFactory = new CrudUseCaseFactory();
+        // var useCaseFactory = new CleanArchUseCaseFactory();
+        this.useCase = useCaseFactory.createOpenAccountHandler(storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 
     @ParameterizedTest
@@ -74,12 +66,21 @@ class OpenAccountUseCaseTest {
                 .withBalance(initialBalance)
                 .build();
 
-        var expectedResponse = new OpenAccountResponse();
-        expectedResponse.setAccountNumber(generatedAccountNumber);
+        var expectedResponse = OpenAccountResponse.builder()
+                .accountNumber(generatedAccountNumber)
+                .build();
+
+        var expectedEvent = AccountOpenedDto.builder()
+                .timestamp(LocalDateTime.of(openingDate, LocalTime.MIN))
+                .accountId(generatedAccountId)
+                .firstName(firstName)
+                .lastName(lastName)
+                .balance(initialBalance)
+                .build();
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
-
         verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        verifyThat(eventBus).shouldHavePublishedExactly(expectedEvent);
     }
 
     @ParameterizedTest

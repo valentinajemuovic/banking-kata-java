@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.internal.cleanarch.domain.accounts;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.ValidationMessages;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 
 import static com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard.guard;
 
