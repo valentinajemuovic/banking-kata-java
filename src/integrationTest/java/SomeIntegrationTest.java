@@ -6,6 +6,5 @@ public class SomeIntegrationTest {
     @Test
     void run() {
         assertThat(3 == 3);
-        throw new RuntimeException();
     }
 }
