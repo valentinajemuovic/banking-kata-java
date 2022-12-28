@@ -32,9 +32,9 @@ jobs:
         ports:
           - 8081:8081
         env:
-          - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
-          - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
-          - ME_CONFIG_MONGODB_SERVER=mongodb
+          ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
+          ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
+          ME_CONFIG_MONGODB_SERVER: mongodb
 
 
     steps:
