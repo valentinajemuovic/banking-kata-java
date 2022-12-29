@@ -15,7 +15,7 @@ jobs:
         run:
           sudo apt-get install --yes postgresql-client
       - name: Check database connectivity
-        run: psql -h localhost -p 4300 -d banking_kata -U postgres -c 'SELECT 1;'
+        run: psql -h localhost -p 5400 -d banking_kata -U postgres -c 'SELECT 1;'
         env:
           PGPASSWORD: admin
       - name: Checkout
