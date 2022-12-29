@@ -37,7 +37,7 @@ Note: Soon we plan to also separate the tests so that they can be run separately
 In IntelliJ, for the `Tests in 'banking-kata.test'` configuration, you can copy this into the `Environment variables`
 
 ```
-POSTGRES_URL=jdbc:postgresql://localhost:5400/banking_kata;
+POSTGRES_URL=jdbc:postgresql://localhost:5400/banking_kata_db;
 POSTGRES_USER=postgres;
 POSTGRES_PASSWORD=admin;
 MONGO_INITDB_ROOT_USERNAME=rootuser;
@@ -54,7 +54,7 @@ KEYCLOAK_TEST_CLIENT_SECRET=B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5;
 
 
 
-You need to have created the database, in the example I had created a database called `banking_kata`. 
+You need to have created the database, in the example I had created a database called `banking_kata_db`. 
 
 Keycloak settings:
 - You need to have created a keycloak realm with client_credentials flow enabled.
@@ -67,7 +67,7 @@ Please update the environment variable values based on your local settings.
 Environment Variables
 
 ```
-$env:POSTGRES_URL='jdbc:postgresql://localhost:5400/banking_kata'
+$env:POSTGRES_URL='jdbc:postgresql://localhost:5400/banking_kata_db'
 $env:POSTGRES_USER='postgres'
 $env:POSTGRES_PASSWORD='admin'
 $env:MONGO_INITDB_ROOT_USERNAME='rootuser'

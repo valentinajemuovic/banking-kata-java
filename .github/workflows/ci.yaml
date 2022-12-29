@@ -15,7 +15,7 @@ jobs:
         run:
           sudo apt-get install --yes postgresql-client
       - name: Check database connectivity
-        run: psql -h localhost -p 5400 -d banking_kata -U postgres -c 'SELECT 1;'
+        run: psql -h localhost -p 5400 -d banking_kata_db -U postgres -c 'SELECT 1;'
         env:
           PGPASSWORD: admin
       - name: Checkout
@@ -30,7 +30,7 @@ jobs:
       - name: Gradle Integration Tests
         run: ./gradlew integrationTest
         env:
-          POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata
+          POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata_db
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: admin
           MONGO_INITDB_ROOT_USERNAME: rootuser

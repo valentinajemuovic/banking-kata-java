@@ -2,7 +2,7 @@
 
 export POSTGRES_USER=postgres
 export POSTGRES_PASSWORD=admin
-export POSTGRES_DB=banking_kata
+export POSTGRES_DB=banking_kata_db
 export POSTGRES_URL=jdbc:postgresql://localhost:5400/$POSTGRES_DB;POSTGRES_USER=$POSTGRES_USER;POSTGRES_PASSWORD=$POSTGRES_PASSWORD
 
 export MONGO_INITDB_ROOT_USERNAME=rootuser

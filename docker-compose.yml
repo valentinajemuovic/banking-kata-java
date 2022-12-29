@@ -5,7 +5,7 @@ services:
     container_name: postgres
     restart: always
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=banking_kata,keycloak
+      - POSTGRES_MULTIPLE_DATABASES=banking_kata_db,keycloak
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
     ports:

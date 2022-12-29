@@ -1,6 +1,6 @@
 set POSTGRES_USER=postgres
 set POSTGRES_PASSWORD=admin
-set POSTGRES_DB=banking_kata
+set POSTGRES_DB=banking_kata_db
 set POSTGRES_URL=jdbc:postgresql://localhost:5400/$POSTGRES_DB;POSTGRES_USER=$POSTGRES_USER;POSTGRES_PASSWORD=$POSTGRES_PASSWORD
 
 set export MONGO_INITDB_ROOT_USERNAME=rootuser
