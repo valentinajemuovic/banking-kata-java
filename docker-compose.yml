@@ -5,7 +5,7 @@ services:
     container_name: postgres
     restart: always
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=banking_kata_db,keycloak
+      - POSTGRES_MULTIPLE_DATABASES=banking_kata_db,keycloak_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin
     ports:
@@ -51,7 +51,7 @@ services:
     environment:
       - DB_VENDOR=postgres
       - DB_ADDR=postgres
-      - DB_DATABASE=keycloak
+      - DB_DATABASE=keycloak_db
       - DB_USER=postgres
       - DB_PASSWORD=admin
       - KEYCLOAK_IMPORT=/tmp/realm-export.json
