@@ -28,7 +28,7 @@ jobs:
       - name: Gradle Build & Unit Tests
         run: ./gradlew build
         env:
-          POSTGRES_URL: jdbc:postgresql://localhost:5432/banking_kata
+          POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: admin
           MONGO_INITDB_ROOT_USERNAME: rootuser
@@ -42,7 +42,7 @@ jobs:
       - name: Gradle Integration Tests
         run: ./gradlew integrationTest
         env:
-          POSTGRES_URL: jdbc:postgresql://localhost:5432/banking_kata
+          POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: admin
           MONGO_INITDB_ROOT_USERNAME: rootuser
