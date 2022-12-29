@@ -3,41 +3,11 @@ on: [push, pull_request]
 jobs:
   build-job:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_DB: postgres_db
-          POSTGRES_PORT: 5432
-          POSTGRES_USER: postgres_usr
-          POSTGRES_PASSWORD: postgres_pwd
-        ports:
-          - 5432:5432
-        options:
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3
-
-      mongodb:
-        image: mongo
-        ports:
-          - 27017:27017
-        env:
-          MONGO_INITDB_ROOT_USERNAME: rootuser
-          MONGO_INITDB_ROOT_PASSWORD: rootpass
-
-      mongo-express:
-        image: mongo-express
-        ports:
-          - 8081:8081
-        env:
-          ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
-          ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
-          ME_CONFIG_MONGODB_SERVER: mongodb
-
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose --env-file=.env.local up -d
       - name: Update Packages
         run:
           sudo apt-get update
@@ -45,9 +15,9 @@ jobs:
         run:
           sudo apt-get install --yes postgresql-client
       - name: Check database connectivity
-        run: psql -h localhost -d postgres_db -U postgres_usr -c 'SELECT 1;'
+        run: psql -h localhost -d banking_kata -U postgres -c 'SELECT 1;'
         env:
-          PGPASSWORD: postgres_pwd
+          PGPASSWORD: admin
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Java
@@ -58,9 +28,9 @@ jobs:
       - name: Gradle Build & Unit Tests
         run: ./gradlew build
         env:
-          POSTGRES_URL: jdbc:postgresql://localhost:5432/postgres_db
-          POSTGRES_USER: postgres_usr
-          POSTGRES_PASSWORD: postgres_pwd
+          POSTGRES_URL: jdbc:postgresql://localhost:5432/banking_kata
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
           MONGO_INITDB_ROOT_USERNAME: rootuser
           MONGO_INITDB_ROOT_PASSWORD: rootpass
           ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
@@ -68,13 +38,13 @@ jobs:
           ME_CONFIG_MONGODB_SERVER: mongodb
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
-          KEYCLOAK_TEST_CLIENT_SECRET: XXXX
+          KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
       - name: Gradle Integration Tests
         run: ./gradlew integrationTest
         env:
-          POSTGRES_URL: jdbc:postgresql://localhost:5432/postgres_db
-          POSTGRES_USER: postgres_usr
-          POSTGRES_PASSWORD: postgres_pwd
+          POSTGRES_URL: jdbc:postgresql://localhost:5432/banking_kata
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
           MONGO_INITDB_ROOT_USERNAME: rootuser
           MONGO_INITDB_ROOT_PASSWORD: rootpass
           ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
@@ -82,4 +52,4 @@ jobs:
           ME_CONFIG_MONGODB_SERVER: mongodb
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
-          KEYCLOAK_TEST_CLIENT_SECRET: XXXX
+          KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
