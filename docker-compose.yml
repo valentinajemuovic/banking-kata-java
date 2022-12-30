@@ -16,7 +16,7 @@ services:
       - postgres:/var/lib/postgresql/data
       - ./src/main/resources/postgres/:/docker-entrypoint-initdb.d
   mongodb:
-    image: mongo
+    image: mongo:6.0.3
     container_name: mongodb
     ports:
       - '27017:27017'
@@ -25,7 +25,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
 
   mongo-express:
-    image: mongo-express #TODO: Perhaps explicit version?
+    image: mongo-express:0.54.0
     container_name: mongo-express
     restart: always
     ports:
