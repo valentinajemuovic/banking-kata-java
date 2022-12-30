@@ -1,3 +1,4 @@
+/*
 plugins {
     id 'java'
 }
@@ -16,4 +17,21 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+ */
+
+dependencies {
+    implementation project(':core')
+    implementation project(':adapters-fake')
+
+    // implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }
