@@ -4,7 +4,6 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountH
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountId;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.Balance;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.BaseDomainEvent;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

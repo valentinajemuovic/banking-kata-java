@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.adapters.driven.real;
 
-import com.optivem.kata.banking.adapters.driven.real.SysDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

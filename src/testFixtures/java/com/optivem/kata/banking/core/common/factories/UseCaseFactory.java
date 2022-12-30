@@ -8,5 +8,5 @@ import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccou
 public interface UseCaseFactory {
 
     Command.Handler<OpenAccountRequest, OpenAccountResponse> createOpenAccountHandler(BankAccountStorage bankAccountStorage,
-         AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator,  DateTimeService dateTimeService, EventBus eventBus);
+                                                                                      AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus);
 }

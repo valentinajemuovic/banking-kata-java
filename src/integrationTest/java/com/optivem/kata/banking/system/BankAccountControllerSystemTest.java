@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.system;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.core.common.verifies;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeEventBus;
-import com.optivem.kata.banking.core.ports.driven.EventBus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

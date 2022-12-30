@@ -1,8 +1,8 @@
-package com.optivem.kata.banking.infra.real;
+package com.optivem.kata.banking.adapters.driven.real;
 
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
-import com.optivem.kata.banking.infra.real.persistence.MongoTemplateCustomDataAccessor;
+import com.optivem.kata.banking.adapters.driven.real.persistence.MongoTemplateCustomDataAccessor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

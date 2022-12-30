@@ -43,7 +43,7 @@ tasks.named('integrationTest') {
 
 dependencies {
 
-    // implementation project(':core')
+    implementation project(':core')
 
 
     testImplementation project(':core')
