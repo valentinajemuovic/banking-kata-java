@@ -46,7 +46,7 @@ dependencies {
     // implementation project(':core')
 
 
-    // testImplementation project(':core')
+    testImplementation project(':core')
 
     integrationTestImplementation project
 
@@ -61,7 +61,7 @@ dependencies {
     testFixturesImplementation 'org.assertj:assertj-core'
     // testFixturesCompileOnly 'org.junit.jupiter:junit-jupiter-api'
 
-    // testFixturesImplementation project(':core')
+    testFixturesImplementation project(':core')
 
 
 
