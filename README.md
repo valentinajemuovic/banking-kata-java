@@ -18,82 +18,84 @@ We implement a Banking system with the following use cases:
 - Deposit funds
 - View account
 
+We also have authentication with Keycloak - a realm with client_id and with client_credentials flow enabled.
+
 ## Prerequisites
 
 - OpenJDK 17
 - Docker
 
-Note: If you also want to run without Docker, you can install:
-- [PostgresSQL 14.4](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
-- [pgAdmin 4](https://www.pgadmin.org/download/)
-- [Keycloak](https://www.keycloak.org/docs/11.0/getting_started/)
+## Basic Setup
 
-## Environment variables
-
-To be able to run the tests (since some of the tests are dependent on the database - the integration tests), we then need to set the environment variables.
-
-Note: Soon we plan to also separate the tests so that they can be run separately.
-
-In IntelliJ, for the `Tests in 'banking-kata.test'` configuration, you can copy this into the `Environment variables`
-
-```
-POSTGRES_URL=jdbc:postgresql://localhost:5400/banking_kata_db;
-POSTGRES_USER=postgres;
-POSTGRES_PASSWORD=admin;
-MONGO_INITDB_ROOT_USERNAME=rootuser;
-MONGO_INITDB_ROOT_PASSWORD=rootpass;
-ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser;
-ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass;
-ME_CONFIG_MONGODB_SERVER=mongodb;
-KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata;
-KEYCLOAK_TEST_CLIENT_ID=test-client;
-KEYCLOAK_TEST_CLIENT_SECRET=B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5;
-```
-
-
-
-
-
-You need to have created the database, in the example I had created a database called `banking_kata_db`. 
-
-Keycloak settings:
-- You need to have created a keycloak realm with client_credentials flow enabled.
-- In the example I had created a realm called `banking-kata` with a client_id `test-client`.
-
-Please update the environment variable values based on your local settings.
-
-## Running build
-
-Environment Variables
-
-```
-$env:POSTGRES_URL='jdbc:postgresql://localhost:5400/banking_kata_db'
-$env:POSTGRES_USER='postgres'
-$env:POSTGRES_PASSWORD='admin'
-$env:MONGO_INITDB_ROOT_USERNAME='rootuser'
-$env:MONGO_INITDB_ROOT_PASSWORD='rootpass'
-$env:ME_CONFIG_MONGODB_ADMINUSERNAME='rootuser'
-$env:ME_CONFIG_MONGODB_ADMINPASSWORD='rootpass'
-$env:ME_CONFIG_MONGODB_SERVER='mongodb'
-$env:KEYCLOAK_REALM_URL='http://localhost:10000/auth/realms/banking-kata'
-$env:KEYCLOAK_TEST_CLIENT_ID='test-client'
-$env:KEYCLOAK_TEST_CLIENT_SECRET='B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5'
-```
-
-Running build with automated tests:
+### Build & Unit Tests
 
 ```
 ./gradlew build
+```
+
+_Alternatively, if you prefer to use IntelliJ UI, you can run `Tests in banking-kata.test`._
+
+### Environment Variables
+
+_Environment variables are located inside the `env` folder. You can optionally choose to edit them._
+
+Apply the environment variables (for Windows only):
+
+```shell
+.\env\env.ps
+```
+
+Apply the environment variables (for Linux/Mac only):
+
+```shell
+source ./env/env.sh
+```
+
+_Alternatively, if you prefer to use IntelliJ UI, you can copy-paste the text from the file `env/env.intellij.ui` into the `Environment variables` section in `Tests in 'banking-kata.integrationTest'` configuration._
+
+### Docker
+
+For Mac only, you need to build a custom Keycloak image to enable Keycloak to work on Mac M1. 
+This is due to a reported Mac-specific issue https://github.com/docker/for-mac/issues/5310.
+For any other OS, please skip this step, because this issue is Mac-specific:
+
+```shell
+./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
+```
+
+Run Docker with the environment file:
+
+```shell
+docker-compose --env-file=env/.env.local up -d
+```
+
+_Alternatively, run Docker without the environment file:_
+
+```shell
+docker-compose up -d
+```
+
+### Integration Tests
+
+Based on having successfully set Environment Variables & Docker (see above), you can run the Integration Tests:
+
+```shell
 ./gradlew integrationTest
 ```
 
-Running JaCoCo code coverage:
+_Alternatively, if you prefer to use IntelliJ UI, you can run `Tests in 'banking-kata.integrationTest'` (assuming you've configured the environment variables also via UI, as per steps above)._
+
+### Code Coverage
+
+Run JaCoCo code coverage:
 
 ```
 ./gradlew jacocoTestReport
 ```
 
-Running PIT mutation testing:
+### Mutation Testing
+
+Run PIT mutation testing:
 
 ```
 ./gradlew pitest
@@ -108,6 +110,12 @@ Reports:
 - build\reports\tests
 - build\reports\jacoco
 - build\reports\pitest
+
+## Issues
+
+If you experience Integration Tests failing, please see the following known issue https://github.com/valentinacupac/banking-kata-java/issues/64.
+
+If you experience any other issues, please create a ticket https://github.com/valentinacupac/banking-kata-java/issues/new
 
 ## Contributing
 

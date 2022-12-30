@@ -14,7 +14,7 @@ services:
       - local
     volumes:
       - postgres:/var/lib/postgresql/data
-      - ./src/main/resources/postgres:/docker-entrypoint-initdb.d
+      - ./src/main/resources/postgres/:/docker-entrypoint-initdb.d
   mongodb:
     image: mongo
     container_name: mongodb
