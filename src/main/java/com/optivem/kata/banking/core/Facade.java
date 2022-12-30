@@ -27,6 +27,8 @@ public class Facade {
         this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository);
         this.openAccountUseCase = new OpenAccountUseCase(bankAccountRepository, dateTimeService, eventPublisher);
         this.viewAccountUseCase = new ViewAccountUseCase(bankAccountRepository, scoreCalculator);
+
+        Hello hello = new Hello();
     }
 
     public void execute(DepositFundsRequest request) {
