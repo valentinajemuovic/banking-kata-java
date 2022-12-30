@@ -49,7 +49,11 @@ dependencies {
     testImplementation project(':core')
     testImplementation project(':adapters-fake')
 
-    integrationTestImplementation project
+    // integrationTestImplementation project
+
+    integrationTestImplementation project(':core')
+    integrationTestImplementation project(':adapters')
+    integrationTestImplementation project(':adapters-fake')
 
     // TODO: Check if any of these are redundant and then remove
     testFixturesImplementation 'net.sizovs:pipelinr:0.7'
