@@ -47,6 +47,7 @@ dependencies {
 
 
     testImplementation project(':core')
+    testImplementation project(':adapters-fake')
 
     integrationTestImplementation project
 
@@ -62,7 +63,7 @@ dependencies {
     // testFixturesCompileOnly 'org.junit.jupiter:junit-jupiter-api'
 
     testFixturesImplementation project(':core')
-
+    testFixturesImplementation project(':adapters-fake')
 
 
 }

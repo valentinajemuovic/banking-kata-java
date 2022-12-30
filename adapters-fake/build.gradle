@@ -20,6 +20,10 @@ test {
 }
  */
 
+dependencies {
+    implementation project(':core')
+}
+
 bootJar {
     enabled = false
 }
