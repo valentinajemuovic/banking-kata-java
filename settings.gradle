@@ -1,1 +1,3 @@
 rootProject.name = 'banking-kata'
+include 'core'
+
