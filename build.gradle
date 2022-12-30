@@ -20,19 +20,9 @@ jacocoTestReport {
     dependsOn test
 }
 
-group = 'com.optivem'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
 
-repositories {
-    mavenCentral()
-}
+
 
 def integrationTest = sourceSets.create('integrationTest')
 configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
@@ -44,27 +34,19 @@ tasks.register('integrationTest', Test) {
     classpath = configurations[integrationTest.runtimeClasspathConfigurationName] + integrationTest.output
 }
 
+tasks.named('integrationTest') {
+    useJUnitPlatform()
+}
+
+
+
+
 dependencies {
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql:42.3.6'
 
-    annotationProcessor 'org.projectlombok:lombok'
+    // implementation project(':core')
 
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:2.7.3'
-    implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0'
-    implementation 'net.sizovs:pipelinr:0.7'
-    implementation 'de.mkammerer.snowflake-id:snowflake-id:0.0.1'
-    implementation project(':core')
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
-    testImplementation 'org.codehaus.groovy:groovy-all:3.0.11'
-    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
-    testImplementation 'com.athaydes:spock-reports:2.3.0-groovy-3.0', { transitive = false }
+    // testImplementation project(':core')
 
     integrationTestImplementation project
 
@@ -78,12 +60,64 @@ dependencies {
     testFixturesImplementation 'org.junit.jupiter:junit-jupiter-api'
     testFixturesImplementation 'org.assertj:assertj-core'
     // testFixturesCompileOnly 'org.junit.jupiter:junit-jupiter-api'
+
+    // testFixturesImplementation project(':core')
+
+
+
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+
+
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
 }
 
-tasks.named('integrationTest') {
-    useJUnitPlatform()
+
+allprojects {
+    group = 'com.optivem'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '17'
+
+    configurations {
+        compileOnly.extendsFrom annotationProcessor
+        testCompileOnly.extendsFrom annotationProcessor
+        testAnnotationProcessor.extendsFrom annotationProcessor
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        runtimeOnly 'org.postgresql:postgresql:42.3.6'
+
+        annotationProcessor 'org.projectlombok:lombok'
+
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:2.7.3'
+        implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0'
+        implementation 'net.sizovs:pipelinr:0.7'
+        implementation 'de.mkammerer.snowflake-id:snowflake-id:0.0.1'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webflux:2.7.0'
+        testImplementation 'org.codehaus.groovy:groovy-all:3.0.11'
+        testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+        testImplementation 'com.athaydes:spock-reports:2.3.0-groovy-3.0', { transitive = false }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
 }
