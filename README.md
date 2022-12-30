@@ -42,7 +42,7 @@ _Environment variables are located inside the `env` folder. You can optionally c
 Apply the environment variables (for Windows only):
 
 ```shell
-.\env\env.ps
+. .\env\env.ps1
 ```
 
 Apply the environment variables (for Linux/Mac only):
