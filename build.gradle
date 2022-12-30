@@ -80,7 +80,7 @@ subprojects {
 
 
 allprojects {
-    group = 'com.optivem'
+    group = 'com.optivem.kata.banking'
     version = '0.0.1-SNAPSHOT'
     sourceCompatibility = '17'
 

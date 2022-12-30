@@ -1,4 +1,5 @@
 rootProject.name = 'banking-kata'
 include 'core'
 include 'adapters'
+include 'adapters-fake'
 
