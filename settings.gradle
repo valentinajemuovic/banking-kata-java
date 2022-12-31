@@ -9,4 +9,7 @@ include 'adapters-generation-random'
 include 'adapters-restapi-spring'
 include 'adapters-messaging-inmemory'
 include 'startup'
+include 'adapters-generation-fake'
+include 'adapters-persistence-fake'
+include 'adapters-time-fake'
 

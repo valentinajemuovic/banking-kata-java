@@ -1,0 +1,13 @@
+dependencies {
+    implementation project(':core')
+
+    testImplementation project(':test-fixtures')
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
