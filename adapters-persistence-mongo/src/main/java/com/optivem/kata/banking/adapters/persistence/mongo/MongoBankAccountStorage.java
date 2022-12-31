@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.adapters.persistence.mongo;
 
+import com.optivem.kata.banking.adapters.persistence.mongo.internal.MongoTemplateCustomDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import org.springframework.stereotype.Component;

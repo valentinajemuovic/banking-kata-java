@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.persistence.jpa;
+package com.optivem.kata.banking.adapters.persistence.jpa.internal;
 
 import org.springframework.data.repository.CrudRepository;
 

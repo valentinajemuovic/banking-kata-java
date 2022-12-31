@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.persistence.mongo;
+package com.optivem.kata.banking.adapters.persistence.mongo.internal;
 
 
 import lombok.AllArgsConstructor;
