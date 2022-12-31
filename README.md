@@ -95,6 +95,12 @@ Reports:
 - build\reports\jacoco
 - build\reports\pitest
 
+## Running Spring Boot
+
+```
+./gradlew adapters:bootRun
+```
+
 ## Optional Notes
 
 Environment variables are located inside the `env` folder. You can optionally choose to edit them.
