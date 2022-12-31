@@ -1,19 +1,20 @@
-plugins {
-    id 'java'
-}
-
-group 'com.optivem.kata.banking'
-version '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation project(':core')
+    implementation project(':adapters-persistence-jpa')
+    implementation project(':adapters-persistence-mongo')
+    implementation project(':adapters-time-system')
+    implementation project(':adapters-generation-random')
+    implementation project(':adapters-restapi-spring')
+    implementation project(':adapters-messaging-inmemory')
+
+    testImplementation project(':test-fixtures')
 }
 
-test {
-    useJUnitPlatform()
+// TODO: VC: Check if the application can still be started normally manually
+bootJar {
+    enabled = true
+}
+
+jar {
+    enabled = true
 }

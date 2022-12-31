@@ -1,9 +1,11 @@
 package com.optivem.kata.banking.system;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.optivem.kata.banking.adapters.BankingApplication;
+import com.optivem.kata.banking.BankingApplication;
+import com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,7 +61,7 @@ class BankAccountControllerSystemTest {
 
     @Test
     void should_open_account_given_valid_request() {
-        var request = openAccountRequest().build();
+        var request = OpenAccountRequestBuilder.openAccountRequest().build();
 
         final var response =
             client
@@ -76,8 +78,8 @@ class BankAccountControllerSystemTest {
                 .returnResult()
                 .getResponseBody();
 
-        assertThat(response).isNotNull();
-        assertThat(response.getAccountNumber()).isNotBlank();
+        Assertions.assertThat(response).isNotNull();
+        Assertions.assertThat(response.getAccountNumber()).isNotBlank();
 
         final var accountNumber = response.getAccountNumber();
 
@@ -94,9 +96,9 @@ class BankAccountControllerSystemTest {
                 .returnResult()
                 .getResponseBody();
 
-        assertThat(viewResponse).isNotNull();
-        assertThat(viewResponse.getAccountNumber()).isEqualTo(accountNumber);
-        assertThat(viewResponse.getFullName()).isNotBlank();
-        assertThat(viewResponse.getBalance()).isNotNegative();
+        Assertions.assertThat(viewResponse).isNotNull();
+        Assertions.assertThat(viewResponse.getAccountNumber()).isEqualTo(accountNumber);
+        Assertions.assertThat(viewResponse.getFullName()).isNotBlank();
+        Assertions.assertThat(viewResponse.getBalance()).isNotNegative();
     }
 }

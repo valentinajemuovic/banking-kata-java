@@ -21,13 +21,6 @@ jacocoTestReport {
 
 dependencies {
 
-    implementation project(':core')
-    implementation project(':adapters')
-
-    testImplementation project(':core')
-    testImplementation project(':adapters')
-    testImplementation project(':adapters-fake')
-    testImplementation project(':test-fixtures')
 }
 
 
@@ -90,6 +83,7 @@ task unitTest {
     dependsOn 'adapters-fake:test'
 }
 
+// TODO: VC: Update
 task integrationTest {
     dependsOn 'adapters:test'
 }

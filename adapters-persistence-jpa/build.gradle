@@ -2,7 +2,7 @@ dependencies {
     implementation project(':core')
 
     testImplementation project(':test-fixtures')
-    testImplementation project(':adapters')
+    testImplementation project(':startup')
 }
 
 bootJar {

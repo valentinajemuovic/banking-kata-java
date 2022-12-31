@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.system;
 
-import com.optivem.kata.banking.adapters.BankingApplication;
+import com.optivem.kata.banking.BankingApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
