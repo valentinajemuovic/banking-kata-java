@@ -8,4 +8,5 @@ include 'adapters-persistence-mongo'
 include 'adapters-time-system'
 include 'adapters-generation-random'
 include 'adapters-restapi-spring'
+include 'adapters-messaging-inmemory'
 
