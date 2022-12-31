@@ -101,6 +101,8 @@ Reports:
 ./gradlew adapters:bootRun
 ```
 
+<!--- TODO: VC: Building also the entire app, maybe running with fakes? -->
+
 ## Optional Notes
 
 Environment variables are located inside the `env` folder. You can optionally choose to edit them.
