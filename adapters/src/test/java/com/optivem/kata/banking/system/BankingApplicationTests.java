@@ -1,4 +1,4 @@
-package com.optivem.kata.banking;
+package com.optivem.kata.banking.system;
 
 import com.optivem.kata.banking.adapters.BankingApplication;
 import org.junit.jupiter.api.Test;
