@@ -26,6 +26,8 @@ test {
 
 dependencies {
     implementation project(':core')
+
+    testImplementation project(':test-fixtures')
 }
 
 bootJar {
