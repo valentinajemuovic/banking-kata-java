@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':core')
+    implementation project(':adapters-persistence-jpa')
 
     testImplementation project(':test-fixtures')
 }
