@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driver.web.configurations;
+package com.optivem.kata.banking.adapters.restapi.spring.configurations;
 
 import an.awesome.pipelinr.Command;
 import an.awesome.pipelinr.Notification;

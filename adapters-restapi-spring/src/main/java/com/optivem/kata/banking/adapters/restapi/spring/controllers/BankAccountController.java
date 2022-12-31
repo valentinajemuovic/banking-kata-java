@@ -1,6 +1,6 @@
-package com.optivem.kata.banking.adapters.driver.web.controllers;
+package com.optivem.kata.banking.adapters.restapi.spring.controllers;
 
-import com.optivem.kata.banking.adapters.driver.web.controllers.base.BaseController;
+import com.optivem.kata.banking.adapters.restapi.spring.controllers.base.BaseController;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;

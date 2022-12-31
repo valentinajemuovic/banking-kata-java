@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driver.web.controllers.base;
+package com.optivem.kata.banking.adapters.restapi.spring.controllers.base;
 
 import an.awesome.pipelinr.Pipeline;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driver.web.configurations;
+package com.optivem.kata.banking.adapters.restapi.spring.configurations;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
