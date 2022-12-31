@@ -22,9 +22,10 @@ jacocoTestReport {
 dependencies {
 
     implementation project(':core')
-
+    implementation project(':adapters')
 
     testImplementation project(':core')
+    testImplementation project(':adapters')
     testImplementation project(':adapters-fake')
     testImplementation project(':test-fixtures')
 }
