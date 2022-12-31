@@ -5,6 +5,7 @@ dependencies {
     implementation project(':adapters-time-system')
     implementation project(':adapters-generation-random')
     implementation project(':adapters-restapi-spring')
+    implementation project(':adapters-messaging-inmemory')
 
     testImplementation project(':test-fixtures')
 }

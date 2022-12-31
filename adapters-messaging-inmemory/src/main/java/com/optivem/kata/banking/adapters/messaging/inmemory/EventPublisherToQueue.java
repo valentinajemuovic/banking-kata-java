@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real.events;
+package com.optivem.kata.banking.adapters.messaging.inmemory;
 
 
 import com.optivem.kata.banking.core.ports.driven.EventBus;

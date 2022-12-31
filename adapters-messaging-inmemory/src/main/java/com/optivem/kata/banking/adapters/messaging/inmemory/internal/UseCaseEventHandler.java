@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real.events;
+package com.optivem.kata.banking.adapters.messaging.inmemory.internal;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
