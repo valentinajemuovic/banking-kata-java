@@ -6,4 +6,5 @@ include 'test-fixtures'
 include 'adapters-persistence-jpa'
 include 'adapters-persistence-mongo'
 include 'adapters-time-system'
+include 'adapters-generation-random'
 
