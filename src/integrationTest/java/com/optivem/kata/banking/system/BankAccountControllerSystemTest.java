@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.system;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.optivem.kata.banking.adapters.BankingApplication;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.openAccountRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 @ContextConfiguration
 class BankAccountControllerSystemTest {
