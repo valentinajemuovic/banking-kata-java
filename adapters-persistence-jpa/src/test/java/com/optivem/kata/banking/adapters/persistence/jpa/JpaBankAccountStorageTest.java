@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real;
+package com.optivem.kata.banking.adapters.persistence.jpa;
 
 import com.optivem.kata.banking.adapters.BankingApplication;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
