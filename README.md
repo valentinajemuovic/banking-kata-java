@@ -25,37 +25,30 @@ We also have authentication with Keycloak - a realm with client_id and with clie
 - OpenJDK 17
 - Docker
 
-## Basic Setup
+## Running Unit Tests
 
-### Build & Unit Tests
+Run unit tests for `core` and `adapters-fake`:
 
 ```
-./gradlew build
+./gradlew core:test
+./gradlew adapters-fake:test
 ```
 
-_Alternatively, if you prefer to use IntelliJ UI, you can run `Tests in banking-kata.test`._
+## Running Integration Tests
 
-### Environment Variables
-
-_Environment variables are located inside the `env` folder. You can optionally choose to edit them._
-
-Apply the environment variables (for Windows only):
+Apply the environment variables (Windows):
 
 ```shell
 . .\env\env.ps1
 ```
 
-Apply the environment variables (for Linux/Mac only):
+Apply the environment variables (for Linux/Mac):
 
 ```shell
 source ./env/env.sh
 ```
 
-_Alternatively, if you prefer to use IntelliJ UI, you can copy-paste the text from the file `env/env.intellij.ui` into the `Environment variables` section in `Tests in 'banking-kata.integrationTest'` configuration._
-
-### Docker
-
-For Mac only, you need to build a custom Keycloak image to enable Keycloak to work on Mac M1. 
+For Mac only, you need to build a custom Keycloak image to enable Keycloak to work on Mac M1.
 This is due to a reported Mac-specific issue https://github.com/docker/for-mac/issues/5310.
 For any other OS, please skip this step, because this issue is Mac-specific:
 
@@ -63,29 +56,22 @@ For any other OS, please skip this step, because this issue is Mac-specific:
 ./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
 ```
 
-Run Docker with the environment file:
-
-```shell
-docker-compose --env-file=env/.env.local up -d
-```
-
-_Alternatively, run Docker without the environment file:_
+Run docker:
 
 ```shell
 docker-compose up -d
 ```
 
-### Integration Tests
+Run the integration tests:
 
-Based on having successfully set Environment Variables & Docker (see above), you can run the Integration Tests:
-
-```shell
-./gradlew integrationTest
+```
+./gradlew adapters:test
 ```
 
-_Alternatively, if you prefer to use IntelliJ UI, you can run `Tests in 'banking-kata.integrationTest'` (assuming you've configured the environment variables also via UI, as per steps above)._
+<!--- TODO: VC: System tests -->
 
-### Code Coverage
+
+### Code Coverage & Mutation Testing
 
 Run JaCoCo code coverage:
 
@@ -93,9 +79,7 @@ Run JaCoCo code coverage:
 ./gradlew jacocoTestReport
 ```
 
-### Mutation Testing
-
-Run PIT mutation testing:
+Run PIT mutation testing (TODO: VC: Fix this):
 
 ```
 ./gradlew pitest
@@ -110,6 +94,21 @@ Reports:
 - build\reports\tests
 - build\reports\jacoco
 - build\reports\pitest
+
+## Optional Notes
+
+Environment variables are located inside the `env` folder. You can optionally choose to edit them.
+
+You can choose to run the tests via IntelliJ UI. 
+
+In the case of integration tests (for `adapters`) you'd have to specify environment variables before you run the tests.
+To do that, you can copy the text from the file `env/env.intellij.ui` into the `Environment variables` section into `Tests in 'banking-kata.adapters'` configuration.
+
+To run Docker with the environment file:
+
+```shell
+docker-compose --env-file=env/.env.local up -d
+```
 
 ## Issues
 
