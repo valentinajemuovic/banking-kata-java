@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real.persistence;
+package com.optivem.kata.banking.adapters.persistence.mongo;
 
 
 import lombok.AllArgsConstructor;

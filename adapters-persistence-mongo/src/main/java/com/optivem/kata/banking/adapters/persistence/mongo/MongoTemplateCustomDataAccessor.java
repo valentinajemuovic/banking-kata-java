@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real.persistence;
+package com.optivem.kata.banking.adapters.persistence.mongo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
