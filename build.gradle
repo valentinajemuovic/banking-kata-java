@@ -85,6 +85,15 @@ allprojects {
 
 }
 
+task unitTest {
+    dependsOn 'core:test'
+    dependsOn 'adapters-fake:test'
+}
+
+task integrationTest {
+    dependsOn 'adapters:test'
+}
+
 bootJar {
     enabled = false
 }
