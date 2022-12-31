@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real;
+package com.optivem.kata.banking.adapters.generation.random;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

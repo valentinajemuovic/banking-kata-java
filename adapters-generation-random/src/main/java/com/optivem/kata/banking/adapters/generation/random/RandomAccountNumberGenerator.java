@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real;
+package com.optivem.kata.banking.adapters.generation.random;
 
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import de.huxhorn.sulky.ulid.ULID;

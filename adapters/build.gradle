@@ -3,6 +3,7 @@ dependencies {
     implementation project(':adapters-persistence-jpa')
     implementation project(':adapters-persistence-mongo')
     implementation project(':adapters-time-system')
+    implementation project(':adapters-generation-random')
 
     testImplementation project(':test-fixtures')
 }
