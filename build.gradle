@@ -19,27 +19,6 @@ jacocoTestReport {
     dependsOn test
 }
 
-
-
-
-
-def integrationTest = sourceSets.create('integrationTest')
-configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
-configurations[integrationTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly)
-
-tasks.register('integrationTest', Test) {
-    useJUnitPlatform()
-    testClassesDirs = integrationTest.output.classesDirs
-    classpath = configurations[integrationTest.runtimeClasspathConfigurationName] + integrationTest.output
-}
-
-tasks.named('integrationTest') {
-    useJUnitPlatform()
-}
-
-
-
-
 dependencies {
 
     implementation project(':core')
@@ -48,13 +27,6 @@ dependencies {
     testImplementation project(':core')
     testImplementation project(':adapters-fake')
     testImplementation project(':test-fixtures')
-
-    integrationTestImplementation project
-
-    integrationTestImplementation project(':core')
-    integrationTestImplementation project(':adapters')
-    integrationTestImplementation project(':adapters-fake')
-    integrationTestImplementation project(':test-fixtures')
 }
 
 
@@ -110,4 +82,12 @@ allprojects {
         useJUnitPlatform()
     }
 
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }
