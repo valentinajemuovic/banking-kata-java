@@ -21,6 +21,11 @@ test {
  */
 
 
+dependencies {
+    testImplementation project(':test-fixtures')
+    testImplementation project(':adapters-fake')
+}
+
 bootJar {
     enabled = false
 }
