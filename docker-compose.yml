@@ -14,7 +14,7 @@ services:
       - local
     volumes:
       - postgres:/var/lib/postgresql/data
-      - ./adapters/src/main/resources/postgres/:/docker-entrypoint-initdb.d
+      - ./startup/src/main/resources/postgres/:/docker-entrypoint-initdb.d
   mongodb:
     image: mongo:6.0.3
     container_name: mongodb
@@ -61,7 +61,7 @@ services:
     networks:
       - local
     volumes:
-      - ./adapters/src/main/resources/keycloak/realm-export.json:/tmp/realm-export.json
+      - ./startup/src/main/resources/keycloak/realm-export.json:/tmp/realm-export.json
     depends_on:
       - postgres
 

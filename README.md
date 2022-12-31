@@ -27,11 +27,10 @@ We also have authentication with Keycloak - a realm with client_id and with clie
 
 ## Running Unit Tests
 
-Run unit tests for `core` and `adapters-fake`:
+Run unit tests for `core`:
 
 ```
-./gradlew core:test
-./gradlew adapters-fake:test
+./gradlew coreTest
 ```
 
 ## Running Integration Tests
@@ -62,10 +61,10 @@ Run docker:
 docker-compose up -d
 ```
 
-Run the integration tests:
+To run all the adapter integration tests:
 
 ```
-./gradlew adapters:test
+./gradlew adapterTest
 ```
 
 <!--- TODO: VC: System tests -->
@@ -98,7 +97,7 @@ Reports:
 ## Running Spring Boot
 
 ```
-./gradlew adapters:bootRun
+./gradlew startup:bootRun
 ```
 
 <!--- TODO: VC: Building also the entire app, maybe running with fakes? -->
@@ -117,6 +116,13 @@ To run Docker with the environment file:
 ```shell
 docker-compose --env-file=env/.env.local up -d
 ```
+
+You can run the integration tests individually, e.g. if you modified a module (in this way you avoid waiting for all of them to finish):
+
+```
+./gradlew adapters-persistence-jpa:test
+```
+
 
 ## Issues
 

@@ -78,14 +78,19 @@ allprojects {
 
 }
 
-task unitTest {
+task coreTest {
     dependsOn 'core:test'
     dependsOn 'adapters-fake:test'
 }
 
-// TODO: VC: Update
-task integrationTest {
-    dependsOn 'adapters:test'
+task adapterTest {
+    dependsOn 'adapters-fake:test'
+    dependsOn 'adapters-generation-random:test'
+    dependsOn 'adapters-messaging-inmemory:test'
+    dependsOn 'adapters-persistence-jpa:test'
+    dependsOn 'adapters-persistence-mongo:test'
+    dependsOn 'adapters-restapi-spring:test'
+    dependsOn 'adapters-time-system:test'
 }
 
 bootJar {
