@@ -1,19 +1,13 @@
-plugins {
-    id 'java'
-}
-
-group 'com.optivem.kata.banking'
-version '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation project(':core')
+
+    testImplementation project(':test-fixtures')
 }
 
-test {
-    useJUnitPlatform()
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }

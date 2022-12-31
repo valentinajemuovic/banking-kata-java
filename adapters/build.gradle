@@ -1,6 +1,7 @@
 dependencies {
     implementation project(':core')
     implementation project(':adapters-persistence-jpa')
+    implementation project(':adapters-time-system')
 
     testImplementation project(':test-fixtures')
 }

@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.real;
+package com.optivem.kata.banking.adapters.time.system;
 
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 import org.springframework.stereotype.Component;
