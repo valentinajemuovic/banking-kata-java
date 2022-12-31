@@ -73,7 +73,6 @@ allprojects {
 
 task coreTest {
     dependsOn 'core:test'
-    dependsOn 'adapters-fake:test'
 }
 
 task adapterTest {

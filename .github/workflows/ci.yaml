@@ -26,7 +26,7 @@ jobs:
         with:
           java-version: 17
           distribution: 'adopt'
-      - name: Gradle Build & All Tests
+      - name: Gradle Build
         run: ./gradlew build
         env:
           POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata_db
