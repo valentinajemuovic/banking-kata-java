@@ -4,4 +4,5 @@ include 'adapters'
 include 'adapters-fake'
 include 'test-fixtures'
 include 'adapters-persistence-jpa'
+include 'adapters-persistence-mongo'
 
