@@ -69,8 +69,16 @@ To run all the adapter integration tests:
 
 <!--- TODO: VC: System tests -->
 
+## Running System Tests
 
-### Code Coverage & Mutation Testing
+To run the whole system:
+
+```
+./gradlew systemTest
+```
+
+
+## Code Coverage & Mutation Testing
 
 Run JaCoCo code coverage:
 
@@ -122,7 +130,6 @@ You can run the integration tests individually, e.g. if you modified a module (i
 ```
 ./gradlew adapters-persistence-jpa:test
 ```
-
 
 ## Issues
 

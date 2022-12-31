@@ -19,13 +19,6 @@ jacocoTestReport {
     dependsOn test
 }
 
-dependencies {
-
-}
-
-
-
-
 
 subprojects {
     apply plugin: 'java'
@@ -33,7 +26,6 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
 
 }
-
 
 allprojects {
     group = 'com.optivem.kata.banking'
@@ -50,6 +42,7 @@ allprojects {
         mavenCentral()
     }
 
+    // TODO: VC: Move these files into respective modules
     dependencies {
         compileOnly 'org.projectlombok:lombok'
         runtimeOnly 'org.postgresql:postgresql:42.3.6'
@@ -91,6 +84,10 @@ task adapterTest {
     dependsOn 'adapters-persistence-mongo:test'
     dependsOn 'adapters-restapi-spring:test'
     dependsOn 'adapters-time-system:test'
+}
+
+task systemTest {
+    dependsOn 'startup:test'
 }
 
 bootJar {
