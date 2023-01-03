@@ -1,7 +1,6 @@
 dependencies {
     implementation project(':core')
-
-    testImplementation project(':adapters-base')
+    implementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 bootJar {
