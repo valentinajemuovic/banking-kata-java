@@ -2,7 +2,7 @@ rootProject.name = 'banking-kata'
 include 'core'
 include 'test-fixtures'
 
-include 'adapters-persistence-mongo'
+
 include 'adapters-time-system'
 
 include 'adapters-restapi-spring'
@@ -22,3 +22,4 @@ include 'adapter-messaging-fake'
 include 'adapter-messaging-inmemory'
 include 'adapter-persistence-fake'
 include 'adapter-persistence-jpa'
+include 'adapter-persistence-mongo'
