@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':core')
+    implementation project(':test-fixtures')
     implementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
