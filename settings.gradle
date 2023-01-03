@@ -6,7 +6,7 @@ include 'adapters-persistence-mongo'
 include 'adapters-time-system'
 
 include 'adapters-restapi-spring'
-include 'adapters-messaging-inmemory'
+
 include 'startup'
 
 include 'adapters-persistence-fake'
@@ -19,3 +19,4 @@ include 'adapter-base'
 include 'adapter-generation-fake'
 include 'adapter-generation-random'
 include 'adapter-messaging-fake'
+include 'adapter-messaging-inmemory'
