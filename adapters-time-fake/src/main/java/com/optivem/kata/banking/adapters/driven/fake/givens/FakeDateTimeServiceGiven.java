@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.common.givens;
+package com.optivem.kata.banking.adapters.driven.fake.givens;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeDateTimeService;
 

@@ -5,6 +5,7 @@ import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
+import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
@@ -60,7 +61,7 @@ class OpenAccountUseCaseTest {
     void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(generatedAccountId);
         FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
-        givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
+        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withFirstName(firstName)

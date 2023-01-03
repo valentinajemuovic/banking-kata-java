@@ -2,6 +2,7 @@ package com.optivem.kata.banking.core.common.factories;
 
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
+import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.Givens;
 
@@ -30,8 +31,8 @@ public class FacadeFactory {
         FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(ACCOUNT_NUMBER_2);
 
         var dateTimeService = new FakeDateTimeService();
-        Givens.givenThat(dateTimeService).willReturn(DATE_TIME_1);
-        Givens.givenThat(dateTimeService).willReturn(DATE_TIME_2);
+        FakeTimeGivens.givenThat(dateTimeService).willReturn(DATE_TIME_1);
+        FakeTimeGivens.givenThat(dateTimeService).willReturn(DATE_TIME_2);
 
         var bankAccountStorage = new FakeBankAccountStorage();
 

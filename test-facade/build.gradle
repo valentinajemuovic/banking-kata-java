@@ -1,0 +1,16 @@
+dependencies {
+    implementation project(':adapters-fake')
+    implementation project(':adapters-generation-fake')
+    implementation project(':adapters-persistence-fake')
+    implementation project(':adapters-time-fake')
+    implementation project(':test-fixtures')
+    implementation project(':core') // TODO: VC: This causes circular referencing
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

@@ -2,9 +2,6 @@ package com.optivem.kata.banking.testing;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.adapters.driven.fake.FakeDateTimeService;
-import com.optivem.kata.banking.core.Facade;
-import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import com.optivem.kata.banking.testing.givens.FakeAccountIdGeneratorGiven;
 import com.optivem.kata.banking.testing.givens.FakeAccountNumberGeneratorGiven;
 
