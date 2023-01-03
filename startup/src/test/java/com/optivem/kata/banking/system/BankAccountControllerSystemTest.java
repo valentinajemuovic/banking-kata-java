@@ -23,7 +23,7 @@ import static com.optivem.kata.banking.core.common.builders.requests.OpenAccount
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({ "test", "jpa", "adapter-generation-random" }) // TODO: Referencing ProfileNames results in build error
+@ActiveProfiles({ "test", "adapter-persistence-jpa", "adapter-generation-random" }) // TODO: Referencing ProfileNames results in build error
 @ContextConfiguration
 class BankAccountControllerSystemTest {
 
