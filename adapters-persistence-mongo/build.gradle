@@ -2,6 +2,8 @@ dependencies {
     implementation project(':core')
 
     testImplementation project(':test-fixtures')
+    testImplementation project(':startup')
+    testImplementation project(':adapters-base')
 }
 
 bootJar {
