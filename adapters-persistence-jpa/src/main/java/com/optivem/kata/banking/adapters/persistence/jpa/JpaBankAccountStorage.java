@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-@Primary // TODO: VC: Profile name
+@Profile(ProfileNames.AdapterPersistenceJpa)
 public class JpaBankAccountStorage implements BankAccountStorage {
 
     private JpaBankAccountDataAccessor dataAccessor;
