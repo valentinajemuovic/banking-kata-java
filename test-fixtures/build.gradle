@@ -1,6 +1,5 @@
 dependencies {
     implementation project(':core')
-    implementation project(':adapters-fake')
     implementation project(':adapters-generation-fake')
 
     implementation 'org.springframework.boot:spring-boot-starter-test'

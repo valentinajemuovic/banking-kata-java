@@ -1,6 +1,5 @@
 rootProject.name = 'banking-kata'
 include 'core'
-include 'adapters-fake'
 include 'test-fixtures'
 include 'adapters-persistence-jpa'
 include 'adapters-persistence-mongo'

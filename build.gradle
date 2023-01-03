@@ -76,7 +76,6 @@ task coreTest {
 }
 
 task adapterTest {
-    dependsOn 'adapters-fake:test'
     dependsOn 'adapters-generation-random:test'
     dependsOn 'adapters-messaging-inmemory:test'
     dependsOn 'adapters-persistence-jpa:test'
