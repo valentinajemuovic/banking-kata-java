@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.adapters.driven.fake.givens.BankAccountStorageGivens;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
@@ -48,7 +49,7 @@ class ViewAccountUseCaseTest {
         var fullName = "Kelly McDonald";
         var score = Score.A;
 
-        givenThat(storage).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
+        BankAccountStorageGivens.givenThat(storage).alreadyHasBankAccount(accountNumber, firstName, lastName, initialBalance);
 
         var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)

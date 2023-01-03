@@ -1,5 +1,7 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.adapters.driven.fake.givens.BankAccountStorageGivens;
+import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
@@ -44,7 +46,7 @@ class DepositFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_deposit_funds_given_valid_request(String accountNumber, int initialBalance, int depositAmount, int expectedFinalBalance) {
-        givenThat(storage)
+        BankAccountStorageGivens.givenThat(storage)
                 .alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = depositFundsRequest()
@@ -56,7 +58,7 @@ class DepositFundsUseCaseTest {
                 .withRequest(request)
                 .shouldReturnVoidResponse();
 
-        verifyThat(storage)
+        BankAccountStorageVerifies.verifyThat(storage)
                 .shouldContain(accountNumber, expectedFinalBalance);
     }
 

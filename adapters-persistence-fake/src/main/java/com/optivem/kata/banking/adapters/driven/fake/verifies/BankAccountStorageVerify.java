@@ -1,8 +1,9 @@
-package com.optivem.kata.banking.core.common.verifies;
+package com.optivem.kata.banking.adapters.driven.fake.verifies;
 
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import org.assertj.core.api.Assertions;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class BankAccountStorageVerify {
     public BankAccountDto shouldContain(BankAccountDto bankAccount) {
         var accountNumber = bankAccount.getAccountNumber();
         var retrievedBankAccount = storage.find(accountNumber);
-        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(bankAccount));
+        Assertions.assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(bankAccount));
         return retrievedBankAccount.get();
     }
 
@@ -48,12 +49,12 @@ public class BankAccountStorageVerify {
 
     public BankAccountDto shouldContain(String accountNumber) {
         var retrievedBankAccount = storage.find(accountNumber);
-        assertThat(retrievedBankAccount).usingRecursiveComparison().isNotEqualTo(Optional.empty());
+        Assertions.assertThat(retrievedBankAccount).usingRecursiveComparison().isNotEqualTo(Optional.empty());
         return retrievedBankAccount.get();
     }
 
     public void shouldNotContain(String accountNumber) {
         var retrievedBankAccount = storage.find(accountNumber);
-        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.empty());
+        Assertions.assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.empty());
     }
 }

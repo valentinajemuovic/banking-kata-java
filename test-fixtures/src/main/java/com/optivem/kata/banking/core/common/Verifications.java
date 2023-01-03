@@ -17,10 +17,6 @@ public class Verifications {
         return new UseCaseVerify<>(useCase);
     }
 
-    public static BankAccountStorageVerify verifyThat(BankAccountStorage storage) {
-        return new BankAccountStorageVerify(storage);
-    }
-
     public static FacadeVerify verifyThat(Facade facade) {
         return new FacadeVerify(facade);
     }

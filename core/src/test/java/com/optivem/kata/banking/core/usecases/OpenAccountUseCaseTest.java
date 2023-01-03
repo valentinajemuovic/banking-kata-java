@@ -6,6 +6,7 @@ import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
+import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
@@ -82,7 +83,7 @@ class OpenAccountUseCaseTest {
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
-        verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        BankAccountStorageVerifies.verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
         verifyThat(eventBus).shouldHavePublishedExactly(expectedEvent);
     }
 

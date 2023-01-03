@@ -1,8 +1,7 @@
-package com.optivem.kata.banking.core.common.givens;
+package com.optivem.kata.banking.adapters.driven.fake.givens;
 
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
-
-import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 
 public class BankAccountStorageGiven {
 
@@ -13,7 +12,7 @@ public class BankAccountStorageGiven {
     }
 
     public void alreadyHasBankAccount(String accountNumber, int balance) {
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withBalance(balance)
                 .build();
@@ -22,7 +21,7 @@ public class BankAccountStorageGiven {
     }
 
     public void alreadyHasBankAccount(String accountNumber, String firstName, String lastName, int balance) {
-        var bankAccount = bankAccount()
+        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)

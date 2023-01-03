@@ -1,5 +1,7 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.adapters.driven.fake.givens.BankAccountStorageGivens;
+import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
@@ -43,7 +45,7 @@ class WithdrawFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_withdraw_funds_given_valid_request(String accountNumber, int initialBalance, int amount, int expectedFinalBalance) {
-        givenThat(storage).alreadyHasBankAccount(accountNumber, initialBalance);
+        BankAccountStorageGivens.givenThat(storage).alreadyHasBankAccount(accountNumber, initialBalance);
 
         var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
@@ -52,7 +54,7 @@ class WithdrawFundsUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldReturnVoidResponse();
 
-        verifyThat(storage).shouldContain(accountNumber, expectedFinalBalance);
+        BankAccountStorageVerifies.verifyThat(storage).shouldContain(accountNumber, expectedFinalBalance);
     }
 
     @ParameterizedTest
@@ -89,7 +91,7 @@ class WithdrawFundsUseCaseTest {
         var balance = 140;
         var amount = 141;
 
-        givenThat(storage).alreadyHasBankAccount(accountNumber, balance);
+        BankAccountStorageGivens.givenThat(storage).alreadyHasBankAccount(accountNumber, balance);
 
         var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
@@ -98,6 +100,6 @@ class WithdrawFundsUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
 
-        verifyThat(storage).shouldContain(accountNumber, balance);
+        BankAccountStorageVerifies.verifyThat(storage).shouldContain(accountNumber, balance);
     }
 }
