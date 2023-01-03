@@ -4,7 +4,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-test'
 
     testImplementation project(':test-fixtures')
-    testImplementation project(':adapters-base')
+    testImplementation project(':adapter-base')
     testImplementation project(':adapters-generation-random')
 }
 

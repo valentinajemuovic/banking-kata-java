@@ -7,7 +7,7 @@ dependencies {
     implementation project(':adapters-restapi-spring')
     implementation project(':adapters-messaging-inmemory')
 
-    testImplementation project(':adapters-base')
+    testImplementation project(':adapter-base')
     testImplementation project(':adapters-persistence-jpa')
     testImplementation project(':test-fixtures')
 }
