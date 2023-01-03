@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.common.verifies;
+package com.optivem.kata.banking.adapters.driven.fake.verifies;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeEventBus;
 
