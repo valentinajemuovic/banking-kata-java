@@ -1,9 +1,4 @@
 spring:
-  datasource:
-    url: ${POSTGRES_URL}
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
-    driver-class-name: org.postgresql.Driver
 
   security:
     oauth2:
@@ -11,19 +6,6 @@ spring:
         jwt:
           issuer-uri: ${KEYCLOAK_REALM_URL}
           jwk-set-uri: ${KEYCLOAK_REALM_URL}/protocol/openid-connect/certs
-
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
-    show-sql: false
-    hibernate-sql: true
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
-        format_sql: true
 
   data:
     mongodb:
