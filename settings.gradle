@@ -10,7 +10,7 @@ include 'adapters-time-system'
 include 'startup'
 
 
-include 'adapters-time-fake'
+
 include 'test-facade'
 
 
@@ -23,6 +23,7 @@ include 'adapter-messaging-inmemory'
 include 'adapter-persistence-fake'
 include 'adapter-persistence-jpa'
 include 'adapter-persistence-mongo'
+include 'adapter-time-fake'
 
 
 
