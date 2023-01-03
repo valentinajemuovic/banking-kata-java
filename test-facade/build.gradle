@@ -1,6 +1,6 @@
 dependencies {
     implementation project(':adapter-generation-fake')
-    implementation project(':adapters-messaging-fake')
+    implementation project(':adapter-messaging-fake')
     implementation project(':adapters-persistence-fake')
     implementation project(':adapters-time-fake')
     implementation project(':test-fixtures')

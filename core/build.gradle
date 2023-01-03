@@ -1,7 +1,7 @@
 dependencies {
     testImplementation project(':test-fixtures')
     testImplementation project(':adapter-generation-fake')
-    testImplementation project(':adapters-messaging-fake')
+    testImplementation project(':adapter-messaging-fake')
     testImplementation project(':adapters-persistence-fake')
     testImplementation project(':adapters-time-fake')
     testImplementation project(':test-facade')

@@ -12,9 +12,10 @@ include 'startup'
 include 'adapters-persistence-fake'
 include 'adapters-time-fake'
 include 'test-facade'
-include 'adapters-messaging-fake'
+
 
 
 include 'adapter-base'
 include 'adapter-generation-fake'
 include 'adapter-generation-random'
+include 'adapter-messaging-fake'
