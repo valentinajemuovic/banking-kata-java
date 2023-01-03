@@ -9,7 +9,7 @@ include 'adapters-restapi-spring'
 
 include 'startup'
 
-include 'adapters-persistence-fake'
+
 include 'adapters-time-fake'
 include 'test-facade'
 
@@ -20,3 +20,4 @@ include 'adapter-generation-fake'
 include 'adapter-generation-random'
 include 'adapter-messaging-fake'
 include 'adapter-messaging-inmemory'
+include 'adapter-persistence-fake'

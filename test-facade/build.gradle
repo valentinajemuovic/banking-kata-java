@@ -1,7 +1,7 @@
 dependencies {
     implementation project(':adapter-generation-fake')
     implementation project(':adapter-messaging-fake')
-    implementation project(':adapters-persistence-fake')
+    implementation project(':adapter-persistence-fake')
     implementation project(':adapters-time-fake')
     implementation project(':test-fixtures')
     implementation project(':core') // TODO: VC: This causes circular referencing
