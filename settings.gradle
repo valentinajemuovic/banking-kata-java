@@ -13,4 +13,5 @@ include 'adapters-generation-fake'
 include 'adapters-persistence-fake'
 include 'adapters-time-fake'
 include 'test-facade'
+include 'adapters-messaging-fake'
 

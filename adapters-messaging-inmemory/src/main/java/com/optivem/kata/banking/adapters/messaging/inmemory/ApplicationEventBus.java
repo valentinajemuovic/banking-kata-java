@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class EventPublisherToQueue implements EventBus {
+public class ApplicationEventBus implements EventBus {
 
     private ApplicationEventPublisher applicationEventPublisher;
 
-    public EventPublisherToQueue(ApplicationEventPublisher applicationEventPublisher){
+    public ApplicationEventBus(ApplicationEventPublisher applicationEventPublisher){
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
