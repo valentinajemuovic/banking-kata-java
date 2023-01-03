@@ -2,6 +2,7 @@ package com.optivem.kata.banking.system;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.optivem.kata.banking.BankingApplication;
+import com.optivem.kata.banking.adapters.driven.ProfileNames;
 import com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
@@ -23,7 +24,7 @@ import static com.optivem.kata.banking.core.common.builders.requests.OpenAccount
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({ "test", "adapter-persistence-jpa", "adapter-generation-random", "adapter-time-system" }) // TODO: Referencing ProfileNames results in build error
+@ActiveProfiles({ "test", ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem })
 @ContextConfiguration
 class BankAccountControllerSystemTest {
 
