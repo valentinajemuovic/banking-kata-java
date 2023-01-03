@@ -1,7 +1,9 @@
 package com.optivem.kata.banking.core.common.factories;
 
 import com.optivem.kata.banking.adapters.driven.fake.*;
+import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
 import com.optivem.kata.banking.core.Facade;
+import com.optivem.kata.banking.core.common.Givens;
 
 import java.time.LocalDateTime;
 
@@ -20,16 +22,16 @@ public class FacadeFactory {
 
     public Facade create() {
         var accountIdGenerator = new FakeAccountIdGenerator();
-        givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_1);
-        givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_2);
+        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_1);
+        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_2);
 
         var accountNumberGenerator = new FakeAccountNumberGenerator();
-        givenThat(accountNumberGenerator).willGenerate(ACCOUNT_NUMBER_1);
-        givenThat(accountNumberGenerator).willGenerate(ACCOUNT_NUMBER_2);
+        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(ACCOUNT_NUMBER_1);
+        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(ACCOUNT_NUMBER_2);
 
         var dateTimeService = new FakeDateTimeService();
-        givenThat(dateTimeService).willReturn(DATE_TIME_1);
-        givenThat(dateTimeService).willReturn(DATE_TIME_2);
+        Givens.givenThat(dateTimeService).willReturn(DATE_TIME_1);
+        Givens.givenThat(dateTimeService).willReturn(DATE_TIME_2);
 
         var bankAccountStorage = new FakeBankAccountStorage();
 

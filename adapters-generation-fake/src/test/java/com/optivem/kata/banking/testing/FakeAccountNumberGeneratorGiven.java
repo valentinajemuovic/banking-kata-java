@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.common.givens;
+package com.optivem.kata.banking.testing.givens;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 

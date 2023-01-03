@@ -12,14 +12,6 @@ public class Givens {
         return new BankAccountStorageGiven(storage);
     }
 
-    public static FakeAccountNumberGeneratorGiven givenThat(FakeAccountNumberGenerator generator) {
-        return new FakeAccountNumberGeneratorGiven(generator);
-    }
-
-    public static FakeAccountIdGeneratorGiven givenThat(FakeAccountIdGenerator generator) {
-        return new FakeAccountIdGeneratorGiven(generator);
-    }
-
     public static FakeDateTimeServiceGiven givenThat(FakeDateTimeService service) {
         return new FakeDateTimeServiceGiven(service);
     }

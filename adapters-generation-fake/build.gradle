@@ -1,7 +1,8 @@
 dependencies {
     implementation project(':core')
+    implementation project(':adapters-fake')
 
-    testImplementation project(':test-fixtures')
+    // testImplementation project(':test-fixtures')
 }
 
 bootJar {

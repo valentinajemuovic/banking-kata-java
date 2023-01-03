@@ -1,11 +1,12 @@
-package com.optivem.kata.banking.adapters.driven.fake;
+package com.optivem.kata.banking;
 
+import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeException;
 import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.core.common.Givens.givenThat;
+import static com.optivem.kata.banking.testing.Givens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
