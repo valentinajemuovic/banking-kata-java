@@ -1,24 +1,29 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
-import com.optivem.kata.banking.adapters.driven.fake.base.FakeGenerator;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class FakeDateTimeService implements DateTimeService {
 
-    private final FakeGenerator<LocalDateTime> dateGenerator;
+    private final Queue<LocalDateTime> queue;
 
     public FakeDateTimeService() {
-        this.dateGenerator = new FakeGenerator<>();
+        this.queue = new ArrayDeque<>();
     }
 
     @Override
     public LocalDateTime now() {
-        return dateGenerator.next();
+        if (queue.isEmpty()) {
+            throw new NextDateTimeIsNotConfiguredException();
+        }
+
+        return queue.remove();
     }
 
-    public void add(LocalDateTime dateTime) {
-        dateGenerator.add(dateTime);
+    public void add(LocalDateTime value) {
+        queue.add(value);
     }
 }

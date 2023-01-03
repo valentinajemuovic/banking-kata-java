@@ -1,8 +1,7 @@
 package com.optivem.kata.banking;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeException;
-import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeMessages;
+import com.optivem.kata.banking.adapters.driven.fake.internal.NextElementIsNotSetupException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +19,7 @@ class FakeAccountNumberGeneratorTest {
 
     @Test
     void should_throw_exception_when_no_elements() {
-        var exception = assertThrows(FakeException.class, () -> generator.next());
-
-        assertThat(exception.getMessage()).isEqualTo(FakeMessages.GENERATOR_DOES_NOT_HAVE_NEXT);
+        assertThrows(NextElementIsNotSetupException.class, () -> generator.next());
     }
 
     @Test
@@ -59,7 +56,6 @@ class FakeAccountNumberGeneratorTest {
     }
 
     private void assertNextThrowsException() {
-        var exception = assertThrows(FakeException.class, () -> generator.next());
-        assertThat(exception.getMessage()).isEqualTo(FakeMessages.GENERATOR_DOES_NOT_HAVE_NEXT);
+        assertThrows(NextElementIsNotSetupException.class, () -> generator.next());
     }
 }

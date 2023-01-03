@@ -3,7 +3,6 @@ package com.optivem.kata.banking.core.util;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
-import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeMessages;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
@@ -16,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UtilityClassTest {
     @Test
     void testConstructor() throws Exception {
-        assertPrivateConstructor(FakeMessages.class);
         assertPrivateConstructor(Guard.class);
         assertPrivateConstructor(RepositoryMessages.class);
         assertPrivateConstructor(ValidationMessages.class);

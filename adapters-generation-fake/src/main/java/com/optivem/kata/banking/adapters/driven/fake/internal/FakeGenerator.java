@@ -1,8 +1,6 @@
-package com.optivem.kata.banking.adapters.driven.fake.base;
+package com.optivem.kata.banking.adapters.driven.fake.internal;
 
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.base.Generator;
-import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeException;
-import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeMessages;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -17,7 +15,7 @@ public class FakeGenerator<T> implements Generator<T> {
     @Override
     public T next() {
         if (queue.isEmpty()) {
-            throw new FakeException(FakeMessages.GENERATOR_DOES_NOT_HAVE_NEXT);
+            throw new NextElementIsNotSetupException();
         }
 
         return queue.remove();
