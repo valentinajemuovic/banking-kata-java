@@ -78,7 +78,7 @@ task coreTest {
 task adapterTest {
     dependsOn 'adapter-generation-random:test'
     dependsOn 'adapter-messaging-inmemory:test'
-    dependsOn 'adapters-persistence-jpa:test'
+    dependsOn 'adapter-persistence-jpa:test'
     dependsOn 'adapters-persistence-mongo:test'
     dependsOn 'adapters-restapi-spring:test'
     dependsOn 'adapters-time-system:test'

@@ -128,7 +128,7 @@ docker-compose --env-file=env/.env.local up -d
 You can run the integration tests individually, e.g. if you modified a module (in this way you avoid waiting for all of them to finish):
 
 ```
-./gradlew adapters-persistence-jpa:test
+./gradlew adapter-persistence-jpa:test
 ```
 
 ## Issues
