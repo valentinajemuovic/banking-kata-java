@@ -2,7 +2,7 @@ dependencies {
     implementation project(':core')
     implementation project(':adapter-persistence-jpa')
     implementation project(':adapter-persistence-mongo')
-    implementation project(':adapters-time-system')
+    implementation project(':adapter-time-system')
     implementation project(':adapter-generation-random')
     implementation project(':adapter-restapi-spring')
     implementation project(':adapter-messaging-inmemory')

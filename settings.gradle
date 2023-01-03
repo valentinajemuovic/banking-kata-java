@@ -1,19 +1,8 @@
 rootProject.name = 'banking-kata'
 include 'core'
 include 'test-fixtures'
-
-
-include 'adapters-time-system'
-
-
-
 include 'startup'
-
-
-
 include 'test-facade'
-
-
 
 include 'adapter-base'
 include 'adapter-generation-fake'
@@ -24,7 +13,6 @@ include 'adapter-persistence-fake'
 include 'adapter-persistence-jpa'
 include 'adapter-persistence-mongo'
 include 'adapter-time-fake'
-
-
+include 'adapter-time-system'
 
 include 'adapter-restapi-spring'

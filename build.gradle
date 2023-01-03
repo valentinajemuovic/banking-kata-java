@@ -81,7 +81,7 @@ task adapterTest {
     dependsOn 'adapter-persistence-jpa:test'
     dependsOn 'adapter-persistence-mongo:test'
     dependsOn 'adapter-restapi-spring:test'
-    dependsOn 'adapters-time-system:test'
+    dependsOn 'adapter-time-system:test'
 }
 
 task systemTest {
