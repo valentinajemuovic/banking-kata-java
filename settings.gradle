@@ -8,10 +8,12 @@ include 'adapters-generation-random'
 include 'adapters-restapi-spring'
 include 'adapters-messaging-inmemory'
 include 'startup'
-include 'adapters-generation-fake'
+
 include 'adapters-persistence-fake'
 include 'adapters-time-fake'
 include 'test-facade'
 include 'adapters-messaging-fake'
-include 'adapter-base'
 
+
+include 'adapter-base'
+include 'adapter-generation-fake'
