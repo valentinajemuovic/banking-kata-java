@@ -4,7 +4,7 @@ dependencies {
     implementation project(':adapter-persistence-mongo')
     implementation project(':adapters-time-system')
     implementation project(':adapter-generation-random')
-    implementation project(':adapters-restapi-spring')
+    implementation project(':adapter-restapi-spring')
     implementation project(':adapter-messaging-inmemory')
 
     testImplementation project(':adapter-base')

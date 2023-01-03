@@ -5,7 +5,7 @@ include 'test-fixtures'
 
 include 'adapters-time-system'
 
-include 'adapters-restapi-spring'
+
 
 include 'startup'
 
@@ -23,3 +23,7 @@ include 'adapter-messaging-inmemory'
 include 'adapter-persistence-fake'
 include 'adapter-persistence-jpa'
 include 'adapter-persistence-mongo'
+
+
+
+include 'adapter-restapi-spring'

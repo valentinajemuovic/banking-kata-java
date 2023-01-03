@@ -80,7 +80,7 @@ task adapterTest {
     dependsOn 'adapter-messaging-inmemory:test'
     dependsOn 'adapter-persistence-jpa:test'
     dependsOn 'adapter-persistence-mongo:test'
-    dependsOn 'adapters-restapi-spring:test'
+    dependsOn 'adapter-restapi-spring:test'
     dependsOn 'adapters-time-system:test'
 }
 
