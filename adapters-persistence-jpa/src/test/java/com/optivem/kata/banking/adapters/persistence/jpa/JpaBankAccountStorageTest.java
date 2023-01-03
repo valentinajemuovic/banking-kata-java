@@ -19,7 +19,7 @@ import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAcc
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = BankingApplication.class)
-@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom })
+@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem })
 @ContextConfiguration
 public class JpaBankAccountStorageTest extends BankAccountStorageTest {
     @Autowired

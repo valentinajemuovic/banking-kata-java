@@ -5,4 +5,6 @@ public class ProfileNames {
 
     public static final String AdapterPersistenceJpa = "adapter-persistence-jpa";
     public static final String AdapterPersistenceMongo = "adapter-persistence-mongo";
+
+    public static final String AdapterTimeSystem = "adapter-time-system";
 }
