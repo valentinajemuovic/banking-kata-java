@@ -5,7 +5,7 @@ dependencies {
 
     testImplementation project(':test-fixtures')
     testImplementation project(':adapter-base')
-    testImplementation project(':adapters-generation-random')
+    testImplementation project(':adapter-generation-random')
 }
 
 bootJar {

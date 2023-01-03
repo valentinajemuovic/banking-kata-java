@@ -4,7 +4,7 @@ include 'test-fixtures'
 include 'adapters-persistence-jpa'
 include 'adapters-persistence-mongo'
 include 'adapters-time-system'
-include 'adapters-generation-random'
+
 include 'adapters-restapi-spring'
 include 'adapters-messaging-inmemory'
 include 'startup'
@@ -17,3 +17,4 @@ include 'adapters-messaging-fake'
 
 include 'adapter-base'
 include 'adapter-generation-fake'
+include 'adapter-generation-random'
