@@ -6,7 +6,7 @@ jobs:
 
 # TODO: VC: Remove line 9, same as lines 22-23; move docker compose, update packages, install Psql client & check DB connectivity above the integration tests
     steps:
-      - uses: actions/checkout@v2
+#      - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose --env-file=env/.env.local up -d
       - name: Update Packages
@@ -26,8 +26,10 @@ jobs:
         with:
           java-version: 17
           distribution: 'adopt'
-      - name: Gradle Build
-        run: ./gradlew build
+      - name: Gradle Core Test
+        run: ./gradlew coreTest
+      - name: Gradle Adapter Test
+        run: ./gradlew adapterTest
         env:
           POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata_db
           POSTGRES_USER: postgres
@@ -40,3 +42,37 @@ jobs:
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
+      - name: Gradle System Test
+        run: ./gradlew systemTest
+        env:
+          POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
+          MONGO_INITDB_ROOT_USERNAME: rootuser
+          MONGO_INITDB_ROOT_PASSWORD: rootpass
+          ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
+          ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
+          ME_CONFIG_MONGODB_SERVER: mongodb
+          KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
+          KEYCLOAK_TEST_CLIENT_ID: test-client
+          KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
+      - name: Gradle Test (All)
+        run: ./gradlew test
+        env:
+          POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
+          MONGO_INITDB_ROOT_USERNAME: rootuser
+          MONGO_INITDB_ROOT_PASSWORD: rootpass
+          ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
+          ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
+          ME_CONFIG_MONGODB_SERVER: mongodb
+          KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
+          KEYCLOAK_TEST_CLIENT_ID: test-client
+          KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
+      - name: Code Coverage
+        run: ./gradlew jacocoTestReport
+      - name: Mutation Testing
+        run: ./gradlew pitest
+
+# TODO: Add pitest after issue https://github.com/valentinacupac/banking-kata-java/issues/69 is resolved
