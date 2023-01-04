@@ -15,6 +15,7 @@ import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -57,7 +58,7 @@ class OpenAccountUseCaseTest {
         // TODO: VC: Make configurable so that we can run same test twice
         var useCaseFactory = new CrudUseCaseFactory();
         // var useCaseFactory = new CleanArchUseCaseFactory();
-        this.useCase = useCaseFactory.createOpenAccountHandler(storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
+        this.useCase = useCaseFactory.createOpenAccountHandler(nationalIdentityProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 
     @ParameterizedTest
@@ -69,6 +70,7 @@ class OpenAccountUseCaseTest {
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
 
         var request = openAccountRequest()
+                .withNationalIdentityNumber(nationalIdentityNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withBalance(initialBalance)
@@ -99,6 +101,14 @@ class OpenAccountUseCaseTest {
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY);
+    }
+
+    @Test
+    void should_throw_exception_given_nonexistent_national_identity_number() {
+        var request = openAccountRequest()
+                .build();
+
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
     }
 
     @ParameterizedTest

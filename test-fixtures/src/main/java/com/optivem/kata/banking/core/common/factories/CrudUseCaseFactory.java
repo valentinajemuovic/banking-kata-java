@@ -8,7 +8,7 @@ import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccou
 
 public class CrudUseCaseFactory implements UseCaseFactory {
     @Override
-    public Command.Handler<OpenAccountRequest, OpenAccountResponse> createOpenAccountHandler(BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
-        return new OpenAccountUseCase(bankAccountStorage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
+    public Command.Handler<OpenAccountRequest, OpenAccountResponse> createOpenAccountHandler(NationalIdentityProvider nationalIdentityProvider, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+        return new OpenAccountUseCase(nationalIdentityProvider, bankAccountStorage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 }

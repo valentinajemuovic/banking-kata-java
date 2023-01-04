@@ -11,7 +11,7 @@ import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccou
 public class CleanArchUseCaseFactory implements UseCaseFactory {
 
     @Override
-    public Command.Handler<OpenAccountRequest, OpenAccountResponse> createOpenAccountHandler(BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+    public Command.Handler<OpenAccountRequest, OpenAccountResponse> createOpenAccountHandler(NationalIdentityProvider nationalIdentityProvider, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
         var repository = new BankAccountRepositoryImpl(bankAccountStorage, accountIdGenerator, accountNumberGenerator);
         var eventPublisher = new EventPublisherImpl(eventBus);
         return new OpenAccountUseCase(repository, dateTimeService, eventPublisher);

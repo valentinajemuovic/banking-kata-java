@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.internal.crud.usecases;
 
 import an.awesome.pipelinr.Command;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driven.*;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
@@ -10,6 +11,7 @@ import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccou
 import static com.optivem.kata.banking.core.internal.crud.common.Guard.guard;
 
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
+    private NationalIdentityProvider nationalIdentityProvider;
     private BankAccountStorage bankAccountStorage;
     private AccountIdGenerator accountIdGenerator;
     private AccountNumberGenerator accountNumberGenerator;
@@ -17,7 +19,8 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
     private EventBus eventBus;
 
-    public OpenAccountUseCase(BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+        this.nationalIdentityProvider = nationalIdentityProvider;
         this.bankAccountStorage = bankAccountStorage;
         this.accountIdGenerator = accountIdGenerator;
         this.accountNumberGenerator = accountNumberGenerator;
@@ -31,6 +34,12 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
         var firstName = guard(request.getFirstName()).againstNullOrWhitespace(ValidationMessages.FIRST_NAME_EMPTY);
         var lastName = guard(request.getLastName()).againstNullOrWhitespace(ValidationMessages.LAST_NAME_EMPTY);
         var balance = guard(request.getBalance()).againstNegative(ValidationMessages.BALANCE_NEGATIVE);
+
+        var nationalIdentityNumberExists = nationalIdentityProvider.exists(nationalIdentityNumber);
+
+        if(!nationalIdentityNumberExists) {
+            throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
+        }
 
         var accountId = accountIdGenerator.next();
         var accountNumber = accountNumberGenerator.next();
