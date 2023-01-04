@@ -23,4 +23,7 @@ public abstract class NationalIdentityProviderTest {
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isNotNull();
     }
+
+    // TODO: VC: Scenario of return success
+    // TODO: VC: Scenario of return not exist
 }

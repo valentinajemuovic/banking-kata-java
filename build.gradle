@@ -44,6 +44,8 @@ allprojects {
 
     // TODO: VC: Move these files into respective modules
     dependencies {
+        compileOnly 'org.springframework.boot:spring-boot-starter-webflux:3.0.1' // Needed for HTTP client
+
         compileOnly 'org.projectlombok:lombok'
         runtimeOnly 'org.postgresql:postgresql:42.3.6'
 
