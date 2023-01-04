@@ -27,6 +27,7 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
     @Override
     public OpenAccountResponse handle(OpenAccountRequest request) {
+        var nationalIdentityNumber = guard(request.getNationalIdentityNumber()).againstNullOrWhitespace(ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY);
         var firstName = guard(request.getFirstName()).againstNullOrWhitespace(ValidationMessages.FIRST_NAME_EMPTY);
         var lastName = guard(request.getLastName()).againstNullOrWhitespace(ValidationMessages.LAST_NAME_EMPTY);
         var balance = guard(request.getBalance()).againstNegative(ValidationMessages.BALANCE_NEGATIVE);

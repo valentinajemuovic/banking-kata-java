@@ -9,6 +9,7 @@ import lombok.*;
 @EqualsAndHashCode
 @Builder
 public class OpenAccountRequest implements Command<OpenAccountResponse> {
+    private String nationalIdentityNumber;
     private String firstName;
     private String lastName;
     private int balance;

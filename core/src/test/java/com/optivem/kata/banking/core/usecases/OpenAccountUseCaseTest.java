@@ -93,6 +93,16 @@ class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
+    void should_throw_exception_given_empty_national_identity_number(String nationalIdentityNumber) {
+        var request = openAccountRequest()
+                .withNationalIdentityNumber(nationalIdentityNumber)
+                .build();
+
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY);
+    }
+
+    @ParameterizedTest
+    @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_first_name(String firstName) {
         var request = openAccountRequest()
                 .withFirstName(firstName)

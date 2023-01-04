@@ -4,7 +4,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ValidationMessages {
-
+    public static final String NATIONAL_IDENTITY_NUMBER_EMPTY = "National identity number is empty";
     public static final String FIRST_NAME_EMPTY = "First name is empty";
     public static final String LAST_NAME_EMPTY = "Last name is empty";
     public static final String BALANCE_NEGATIVE = "Balance is negative";
@@ -17,4 +17,5 @@ public class ValidationMessages {
     public static final String BALANCE_EMPTY = "Balance is empty";
     public static final String ACCOUNT_ID_EMPTY = "Account ID is empty";
     public static final String ACCOUNT_ID_NON_POSITIVE = "Account ID is not positive";
+
 }
