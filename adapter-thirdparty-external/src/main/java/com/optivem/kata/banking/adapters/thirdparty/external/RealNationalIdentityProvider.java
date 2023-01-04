@@ -9,9 +9,19 @@ public class RealNationalIdentityProvider implements NationalIdentityProvider {
     private static final String URL = "https://jsonplaceholder.typicode.com"; // TODO: Move into configuration
     private static final String PATH = "users/%s";
 
+    private final String url;
+
+    public RealNationalIdentityProvider(String url) {
+        this.url = url;
+    }
+
+    public RealNationalIdentityProvider() {
+        this(URL); // TODO: VC: Should be injected from configuration
+    }
+
     @Override
     public boolean exists(String nationalIdentityNumber) {
-        var client = WebClient.create(URL);
+        var client = WebClient.create(url);
         var path = getPath(nationalIdentityNumber);
         var responseSpec = client.get().uri(path).retrieve();
 
