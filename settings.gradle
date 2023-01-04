@@ -17,5 +17,5 @@ include 'adapter-time-fake'
 include 'adapter-time-system'
 
 include 'adapter-restapi-spring'
-
+include 'adapter-thirdparty-external'
 
