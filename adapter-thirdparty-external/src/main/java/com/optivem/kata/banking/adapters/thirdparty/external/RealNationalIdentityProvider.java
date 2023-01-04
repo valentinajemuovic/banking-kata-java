@@ -30,7 +30,7 @@ public class RealNationalIdentityProvider implements NationalIdentityProvider {
                 .bodyToMono(UserDto.class)
                 .block();
 
-        return user.getId() != null;
+        return user != null && user.getId() != null;
     }
 
     private String getPath(String nationalIdentityNumber) {

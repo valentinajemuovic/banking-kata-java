@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.adapters.thirdparty.external;
 
 import au.com.dius.pact.consumer.MockServer;
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
@@ -17,15 +18,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "national-identity-provider", hostInterface = "localhost")
 public class RealNationalIdentityProviderContractTest {
-    @Disabled("TODO: FIXME")
+
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForExistingUserId(PactDslWithProvider builder) {
         var userId = "USR_002";
-        var body = LambdaDsl.newJsonBody((o) -> o
-                .stringType("id", userId)
-        ).build();
+        var body = new PactDslJsonBody()
+                .stringType("id", userId);
 
-        var pathFormat = "users/%s";
+        var pathFormat = "/users/%s";
         var path = String.format(pathFormat, userId);
 
         return builder.given("GET User: a user with the specified ID already exists")
@@ -38,28 +38,22 @@ public class RealNationalIdentityProviderContractTest {
                 .toPact();
     }
 
-    @Disabled("TODO: FIXME")
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForNonexistentUserId(PactDslWithProvider builder) {
-        var userId = "USR_99999999";
-        var body = LambdaDsl.newJsonBody((o) -> o
-                .stringType("id", userId)
-        ).build();
+        var userId = "USR_999";
 
-        var pathFormat = "users/%s";
+        var pathFormat = "/users/%s";
         var path = String.format(pathFormat, userId);
 
-        return builder.given("GET User: a user with the specified ID does not exist")
+        return builder.given("GET User: a user with the specified ID already exists")
                 .uponReceiving("A request for User data")
                 .path(path)
                 .method("GET")
                 .willRespondWith()
                 .status(404)
-                .body(body)
                 .toPact();
     }
 
-    @Disabled("TODO: FIXME")
     @Test
     @PactTestFor(pactMethod = "createPactForExistingUserId")
     public void should_return_true_when_user_exists(MockServer mockServer) {
@@ -70,11 +64,11 @@ public class RealNationalIdentityProviderContractTest {
         assertThat(exists).isTrue();
     }
 
-    @Disabled("TODO: FIXME")
     @Test
-    @PactTestFor
-    public void should_return_false_when_user_exists() {
-        var provider = new RealNationalIdentityProvider();
+    @PactTestFor(pactMethod = "createPactForNonexistentUserId")
+    public void should_return_false_when_user_not_exists(MockServer mockServer) {
+        var url = mockServer.getUrl();
+        var provider = new RealNationalIdentityProvider(url);
         var nationalIdentityNumber = "USR_999";
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isFalse();
