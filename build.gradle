@@ -75,13 +75,25 @@ task coreTest {
     dependsOn 'core:test'
 }
 
-task adapterTest {
+task fakeAdapterTest {
+    dependsOn 'adapter-generation-fake:test'
+    dependsOn 'adapter-messaging-fake:test'
+    dependsOn 'adapter-persistence-fake:test'
+    dependsOn 'adapter-time-fake:test'
+}
+
+task realAdapterTest {
     dependsOn 'adapter-generation-random:test'
     dependsOn 'adapter-messaging-inmemory:test'
     dependsOn 'adapter-persistence-jpa:test'
     dependsOn 'adapter-persistence-mongo:test'
     dependsOn 'adapter-restapi-spring:test'
     dependsOn 'adapter-time-system:test'
+}
+
+task adapterTest {
+    dependsOn fakeAdapterTest
+    dependsOn realAdapterTest
 }
 
 task systemTest {
