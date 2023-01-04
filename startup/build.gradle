@@ -6,6 +6,7 @@ dependencies {
     implementation project(':adapter-generation-random')
     implementation project(':adapter-restapi-spring')
     implementation project(':adapter-messaging-inmemory')
+    implementation project(':adapter-thirdparty-fake')
 
     testImplementation project(':adapter-base')
     testImplementation project(':adapter-persistence-jpa')

@@ -62,7 +62,9 @@ class BankAccountControllerSystemTest {
 
     @Test
     void should_open_account_given_valid_request() {
-        var request = OpenAccountRequestBuilder.openAccountRequest().build();
+        var request = OpenAccountRequestBuilder.openAccountRequest()
+                .withNationalIdentityNumber("SIM_1") // TODO: VC: This dependency should only exist in E2E, and maybe demos?
+                .build();
 
         final var response =
             client
@@ -102,4 +104,7 @@ class BankAccountControllerSystemTest {
         Assertions.assertThat(viewResponse.getFullName()).isNotBlank();
         Assertions.assertThat(viewResponse.getBalance()).isNotNegative();
     }
+
+    // TODO: Test with invalid data - e.g. empty fields
+    // TODO: Test with non-existent national identity number
 }

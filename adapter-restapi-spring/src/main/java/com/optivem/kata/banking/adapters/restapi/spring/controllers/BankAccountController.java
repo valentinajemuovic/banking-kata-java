@@ -14,8 +14,14 @@ public class BankAccountController extends BaseController {
 
     @PostMapping("/bank-accounts")
     public ResponseEntity<OpenAccountResponse> openAccount(@RequestBody OpenAccountRequest request) {
-        var response = pipeline.send(request);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        try {
+            var response = pipeline.send(request);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch(Exception ex) {
+            throw ex;
+        }
+
+
     }
 
     @GetMapping("/bank-accounts/{accountNumber}")

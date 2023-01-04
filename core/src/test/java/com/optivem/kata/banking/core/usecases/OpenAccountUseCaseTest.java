@@ -57,8 +57,8 @@ class OpenAccountUseCaseTest {
         this.eventBus = new FakeEventBus();
 
         // TODO: VC: Make configurable so that we can run same test twice
-        // var useCaseFactory = new CrudUseCaseFactory();
-        var useCaseFactory = new CleanArchUseCaseFactory();
+        var useCaseFactory = new CrudUseCaseFactory();
+        // var useCaseFactory = new CleanArchUseCaseFactory();
         this.useCase = useCaseFactory.createOpenAccountHandler(nationalIdentityProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 

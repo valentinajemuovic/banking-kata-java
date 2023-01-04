@@ -49,6 +49,7 @@ public class JpaBankAccountStorage implements BankAccountStorage {
         var record = new BankAccountRecord();
         record.setId(bankAccount.getAccountId());
         record.setAccountNumber(bankAccount.getAccountNumber());
+        record.setNationalIdentityNumber(bankAccount.getNationalIdentityNumber());
         record.setFirstName(bankAccount.getFirstName());
         record.setLastName(bankAccount.getLastName());
         record.setOpeningDate(bankAccount.getOpeningDate());
@@ -60,6 +61,7 @@ public class JpaBankAccountStorage implements BankAccountStorage {
         var dto = new BankAccountDto();
         dto.setAccountId(record.getId());
         dto.setAccountNumber(record.getAccountNumber());
+        dto.setNationalIdentityNumber(record.getNationalIdentityNumber());
         dto.setFirstName(record.getFirstName());
         dto.setLastName(record.getLastName());
         dto.setOpeningDate(record.getOpeningDate());

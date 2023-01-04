@@ -16,6 +16,9 @@ public class BankAccountRecord {
     @Column(name = "account_number", unique = true, nullable = false)
     private String accountNumber;
 
+    @Column(name = "national_identity_number", nullable = false)
+    private String nationalIdentityNumber;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
