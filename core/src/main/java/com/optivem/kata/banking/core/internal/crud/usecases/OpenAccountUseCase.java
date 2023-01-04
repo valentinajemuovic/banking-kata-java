@@ -40,6 +40,7 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
         var account = BankAccountDto.builder()
                 .accountId(accountId)
                 .accountNumber(accountNumber)
+                .nationalIdentityNumber(nationalIdentityNumber)
                 .firstName(firstName)
                 .lastName(lastName)
                 .openingDate(openingDate)

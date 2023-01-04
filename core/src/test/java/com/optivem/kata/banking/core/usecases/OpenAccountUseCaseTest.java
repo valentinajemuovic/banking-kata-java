@@ -87,7 +87,7 @@ class OpenAccountUseCaseTest {
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
-        BankAccountStorageVerifies.verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, firstName, lastName, openingDate, initialBalance);
+        BankAccountStorageVerifies.verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, nationalIdentityNumber, firstName, lastName, openingDate, initialBalance);
         FakeEventBusVerifies.verifyThat(eventBus).shouldHavePublishedExactly(expectedEvent);
     }
 

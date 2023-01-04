@@ -62,6 +62,7 @@ public class FakeBankAccountStorage implements BankAccountStorage {
 
         clone.setAccountId(bankAccount.getAccountId());
         clone.setAccountNumber(bankAccount.getAccountNumber());
+        clone.setNationalIdentityNumber(bankAccount.getNationalIdentityNumber());
         clone.setFirstName(bankAccount.getFirstName());
         clone.setLastName(bankAccount.getLastName());
         clone.setBalance(bankAccount.getBalance());

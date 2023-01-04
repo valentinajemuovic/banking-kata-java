@@ -7,12 +7,14 @@ import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import java.time.LocalDate;
 
 public class BankAccountDtoTestBuilder {
+
     public static BankAccountDtoTestBuilder bankAccount() {
         return new BankAccountDtoTestBuilder();
     }
 
     private long accountId;
     private String accountNumber;
+    private String nationalIdentityNumber;
     private String firstName;
     private String lastName;
     private LocalDate openingDate;
@@ -21,6 +23,7 @@ public class BankAccountDtoTestBuilder {
     public BankAccountDtoTestBuilder() {
         this.accountId = BankAccountDefaults.DEFAULT_ACCOUNT_ID;
         this.accountNumber = BankAccountDefaults.DEFAULT_ACCOUNT_NUMBER;
+        this.nationalIdentityNumber = BankAccountDefaults.DEFAULT_NATIONAL_IDENTITY_NUMBER;
         this.firstName = BankAccountDefaults.DEFAULT_FIRST_NAME;
         this.lastName = BankAccountDefaults.DEFAULT_LAST_NAME;
         this.openingDate = BankAccountDefaults.DEFAULT_OPENING_DATE;
@@ -34,6 +37,11 @@ public class BankAccountDtoTestBuilder {
 
     public BankAccountDtoTestBuilder withAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+        return this;
+    }
+
+    public BankAccountDtoTestBuilder withNationalIdentityNumber(String nationalIdentityNumber) {
+        this.nationalIdentityNumber = nationalIdentityNumber;
         return this;
     }
 
@@ -61,6 +69,7 @@ public class BankAccountDtoTestBuilder {
         return BankAccountDto.builder()
                 .accountId(accountId)
                 .accountNumber(accountNumber)
+                .nationalIdentityNumber(nationalIdentityNumber)
                 .firstName(firstName)
                 .lastName(lastName)
                 .openingDate(openingDate)
@@ -72,5 +81,6 @@ public class BankAccountDtoTestBuilder {
     public BankAccount buildEntity() {
         return BankAccountConverter.toEntity(build());
     }
+
 
 }

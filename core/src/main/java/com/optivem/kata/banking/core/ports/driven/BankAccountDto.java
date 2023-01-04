@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class BankAccountDto {
     private long accountId;
     private String accountNumber;
+    private String nationalIdentityNumber;
     private String firstName;
     private String lastName;
     private LocalDate openingDate;

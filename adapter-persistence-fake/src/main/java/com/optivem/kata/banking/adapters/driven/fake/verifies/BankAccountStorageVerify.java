@@ -34,10 +34,11 @@ public class BankAccountStorageVerify {
         return shouldContain(expectedBankAccount);
     }
 
-    public BankAccountDto shouldContain(long accountId, String accountNumber, String firstName, String lastName, LocalDate openingDate, int initialBalance) {
+    public BankAccountDto shouldContain(long accountId, String accountNumber, String nationalIdentityNumber, String firstName, String lastName, LocalDate openingDate, int initialBalance) {
         var expectedBankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountId(accountId)
                 .withAccountNumber(accountNumber)
+                .withNationalIdentityNumber(nationalIdentityNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withOpeningDate(openingDate)
