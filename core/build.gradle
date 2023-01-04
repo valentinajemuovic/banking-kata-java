@@ -3,6 +3,7 @@ dependencies {
     testImplementation project(':adapter-generation-fake')
     testImplementation project(':adapter-messaging-fake')
     testImplementation project(':adapter-persistence-fake')
+    testImplementation project(':adapter-thirdparty-fake')
     testImplementation project(':adapter-time-fake')
     testImplementation project(':test-facade')
 }

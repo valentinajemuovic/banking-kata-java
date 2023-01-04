@@ -6,6 +6,7 @@ import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
+import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
 import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
@@ -23,7 +24,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder.openAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NEGATIVE_INTEGERS;
@@ -31,6 +31,7 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OpenAccountUseCaseTest {
+    private FakeNationalIdentityProvider nationalIdentityProvider;
     private FakeBankAccountStorage storage;
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
@@ -40,12 +41,13 @@ class OpenAccountUseCaseTest {
     private Command.Handler<OpenAccountRequest, OpenAccountResponse> useCase;
 
     private static Stream<Arguments> should_open_account_given_valid_request() {
-        return Stream.of(Arguments.of("John", "Smith", 0, 3456, "GB41OMQP68570038161775", LocalDate.of(2022, 5, 20)),
-                Arguments.of("Mary", "McDonald", 50, 735353, "GB36BMFK75394735916876", LocalDate.of(2021, 6, 15)));
+        return Stream.of(Arguments.of("ABC", "John", "Smith", 0, 3456, "GB41OMQP68570038161775", LocalDate.of(2022, 5, 20)),
+                Arguments.of("DEF", "Mary", "McDonald", 50, 735353, "GB36BMFK75394735916876", LocalDate.of(2021, 6, 15)));
     }
 
     @BeforeEach
     void init() {
+        this.nationalIdentityProvider = new FakeNationalIdentityProvider();
         this.storage = new FakeBankAccountStorage();
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
@@ -60,7 +62,8 @@ class OpenAccountUseCaseTest {
 
     @ParameterizedTest
     @MethodSource
-    void should_open_account_given_valid_request(String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
+    void should_open_account_given_valid_request(String nationalIdentityNumber, String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
+        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(generatedAccountId);
         FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));

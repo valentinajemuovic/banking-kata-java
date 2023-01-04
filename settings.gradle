@@ -12,9 +12,10 @@ include 'adapter-messaging-inmemory'
 include 'adapter-persistence-fake'
 include 'adapter-persistence-jpa'
 include 'adapter-persistence-mongo'
+include 'adapter-thirdparty-fake'
 include 'adapter-time-fake'
 include 'adapter-time-system'
 
 include 'adapter-restapi-spring'
-include 'adapter-thirdparty-fake'
+
 
