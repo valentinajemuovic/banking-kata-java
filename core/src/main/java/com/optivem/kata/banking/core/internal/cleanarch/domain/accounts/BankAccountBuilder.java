@@ -8,6 +8,7 @@ public class BankAccountBuilder {
     }
     private AccountId accountId;
     private AccountNumber accountNumber;
+    private String nationalIdentityNumber;
     private AccountHolderName accountHolderName;
     private LocalDate openingDate;
     private Balance balance;
@@ -19,6 +20,11 @@ public class BankAccountBuilder {
 
     public BankAccountBuilder withAccountNumber(AccountNumber accountNumber) {
         this.accountNumber = accountNumber;
+        return this;
+    }
+
+    public BankAccountBuilder withNationalIdentityNumber(String nationalIdentityNumber) {
+        this.nationalIdentityNumber = nationalIdentityNumber;
         return this;
     }
 
@@ -38,7 +44,7 @@ public class BankAccountBuilder {
     }
 
     public BankAccount build() {
-        return new BankAccount(accountId, accountNumber, accountHolderName, openingDate, balance);
+        return new BankAccount(accountId, accountNumber, nationalIdentityNumber, accountHolderName, openingDate, balance);
     }
 
 

@@ -14,6 +14,6 @@ public class CleanArchUseCaseFactory implements UseCaseFactory {
     public Command.Handler<OpenAccountRequest, OpenAccountResponse> createOpenAccountHandler(NationalIdentityProvider nationalIdentityProvider, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
         var repository = new BankAccountRepositoryImpl(bankAccountStorage, accountIdGenerator, accountNumberGenerator);
         var eventPublisher = new EventPublisherImpl(eventBus);
-        return new OpenAccountUseCase(repository, dateTimeService, eventPublisher);
+        return new OpenAccountUseCase(nationalIdentityProvider, repository, dateTimeService, eventPublisher);
     }
 }

@@ -2,6 +2,7 @@ package com.optivem.kata.banking.core.common.factories;
 
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
+import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.Givens;
@@ -18,10 +19,17 @@ public class FacadeFactory {
     private static final String ACCOUNT_NUMBER_1 = "GB41OMQP68570038161775";
     private static final String ACCOUNT_NUMBER_2 = "GB41OMQP68570038161776";
 
+    private static final String NATIONAL_IDENTITY_NUMBER_1 = "XYZ";
+    private static final String NATIONAL_IDENTITY_NUMBER_2 = "ABC_1002_B";
+
     private static final LocalDateTime DATE_TIME_1 = LocalDateTime.of(2022, 3, 28, 10, 50);
     private static final LocalDateTime DATE_TIME_2 = LocalDateTime.of(2022, 4, 15, 9, 1);
 
     public Facade create() {
+        var nationalIdentityProvider = new FakeNationalIdentityProvider();
+        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(NATIONAL_IDENTITY_NUMBER_1);
+        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(NATIONAL_IDENTITY_NUMBER_2);
+
         var accountIdGenerator = new FakeAccountIdGenerator();
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_1);
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_2);
@@ -38,6 +46,6 @@ public class FacadeFactory {
 
         var eventBus = new FakeEventBus();
 
-        return new Facade(accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountStorage, eventBus);
+        return new Facade(nationalIdentityProvider, accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountStorage, eventBus);
     }
 }

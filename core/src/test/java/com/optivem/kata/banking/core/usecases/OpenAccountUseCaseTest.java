@@ -9,6 +9,7 @@ import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
+import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
@@ -56,8 +57,8 @@ class OpenAccountUseCaseTest {
         this.eventBus = new FakeEventBus();
 
         // TODO: VC: Make configurable so that we can run same test twice
-        var useCaseFactory = new CrudUseCaseFactory();
-        // var useCaseFactory = new CleanArchUseCaseFactory();
+        // var useCaseFactory = new CrudUseCaseFactory();
+        var useCaseFactory = new CleanArchUseCaseFactory();
         this.useCase = useCaseFactory.createOpenAccountHandler(nationalIdentityProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 
@@ -96,6 +97,10 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_national_identity_number(String nationalIdentityNumber) {
+        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(1001);
+        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate("1-0-0-1");
+        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
                 .build();
@@ -105,6 +110,10 @@ class OpenAccountUseCaseTest {
 
     @Test
     void should_throw_exception_given_nonexistent_national_identity_number() {
+        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(1001);
+        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate("1-0-0-1");
+        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+
         var request = openAccountRequest()
                 .build();
 

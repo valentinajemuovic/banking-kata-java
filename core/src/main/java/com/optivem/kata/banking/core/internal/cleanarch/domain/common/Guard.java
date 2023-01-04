@@ -23,4 +23,7 @@ public class Guard {
     public static TextGuard guard(Text value) {
         return new TextGuard(value);
     }
+    public static TextGuard guard(String value) {
+        return new TextGuard(new Text(value));
+    }
 }

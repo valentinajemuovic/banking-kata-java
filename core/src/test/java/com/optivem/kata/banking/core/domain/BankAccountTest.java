@@ -29,6 +29,12 @@ class BankAccountTest {
     }
 
     @Test
+    void should_throw_exception_given_null_national_identity_number() {
+        verifyThat(() -> getDefaultBuilder().withNationalIdentityNumber(null).build())
+                .shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY);
+    }
+
+    @Test
     void should_throw_exception_given_null_account_holder_name() {
         verifyThat(() -> getDefaultBuilder().withAccountHolderName(null).build())
                 .shouldThrowValidationException(ValidationMessages.ACCOUNT_HOLDER_NAME_EMPTY);
@@ -50,6 +56,7 @@ class BankAccountTest {
     private BankAccountBuilder getDefaultBuilder() {
         var accountId = AccountId.of(BankAccountDefaults.DEFAULT_ACCOUNT_ID);
         var accountNumber = AccountNumber.of(BankAccountDefaults.DEFAULT_ACCOUNT_NUMBER);
+        var nationalIdentityNumber = BankAccountDefaults.DEFAULT_NATIONAL_IDENTITY_NUMBER;
         var accountHolderName = AccountHolderName.of(BankAccountDefaults.DEFAULT_FIRST_NAME, BankAccountDefaults.DEFAULT_LAST_NAME);
         var openingDate = BankAccountDefaults.DEFAULT_OPENING_DATE;
         var balance = Balance.of(BankAccountDefaults.DEFAULT_BALANCE);
@@ -57,6 +64,7 @@ class BankAccountTest {
         return BankAccountBuilder.bankAccount()
                 .withAccountId(accountId)
                 .withAccountNumber(accountNumber)
+                .withNationalIdentityNumber(nationalIdentityNumber)
                 .withAccountHolderName(accountHolderName)
                 .withOpeningDate(openingDate)
                 .withBalance(balance);

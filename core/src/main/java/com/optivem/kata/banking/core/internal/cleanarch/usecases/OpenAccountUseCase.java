@@ -8,33 +8,46 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAcco
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.AccountOpened;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
+import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
+    private final NationalIdentityProvider nationalIdentityProvider;
     private final BankAccountRepository bankAccountRepository;
     private final DateTimeService dateTimeService;
 
     private final EventPublisher eventPublisher;
 
 
-    public OpenAccountUseCase(BankAccountRepository bankAccountRepository, DateTimeService dateTimeService, EventPublisher eventPublisher) {
+    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, BankAccountRepository bankAccountRepository, DateTimeService dateTimeService, EventPublisher eventPublisher) {
+        this.nationalIdentityProvider = nationalIdentityProvider;
         this.bankAccountRepository = bankAccountRepository;
         this.dateTimeService = dateTimeService;
         this.eventPublisher = eventPublisher;
     }
 
     public OpenAccountResponse handle(OpenAccountRequest request) {
+        var nationalIdentityNumber = request.getNationalIdentityNumber();
         var accountHolderName = getAccountHolderName(request);
         var balance = getBalance(request);
 
         var timestamp = dateTimeService.now();
 
-        var bankAccount = createBankAccount(accountHolderName, balance, timestamp);
+        var bankAccount = createBankAccount(nationalIdentityNumber, accountHolderName, balance, timestamp);
+
+        // TODO: VC: Value object for national identity number
+        var exists = nationalIdentityProvider.exists(nationalIdentityNumber);
+        if(!exists) {
+            throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
+        }
+
         bankAccountRepository.add(bankAccount);
 
         var accountOpened = getAccountOpened(bankAccount, timestamp);
@@ -51,11 +64,11 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
         return Balance.of(request.getBalance());
     }
 
-    private BankAccount createBankAccount(AccountHolderName accountHolderName, Balance balance, LocalDateTime timestamp) {
+    private BankAccount createBankAccount(String nationalIdentityNumber, AccountHolderName accountHolderName, Balance balance, LocalDateTime timestamp) {
         var accountId = bankAccountRepository.nextAccountId();
         var accountNumber = bankAccountRepository.nextAccountNumber();
         var openingDate = timestamp.toLocalDate();
-        return new BankAccount(accountId, accountNumber, accountHolderName, openingDate, balance);
+        return new BankAccount(accountId, accountNumber, nationalIdentityNumber, accountHolderName, openingDate, balance);
     }
 
     private AccountOpened getAccountOpened(BankAccount bankAccount, LocalDateTime timestamp) {
