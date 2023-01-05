@@ -24,11 +24,7 @@ public class BankAccountController extends BaseController {
                 .accountNumber(accountNumber)
                 .build();
 
-        try {
-            var response = pipeline.send(request);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch(Exception ex) {
-            throw ex;
-        }
+        var response = pipeline.send(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
