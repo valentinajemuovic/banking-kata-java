@@ -6,18 +6,14 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
-import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "banking-provider", hostInterface = "localhost")
-public class BankingConsumerConsumerContractTest {
+public class BankingConsumerContractTest {
 
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForNonexistentAccountNumber(PactDslWithProvider builder) {
@@ -39,16 +35,11 @@ public class BankingConsumerConsumerContractTest {
     @PactTestFor(pactMethod = "createPactForNonexistentAccountNumber")
     public void should_return_none_when_bank_account_not_exists(MockServer mockServer) {
         var url = mockServer.getUrl();
-        var client = WebClient.create(url);
-        var path = url + "/bank-accounts/999-999999-999";
-        var responseSpec = client.get().uri(path).retrieve();
+        var client = new BankingClient(url);
+        var accountNumber = "999-999999-999";
+        var response = client.viewAccount(accountNumber);
 
-        var bankAccount = responseSpec
-                .onStatus(status -> HttpStatus.NOT_FOUND.equals(status), response -> Mono.empty())
-                .bodyToMono(ViewAccountResponse.class)
-                .block();
-
-        assertThat(bankAccount).isNull();
+        assertThat(response).isEmpty();
     }
 }
 
