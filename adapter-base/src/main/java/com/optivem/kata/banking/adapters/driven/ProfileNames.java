@@ -7,4 +7,8 @@ public class ProfileNames {
     public static final String AdapterPersistenceMongo = "adapter-persistence-mongo";
 
     public static final String AdapterTimeSystem = "adapter-time-system";
+
+    public static final String AdapterAuthFake = "adapter-auth-fake";
+
+    public static final String AdapterAuthKeycloak = "adapter-auth-keycloak";
 }
