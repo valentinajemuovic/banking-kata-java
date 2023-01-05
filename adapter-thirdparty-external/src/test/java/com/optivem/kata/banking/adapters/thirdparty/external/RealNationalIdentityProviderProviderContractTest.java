@@ -18,7 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.net.URL;
 
 @Provider("national-identity-provider")
-@PactFolder("pacts")
+@PactFolder("build/pacts")
 public class RealNationalIdentityProviderProviderContractTest {
 
     @TestTemplate
