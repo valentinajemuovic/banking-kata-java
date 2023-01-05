@@ -12,6 +12,8 @@ public class ProfileNames {
 
     public static final String AdapterAuthKeycloak = "adapter-auth-keycloak";
 
+    public static final String AdapterAuthNone = "adapter-auth-none";
+
     public static final String AdapterThirdpartyReal = "adapter-thirdparty-real";
 
     public static final String AdapterThirdpartySim = "adapter-thirdparty-sim";
