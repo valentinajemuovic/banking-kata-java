@@ -38,7 +38,7 @@ public class RealNationalIdentityProviderConsumerContractTest {
                 .toPact();
     }
 
-    /*
+
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForNonexistentUserId(PactDslWithProvider builder) {
         var userId = INVALID_ID;
@@ -55,28 +55,23 @@ public class RealNationalIdentityProviderConsumerContractTest {
                 .toPact();
     }
 
-     */
-
     @Test
     @PactTestFor(pactMethod = "createPactForExistingUserId")
     public void should_return_true_when_user_exists(MockServer mockServer) {
         var url = mockServer.getUrl();
         var provider = new RealNationalIdentityProvider(url);
-        var nationalIdentityNumber = "2";
+        var nationalIdentityNumber = String.valueOf(EXISTING_ID);
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isTrue();
     }
 
-    /*
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentUserId")
     public void should_return_false_when_user_not_exists(MockServer mockServer) {
         var url = mockServer.getUrl();
         var provider = new RealNationalIdentityProvider(url);
-        var nationalIdentityNumber = "99";
+        var nationalIdentityNumber = String.valueOf(INVALID_ID);
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isFalse();
     }
-
-     */
 }
