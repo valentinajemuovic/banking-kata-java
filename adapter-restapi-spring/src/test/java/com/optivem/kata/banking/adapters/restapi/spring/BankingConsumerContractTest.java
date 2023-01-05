@@ -67,8 +67,7 @@ public class BankingConsumerContractTest {
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentAccountNumber")
     public void should_return_none_when_bank_account_not_exists(MockServer mockServer) {
-        var url = mockServer.getUrl();
-        var client = new BankingClient(url);
+        var client = createBankingClient(mockServer);
         var accountNumber = NON_EXISTENT_ACCOUNT_NUMBER;
         var response = client.viewAccount(accountNumber);
 
@@ -78,8 +77,7 @@ public class BankingConsumerContractTest {
     @Test
     @PactTestFor(pactMethod = "createPactForExistingAccountNumber")
     public void should_return_response_when_bank_account_exists(MockServer mockServer) {
-        var url = mockServer.getUrl();
-        var client = new BankingClient(url);
+        var client = createBankingClient(mockServer);
         var accountNumber = EXISTING_ACCOUNT_NUMBER;
         var response = client.viewAccount(accountNumber);
 
@@ -92,12 +90,12 @@ public class BankingConsumerContractTest {
 
         assertThat(response).isNotEmpty();
         assertThat(response.get()).usingRecursiveComparison().isEqualTo(expectedResponse);
+    }
 
-        // assertThat(response.get().getAccountNumber()).isEqualTo(EXISTING_ACCOUNT_NUMBER);
-        // assertThat(response.get().getFullName()).isEqualTo(FULL_NAME);
-        // assertThat(response.get().getFullName()).isEqualTo(FULL_NAME);
-        // assertThat(response.get().getFullName()).isEqualTo(FULL_NAME);
-        // TODO: VC: Full comparison
+    private BankingClient createBankingClient(MockServer mockServer) {
+        var url = mockServer.getUrl();
+        var tokenProvider = new FakeTokenProvider();
+        return new BankingClient(url, tokenProvider);
     }
 }
 

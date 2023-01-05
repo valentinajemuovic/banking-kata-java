@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-@Profile(ProfileNames.AdapterPersistenceJpa)
+// @Profile(ProfileNames.AdapterPersistenceJpa) // TODO: VC: Not working for BankingProviderContractTest
+@Primary
 public class JpaBankAccountStorage implements BankAccountStorage {
 
     private JpaBankAccountDataAccessor dataAccessor;
