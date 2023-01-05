@@ -1,11 +1,13 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
+import com.optivem.kata.banking.adapters.driven.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
+@Profile(ProfileNames.AdapterThirdpartySim)
 public class FakeNationalIdentityProviderSimulator implements NationalIdentityProvider {
 
     private final FakeNationalIdentityProvider provider;

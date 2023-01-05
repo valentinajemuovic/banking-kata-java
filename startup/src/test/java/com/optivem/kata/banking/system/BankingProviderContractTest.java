@@ -6,6 +6,7 @@ import au.com.dius.pact.provider.junit.loader.PactFolder;
 import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
+import au.com.dius.pact.provider.spring.SpringRestPactRunner;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.optivem.kata.banking.BankingApplication;
 import com.optivem.kata.banking.adapters.driven.ProfileNames;
@@ -14,10 +15,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -25,29 +28,35 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 
+@RunWith(SpringRestPactRunner.class)
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({ "test", ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem })
+@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterThirdpartySim })
 @ContextConfiguration
 @Provider("banking-provider")
 @PactFolder("C:\\Users\\valen\\GitHub\\valentinacupac\\banking-kata-java\\adapter-restapi-spring\\build\\pacts")
 @Disabled
 public class BankingProviderContractTest {
 
+    @LocalServerPort
+    private int port;
+
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void pactVerificationTestTemplate(PactVerificationContext context) {
+
         context.verifyInteraction();
     }
 
 
     @BeforeAll
     public static void start() {
-        SpringApplication.run(BankingApplication.class);
+
+        // SpringApplication.run(BankingApplication.class);
     }
 
     @BeforeEach
     void before(PactVerificationContext context) {
-        var testTarget = new HttpTestTarget();
+        var testTarget = new HttpTestTarget("localhost", port);
         context.setTarget(testTarget);
     }
 

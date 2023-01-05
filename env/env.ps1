@@ -1,3 +1,5 @@
+$env:SPRING_PROFILES_ACTIVE='adapter-persistence-jpa,adapter-generation-random,adapter-thirdparty-sim,adapter-time-system'
+
 $env:POSTGRES_URL='jdbc:postgresql://localhost:5400/banking_kata_db'
 $env:POSTGRES_USER='postgres'
 $env:POSTGRES_PASSWORD='admin'

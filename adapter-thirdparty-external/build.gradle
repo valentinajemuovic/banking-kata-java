@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':core')
+    implementation project(':adapter-base')
 
     testImplementation project(':adapter-base')
 }

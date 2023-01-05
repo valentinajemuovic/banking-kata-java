@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.adapters.restapi.spring.configurations;
 
+/*
 import com.optivem.kata.banking.adapters.driven.ProfileNames;
 import com.optivem.kata.banking.adapters.restapi.spring.fake.FakeAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,3 +38,4 @@ public class FakeSecurityConfiguration {
         return http.build();
     }
 }
+*/

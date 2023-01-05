@@ -1,0 +1,8 @@
+spring:
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_REALM_URL}
+          jwk-set-uri: ${KEYCLOAK_REALM_URL}/protocol/openid-connect/certs

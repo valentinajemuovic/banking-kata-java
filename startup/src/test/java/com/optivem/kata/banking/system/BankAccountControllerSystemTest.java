@@ -24,7 +24,7 @@ import static com.optivem.kata.banking.core.common.builders.requests.OpenAccount
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterAuthKeycloak })
+@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterAuthKeycloak, ProfileNames.AdapterThirdpartySim })
 @ContextConfiguration
 class BankAccountControllerSystemTest {
 

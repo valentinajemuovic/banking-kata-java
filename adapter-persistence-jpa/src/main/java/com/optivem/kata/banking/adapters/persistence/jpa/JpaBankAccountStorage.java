@@ -5,15 +5,13 @@ import com.optivem.kata.banking.adapters.persistence.jpa.internal.BankAccountRec
 import com.optivem.kata.banking.adapters.persistence.jpa.internal.JpaBankAccountDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-// @Profile(ProfileNames.AdapterPersistenceJpa) // TODO: VC: Not working for BankingProviderContractTest
-@Primary
+@Profile(ProfileNames.AdapterPersistenceJpa)
 public class JpaBankAccountStorage implements BankAccountStorage {
 
     private JpaBankAccountDataAccessor dataAccessor;
