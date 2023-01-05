@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export SPRING_PROFILES_ACTIVE=adapter-persistence-jpa
-
 export POSTGRES_USER=postgres
 export POSTGRES_PASSWORD=admin
 export POSTGRES_DB=banking_kata_db

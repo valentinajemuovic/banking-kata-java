@@ -1,5 +1,8 @@
 spring:
 
+  profiles:
+    active: adapter-persistence-jpa,adapter-generation-random,adapter-thirdparty-sim,adapter-time-system
+
   data:
     mongodb:
       authentication-database: admin
