@@ -18,8 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.net.URL;
 
 @Provider("national-identity-provider")
-@PactFolder("C:\\Users\\valen\\GitHub\\valentinacupac\\banking-kata-java\\adapter-thirdparty-external\\build\\pacts")
-// @PactFolder("pacts") // au.com.dius.pact.provider.junit.loader.NoPactsFoundException: No Pact files were found to verify
+@PactFolder("pacts")
 public class RealNationalIdentityProviderProviderContractTest {
 
     @TestTemplate
