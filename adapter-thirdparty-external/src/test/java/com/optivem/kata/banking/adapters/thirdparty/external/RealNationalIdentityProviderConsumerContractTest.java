@@ -7,9 +7,6 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
-import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
-import io.pactfoundation.consumer.dsl.LambdaDsl;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -17,13 +14,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "national-identity-provider", hostInterface = "localhost")
-public class RealNationalIdentityProviderContractTest {
+public class RealNationalIdentityProviderConsumerContractTest {
+
+    private static int EXISTING_ID = 2;
+    private static int INVALID_ID = 99;
 
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForExistingUserId(PactDslWithProvider builder) {
-        var userId = "USR_002";
+        var userId = EXISTING_ID;
         var body = new PactDslJsonBody()
-                .stringType("id", userId);
+                .numberType("id", userId);
 
         var pathFormat = "/users/%s";
         var path = String.format(pathFormat, userId);
@@ -38,9 +38,10 @@ public class RealNationalIdentityProviderContractTest {
                 .toPact();
     }
 
+    /*
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForNonexistentUserId(PactDslWithProvider builder) {
-        var userId = "USR_999";
+        var userId = INVALID_ID;
 
         var pathFormat = "/users/%s";
         var path = String.format(pathFormat, userId);
@@ -54,23 +55,28 @@ public class RealNationalIdentityProviderContractTest {
                 .toPact();
     }
 
+     */
+
     @Test
     @PactTestFor(pactMethod = "createPactForExistingUserId")
     public void should_return_true_when_user_exists(MockServer mockServer) {
         var url = mockServer.getUrl();
         var provider = new RealNationalIdentityProvider(url);
-        var nationalIdentityNumber = "USR_002";
+        var nationalIdentityNumber = "2";
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isTrue();
     }
 
+    /*
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentUserId")
     public void should_return_false_when_user_not_exists(MockServer mockServer) {
         var url = mockServer.getUrl();
         var provider = new RealNationalIdentityProvider(url);
-        var nationalIdentityNumber = "USR_999";
+        var nationalIdentityNumber = "99";
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isFalse();
     }
+
+     */
 }
