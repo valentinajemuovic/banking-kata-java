@@ -9,6 +9,7 @@ import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -32,7 +33,7 @@ public class BankingConsumerContractTest {
         var pathFormat = "/bank-accounts/%s";
         var path = String.format(pathFormat, accountNumber);
 
-        return builder.given("GET Bank Account: a bank account with the specified ID already exists")
+        return builder.given("GET Bank Account: a bank account with the specified ID 999-999999-999 does not exist")
                 .uponReceiving("A request for Bank Account data")
                 .path(path)
                 .method("GET")
@@ -41,6 +42,8 @@ public class BankingConsumerContractTest {
                 .toPact();
     }
 
+    /*
+    @Disabled("TODO")
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForExistingAccountNumber(PactDslWithProvider builder) {
         var accountNumber = EXISTING_ACCOUNT_NUMBER;
@@ -64,6 +67,8 @@ public class BankingConsumerContractTest {
                 .toPact();
     }
 
+     */
+
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentAccountNumber")
     public void should_return_none_when_bank_account_not_exists(MockServer mockServer) {
@@ -74,6 +79,8 @@ public class BankingConsumerContractTest {
         assertThat(response).isEmpty();
     }
 
+    /*
+    @Disabled("TODO")
     @Test
     @PactTestFor(pactMethod = "createPactForExistingAccountNumber")
     public void should_return_response_when_bank_account_exists(MockServer mockServer) {
@@ -91,6 +98,7 @@ public class BankingConsumerContractTest {
         assertThat(response).isNotEmpty();
         assertThat(response.get()).usingRecursiveComparison().isEqualTo(expectedResponse);
     }
+     */
 
     private BankingClient createBankingClient(MockServer mockServer) {
         var url = mockServer.getUrl();

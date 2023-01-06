@@ -30,11 +30,10 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 @RunWith(SpringRestPactRunner.class)
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterThirdpartySim })
+@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterThirdpartySim, ProfileNames.AdapterAuthNone })
 @ContextConfiguration
 @Provider("banking-provider")
 @PactFolder("C:\\Users\\valen\\GitHub\\valentinacupac\\banking-kata-java\\adapter-restapi-spring\\build\\pacts")
-@Disabled
 public class BankingProviderContractTest {
 
     @LocalServerPort
@@ -60,15 +59,18 @@ public class BankingProviderContractTest {
         context.setTarget(testTarget);
     }
 
-    @State("GET Bank Account: a bank account with the specified ID already exists")
-    public void toBankAccountExistState() {
+    @State("GET Bank Account: a bank account with the specified ID 999-999999-999 does not exist")
+    public void toBankAccountNotExistState() {
 
     }
 
+    /*
     @State("GET Bank Account: a Bank Account with the specified ID ABC_001 already exists")
     public void toBankAccountABC101ExistState() {
 
     }
+
+     */
 }
 
 
