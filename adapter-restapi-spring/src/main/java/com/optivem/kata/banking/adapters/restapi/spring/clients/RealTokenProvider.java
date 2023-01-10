@@ -1,7 +1,6 @@
-package com.optivem.kata.banking.adapters.restapi.spring;
+package com.optivem.kata.banking.adapters.restapi.spring.clients;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.antlr.runtime.Token;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

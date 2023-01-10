@@ -6,10 +6,13 @@ import au.com.dius.pact.provider.junit.loader.PactFolder;
 import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
-import au.com.dius.pact.provider.spring.SpringRestPactRunner;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.optivem.kata.banking.BankingApplication;
 import com.optivem.kata.banking.adapters.driven.ProfileNames;
+import com.optivem.kata.banking.adapters.restapi.spring.clients.BankingClient;
+import com.optivem.kata.banking.adapters.restapi.spring.clients.FakeTokenProvider;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -23,12 +26,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.BodyInserters;
 
-@RunWith(SpringRestPactRunner.class)
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterThirdpartySim, ProfileNames.AdapterAuthNone })
 @ContextConfiguration
@@ -46,13 +44,6 @@ public class BankingProviderContractTest {
         context.verifyInteraction();
     }
 
-
-    @BeforeAll
-    public static void start() {
-
-        // SpringApplication.run(BankingApplication.class);
-    }
-
     @BeforeEach
     void before(PactVerificationContext context) {
         var testTarget = new HttpTestTarget("localhost", port);
@@ -64,13 +55,20 @@ public class BankingProviderContractTest {
 
     }
 
-    /*
     @State("GET Bank Account: a Bank Account with the specified ID ABC_001 already exists")
     public void toBankAccountABC101ExistState() {
+        var url = "http://localhost:" + port;
+        var tokenProvider = new FakeTokenProvider();
+        var bankingClient = new BankingClient(url, tokenProvider);
 
+        var openAccountRequest = OpenAccountRequest.builder()
+                        .firstName("John")
+                                .lastName("Smith")
+                .nationalIdentityNumber("SIM_1")
+                                        .build();
+
+        var response = bankingClient.openAccount(openAccountRequest);
     }
-
-     */
 }
 
 

@@ -7,6 +7,8 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
+import com.optivem.kata.banking.adapters.restapi.spring.clients.BankingClient;
+import com.optivem.kata.banking.adapters.restapi.spring.clients.FakeTokenProvider;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import org.junit.jupiter.api.Disabled;
@@ -42,8 +44,7 @@ public class BankingConsumerContractTest {
                 .toPact();
     }
 
-    /*
-    @Disabled("TODO")
+    @Disabled
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForExistingAccountNumber(PactDslWithProvider builder) {
         var accountNumber = EXISTING_ACCOUNT_NUMBER;
@@ -67,8 +68,6 @@ public class BankingConsumerContractTest {
                 .toPact();
     }
 
-     */
-
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentAccountNumber")
     public void should_return_none_when_bank_account_not_exists(MockServer mockServer) {
@@ -79,8 +78,8 @@ public class BankingConsumerContractTest {
         assertThat(response).isEmpty();
     }
 
-    /*
-    @Disabled("TODO")
+
+    @Disabled
     @Test
     @PactTestFor(pactMethod = "createPactForExistingAccountNumber")
     public void should_return_response_when_bank_account_exists(MockServer mockServer) {
@@ -98,7 +97,6 @@ public class BankingConsumerContractTest {
         assertThat(response).isNotEmpty();
         assertThat(response.get()).usingRecursiveComparison().isEqualTo(expectedResponse);
     }
-     */
 
     private BankingClient createBankingClient(MockServer mockServer) {
         var url = mockServer.getUrl();

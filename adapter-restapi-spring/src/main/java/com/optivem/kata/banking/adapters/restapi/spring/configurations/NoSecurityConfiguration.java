@@ -14,7 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class NoSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf()
+                .disable()
+                .authorizeRequests()
                 .anyRequest()
                 .permitAll();
 
