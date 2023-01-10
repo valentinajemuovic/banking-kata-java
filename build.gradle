@@ -9,6 +9,7 @@ plugins {
 
 pitest {
     junit5PluginVersion = '0.15'
+    useClasspathFile = true
 }
 
 jacoco {
@@ -18,7 +19,6 @@ jacoco {
 jacocoTestReport {
     dependsOn test
 }
-
 
 subprojects {
     apply plugin: 'java'
