@@ -33,7 +33,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 @ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterThirdpartySim, ProfileNames.AdapterAuthNone })
 @ContextConfiguration
 @Provider("banking-provider")
-@PactFolder("..\\adapter-restapi-spring\\build\\pacts")
+@PactFolder("../adapter-restapi-spring/build/pacts")
 public class BankingProviderContractTest {
 
     @LocalServerPort
