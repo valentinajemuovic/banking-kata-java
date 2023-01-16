@@ -2,6 +2,8 @@ dependencies {
     implementation project(':core')
     implementation project(':adapter-base')
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.0'
+
     testImplementation project(':test-fixtures')
     testImplementation project(':startup')
     testImplementation project(':adapter-base')
