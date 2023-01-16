@@ -4,6 +4,7 @@ import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.*;
+import com.optivem.kata.banking.adapters.driven.fake.givens.FakeCustomerProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
@@ -34,6 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class OpenAccountUseCaseTest {
     private FakeNationalIdentityProvider nationalIdentityProvider;
+    private FakeCustomerProvider customerProvider;
     private FakeBankAccountStorage storage;
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
@@ -50,6 +52,7 @@ class OpenAccountUseCaseTest {
     @BeforeEach
     void init() {
         this.nationalIdentityProvider = new FakeNationalIdentityProvider();
+        this.customerProvider = new FakeCustomerProvider();
         this.storage = new FakeBankAccountStorage();
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();
@@ -66,6 +69,7 @@ class OpenAccountUseCaseTest {
     @MethodSource
     void should_open_account_given_valid_request(String nationalIdentityNumber, String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
+        FakeCustomerProviderGivens.givenThat(customerProvider).isValid(nationalIdentityNumber);
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(generatedAccountId);
         FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
