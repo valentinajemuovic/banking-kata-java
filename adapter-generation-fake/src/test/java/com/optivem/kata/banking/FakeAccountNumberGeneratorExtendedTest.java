@@ -5,7 +5,6 @@ import com.optivem.kata.banking.adapters.driven.fake.internal.NextElementIsNotSe
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,7 +25,7 @@ public class FakeAccountNumberGeneratorExtendedTest {
     void should_return_next_element_when_there_is_one_element() {
         var expectedValue = "GB54BARC20032611545669";
 
-        givenThat(generator).willGenerate(expectedValue);
+        generator.givenNext(expectedValue);
 
         assertGeneratesNext(expectedValue);
 
@@ -39,9 +38,9 @@ public class FakeAccountNumberGeneratorExtendedTest {
         var expectedValue2 = "GB36BARC20038032622823";
         var expectedValue3 = "GB10BARC20040184197751";
 
-        givenThat(generator).willGenerate(expectedValue1);
-        givenThat(generator).willGenerate(expectedValue2);
-        givenThat(generator).willGenerate(expectedValue3);
+        generator.givenNext(expectedValue1);
+        generator.givenNext(expectedValue2);
+        generator.givenNext(expectedValue3);
 
         assertGeneratesNext(expectedValue1);
         assertGeneratesNext(expectedValue2);

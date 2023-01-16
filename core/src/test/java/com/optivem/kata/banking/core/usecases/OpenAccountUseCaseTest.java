@@ -3,7 +3,6 @@ package com.optivem.kata.banking.core.usecases;
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeCustomerProviderGivens;
-import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
@@ -65,8 +64,8 @@ class OpenAccountUseCaseTest {
     @MethodSource
     void should_open_account_given_valid_request(String nationalIdentityNumber, String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
-        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(generatedAccountId);
-        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
+        accountIdGenerator.givenNext(generatedAccountId);
+        accountNumberGenerator.givenNext(generatedAccountNumber);
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
 
         var request = openAccountRequest()
@@ -96,8 +95,8 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_national_identity_number(String nationalIdentityNumber) {
-        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(1001);
-        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate("1-0-0-1");
+        accountIdGenerator.givenNext(1001L);
+        accountNumberGenerator.givenNext("1-0-0-1");
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
@@ -109,8 +108,8 @@ class OpenAccountUseCaseTest {
 
     @Test
     void should_throw_exception_given_nonexistent_national_identity_number() {
-        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(1001);
-        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate("1-0-0-1");
+        accountIdGenerator.givenNext(1001L);
+        accountNumberGenerator.givenNext("1-0-0-1");
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
@@ -124,8 +123,8 @@ class OpenAccountUseCaseTest {
         var nationalIdentityNumber = "NAT_1001";
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
         FakeCustomerProviderGivens.givenThat(customerProvider).isBlacklisted(nationalIdentityNumber);
-        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(1001);
-        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate("1-0-0-1");
+        accountIdGenerator.givenNext(1001L);
+        accountNumberGenerator.givenNext("1-0-0-1");
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()

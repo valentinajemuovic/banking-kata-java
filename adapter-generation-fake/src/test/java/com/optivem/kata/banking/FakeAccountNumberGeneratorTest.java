@@ -4,8 +4,6 @@ import com.optivem.kata.banking.adapters.driven.AccountNumberGeneratorTest;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 
-import static com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens.givenThat;
-
 class FakeAccountNumberGeneratorTest extends AccountNumberGeneratorTest {
 
     @Override
@@ -17,9 +15,9 @@ class FakeAccountNumberGeneratorTest extends AccountNumberGeneratorTest {
         var expectedValue2 = "GB36BARC20038032622823";
         var expectedValue3 = "GB10BARC20040184197751";
 
-        givenThat(generator).willGenerate(expectedValue1);
-        givenThat(generator).willGenerate(expectedValue2);
-        givenThat(generator).willGenerate(expectedValue3);
+        generator.givenNext(expectedValue1);
+        generator.givenNext(expectedValue2);
+        generator.givenNext(expectedValue3);
 
         return generator;
     }
