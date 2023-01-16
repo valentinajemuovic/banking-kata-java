@@ -18,4 +18,5 @@ include 'adapter-time-system'
 
 include 'adapter-restapi-spring'
 include 'adapter-thirdparty-external'
+include 'z-customer-microservice'
 
