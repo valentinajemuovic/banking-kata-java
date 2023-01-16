@@ -5,7 +5,7 @@ import com.optivem.kata.banking.adapters.driven.fake.internal.NextElementIsNotSe
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.testing.Givens.givenThat;
+import static com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

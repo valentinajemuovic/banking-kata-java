@@ -4,7 +4,7 @@ import com.optivem.kata.banking.adapters.driven.AccountNumberGeneratorTest;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 
-import static com.optivem.kata.banking.testing.Givens.givenThat;
+import static com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens.givenThat;
 
 class FakeAccountNumberGeneratorTest extends AccountNumberGeneratorTest {
 
