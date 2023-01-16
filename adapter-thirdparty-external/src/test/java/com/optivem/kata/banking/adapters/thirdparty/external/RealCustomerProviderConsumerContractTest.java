@@ -41,10 +41,9 @@ public class RealCustomerProviderConsumerContractTest {
                 .toPact();
     }
 
-    @Disabled
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForWhitelistedCustomer(PactDslWithProvider builder) {
-        var customerId = BLACKLISTED_ID;
+        var customerId = WHITELISTED_ID;
         var body = new PactDslJsonBody()
                 .numberType("id", customerId)
                 .booleanType("blacklisted", false);
@@ -89,7 +88,6 @@ public class RealCustomerProviderConsumerContractTest {
         assertThat(isBlacklisted).isTrue();
     }
 
-    @Disabled("TODO")
     @Test
     @PactTestFor(pactMethod = "createPactForWhitelistedCustomer")
     public void should_return_true_when_user_is_whitelisted(MockServer mockServer) {
