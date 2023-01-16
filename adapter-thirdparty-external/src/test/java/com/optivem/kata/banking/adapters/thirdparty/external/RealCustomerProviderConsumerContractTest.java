@@ -61,7 +61,6 @@ public class RealCustomerProviderConsumerContractTest {
                 .toPact();
     }
 
-    @Disabled
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForNonExistentCustomer(PactDslWithProvider builder) {
         var customerId = NON_EXISTENT_ID;
@@ -98,7 +97,6 @@ public class RealCustomerProviderConsumerContractTest {
         assertThat(isBlacklisted).isFalse();
     }
 
-    @Disabled("TODO")
     @Test
     @PactTestFor(pactMethod = "createPactForNonExistentCustomer")
     public void should_return_false_when_user_not_exists(MockServer mockServer) {
