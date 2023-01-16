@@ -3,8 +3,8 @@ package com.optivem.kata.banking.core.usecases;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
-import com.optivem.kata.banking.adapters.driven.fake.givens.BankAccountStorageGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.DepositFundsUseCase;
@@ -45,8 +45,13 @@ class DepositFundsUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_deposit_funds_given_valid_request(String accountNumber, int initialBalance, int depositAmount, int expectedFinalBalance) {
-        BankAccountStorageGivens.givenThat(storage)
-                .alreadyHasBankAccount(accountNumber, initialBalance);
+
+        var existingAccount = BankAccountDtoTestBuilder.bankAccount()
+                .withAccountNumber(accountNumber)
+                .withBalance(initialBalance)
+                .build();
+
+        storage.add(existingAccount);
 
         var request = depositFundsRequest()
                 .withAccountNumber(accountNumber)
