@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
 import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
-import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;

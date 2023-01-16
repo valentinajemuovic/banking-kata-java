@@ -5,8 +5,6 @@ import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDto
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
-
 // TODO: VC: Incorporate this into main test later
 class FakeBankAccountStorageExtendedTest {
 

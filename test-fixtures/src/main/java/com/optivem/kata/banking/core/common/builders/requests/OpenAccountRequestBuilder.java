@@ -2,8 +2,6 @@ package com.optivem.kata.banking.core.common.builders.requests;
 
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 
-import java.util.stream.Stream;
-
 public class OpenAccountRequestBuilder {
 
     private static final String DEFAULT_NATIONAL_IDENTITY_NUMBER = "XYZ";

@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.adapters.driven;
 
-import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

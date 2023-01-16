@@ -2,10 +2,10 @@ package com.optivem.kata.banking.core.internal.cleanarch.domain.common;
 
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.Money;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.Text;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.guards.LongGuard;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.guards.MoneyGuard;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.guards.ObjectGuard;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.guards.TextGuard;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.guards.LongGuard;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

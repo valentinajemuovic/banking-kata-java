@@ -1,14 +1,14 @@
 package com.optivem.kata.banking.core.usecases;
 
+import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.adapters.driven.fake.givens.BankAccountStorageGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.usecases.DepositFundsUseCase;
-import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +17,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.depositFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_INTEGERS;

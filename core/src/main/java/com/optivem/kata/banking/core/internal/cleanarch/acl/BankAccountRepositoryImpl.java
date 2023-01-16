@@ -4,11 +4,11 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountI
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
-import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

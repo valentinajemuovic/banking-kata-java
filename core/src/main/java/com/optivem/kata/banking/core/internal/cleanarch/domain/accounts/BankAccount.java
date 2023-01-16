@@ -1,8 +1,8 @@
 package com.optivem.kata.banking.core.internal.cleanarch.domain.accounts;
 
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;

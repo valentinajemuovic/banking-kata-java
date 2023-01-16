@@ -1,23 +1,22 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.adapters.driven.fake.givens.BankAccountStorageGivens;
-import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
-import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.ScoreCalculator;
-import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
-import com.optivem.kata.banking.core.internal.cleanarch.usecases.ViewAccountUseCase;
-import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
+import com.optivem.kata.banking.adapters.driven.fake.givens.BankAccountStorageGivens;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
+import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.ScoreCalculator;
+import com.optivem.kata.banking.core.internal.cleanarch.usecases.ViewAccountUseCase;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.ViewAccountRequestBuilder.viewAccountRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;

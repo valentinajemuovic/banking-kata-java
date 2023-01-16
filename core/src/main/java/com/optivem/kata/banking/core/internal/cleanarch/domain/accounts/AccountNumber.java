@@ -1,9 +1,7 @@
 package com.optivem.kata.banking.core.internal.cleanarch.domain.accounts;
 
-import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard;
-
-import static com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard.guard;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 
 public record AccountNumber(Text value) {
 

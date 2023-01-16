@@ -5,11 +5,8 @@ import com.optivem.kata.banking.adapters.driven.fake.givens.FakeGenerationGivens
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.core.Facade;
-import com.optivem.kata.banking.core.common.Givens;
 
 import java.time.LocalDateTime;
-
-import static com.optivem.kata.banking.core.common.Givens.givenThat;
 
 public class FacadeFactory {
 

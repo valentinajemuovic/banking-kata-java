@@ -3,8 +3,6 @@ package com.optivem.kata.banking.adapters.generation.random;
 import com.optivem.kata.banking.adapters.driven.AccountNumberGeneratorTest;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 class RandomAccountNumberGeneratorTest extends AccountNumberGeneratorTest {
 
     @Override

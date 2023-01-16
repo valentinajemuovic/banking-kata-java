@@ -2,7 +2,6 @@ package com.optivem.kata.banking;
 
 import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapters.driven.fake.internal.NextElementIsNotSetupException;
-import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

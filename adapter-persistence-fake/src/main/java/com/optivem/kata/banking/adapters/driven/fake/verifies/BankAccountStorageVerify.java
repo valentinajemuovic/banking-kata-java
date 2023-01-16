@@ -8,8 +8,6 @@ import org.assertj.core.api.Assertions;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class BankAccountStorageVerify {
 
     private final BankAccountStorage storage;

@@ -11,7 +11,6 @@ import com.optivem.kata.banking.adapters.restapi.spring.clients.BankingClient;
 import com.optivem.kata.banking.adapters.restapi.spring.clients.FakeTokenProvider;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 

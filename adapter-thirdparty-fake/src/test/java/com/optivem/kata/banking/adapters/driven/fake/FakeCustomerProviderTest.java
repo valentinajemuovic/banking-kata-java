@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
 import com.optivem.kata.banking.adapters.driven.CustomerProviderTest;
-import com.optivem.kata.banking.core.ports.driven.CustomerProvider;
 import org.junit.jupiter.api.Test;
 
 import static com.optivem.kata.banking.adapters.driven.fake.givens.FakeCustomerProviderGivens.givenThat;
