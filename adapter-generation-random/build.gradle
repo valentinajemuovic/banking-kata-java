@@ -2,6 +2,9 @@ dependencies {
     implementation project(':core')
     implementation project(':adapter-base')
 
+    implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0'
+    implementation 'de.mkammerer.snowflake-id:snowflake-id:0.0.1'
+
     testImplementation project(':core')
     testImplementation project(':test-fixtures')
     testImplementation project(':adapter-base')

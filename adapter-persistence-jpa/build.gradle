@@ -1,4 +1,6 @@
 dependencies {
+    runtimeOnly 'org.postgresql:postgresql:42.3.6'
+
     implementation project(':core')
     implementation project(':adapter-base')
 
