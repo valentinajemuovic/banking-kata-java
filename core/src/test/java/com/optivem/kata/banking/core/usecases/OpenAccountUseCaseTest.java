@@ -4,7 +4,6 @@ import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeCustomerProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
-import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
@@ -66,7 +65,7 @@ class OpenAccountUseCaseTest {
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
         accountIdGenerator.givenNext(generatedAccountId);
         accountNumberGenerator.givenNext(generatedAccountNumber);
-        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
+        dateTimeService.add(LocalDateTime.of(openingDate, LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
@@ -97,7 +96,7 @@ class OpenAccountUseCaseTest {
     void should_throw_exception_given_empty_national_identity_number(String nationalIdentityNumber) {
         accountIdGenerator.givenNext(1001L);
         accountNumberGenerator.givenNext("1-0-0-1");
-        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        dateTimeService.add(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
@@ -110,7 +109,7 @@ class OpenAccountUseCaseTest {
     void should_throw_exception_given_nonexistent_national_identity_number() {
         accountIdGenerator.givenNext(1001L);
         accountNumberGenerator.givenNext("1-0-0-1");
-        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        dateTimeService.add(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .build();
@@ -125,7 +124,7 @@ class OpenAccountUseCaseTest {
         FakeCustomerProviderGivens.givenThat(customerProvider).isBlacklisted(nationalIdentityNumber);
         accountIdGenerator.givenNext(1001L);
         accountNumberGenerator.givenNext("1-0-0-1");
-        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        dateTimeService.add(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
