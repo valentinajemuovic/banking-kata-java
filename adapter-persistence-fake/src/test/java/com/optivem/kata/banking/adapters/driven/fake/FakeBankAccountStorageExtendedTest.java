@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.adapters.driven.fake;
 
-import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class FakeBankAccountStorageExtendedTest {
     void should_return_empty_result_when_account_number_does_not_exist() {
         var accountNumber = "GB36BARC20038032622823";
 
-        BankAccountStorageVerifies.verifyThat(storage).shouldNotContain(accountNumber);
+        storage.shouldNotContain(accountNumber);
     }
 
     @Test
@@ -31,7 +30,7 @@ class FakeBankAccountStorageExtendedTest {
 
         storage.add(bankAccount);
 
-        BankAccountStorageVerifies.verifyThat(storage).shouldContain(bankAccount);
+        storage.shouldContain(bankAccount);
     }
 
     @Test
@@ -56,7 +55,7 @@ class FakeBankAccountStorageExtendedTest {
 
         storage.update(bankAccount);
 
-        BankAccountStorageVerifies.verifyThat(storage).shouldContain(expectedUpdatedBankAccount);
+        storage.shouldContain(expectedUpdatedBankAccount);
     }
 
     @Test
@@ -77,7 +76,7 @@ class FakeBankAccountStorageExtendedTest {
 
         bankAccount.setBalance(20);
 
-        BankAccountStorageVerifies.verifyThat(storage).shouldContain(expectedBankAccount);
+        storage.shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -100,7 +99,7 @@ class FakeBankAccountStorageExtendedTest {
 
         retrievedBankAccount.setBalance(20);
 
-        BankAccountStorageVerifies.verifyThat(storage).shouldContain(expectedBankAccount);
+        storage.shouldContain(expectedBankAccount);
     }
 
     @Test
@@ -119,13 +118,13 @@ class FakeBankAccountStorageExtendedTest {
 
         storage.add(bankAccount);
 
-        var retrievedBankAccount = BankAccountStorageVerifies.verifyThat(storage).shouldContain(accountNumber);
+        var retrievedBankAccount = storage.find(accountNumber).get();
 
         storage.update(retrievedBankAccount);
 
         retrievedBankAccount.setBalance(20);
 
-        BankAccountStorageVerifies.verifyThat(storage).shouldContain(expectedBankAccount);
+        storage.shouldContain(expectedBankAccount);
     }
 
 

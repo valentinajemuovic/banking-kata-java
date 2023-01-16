@@ -4,8 +4,8 @@ import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeCustomerProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
-import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
@@ -86,8 +86,18 @@ class OpenAccountUseCaseTest {
                 .balance(initialBalance)
                 .build();
 
+        var expectedBankAccount = BankAccountDtoTestBuilder.bankAccount()
+                .withAccountId(generatedAccountId)
+                .withAccountNumber(generatedAccountNumber)
+                .withNationalIdentityNumber(nationalIdentityNumber)
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withOpeningDate(openingDate)
+                .withBalance(initialBalance)
+                .build();
+
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
-        BankAccountStorageVerifies.verifyThat(storage).shouldContain(generatedAccountId, generatedAccountNumber, nationalIdentityNumber, firstName, lastName, openingDate, initialBalance);
+        storage.shouldContain(expectedBankAccount);
         FakeEventBusVerifies.verifyThat(eventBus).shouldHavePublishedExactly(expectedEvent);
     }
 

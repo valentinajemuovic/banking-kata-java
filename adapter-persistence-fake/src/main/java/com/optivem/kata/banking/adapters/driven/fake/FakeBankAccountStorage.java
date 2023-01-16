@@ -4,10 +4,13 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import org.assertj.core.api.Assertions;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FakeBankAccountStorage implements BankAccountStorage {
 
@@ -55,6 +58,18 @@ public class FakeBankAccountStorage implements BankAccountStorage {
 
     public void givenExists(BankAccountDto bankAccount) {
         add(bankAccount);
+    }
+
+    public void shouldContain(BankAccountDto bankAccount) {
+        var accountNumber = bankAccount.getAccountNumber();
+        var retrievedBankAccount = find(accountNumber);
+        assertThat(retrievedBankAccount).isNotEmpty();
+        assertThat(retrievedBankAccount).usingRecursiveComparison().isEqualTo(Optional.of(bankAccount));
+    }
+
+    public void shouldNotContain(String accountNumber) {
+        var retrievedBankAccount = find(accountNumber);
+        assertThat(retrievedBankAccount).isEmpty();
     }
 
     private boolean contains(String accountNumber) {
