@@ -3,7 +3,6 @@ package com.optivem.kata.banking.adapters.driven.fake;
 import com.optivem.kata.banking.adapters.driven.CustomerProviderTest;
 import org.junit.jupiter.api.Test;
 
-import static com.optivem.kata.banking.adapters.driven.fake.givens.FakeCustomerProviderGivens.givenThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FakeCustomerProviderTest extends CustomerProviderTest<FakeCustomerProvider> {
@@ -15,7 +14,7 @@ public class FakeCustomerProviderTest extends CustomerProviderTest<FakeCustomerP
     @Test
     void should_return_blacklisted() {
         var nationalIdentityNumber = "ABC101";
-        givenThat(provider).givenBlacklisted(nationalIdentityNumber);
+        provider.givenBlacklisted(nationalIdentityNumber);
         var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
         assertThat(isBlacklisted).isTrue();
     }

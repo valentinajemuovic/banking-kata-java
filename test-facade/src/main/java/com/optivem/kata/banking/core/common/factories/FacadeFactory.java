@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.core.common.factories;
 
 import com.optivem.kata.banking.adapters.driven.fake.*;
-import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.core.Facade;
 
 import java.time.LocalDateTime;
@@ -22,8 +21,8 @@ public class FacadeFactory {
 
     public Facade create() {
         var nationalIdentityProvider = new FakeNationalIdentityProvider();
-        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).givenExists(NATIONAL_IDENTITY_NUMBER_1);
-        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).givenExists(NATIONAL_IDENTITY_NUMBER_2);
+        nationalIdentityProvider.givenExists(NATIONAL_IDENTITY_NUMBER_1);
+        nationalIdentityProvider.givenExists(NATIONAL_IDENTITY_NUMBER_2);
 
         var customerProvider = new FakeCustomerProvider();
 

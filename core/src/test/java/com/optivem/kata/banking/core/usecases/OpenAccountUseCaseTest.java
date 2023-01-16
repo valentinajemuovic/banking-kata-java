@@ -2,8 +2,6 @@ package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
-import com.optivem.kata.banking.adapters.driven.fake.givens.FakeCustomerProviderGivens;
-import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
@@ -62,7 +60,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_open_account_given_valid_request(String nationalIdentityNumber, String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
-        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).givenExists(nationalIdentityNumber);
+        nationalIdentityProvider.givenExists(nationalIdentityNumber);
         accountIdGenerator.givenNext(generatedAccountId);
         accountNumberGenerator.givenNext(generatedAccountNumber);
         dateTimeService.givenNow(LocalDateTime.of(openingDate, LocalTime.MIN));
@@ -130,8 +128,8 @@ class OpenAccountUseCaseTest {
     @Test
     void should_throw_exception_given_blacklisted_national_identity_number() {
         var nationalIdentityNumber = "NAT_1001";
-        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).givenExists(nationalIdentityNumber);
-        FakeCustomerProviderGivens.givenThat(customerProvider).givenBlacklisted(nationalIdentityNumber);
+        nationalIdentityProvider.givenExists(nationalIdentityNumber);
+        customerProvider.givenBlacklisted(nationalIdentityNumber);
         accountIdGenerator.givenNext(1001L);
         accountNumberGenerator.givenNext("1-0-0-1");
         dateTimeService.givenNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
