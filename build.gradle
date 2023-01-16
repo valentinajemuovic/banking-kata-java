@@ -5,6 +5,7 @@ plugins {
     id 'groovy'
     id 'info.solidsoft.pitest' version '1.7.4'
     id 'jacoco'
+    id 'com.adarshr.test-logger' version '3.2.0' // TODO: Check why not working
 }
 
 pitest {
@@ -73,6 +74,14 @@ allprojects {
 
     test {
         useJUnitPlatform()
+
+        testLogging {
+            events "failed", "skipped"
+            showExceptions true
+            exceptionFormat "full"
+            showCauses true
+            showStackTraces true
+        }
     }
 
 }

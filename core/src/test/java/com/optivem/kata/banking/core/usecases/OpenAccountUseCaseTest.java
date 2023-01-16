@@ -10,13 +10,13 @@ import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
-import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -69,7 +69,6 @@ class OpenAccountUseCaseTest {
     @MethodSource
     void should_open_account_given_valid_request(String nationalIdentityNumber, String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
-        FakeCustomerProviderGivens.givenThat(customerProvider).isValid(nationalIdentityNumber);
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(generatedAccountId);
         FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate(generatedAccountNumber);
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(openingDate, LocalTime.MIN));
@@ -122,6 +121,22 @@ class OpenAccountUseCaseTest {
                 .build();
 
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
+    }
+
+    @Disabled("TODO")
+    @Test
+    void should_throw_exception_given_blacklisted_national_identity_number() {
+        var nationalIdentityNumber = "NAT_1001";
+        FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
+        FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(1001);
+        FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate("1-0-0-1");
+        FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+
+        var request = openAccountRequest()
+                .withNationalIdentityNumber(nationalIdentityNumber)
+                .build();
+
+        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_BLACKLISTED);
     }
 
     @ParameterizedTest

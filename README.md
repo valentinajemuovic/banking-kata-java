@@ -77,6 +77,8 @@ To run the whole system:
 ./gradlew systemTest
 ```
 
+Note, if you need details regarding test 
+
 
 ## Code Coverage & Mutation Testing
 
