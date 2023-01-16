@@ -36,8 +36,8 @@ public class FacadeFactory {
         accountNumberGenerator.givenNext(ACCOUNT_NUMBER_2);
 
         var dateTimeService = new FakeDateTimeService();
-        dateTimeService.add(DATE_TIME_1);
-        dateTimeService.add(DATE_TIME_2);
+        dateTimeService.givenNow(DATE_TIME_1);
+        dateTimeService.givenNow(DATE_TIME_2);
 
         var bankAccountStorage = new FakeBankAccountStorage();
 

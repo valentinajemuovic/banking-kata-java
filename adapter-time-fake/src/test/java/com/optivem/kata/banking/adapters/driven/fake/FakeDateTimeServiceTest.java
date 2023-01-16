@@ -18,7 +18,7 @@ class FakeDateTimeServiceTest {
     @Test
     void should_return_current_date_time() {
         var dateTime = LocalDateTime.of(2022, 4, 15, 9, 1);
-        service.add(dateTime);
+        service.givenNow(dateTime);
 
         assertReturnsNext(dateTime);
     }

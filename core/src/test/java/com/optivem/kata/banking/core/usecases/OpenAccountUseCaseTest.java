@@ -65,7 +65,7 @@ class OpenAccountUseCaseTest {
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
         accountIdGenerator.givenNext(generatedAccountId);
         accountNumberGenerator.givenNext(generatedAccountNumber);
-        dateTimeService.add(LocalDateTime.of(openingDate, LocalTime.MIN));
+        dateTimeService.givenNow(LocalDateTime.of(openingDate, LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
@@ -96,7 +96,7 @@ class OpenAccountUseCaseTest {
     void should_throw_exception_given_empty_national_identity_number(String nationalIdentityNumber) {
         accountIdGenerator.givenNext(1001L);
         accountNumberGenerator.givenNext("1-0-0-1");
-        dateTimeService.add(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        dateTimeService.givenNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
@@ -109,7 +109,7 @@ class OpenAccountUseCaseTest {
     void should_throw_exception_given_nonexistent_national_identity_number() {
         accountIdGenerator.givenNext(1001L);
         accountNumberGenerator.givenNext("1-0-0-1");
-        dateTimeService.add(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        dateTimeService.givenNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .build();
@@ -124,7 +124,7 @@ class OpenAccountUseCaseTest {
         FakeCustomerProviderGivens.givenThat(customerProvider).isBlacklisted(nationalIdentityNumber);
         accountIdGenerator.givenNext(1001L);
         accountNumberGenerator.givenNext("1-0-0-1");
-        dateTimeService.add(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        dateTimeService.givenNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
