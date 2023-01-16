@@ -14,7 +14,6 @@ dependencies {
     testImplementation project(':test-fixtures')
 }
 
-// TODO: VC: Check if the application can still be started normally manually
 bootJar {
     enabled = true
 }
