@@ -44,7 +44,6 @@ public class BankingConsumerContractTest {
                 .toPact();
     }
 
-    @Disabled
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForExistingAccountNumber(PactDslWithProvider builder) {
         var accountNumber = EXISTING_ACCOUNT_NUMBER;
@@ -52,7 +51,7 @@ public class BankingConsumerContractTest {
                 .stringValue("accountNumber", accountNumber)
                 .stringType("fullName", FULL_NAME)
                 .integerType("balance", BALANCE)
-                .integerType("score", SCORE.ordinal());
+                .stringType("score", SCORE.toString());
 
 
         var pathFormat = "/bank-accounts/%s";
@@ -78,8 +77,6 @@ public class BankingConsumerContractTest {
         assertThat(response).isEmpty();
     }
 
-
-    @Disabled
     @Test
     @PactTestFor(pactMethod = "createPactForExistingAccountNumber")
     public void should_return_response_when_bank_account_exists(MockServer mockServer) {

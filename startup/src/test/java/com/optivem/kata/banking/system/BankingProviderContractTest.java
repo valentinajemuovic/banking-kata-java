@@ -1,8 +1,10 @@
 package com.optivem.kata.banking.system;
 
+import an.awesome.pipelinr.Pipeline;
 import au.com.dius.pact.provider.junit.Provider;
 import au.com.dius.pact.provider.junit.State;
 import au.com.dius.pact.provider.junit.loader.PactFolder;
+import au.com.dius.pact.provider.junit.target.TestTarget;
 import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
@@ -11,28 +13,38 @@ import com.optivem.kata.banking.BankingApplication;
 import com.optivem.kata.banking.adapters.driven.ProfileNames;
 import com.optivem.kata.banking.adapters.restapi.spring.clients.BankingClient;
 import com.optivem.kata.banking.adapters.restapi.spring.clients.FakeTokenProvider;
+import com.optivem.kata.banking.adapters.restapi.spring.controllers.BankAccountController;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
-import org.junit.jupiter.api.BeforeAll;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
+import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
+import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
+
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+// @ActiveProfiles({ "contract-test", ProfileNames.AdapterPersistenceJpa })
 @ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterThirdpartySim, ProfileNames.AdapterAuthNone })
-@ContextConfiguration
+// @ContextConfiguration(classes = ContractTestConfiguration.class)
+@Import(ContractTestConfiguration.class)
 @Provider("banking-provider")
 @PactFolder("../adapter-restapi-spring/build/pacts")
 public class BankingProviderContractTest {
+
+    @MockBean
+    private Pipeline pipeline;
 
     @LocalServerPort
     private int port;
@@ -40,7 +52,6 @@ public class BankingProviderContractTest {
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void pactVerificationTestTemplate(PactVerificationContext context) {
-
         context.verifyInteraction();
     }
 
@@ -52,57 +63,31 @@ public class BankingProviderContractTest {
 
     @State("GET Bank Account: a bank account with the specified ID 999-999999-999 does not exist")
     public void toBankAccountNotExistState() {
+        reset(pipeline);
 
+        var accountNumber = "999-999999-999";
+        var request = ViewAccountRequest.builder()
+                        .accountNumber(accountNumber)
+                                .build();
+
+        when(pipeline.send(request)).thenThrow(new ValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST));
     }
 
     @State("GET Bank Account: a Bank Account with the specified ID ABC_001 already exists")
     public void toBankAccountABC101ExistState() {
-        var url = "http://localhost:" + port;
-        var tokenProvider = new FakeTokenProvider();
-        var bankingClient = new BankingClient(url, tokenProvider);
+        reset(pipeline);
 
-        var openAccountRequest = OpenAccountRequest.builder()
-                        .firstName("John")
-                                .lastName("Smith")
-                .nationalIdentityNumber("SIM_1")
-                                        .build();
+        var request = ViewAccountRequest.builder()
+                .accountNumber("ABC_001")
+                .build();
 
-        var response = bankingClient.openAccount(openAccountRequest);
+        var response = ViewAccountResponse.builder()
+                .accountNumber("ABC_001")
+                .fullName("John Smith")
+                .balance(20)
+                .score(Score.C)
+                .build();
+
+        when(pipeline.send(request)).thenReturn(response);
     }
 }
-
-
-/*
-
-@Provider("national-identity-provider")
-@PactFolder("build/pacts")
-public class RealNationalIdentityProviderProviderContractTest {
-
-    @TestTemplate
-    @ExtendWith(PactVerificationInvocationContextProvider.class)
-    void pactVerificationTestTemplate(PactVerificationContext context) {
-        context.verifyInteraction();
-    }
-
-
-    @BeforeAll
-    public static void start() {
-        // TODO: Start the Spring Application
-    }
-
-    @SneakyThrows
-    @BeforeEach
-    void before(PactVerificationContext context) {
-        var urlString = "https://jsonplaceholder.typicode.com";
-        var url = new URL(urlString);
-        var testTarget = HttpsTestTarget.fromUrl(url);
-        context.setTarget(testTarget);
-    }
-
-    @State("GET User: a user with the specified ID already exists")
-    public void toGetUserExistsState() {
-
-    }
-}
-
- */

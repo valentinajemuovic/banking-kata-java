@@ -68,6 +68,7 @@ allprojects {
         testImplementation 'au.com.dius:pact-jvm-consumer-junit5:4.0.10' // NOTE: For contract testing
         testImplementation 'au.com.dius:pact-jvm-consumer-java8:4.0.10' // NOTE: For contract testing
         testImplementation 'au.com.dius:pact-jvm-provider-junit5:4.0.10' // NOTE: For contract testing
+        // testImplementation 'au.com.dius:pact-jvm-provider-spring:4.0.10' // NOTE: For contract testing
     }
 
     test {
