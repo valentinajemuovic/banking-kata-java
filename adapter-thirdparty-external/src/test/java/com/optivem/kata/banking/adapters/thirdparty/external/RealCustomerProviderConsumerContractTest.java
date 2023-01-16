@@ -32,7 +32,7 @@ public class RealCustomerProviderConsumerContractTest {
         var path = String.format(pathFormat, customerId);
 
         return builder.given("GET User: customer ABC_1001 is blacklisted")
-                .uponReceiving("A request for Customer data")
+                .uponReceiving("A request for blacklisted customer ABC_1001")
                 .path(path)
                 .method("GET")
                 .willRespondWith()
@@ -52,7 +52,7 @@ public class RealCustomerProviderConsumerContractTest {
         var path = String.format(pathFormat, customerId);
 
         return builder.given("GET User: customer ABC_1002 is whitelisted")
-                .uponReceiving("A request for Customer data")
+                .uponReceiving("A request for whitelisted customer ABC_1002")
                 .path(path)
                 .method("GET")
                 .willRespondWith()
@@ -68,8 +68,8 @@ public class RealCustomerProviderConsumerContractTest {
         var pathFormat = "/customers/%s";
         var path = String.format(pathFormat, customerId);
 
-        return builder.given("GET User: customer DEF_1002 is whitelisted")
-                .uponReceiving("A request for Customer data")
+        return builder.given("GET User: customer DEF_1002 does not exist")
+                .uponReceiving("A request for non-existent customer DEF_1002")
                 .path(path)
                 .method("GET")
                 .willRespondWith()
