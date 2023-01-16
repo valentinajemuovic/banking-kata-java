@@ -18,7 +18,7 @@ public class FakeCustomerProvider implements CustomerProvider {
         return blacklisted.contains(nationalIdentityNumber);
     }
 
-    public void registerBlacklisted(String nationalIdentityNumber) {
+    public void givenBlacklisted(String nationalIdentityNumber) {
         blacklisted.add(nationalIdentityNumber);
     }
 }

@@ -10,7 +10,7 @@ public class FakeCustomerProviderGiven {
         this.provider = provider;
     }
 
-    public void isBlacklisted(String nationalIdentityNumber) {
-        provider.registerBlacklisted(nationalIdentityNumber);
+    public void givenBlacklisted(String nationalIdentityNumber) {
+        provider.givenBlacklisted(nationalIdentityNumber);
     }
 }

@@ -7,7 +7,7 @@ public class FakeNationalIdentityProviderTest extends NationalIdentityProviderTe
     @Override
     protected NationalIdentityProvider create() {
         var provider = new FakeNationalIdentityProvider();
-        provider.add("Me"); // TODO: VC: Simulator
+        provider.givenExists("Me"); // TODO: VC: Simulator
         return provider;
     }
 }

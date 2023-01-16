@@ -24,7 +24,7 @@ public class FakeNationalIdentityProviderExtendedTest {
     @Test
     void should_return_true_for_non_existent_national_identity_number() {
         var nationalIdentityNumber = "ABC";
-        provider.add(nationalIdentityNumber);
+        provider.givenExists(nationalIdentityNumber);
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isTrue();
     }

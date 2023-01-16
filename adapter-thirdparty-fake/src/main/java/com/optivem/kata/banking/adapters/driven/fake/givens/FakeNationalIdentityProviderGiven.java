@@ -9,7 +9,7 @@ public class FakeNationalIdentityProviderGiven {
         this.provider = provider;
     }
 
-    public void contains(String nationalIdentityNumber) {
-        provider.add(nationalIdentityNumber);
+    public void givenExists(String nationalIdentityNumber) {
+        provider.givenExists(nationalIdentityNumber);
     }
 }
