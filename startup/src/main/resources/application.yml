@@ -11,3 +11,5 @@ spring:
       database: ${ME_CONFIG_MONGODB_SERVER}
       port: 27017
       host: localhost
+
+customer-provider-uri: http://something
