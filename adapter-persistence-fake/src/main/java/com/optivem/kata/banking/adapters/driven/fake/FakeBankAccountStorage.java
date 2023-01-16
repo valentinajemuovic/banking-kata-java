@@ -53,6 +53,10 @@ public class FakeBankAccountStorage implements BankAccountStorage {
         bankAccounts.put(accountNumber, clonedBankAccount);
     }
 
+    public void givenExists(BankAccountDto bankAccount) {
+        add(bankAccount);
+    }
+
     private boolean contains(String accountNumber) {
         return bankAccounts.containsKey(accountNumber);
     }

@@ -51,7 +51,7 @@ class DepositFundsUseCaseTest {
                 .withBalance(initialBalance)
                 .build();
 
-        storage.add(existingAccount);
+        storage.givenExists(existingAccount);
 
         var request = depositFundsRequest()
                 .withAccountNumber(accountNumber)

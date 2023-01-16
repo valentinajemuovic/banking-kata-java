@@ -54,7 +54,7 @@ class ViewAccountUseCaseTest {
                 .withBalance(initialBalance)
                 .build();
 
-        storage.add(existingAccount);
+        storage.givenExists(existingAccount);
 
         var bankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)

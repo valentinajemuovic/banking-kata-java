@@ -49,7 +49,7 @@ class WithdrawFundsUseCaseTest {
                 .withBalance(initialBalance)
                 .build();
 
-        storage.add(existingAccount);
+        storage.givenExists(existingAccount);
 
         var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
@@ -100,7 +100,7 @@ class WithdrawFundsUseCaseTest {
                 .withBalance(balance)
                 .build();
 
-        storage.add(existingAccount);
+        storage.givenExists(existingAccount);
 
         var request = withdrawFundsRequest()
                 .withAccountNumber(accountNumber)
