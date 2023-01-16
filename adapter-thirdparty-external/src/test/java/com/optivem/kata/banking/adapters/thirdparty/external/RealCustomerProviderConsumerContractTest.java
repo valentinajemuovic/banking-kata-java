@@ -21,7 +21,6 @@ public class RealCustomerProviderConsumerContractTest {
     private static String WHITELISTED_ID = "ABC_1002";
     private static String NON_EXISTENT_ID = "DEF_1002";
 
-    @Disabled
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForBlacklistedCustomer(PactDslWithProvider builder) {
         var customerId = BLACKLISTED_ID;
@@ -80,7 +79,6 @@ public class RealCustomerProviderConsumerContractTest {
                 .toPact();
     }
 
-    @Disabled("TODO")
     @Test
     @PactTestFor(pactMethod = "createPactForBlacklistedCustomer")
     public void should_return_true_when_user_is_blacklisted(MockServer mockServer) {
