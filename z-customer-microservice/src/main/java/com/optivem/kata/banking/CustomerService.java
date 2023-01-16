@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -12,10 +13,13 @@ public class CustomerService {
 
     public CustomerService() {
         this.customers = new HashMap<>();
-        customers.put("SIM_3", new CustomerDto());
     }
 
-    public CustomerDto getCustomer(String id) {
-        return customers.getOrDefault(id, null);
+    public Optional<CustomerDto> getCustomer(String id) {
+        if(!customers.containsKey(id)) {
+            return Optional.empty();
+        }
+
+        return Optional.of(customers.get(id));
     }
 }

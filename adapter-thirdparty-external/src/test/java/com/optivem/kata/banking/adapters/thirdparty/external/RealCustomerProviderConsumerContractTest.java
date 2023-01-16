@@ -25,7 +25,7 @@ public class RealCustomerProviderConsumerContractTest {
     public RequestResponsePact createPactForBlacklistedCustomer(PactDslWithProvider builder) {
         var customerId = BLACKLISTED_ID;
         var body = new PactDslJsonBody()
-                .numberType("id", customerId)
+                .stringType("id", customerId)
                 .booleanType("blacklisted", true);
 
         var pathFormat = "/customers/%s";
@@ -45,7 +45,7 @@ public class RealCustomerProviderConsumerContractTest {
     public RequestResponsePact createPactForWhitelistedCustomer(PactDslWithProvider builder) {
         var customerId = WHITELISTED_ID;
         var body = new PactDslJsonBody()
-                .numberType("id", customerId)
+                .stringType("id", customerId)
                 .booleanType("blacklisted", false);
 
         var pathFormat = "/customers/%s";
