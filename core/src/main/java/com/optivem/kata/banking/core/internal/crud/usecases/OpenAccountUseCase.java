@@ -12,6 +12,7 @@ import static com.optivem.kata.banking.core.internal.crud.common.Guard.guard;
 
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
     private NationalIdentityProvider nationalIdentityProvider;
+    private CustomerProvider customerProvider;
     private BankAccountStorage bankAccountStorage;
     private AccountIdGenerator accountIdGenerator;
     private AccountNumberGenerator accountNumberGenerator;
@@ -19,8 +20,9 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
     private EventBus eventBus;
 
-    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, CustomerProvider customerProvider, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
         this.nationalIdentityProvider = nationalIdentityProvider;
+        this.customerProvider = customerProvider;
         this.bankAccountStorage = bankAccountStorage;
         this.accountIdGenerator = accountIdGenerator;
         this.accountNumberGenerator = accountNumberGenerator;
@@ -39,6 +41,12 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
         if(!nationalIdentityNumberExists) {
             throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
+        }
+
+        var isBlacklisted = customerProvider.isBlacklisted(nationalIdentityNumber);
+
+        if(isBlacklisted) {
+            throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_BLACKLISTED);
         }
 
         var accountId = accountIdGenerator.next();

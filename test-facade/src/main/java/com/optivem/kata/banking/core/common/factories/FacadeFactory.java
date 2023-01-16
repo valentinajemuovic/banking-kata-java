@@ -30,6 +30,8 @@ public class FacadeFactory {
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(NATIONAL_IDENTITY_NUMBER_1);
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(NATIONAL_IDENTITY_NUMBER_2);
 
+        var customerProvider = new FakeCustomerProvider();
+
         var accountIdGenerator = new FakeAccountIdGenerator();
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_1);
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(ACCOUNT_ID_2);
@@ -46,6 +48,6 @@ public class FacadeFactory {
 
         var eventBus = new FakeEventBus();
 
-        return new Facade(nationalIdentityProvider, accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountStorage, eventBus);
+        return new Facade(nationalIdentityProvider, customerProvider, accountIdGenerator, accountNumberGenerator, dateTimeService, bankAccountStorage, eventBus);
     }
 }

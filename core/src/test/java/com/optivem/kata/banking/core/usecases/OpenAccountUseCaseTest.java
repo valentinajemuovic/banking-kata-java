@@ -10,6 +10,7 @@ import com.optivem.kata.banking.adapters.driven.fake.givens.FakeTimeGivens;
 import com.optivem.kata.banking.adapters.driven.fake.givens.FakeNationalIdentityProviderGivens;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.BankAccountStorageVerifies;
 import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
+import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
@@ -60,9 +61,9 @@ class OpenAccountUseCaseTest {
         this.eventBus = new FakeEventBus();
 
         // TODO: VC: Make configurable so that we can run same test twice
-        var useCaseFactory = new CrudUseCaseFactory();
-        // var useCaseFactory = new CleanArchUseCaseFactory();
-        this.useCase = useCaseFactory.createOpenAccountHandler(nationalIdentityProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
+        // var useCaseFactory = new CrudUseCaseFactory();
+        var useCaseFactory = new CleanArchUseCaseFactory();
+        this.useCase = useCaseFactory.createOpenAccountHandler(nationalIdentityProvider, customerProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
     }
 
     @ParameterizedTest
@@ -123,11 +124,11 @@ class OpenAccountUseCaseTest {
         verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
     }
 
-    @Disabled("TODO")
     @Test
     void should_throw_exception_given_blacklisted_national_identity_number() {
         var nationalIdentityNumber = "NAT_1001";
         FakeNationalIdentityProviderGivens.givenThat(nationalIdentityProvider).contains(nationalIdentityNumber);
+        FakeCustomerProviderGivens.givenThat(customerProvider).isBlacklisted(nationalIdentityNumber);
         FakeGenerationGivens.givenThat(accountIdGenerator).willGenerate(1001);
         FakeGenerationGivens.givenThat(accountNumberGenerator).willGenerate("1-0-0-1");
         FakeTimeGivens.givenThat(dateTimeService).willReturn(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
