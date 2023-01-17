@@ -94,6 +94,9 @@ Run PIT mutation testing:
 ./gradlew pitest
 ```
 
+<!--- TODO: Add pitest report aggregation after issue is resolved 
+See issue #80 Pitest report aggregation not working --->
+
 ## Reports
 
 See the `build\reports` directory for the generated reports for test results, code coverage and mutation testing.
@@ -110,7 +113,7 @@ Reports:
 ./gradlew runApp
 ```
 
-<!--- TODO: VC: Building also the entire app, maybe running with fakes? -->
+<!--- TODO: VC: Building also the entire app, maybe running with fakes? --->
 
 ## Optional Notes
 

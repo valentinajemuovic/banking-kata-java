@@ -8,7 +8,7 @@ plugins {
     id 'com.adarshr.test-logger' version '3.2.0' // TODO: Check why not working
 }
 
-
+apply plugin: 'info.solidsoft.pitest.aggregator'
 
 jacoco {
     toolVersion = "0.8.7"
@@ -31,6 +31,11 @@ subprojects {
         if(project.name in ['startup']) {
             failWhenNoMutations = false
         }
+
+        // Export for aggregation
+        outputFormats = [ "XML" ]
+        exportLineCoverage = true
+        timestampedReports = false
     }
 }
 
