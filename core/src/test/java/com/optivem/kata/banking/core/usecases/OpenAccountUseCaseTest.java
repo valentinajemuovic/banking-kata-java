@@ -134,7 +134,7 @@ class OpenAccountUseCaseTest {
     void should_throw_exception_given_blacklisted_national_identity_number() {
         var nationalIdentityNumber = "NAT_1001";
         nationalIdentityProvider.setupExists(nationalIdentityNumber);
-        customerProvider.givenBlacklisted(nationalIdentityNumber);
+        customerProvider.setupBlacklisted(nationalIdentityNumber);
         accountIdGenerator.setupNext(1001L);
         accountNumberGenerator.setupNext("1-0-0-1");
         dateTimeService.setupNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));

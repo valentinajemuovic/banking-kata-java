@@ -14,7 +14,7 @@ public class FakeCustomerProviderTest extends CustomerProviderTest<FakeCustomerP
     @Test
     void should_return_blacklisted() {
         var nationalIdentityNumber = "ABC101";
-        provider.givenBlacklisted(nationalIdentityNumber);
+        provider.setupBlacklisted(nationalIdentityNumber);
         var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
         assertThat(isBlacklisted).isTrue();
     }
