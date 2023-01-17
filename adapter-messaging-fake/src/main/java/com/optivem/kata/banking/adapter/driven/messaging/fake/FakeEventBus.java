@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven.fake;
+package com.optivem.kata.banking.adapter.driven.messaging.fake;
 
 import com.optivem.kata.banking.core.ports.driven.EventBus;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;

@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.messaging.inmemory.internal;
+package com.optivem.kata.banking.adapter.driven.messaging.inmemory.internal;
 
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
