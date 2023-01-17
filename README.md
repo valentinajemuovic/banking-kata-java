@@ -88,7 +88,7 @@ Run code coverage (Jacoco):
 ./gradlew codeCoverage
 ```
 
-Run PIT mutation testing (currently this doesn't work, pending to fix #69):
+Run PIT mutation testing:
 
 ```
 ./gradlew pitest

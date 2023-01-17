@@ -3,15 +3,12 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'groovy'
-    id 'info.solidsoft.pitest' version '1.7.4'
+    id 'info.solidsoft.pitest' version '1.7.4' apply false
     id 'jacoco'
     id 'com.adarshr.test-logger' version '3.2.0' // TODO: Check why not working
 }
 
-pitest {
-    junit5PluginVersion = '0.15'
-    useClasspathFile = true
-}
+
 
 jacoco {
     toolVersion = "0.8.7"
@@ -25,7 +22,16 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'info.solidsoft.pitest'
 
+    pitest {
+        junit5PluginVersion = '0.15'
+        useClasspathFile = true
+
+        if(project.name in ['startup']) {
+            failWhenNoMutations = false
+        }
+    }
 }
 
 allprojects {
