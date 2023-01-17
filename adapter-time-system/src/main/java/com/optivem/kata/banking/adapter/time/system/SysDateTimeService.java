@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.time.system;
+package com.optivem.kata.banking.adapter.time.system;
 
 import com.optivem.kata.banking.adapter.driven.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;

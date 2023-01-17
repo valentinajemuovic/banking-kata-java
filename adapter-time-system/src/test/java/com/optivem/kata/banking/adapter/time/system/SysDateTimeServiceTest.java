@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.time.system;
+package com.optivem.kata.banking.adapter.time.system;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

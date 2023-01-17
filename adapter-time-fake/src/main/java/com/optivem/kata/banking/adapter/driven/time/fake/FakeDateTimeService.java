@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven.fake;
+package com.optivem.kata.banking.adapter.driven.time.fake;
 
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 
