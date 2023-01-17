@@ -41,6 +41,8 @@ The application can be executed via `startup`.
 - Core Layer: Unit Tests targeting the Driver Ports.
 - Adapter Layer: Integration Tests targeting the Driven Ports. In cases of integrating with third-party systems or microservices, we use Contract Testing.
 
+As can be seen below, you can separately run these fast-running and slow-running tests.
+
 ## Prerequisites
 
 - OpenJDK 17
