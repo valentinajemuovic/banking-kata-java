@@ -16,7 +16,7 @@ public class MongoBankAccountStorage implements BankAccountStorage {
     private MongoTemplateCustomDataAccessor dataAccessor;
 
     public MongoBankAccountStorage(MongoTemplateCustomDataAccessor dataAccessor){
-        this.dataAccessor=dataAccessor;
+        this.dataAccessor = dataAccessor;
     }
 
     @Override
