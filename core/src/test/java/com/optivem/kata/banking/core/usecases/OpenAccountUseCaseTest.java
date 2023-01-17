@@ -2,7 +2,6 @@ package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapters.driven.fake.*;
-import com.optivem.kata.banking.adapters.driven.fake.verifies.FakeEventBusVerifies;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
@@ -96,7 +95,7 @@ class OpenAccountUseCaseTest {
 
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
         storage.shouldContain(expectedBankAccount);
-        FakeEventBusVerifies.verifyThat(eventBus).shouldHavePublishedExactly(expectedEvent);
+        eventBus.shouldHavePublishedExactly(expectedEvent);
     }
 
     @ParameterizedTest
