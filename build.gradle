@@ -154,7 +154,8 @@ task adapterMutationTest {
 }
 
 task mutationTest {
-    dependsOn pitest
+    dependsOn coreMutationTest
+    dependsOn adapterMutationTest
 }
 
 bootJar {
