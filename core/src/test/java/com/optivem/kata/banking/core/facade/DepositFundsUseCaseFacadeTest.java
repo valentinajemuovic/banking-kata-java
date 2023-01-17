@@ -2,6 +2,7 @@ package com.optivem.kata.banking.core.facade;
 
 import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.factories.FacadeFactory;
+import com.optivem.kata.banking.core.facade.common.TestFacade;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static com.optivem.kata.banking.core.common.Givens.givenThat;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.builders.requests.DepositFundsRequestBuilder.depositFundsRequest;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY_WHITESPACE;
@@ -19,7 +19,7 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY
  * This test is an alternative approach to DepositFundsUseCaseTest, so we would use either of these, but not both
  */
 class DepositFundsUseCaseFacadeTest {
-    private Facade facade;
+    private TestFacade facade;
 
     private static Stream<Arguments> should_deposit_funds_given_valid_request() {
         return Stream.of(Arguments.of(0, 50, 50),
@@ -29,13 +29,13 @@ class DepositFundsUseCaseFacadeTest {
     @BeforeEach
     void init() {
         var facadeFactory = new FacadeFactory();
-        facade = facadeFactory.create();
+        facade = new TestFacade(facadeFactory.create());
     }
 
     @ParameterizedTest
     @MethodSource
     void should_deposit_funds_given_valid_request(int initialBalance, int depositAmount, int expectedFinalBalance) {
-        var accountNumber = givenThat(facade)
+        var accountNumber = facade
                 .alreadyHasBankAccount(initialBalance);
 
         var request = depositFundsRequest()
@@ -43,11 +43,11 @@ class DepositFundsUseCaseFacadeTest {
                 .withAmount(depositAmount)
                 .build();
 
-        verifyThat(facade)
+        verifyThat(facade.getFacade())
                 .withRequest(request)
                 .shouldExecuteSuccessfully();
 
-        verifyThat(facade)
+        verifyThat(facade.getFacade())
                 .shouldContain(accountNumber, expectedFinalBalance);
     }
 
@@ -58,7 +58,7 @@ class DepositFundsUseCaseFacadeTest {
                 .withAccountNumber(accountNumber)
                 .build();
 
-        verifyThat(facade)
+        verifyThat(facade.getFacade())
                 .withRequest(request)
                 .shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
