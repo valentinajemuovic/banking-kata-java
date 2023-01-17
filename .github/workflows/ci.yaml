@@ -71,7 +71,7 @@ jobs:
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
       - name: Code Coverage
-        run: ./gradlew jacocoTestReport
+        run: ./gradlew codeCoverage
 # TODO: Add pitest after issue https://github.com/valentinacupac/banking-kata-java/issues/69 is resolved
 #      - name: Mutation Testing
 #        run: ./gradlew pitest

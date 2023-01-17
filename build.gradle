@@ -111,6 +111,10 @@ task runApp {
     dependsOn 'startup:bootRun'
 }
 
+task codeCoverage {
+    dependsOn jacocoTestReport
+}
+
 bootJar {
     enabled = false
 }

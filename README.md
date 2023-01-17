@@ -82,10 +82,10 @@ Note, if you need details regarding test
 
 ## Code Coverage & Mutation Testing
 
-Run JaCoCo code coverage:
+Run code coverage (Jacoco):
 
 ```
-./gradlew jacocoTestReport
+./gradlew codeCoverage
 ```
 
 Run PIT mutation testing (currently this doesn't work, pending to fix #69):
