@@ -107,7 +107,7 @@ Reports:
 ## Running Spring Boot
 
 ```
-./gradlew startup:bootRun
+./gradlew runApp
 ```
 
 <!--- TODO: VC: Building also the entire app, maybe running with fakes? -->
