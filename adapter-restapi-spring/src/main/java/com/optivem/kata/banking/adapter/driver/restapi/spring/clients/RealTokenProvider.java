@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.restapi.spring.clients;
+package com.optivem.kata.banking.adapter.driver.restapi.spring.clients;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;

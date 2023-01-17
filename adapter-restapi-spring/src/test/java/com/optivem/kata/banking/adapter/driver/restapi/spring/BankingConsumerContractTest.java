@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.restapi.spring;
+package com.optivem.kata.banking.adapter.driver.restapi.spring;
 
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
@@ -7,10 +7,11 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
-import com.optivem.kata.banking.adapters.restapi.spring.clients.BankingClient;
-import com.optivem.kata.banking.adapters.restapi.spring.clients.FakeTokenProvider;
+import com.optivem.kata.banking.adapter.driver.restapi.spring.clients.BankingClient;
+import com.optivem.kata.banking.adapter.driver.restapi.spring.clients.FakeTokenProvider;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -73,7 +74,7 @@ public class BankingConsumerContractTest {
         var accountNumber = NON_EXISTENT_ACCOUNT_NUMBER;
         var response = client.viewAccount(accountNumber);
 
-        assertThat(response).isEmpty();
+        Assertions.assertThat(response).isEmpty();
     }
 
     @Test
@@ -90,8 +91,8 @@ public class BankingConsumerContractTest {
             .score(SCORE)
             .build();
 
-        assertThat(response).isNotEmpty();
-        assertThat(response.get()).usingRecursiveComparison().isEqualTo(expectedResponse);
+        Assertions.assertThat(response).isNotEmpty();
+        Assertions.assertThat(response.get()).usingRecursiveComparison().isEqualTo(expectedResponse);
     }
 
     private BankingClient createBankingClient(MockServer mockServer) {

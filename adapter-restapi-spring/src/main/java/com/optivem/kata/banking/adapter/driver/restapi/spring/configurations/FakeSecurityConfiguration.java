@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.restapi.spring.configurations;
+package com.optivem.kata.banking.adapter.driver.restapi.spring.configurations;
 
 /*
 import com.optivem.kata.banking.adapters.driven.ProfileNames;
