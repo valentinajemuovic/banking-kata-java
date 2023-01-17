@@ -117,9 +117,13 @@ Reports:
 
 ## Running Spring Boot
 
+To manually run the app.
+
 ```shell
 ./gradlew runApp
 ```
+
+Then `CTRL+C` to terminate the app.
 
 <!--- TODO: VC: Building also the entire app, maybe running with fakes? --->
 
