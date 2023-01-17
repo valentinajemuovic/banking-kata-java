@@ -74,7 +74,7 @@ jobs:
         run: ./gradlew codeCoverage
 # TODO: #81 Mutation Testing - Create separate job
 #      - name: Mutation Testing
-#        run: ./gradlew mutationTesting
+#        run: ./gradlew mutationTest
 #        env:
 #          POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata_db
 #          POSTGRES_USER: postgres
