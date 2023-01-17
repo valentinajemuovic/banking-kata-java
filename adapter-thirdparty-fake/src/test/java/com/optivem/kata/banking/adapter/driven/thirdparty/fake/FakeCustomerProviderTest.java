@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.thirdparty.fake;
 
-import com.optivem.kata.banking.adapter.driven.CustomerProviderTest;
-import com.optivem.kata.banking.adapter.driven.thirdparty.fake.FakeCustomerProvider;
+import com.optivem.kata.banking.adapter.driven.base.CustomerProviderTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapter.driver.restapi.spring.configurations;
 
-import com.optivem.kata.banking.adapter.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

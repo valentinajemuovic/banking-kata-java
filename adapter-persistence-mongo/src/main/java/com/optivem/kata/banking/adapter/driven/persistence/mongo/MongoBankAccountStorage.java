@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.persistence.mongo;
 
-import com.optivem.kata.banking.adapter.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.adapter.driven.persistence.mongo.internal.MongoTemplateCustomDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;

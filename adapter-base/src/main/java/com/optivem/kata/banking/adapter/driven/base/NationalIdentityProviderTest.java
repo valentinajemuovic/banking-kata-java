@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven;
+package com.optivem.kata.banking.adapter.driven.base;
 
 import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
 import org.junit.jupiter.api.BeforeEach;

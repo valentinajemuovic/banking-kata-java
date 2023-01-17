@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.persistence.mongo;
 
-import com.optivem.kata.banking.adapter.driven.BankAccountStorageTest;
+import com.optivem.kata.banking.adapter.driven.base.BankAccountStorageTest;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;

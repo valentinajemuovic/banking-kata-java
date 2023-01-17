@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.thirdparty.external;
 
-import com.optivem.kata.banking.adapter.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.CustomerProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;

@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven;
+package com.optivem.kata.banking.adapter.driven.base;
 
 public class ProfileNames {
     public static final String AdapterGenerationRandom = "adapter-generation-random";

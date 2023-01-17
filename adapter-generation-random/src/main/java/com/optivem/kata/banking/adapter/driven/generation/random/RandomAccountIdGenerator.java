@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.generation.random;
 
-import com.optivem.kata.banking.adapter.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
 import de.mkammerer.snowflakeid.SnowflakeIdGenerator;
 import org.springframework.context.annotation.Profile;

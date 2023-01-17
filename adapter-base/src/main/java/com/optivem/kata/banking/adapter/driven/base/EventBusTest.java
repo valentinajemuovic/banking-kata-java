@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven;
+package com.optivem.kata.banking.adapter.driven.base;
 
 import com.optivem.kata.banking.core.ports.driven.EventBus;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
