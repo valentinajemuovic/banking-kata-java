@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.system;
+package com.optivem.kata.banking.startup;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.optivem.kata.banking.BankingApplication;

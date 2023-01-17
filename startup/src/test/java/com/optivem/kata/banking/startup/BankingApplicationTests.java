@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.system;
+package com.optivem.kata.banking.startup;
 
 import com.optivem.kata.banking.BankingApplication;
 import org.junit.jupiter.api.Disabled;

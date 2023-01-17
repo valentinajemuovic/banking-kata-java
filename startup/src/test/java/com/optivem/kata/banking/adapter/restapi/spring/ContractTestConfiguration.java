@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.system;
+package com.optivem.kata.banking.adapter.restapi.spring;
 
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;

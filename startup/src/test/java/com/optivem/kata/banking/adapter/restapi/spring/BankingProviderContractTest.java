@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.system;
+package com.optivem.kata.banking.adapter.restapi.spring;
 
 import an.awesome.pipelinr.Pipeline;
 import au.com.dius.pact.provider.junit.Provider;
@@ -7,13 +7,13 @@ import au.com.dius.pact.provider.junit.loader.PactFolder;
 import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
-import com.optivem.kata.banking.BankingApplication;
 import com.optivem.kata.banking.adapter.driven.ProfileNames;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
+import com.optivem.kata.banking.BankingApplication;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
