@@ -5,6 +5,8 @@ import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountIdGene
 import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapter.driven.messaging.fake.FakeEventBus;
 import com.optivem.kata.banking.adapter.driven.persistence.fake.FakeBankAccountStorage;
+import com.optivem.kata.banking.adapter.driven.thirdparty.fake.FakeCustomerProvider;
+import com.optivem.kata.banking.adapter.driven.thirdparty.fake.FakeNationalIdentityProvider;
 import com.optivem.kata.banking.core.Facade;
 
 import java.time.LocalDateTime;
