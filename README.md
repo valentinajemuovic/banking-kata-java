@@ -86,13 +86,15 @@ You can run them all:
 ./gradlew test
 ```
 
-## Code Coverage & Mutation Testing
+## Running Code Coverage 
 
 Run code coverage (executes Jacoco):
 
 ```shell
 ./gradlew codeCoverage
 ```
+
+## Running Mutation Testing
 
 Run mutation testing (executes pitest):
 
@@ -103,7 +105,7 @@ Run mutation testing (executes pitest):
 <!--- TODO: Add pitest report aggregation after issue is resolved 
 See issue #80 Pitest report aggregation not working --->
 
-## Reports
+## Viewing Reports
 
 See the `build\reports` directory for the generated reports for test results, code coverage and mutation testing.
 
@@ -122,6 +124,8 @@ Reports:
 <!--- TODO: VC: Building also the entire app, maybe running with fakes? --->
 
 ## Optional Notes
+
+The following are for additional reading, you do not need to execute these, but you can if you wish.
 
 Environment variables are located inside the `env` folder. You can optionally choose to edit them.
 
