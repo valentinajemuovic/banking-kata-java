@@ -63,7 +63,7 @@ docker-compose up -d
 
 To run all the adapter integration tests:
 
-```
+```shell
 ./gradlew adapterTest
 ```
 
@@ -73,24 +73,21 @@ To run all the adapter integration tests:
 
 To run the whole system:
 
-```
+```shell
 ./gradlew systemTest
 ```
 
-Note, if you need details regarding test 
-
-
 ## Code Coverage & Mutation Testing
 
-Run code coverage (Jacoco):
+Run code coverage (executes Jacoco):
 
-```
+```shell
 ./gradlew codeCoverage
 ```
 
-Run mutation testing (pitest):
+Run mutation testing (executes pitest):
 
-```
+```shell
 ./gradlew mutationTest
 ```
 
@@ -109,7 +106,7 @@ Reports:
 
 ## Running Spring Boot
 
-```
+```shell
 ./gradlew runApp
 ```
 
@@ -132,8 +129,20 @@ docker-compose --env-file=env/.env.local up -d
 
 You can run the integration tests individually, e.g. if you modified a module (in this way you avoid waiting for all of them to finish):
 
-```
+```shell
 ./gradlew adapter-persistence-jpa:test
+```
+
+For code coverage, the underlying call is:
+
+```shell
+./gradlew jacocoTestReport
+```
+
+For mutation testing, the underlying call is:
+
+```shell
+./gradlew pitest
 ```
 
 ## Issues
