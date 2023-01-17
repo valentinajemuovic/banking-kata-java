@@ -1,6 +1,8 @@
 package com.optivem.kata.banking.core.common.factories;
 
 import com.optivem.kata.banking.adapters.driven.fake.*;
+import com.optivem.kata.banking.adapters.driven.generation.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.adapters.driven.generation.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.core.Facade;
 
 import java.time.LocalDateTime;

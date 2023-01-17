@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.fake.internal;
+package com.optivem.kata.banking.adapters.driven.generation.fake.internal;
 
 public class NextElementIsNotSetupException extends RuntimeException {
     private static final String GENERATOR_DOES_NOT_HAVE_NEXT = "Generator does not have next element";

@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.example
 
-import com.optivem.kata.banking.adapters.driven.fake.FakeAccountNumberGenerator
+import com.optivem.kata.banking.adapters.driven.generation.fake.FakeAccountNumberGenerator
 import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeException
 import com.optivem.kata.banking.adapters.driven.fake.exceptions.FakeMessages
 

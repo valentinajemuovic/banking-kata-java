@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.driven.fake.internal;
+package com.optivem.kata.banking.adapters.driven.generation.fake.internal;
 
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.base.Generator;
 
