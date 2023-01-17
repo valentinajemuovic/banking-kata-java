@@ -77,6 +77,15 @@ To run the whole system:
 ./gradlew systemTest
 ```
 
+## Running all Tests
+
+In the above instructions, we ran the tests separately.
+You can run them all:
+
+```shell
+./gradlew test
+```
+
 ## Code Coverage & Mutation Testing
 
 Run code coverage (executes Jacoco):
