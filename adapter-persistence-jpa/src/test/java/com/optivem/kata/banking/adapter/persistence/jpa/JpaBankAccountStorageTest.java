@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.persistence.jpa;
+package com.optivem.kata.banking.adapter.persistence.jpa;
 
 import com.optivem.kata.banking.BankingApplication;
 import com.optivem.kata.banking.adapter.driven.BankAccountStorageTest;

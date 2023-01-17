@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.persistence.mongo.internal;
+package com.optivem.kata.banking.adapter.persistence.mongo.internal;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

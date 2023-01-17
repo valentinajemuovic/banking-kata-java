@@ -1,5 +1,6 @@
-package com.optivem.kata.banking.adapter.driven.fake;
+package com.optivem.kata.banking.adapter.driven.persistence.fake;
 
+import com.optivem.kata.banking.adapter.driven.persistence.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

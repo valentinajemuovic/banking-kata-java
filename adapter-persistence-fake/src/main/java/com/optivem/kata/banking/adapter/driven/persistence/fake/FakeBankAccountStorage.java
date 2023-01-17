@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven.fake;
+package com.optivem.kata.banking.adapter.driven.persistence.fake;
 
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryException;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;

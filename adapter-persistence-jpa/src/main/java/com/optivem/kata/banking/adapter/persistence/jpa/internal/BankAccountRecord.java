@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.persistence.jpa.internal;
+package com.optivem.kata.banking.adapter.persistence.jpa.internal;
 
 import lombok.Data;
 

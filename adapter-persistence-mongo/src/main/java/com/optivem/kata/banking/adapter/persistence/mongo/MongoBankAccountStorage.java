@@ -1,7 +1,7 @@
-package com.optivem.kata.banking.adapters.persistence.mongo;
+package com.optivem.kata.banking.adapter.persistence.mongo;
 
 import com.optivem.kata.banking.adapter.driven.ProfileNames;
-import com.optivem.kata.banking.adapters.persistence.mongo.internal.MongoTemplateCustomDataAccessor;
+import com.optivem.kata.banking.adapter.persistence.mongo.internal.MongoTemplateCustomDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import org.springframework.context.annotation.Profile;
