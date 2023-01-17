@@ -126,6 +126,37 @@ task codeCoverage {
     dependsOn jacocoTestReport
 }
 
+task coreMutationTest {
+    dependsOn 'core:pitest'
+}
+
+task fakeAdapterMutationTest {
+    dependsOn 'adapter-generation-fake:pitest'
+    dependsOn 'adapter-messaging-fake:pitest'
+    dependsOn 'adapter-persistence-fake:pitest'
+    dependsOn 'adapter-thirdparty-fake:pitest'
+    dependsOn 'adapter-time-fake:pitest'
+}
+
+task realAdapterMutationTest {
+    dependsOn 'adapter-generation-random:pitest'
+    dependsOn 'adapter-messaging-inmemory:pitest'
+    dependsOn 'adapter-persistence-jpa:pitest'
+    dependsOn 'adapter-persistence-mongo:pitest'
+    dependsOn 'adapter-restapi-spring:pitest'
+    dependsOn 'adapter-thirdparty-external:pitest'
+    dependsOn 'adapter-time-system:pitest'
+}
+
+task adapterMutationTest {
+    dependsOn fakeAdapterMutationTest
+    dependsOn realAdapterMutationTest
+}
+
+task mutationTest {
+    dependsOn pitest
+}
+
 bootJar {
     enabled = false
 }

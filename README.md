@@ -88,10 +88,10 @@ Run code coverage (Jacoco):
 ./gradlew codeCoverage
 ```
 
-Run PIT mutation testing:
+Run mutation testing (pitest):
 
 ```
-./gradlew pitest
+./gradlew mutationTest
 ```
 
 <!--- TODO: Add pitest report aggregation after issue is resolved 

@@ -73,7 +73,7 @@ jobs:
       - name: Code Coverage
         run: ./gradlew codeCoverage
       - name: Mutation Testing
-        run: ./gradlew pitest
+        run: ./gradlew mutationTesting
         env:
           POSTGRES_URL: jdbc:postgresql://localhost:5400/banking_kata_db
           POSTGRES_USER: postgres
