@@ -13,8 +13,8 @@ public class FakeNationalIdentityProviderSimulator implements NationalIdentityPr
 
     public FakeNationalIdentityProviderSimulator() {
         this.provider = new FakeNationalIdentityProvider();
-        provider.givenExists("SIM_1");
-        provider.givenExists("SIM_2");
+        provider.setupExists("SIM_1");
+        provider.setupExists("SIM_2");
     }
 
     @Override

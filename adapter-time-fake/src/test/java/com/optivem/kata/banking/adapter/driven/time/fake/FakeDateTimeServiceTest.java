@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.adapter.driven.time.fake;
 
-import com.optivem.kata.banking.adapter.driven.time.fake.FakeDateTimeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +18,7 @@ class FakeDateTimeServiceTest {
     @Test
     void should_return_current_date_time() {
         var dateTime = LocalDateTime.of(2022, 4, 15, 9, 1);
-        service.givenNow(dateTime);
+        service.setupNow(dateTime);
 
         assertReturnsNext(dateTime);
     }

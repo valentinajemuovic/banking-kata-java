@@ -12,7 +12,7 @@ public class FakeNationalIdentityProvider implements NationalIdentityProvider {
         this.nationalIdentityNumbers = new HashSet();
     }
 
-    public void givenExists(String nationalIdentityNumber) {
+    public void setupExists(String nationalIdentityNumber) {
         this.nationalIdentityNumbers.add(nationalIdentityNumber);
     }
 

@@ -26,7 +26,7 @@ public class TimeFactorCalculatorTest {
         var currentDateTime = LocalDateTime.of(2022, 4, 20, 10, 15);
         var openingDate = LocalDate.of(2022, 4, 15);
 
-        dateTimeService.givenNow(currentDateTime);
+        dateTimeService.setupNow(currentDateTime);
 
         var bankAccount = bankAccount()
                 .withOpeningDate(openingDate)

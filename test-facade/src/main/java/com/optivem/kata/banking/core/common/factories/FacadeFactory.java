@@ -27,22 +27,22 @@ public class FacadeFactory {
 
     public Facade create() {
         var nationalIdentityProvider = new FakeNationalIdentityProvider();
-        nationalIdentityProvider.givenExists(NATIONAL_IDENTITY_NUMBER_1);
-        nationalIdentityProvider.givenExists(NATIONAL_IDENTITY_NUMBER_2);
+        nationalIdentityProvider.setupExists(NATIONAL_IDENTITY_NUMBER_1);
+        nationalIdentityProvider.setupExists(NATIONAL_IDENTITY_NUMBER_2);
 
         var customerProvider = new FakeCustomerProvider();
 
         var accountIdGenerator = new FakeAccountIdGenerator();
-        accountIdGenerator.givenNext(ACCOUNT_ID_1);
-        accountIdGenerator.givenNext(ACCOUNT_ID_2);
+        accountIdGenerator.setupNext(ACCOUNT_ID_1);
+        accountIdGenerator.setupNext(ACCOUNT_ID_2);
 
         var accountNumberGenerator = new FakeAccountNumberGenerator();
-        accountNumberGenerator.givenNext(ACCOUNT_NUMBER_1);
-        accountNumberGenerator.givenNext(ACCOUNT_NUMBER_2);
+        accountNumberGenerator.setupNext(ACCOUNT_NUMBER_1);
+        accountNumberGenerator.setupNext(ACCOUNT_NUMBER_2);
 
         var dateTimeService = new FakeDateTimeService();
-        dateTimeService.givenNow(DATE_TIME_1);
-        dateTimeService.givenNow(DATE_TIME_2);
+        dateTimeService.setupNow(DATE_TIME_1);
+        dateTimeService.setupNow(DATE_TIME_2);
 
         var bankAccountStorage = new FakeBankAccountStorage();
 

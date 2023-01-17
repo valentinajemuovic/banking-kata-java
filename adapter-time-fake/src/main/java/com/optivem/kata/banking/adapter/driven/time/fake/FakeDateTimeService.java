@@ -23,7 +23,7 @@ public class FakeDateTimeService implements DateTimeService {
         return queue.remove();
     }
 
-    public void givenNow(LocalDateTime value) {
+    public void setupNow(LocalDateTime value) {
         queue.add(value);
     }
 }

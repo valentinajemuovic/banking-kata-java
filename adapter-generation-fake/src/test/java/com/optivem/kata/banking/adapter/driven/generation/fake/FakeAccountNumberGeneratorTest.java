@@ -14,9 +14,9 @@ class FakeAccountNumberGeneratorTest extends AccountNumberGeneratorTest {
         var expectedValue2 = "GB36BARC20038032622823";
         var expectedValue3 = "GB10BARC20040184197751";
 
-        generator.givenNext(expectedValue1);
-        generator.givenNext(expectedValue2);
-        generator.givenNext(expectedValue3);
+        generator.setupNext(expectedValue1);
+        generator.setupNext(expectedValue2);
+        generator.setupNext(expectedValue3);
 
         return generator;
     }

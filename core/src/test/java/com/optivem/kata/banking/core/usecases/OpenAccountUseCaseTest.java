@@ -65,10 +65,10 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_open_account_given_valid_request(String nationalIdentityNumber, String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
-        nationalIdentityProvider.givenExists(nationalIdentityNumber);
-        accountIdGenerator.givenNext(generatedAccountId);
-        accountNumberGenerator.givenNext(generatedAccountNumber);
-        dateTimeService.givenNow(LocalDateTime.of(openingDate, LocalTime.MIN));
+        nationalIdentityProvider.setupExists(nationalIdentityNumber);
+        accountIdGenerator.setupNext(generatedAccountId);
+        accountNumberGenerator.setupNext(generatedAccountNumber);
+        dateTimeService.setupNow(LocalDateTime.of(openingDate, LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
@@ -107,9 +107,9 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource(NULL_EMPTY_WHITESPACE)
     void should_throw_exception_given_empty_national_identity_number(String nationalIdentityNumber) {
-        accountIdGenerator.givenNext(1001L);
-        accountNumberGenerator.givenNext("1-0-0-1");
-        dateTimeService.givenNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        accountIdGenerator.setupNext(1001L);
+        accountNumberGenerator.setupNext("1-0-0-1");
+        dateTimeService.setupNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
@@ -120,9 +120,9 @@ class OpenAccountUseCaseTest {
 
     @Test
     void should_throw_exception_given_nonexistent_national_identity_number() {
-        accountIdGenerator.givenNext(1001L);
-        accountNumberGenerator.givenNext("1-0-0-1");
-        dateTimeService.givenNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        accountIdGenerator.setupNext(1001L);
+        accountNumberGenerator.setupNext("1-0-0-1");
+        dateTimeService.setupNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .build();
@@ -133,11 +133,11 @@ class OpenAccountUseCaseTest {
     @Test
     void should_throw_exception_given_blacklisted_national_identity_number() {
         var nationalIdentityNumber = "NAT_1001";
-        nationalIdentityProvider.givenExists(nationalIdentityNumber);
+        nationalIdentityProvider.setupExists(nationalIdentityNumber);
         customerProvider.givenBlacklisted(nationalIdentityNumber);
-        accountIdGenerator.givenNext(1001L);
-        accountNumberGenerator.givenNext("1-0-0-1");
-        dateTimeService.givenNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
+        accountIdGenerator.setupNext(1001L);
+        accountNumberGenerator.setupNext("1-0-0-1");
+        dateTimeService.setupNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
         var request = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)

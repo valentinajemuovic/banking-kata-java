@@ -24,7 +24,7 @@ public class FakeAccountNumberGeneratorExtendedTest {
     void should_return_next_element_when_there_is_one_element() {
         var expectedValue = "GB54BARC20032611545669";
 
-        generator.givenNext(expectedValue);
+        generator.setupNext(expectedValue);
 
         assertGeneratesNext(expectedValue);
 
@@ -37,9 +37,9 @@ public class FakeAccountNumberGeneratorExtendedTest {
         var expectedValue2 = "GB36BARC20038032622823";
         var expectedValue3 = "GB10BARC20040184197751";
 
-        generator.givenNext(expectedValue1);
-        generator.givenNext(expectedValue2);
-        generator.givenNext(expectedValue3);
+        generator.setupNext(expectedValue1);
+        generator.setupNext(expectedValue2);
+        generator.setupNext(expectedValue3);
 
         assertGeneratesNext(expectedValue1);
         assertGeneratesNext(expectedValue2);
