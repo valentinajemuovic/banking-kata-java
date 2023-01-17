@@ -2,14 +2,14 @@
 
 [![CI](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml/badge.svg)](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml)
 
-## Purpose
-
-This demo was created for the purposes of meetup series on TDD & Clean Architecture. See the [YouTube Meetups](https://journal.optivem.com/p/foundations-of-tdd-and-clean-architecture). Please note that this project is purely for demo purposes only.
-
 ## Overview
 
 This project illustrates TDD & Clean Architecture implementation in Java, showing the Use Case Driven Development
 Approach.
+
+This demo was created for the purposes of meetup series on TDD & Clean Architecture. See the [YouTube Meetups](https://journal.optivem.com/p/foundations-of-tdd-and-clean-architecture). Please note that this project is purely for demo purposes only.
+
+## Business Requirements
 
 We implement a Banking system with the following use cases:
 
@@ -19,6 +19,27 @@ We implement a Banking system with the following use cases:
 - View account
 
 We also have authentication with Keycloak - a realm with client_id and with client_credentials flow enabled.
+
+## Architecture
+
+The overall architecture is split into: 
+- Application Core (`core`) layer contains the business logic. 
+- Adapter (`adapter`) layer contains the infrastructural concerns.
+
+The Application Core(`core`) is composed of: 
+- Ports (`ports`), representing an interface to the Application Core, isolating it from infrastructural concerns. There are both Driver (`driver`) ports, representing use cases; and Driven (`driven`) ports, representing gateways.
+- Internals (`internal`), representing the internal implementation of the Application Core, more specifically, the implementation of the Driver (`driver`) ports. This implementation can be anything. Here we illustrate the implementation with Clean Architecture (`cleanarch`) approach and the CRUD (`crud`) approach, but other approaches are possible too. The use case tests are independent of the implementation approach; the internal implementation is thus swappable.
+
+The Adapter (`adapter`) layer is composed of driver adapters and driven adapters.
+- Driver adapters: REST API Adapter (`adapter-restapi-*`)
+- Driven adapters: Persistence Adapters (`adapter-persistence-*`), Random Number Generation Adapters (`adapter-generation-*`), Time Adapters (`adapter-time-*`), Third Party Integration Adapters (`adapter-thirdparty-*`), and Messaging Adapters (`adapter-messaging-*`).
+
+The application can be executed via `startup`.
+
+## Tests
+
+- Core Layer: Unit Tests targeting the Driver Ports.
+- Adapter Layer: Integration Tests targeting the Driven Ports. In cases of integrating with third-party systems or microservices, we use Contract Testing.
 
 ## Prerequisites
 
