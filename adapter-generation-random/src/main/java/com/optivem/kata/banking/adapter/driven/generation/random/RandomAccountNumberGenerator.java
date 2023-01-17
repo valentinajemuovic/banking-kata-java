@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapters.generation.random;
+package com.optivem.kata.banking.adapter.driven.generation.random;
 
 import com.optivem.kata.banking.adapter.driven.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
