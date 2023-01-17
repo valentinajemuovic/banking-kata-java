@@ -36,3 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 /db_persist/
+
+
+### OTHER ###
+
+**/target/pacts/
