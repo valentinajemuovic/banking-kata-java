@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapters.persistence.jpa;
 
-import com.optivem.kata.banking.adapters.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.ProfileNames;
 import com.optivem.kata.banking.adapters.persistence.jpa.internal.BankAccountRecord;
 import com.optivem.kata.banking.adapters.persistence.jpa.internal.JpaBankAccountDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;

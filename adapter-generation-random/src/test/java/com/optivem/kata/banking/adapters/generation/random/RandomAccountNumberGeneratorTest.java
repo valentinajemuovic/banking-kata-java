@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapters.generation.random;
 
-import com.optivem.kata.banking.adapters.driven.AccountNumberGeneratorTest;
+import com.optivem.kata.banking.adapter.driven.AccountNumberGeneratorTest;
 import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
 
 class RandomAccountNumberGeneratorTest extends AccountNumberGeneratorTest {

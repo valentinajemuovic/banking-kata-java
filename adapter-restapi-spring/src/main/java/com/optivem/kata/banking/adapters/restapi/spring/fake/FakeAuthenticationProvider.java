@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapters.restapi.spring.fake;
 
-import com.optivem.kata.banking.adapters.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.ProfileNames;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

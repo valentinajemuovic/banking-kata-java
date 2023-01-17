@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapters.time.system;
 
-import com.optivem.kata.banking.adapters.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;

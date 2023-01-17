@@ -8,7 +8,7 @@ import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import com.optivem.kata.banking.BankingApplication;
-import com.optivem.kata.banking.adapters.driven.ProfileNames;
+import com.optivem.kata.banking.adapter.driven.ProfileNames;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;

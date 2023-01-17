@@ -1,8 +1,8 @@
 package com.optivem.kata.banking.core.usecases;
 
-import com.optivem.kata.banking.adapters.driven.generation.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.adapters.driven.generation.fake.FakeAccountNumberGenerator;
-import com.optivem.kata.banking.adapters.driven.fake.FakeBankAccountStorage;
+import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.adapter.driven.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;

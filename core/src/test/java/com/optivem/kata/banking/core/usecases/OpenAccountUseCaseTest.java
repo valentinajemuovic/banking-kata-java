@@ -1,9 +1,9 @@
 package com.optivem.kata.banking.core.usecases;
 
 import an.awesome.pipelinr.Command;
-import com.optivem.kata.banking.adapters.driven.fake.*;
-import com.optivem.kata.banking.adapters.driven.generation.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.adapters.driven.generation.fake.FakeAccountNumberGenerator;
+import com.optivem.kata.banking.adapter.driven.fake.*;
+import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountIdGenerator;
+import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;

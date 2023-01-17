@@ -1,0 +1,7 @@
+package com.optivem.kata.banking.adapter.driven.generation.fake;
+
+import com.optivem.kata.banking.adapter.driven.generation.fake.internal.FakeGenerator;
+import com.optivem.kata.banking.core.ports.driven.AccountIdGenerator;
+
+public class FakeAccountIdGenerator extends FakeGenerator<Long> implements AccountIdGenerator {
+}
