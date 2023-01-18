@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "customer-provider", hostInterface = "localhost")
-public class RealCustomerProviderConsumerContractTest extends CustomerProviderTest<RealCustomerProvider> {
+public class RealCustomerProviderConsumerTest extends CustomerProviderTest<RealCustomerProvider> {
 
     @BeforeEach
     public void init(MockServer mockServer) {

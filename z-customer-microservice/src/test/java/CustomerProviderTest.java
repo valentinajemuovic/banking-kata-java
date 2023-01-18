@@ -8,7 +8,6 @@ import com.optivem.kata.banking.CustomerApplication;
 import com.optivem.kata.banking.CustomerDto;
 import com.optivem.kata.banking.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = CustomerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Provider("customer-provider")
 @PactFolder("../adapter-thirdparty-external/build/pacts")
-public class CustomerProviderContractTest {
+public class CustomerProviderTest {
     @LocalServerPort
     private int port;
 
