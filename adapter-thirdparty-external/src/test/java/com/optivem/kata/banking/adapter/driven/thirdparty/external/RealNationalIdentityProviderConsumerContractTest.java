@@ -7,6 +7,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -18,6 +19,14 @@ public class RealNationalIdentityProviderConsumerContractTest {
 
     private static int EXISTING_ID = 2;
     private static int INVALID_ID = 99;
+
+    private RealNationalIdentityProvider provider;
+
+    @BeforeEach
+    public void init(MockServer mockServer) {
+        var url = mockServer.getUrl();
+        provider = new RealNationalIdentityProvider(url);
+    }
 
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForExistingUserId(PactDslWithProvider builder) {
@@ -57,9 +66,7 @@ public class RealNationalIdentityProviderConsumerContractTest {
 
     @Test
     @PactTestFor(pactMethod = "createPactForExistingUserId")
-    public void should_return_true_when_user_exists(MockServer mockServer) {
-        var url = mockServer.getUrl();
-        var provider = new RealNationalIdentityProvider(url);
+    public void should_return_true_when_user_exists() {
         var nationalIdentityNumber = String.valueOf(EXISTING_ID);
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isTrue();
@@ -67,9 +74,7 @@ public class RealNationalIdentityProviderConsumerContractTest {
 
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentUserId")
-    public void should_return_false_when_user_not_exists(MockServer mockServer) {
-        var url = mockServer.getUrl();
-        var provider = new RealNationalIdentityProvider(url);
+    public void should_return_false_when_user_not_exists() {
         var nationalIdentityNumber = String.valueOf(INVALID_ID);
         var exists = provider.exists(nationalIdentityNumber);
         assertThat(exists).isFalse();
