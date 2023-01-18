@@ -44,7 +44,6 @@ public class RealNationalIdentityProviderConsumerContractTest extends NationalId
                 .toPact();
     }
 
-
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForNonexistentUserId(PactDslWithProvider builder) {
         var userId = INVALID_ID;
