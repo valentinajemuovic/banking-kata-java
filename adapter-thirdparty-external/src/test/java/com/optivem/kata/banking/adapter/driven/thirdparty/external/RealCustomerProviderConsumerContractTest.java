@@ -7,6 +7,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
+import com.optivem.kata.banking.adapter.driven.base.CustomerProviderTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,13 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "customer-provider", hostInterface = "localhost")
-public class RealCustomerProviderConsumerContractTest {
-
-    private static String BLACKLISTED_ID = "ABC_1001";
-    private static String WHITELISTED_ID = "ABC_1002";
-    private static String NON_EXISTENT_ID = "DEF_1002";
-
-    private RealCustomerProvider provider;
+public class RealCustomerProviderConsumerContractTest extends CustomerProviderTest<RealCustomerProvider> {
 
     @BeforeEach
     public void init(MockServer mockServer) {
@@ -85,27 +80,26 @@ public class RealCustomerProviderConsumerContractTest {
                 .toPact();
     }
 
+
+    @Override
     @Test
     @PactTestFor(pactMethod = "createPactForBlacklistedCustomer")
     public void should_return_true_when_user_is_blacklisted() {
-        var nationalIdentityNumber = BLACKLISTED_ID;
-        var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
-        assertThat(isBlacklisted).isTrue();
+        super.should_return_true_when_user_is_blacklisted();
     }
 
+    @Override
     @Test
     @PactTestFor(pactMethod = "createPactForWhitelistedCustomer")
     public void should_return_true_when_user_is_whitelisted() {
-        var nationalIdentityNumber = WHITELISTED_ID;
-        var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
-        assertThat(isBlacklisted).isFalse();
+        super.should_return_true_when_user_is_whitelisted();
     }
 
+    @Override
     @Test
     @PactTestFor(pactMethod = "createPactForNonExistentCustomer")
-    public void should_return_false_when_user_not_exists() {
-        var nationalIdentityNumber = NON_EXISTENT_ID;
-        var exists = provider.isBlacklisted(nationalIdentityNumber);
-        assertThat(exists).isFalse();
+    public void should_return_false_when_customer_not_exists() {
+        super.should_return_false_when_customer_not_exists();
     }
+
 }
