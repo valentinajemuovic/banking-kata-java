@@ -17,7 +17,7 @@ import java.net.URL;
 
 // TODO: Where to place this file?
 @Provider("national-identity-provider")
-@PactFolder("build/pacts")
+@PactFolder("../adapter-thirdparty-external/build/pacts")
 public class RealNationalIdentityProviderProviderContractTest {
 
     @TestTemplate
