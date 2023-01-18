@@ -1,0 +1,15 @@
+spring:
+
+  profiles:
+    active: adapter-persistence-jpa,adapter-generation-random,adapter-thirdparty-sim,adapter-time-system,adapter-auth-none
+
+  data:
+    mongodb:
+      authentication-database: admin
+      username: ${MONGO_INITDB_ROOT_USERNAME}
+      password: ${MONGO_INITDB_ROOT_PASSWORD}
+      database: ${ME_CONFIG_MONGODB_SERVER}
+      port: 27017
+      host: localhost
+
+customer-provider-uri: http://something

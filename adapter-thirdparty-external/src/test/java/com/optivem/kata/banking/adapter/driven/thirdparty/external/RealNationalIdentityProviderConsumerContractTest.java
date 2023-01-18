@@ -7,6 +7,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
+import com.optivem.kata.banking.adapter.driven.base.NationalIdentityProviderTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,12 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "national-identity-provider", hostInterface = "localhost")
-public class RealNationalIdentityProviderConsumerContractTest {
-
-    private static int EXISTING_ID = 2;
-    private static int INVALID_ID = 99;
-
-    private RealNationalIdentityProvider provider;
+public class RealNationalIdentityProviderConsumerContractTest extends NationalIdentityProviderTest<RealNationalIdentityProvider> {
 
     @BeforeEach
     public void init(MockServer mockServer) {
@@ -30,7 +26,8 @@ public class RealNationalIdentityProviderConsumerContractTest {
 
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForExistingUserId(PactDslWithProvider builder) {
-        var userId = EXISTING_ID;
+        var userId = Integer.parseInt(EXISTING_ID);
+
         var body = new PactDslJsonBody()
                 .numberType("id", userId);
 
@@ -67,16 +64,12 @@ public class RealNationalIdentityProviderConsumerContractTest {
     @Test
     @PactTestFor(pactMethod = "createPactForExistingUserId")
     public void should_return_true_when_user_exists() {
-        var nationalIdentityNumber = String.valueOf(EXISTING_ID);
-        var exists = provider.exists(nationalIdentityNumber);
-        assertThat(exists).isTrue();
+        super.should_return_true_when_user_exists();
     }
 
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentUserId")
     public void should_return_false_when_user_not_exists() {
-        var nationalIdentityNumber = String.valueOf(INVALID_ID);
-        var exists = provider.exists(nationalIdentityNumber);
-        assertThat(exists).isFalse();
+        super.should_return_false_when_user_not_exists();
     }
 }

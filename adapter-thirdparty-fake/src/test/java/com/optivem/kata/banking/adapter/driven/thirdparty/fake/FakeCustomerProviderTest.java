@@ -15,7 +15,7 @@ public class FakeCustomerProviderTest extends CustomerProviderTest<FakeCustomerP
 
     @Override
     public void should_return_true_when_user_is_blacklisted() {
-        provider.setupBlacklisted(CustomerProviderTest.BLACKLISTED_ID);
+        provider.setupBlacklisted(BLACKLISTED_ID);
         super.should_return_true_when_user_is_blacklisted();
     }
 }

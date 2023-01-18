@@ -6,23 +6,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class NationalIdentityProviderTest {
-    protected NationalIdentityProvider provider;
+public abstract class NationalIdentityProviderTest<T extends NationalIdentityProvider> {
 
-    @BeforeEach
-    private void init() {
-        this.provider = create();
-    }
+    public static String EXISTING_ID = "2";
+    public static String INVALID_ID = "99";
 
-    protected abstract NationalIdentityProvider create();
+    protected T provider;
 
     @Test
-    void should_return_response() {
-        var nationalIdentityNumber = "123";
+    public void should_return_true_when_user_exists() {
+        var nationalIdentityNumber = EXISTING_ID;
         var exists = provider.exists(nationalIdentityNumber);
-        assertThat(exists).isNotNull();
+        assertThat(exists).isTrue();
     }
 
-    // TODO: VC: Scenario of return success
-    // TODO: VC: Scenario of return not exist
+    @Test
+    public void should_return_false_when_user_not_exists() {
+        var nationalIdentityNumber = INVALID_ID;
+        var exists = provider.exists(nationalIdentityNumber);
+        assertThat(exists).isFalse();
+    }
 }
