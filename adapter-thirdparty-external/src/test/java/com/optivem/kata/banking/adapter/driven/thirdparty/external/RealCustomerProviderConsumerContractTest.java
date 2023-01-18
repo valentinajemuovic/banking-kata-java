@@ -7,6 +7,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -19,6 +20,14 @@ public class RealCustomerProviderConsumerContractTest {
     private static String BLACKLISTED_ID = "ABC_1001";
     private static String WHITELISTED_ID = "ABC_1002";
     private static String NON_EXISTENT_ID = "DEF_1002";
+
+    private RealCustomerProvider provider;
+
+    @BeforeEach
+    public void init(MockServer mockServer) {
+        var url = mockServer.getUrl();
+        provider = new RealCustomerProvider(url);
+    }
 
     @Pact(consumer = "banking-consumer")
     public RequestResponsePact createPactForBlacklistedCustomer(PactDslWithProvider builder) {
@@ -78,9 +87,7 @@ public class RealCustomerProviderConsumerContractTest {
 
     @Test
     @PactTestFor(pactMethod = "createPactForBlacklistedCustomer")
-    public void should_return_true_when_user_is_blacklisted(MockServer mockServer) {
-        var url = mockServer.getUrl();
-        var provider = new RealCustomerProvider(url);
+    public void should_return_true_when_user_is_blacklisted() {
         var nationalIdentityNumber = BLACKLISTED_ID;
         var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
         assertThat(isBlacklisted).isTrue();
@@ -88,9 +95,7 @@ public class RealCustomerProviderConsumerContractTest {
 
     @Test
     @PactTestFor(pactMethod = "createPactForWhitelistedCustomer")
-    public void should_return_true_when_user_is_whitelisted(MockServer mockServer) {
-        var url = mockServer.getUrl();
-        var provider = new RealCustomerProvider(url);
+    public void should_return_true_when_user_is_whitelisted() {
         var nationalIdentityNumber = WHITELISTED_ID;
         var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
         assertThat(isBlacklisted).isFalse();
@@ -98,9 +103,7 @@ public class RealCustomerProviderConsumerContractTest {
 
     @Test
     @PactTestFor(pactMethod = "createPactForNonExistentCustomer")
-    public void should_return_false_when_user_not_exists(MockServer mockServer) {
-        var url = mockServer.getUrl();
-        var provider = new RealCustomerProvider(url);
+    public void should_return_false_when_user_not_exists() {
         var nationalIdentityNumber = NON_EXISTENT_ID;
         var exists = provider.isBlacklisted(nationalIdentityNumber);
         assertThat(exists).isFalse();
