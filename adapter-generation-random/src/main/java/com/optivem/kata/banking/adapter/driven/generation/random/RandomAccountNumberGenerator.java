@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile(ProfileNames.AdapterGenerationRandom)
+@Profile(ProfileNames.ADAPTER_GENERATION_RANDOM)
 public class RandomAccountNumberGenerator implements AccountNumberGenerator {
     private final ULID ulid;
 

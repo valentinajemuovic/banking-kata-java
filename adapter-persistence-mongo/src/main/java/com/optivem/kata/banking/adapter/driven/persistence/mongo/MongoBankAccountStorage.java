@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-@Profile(ProfileNames.AdapterPersistenceMongo)
+@Profile(ProfileNames.ADAPTER_PERSISTENCE_MONGO)
 public class MongoBankAccountStorage implements BankAccountStorage {
 
-    private MongoTemplateCustomDataAccessor dataAccessor;
+    private final MongoTemplateCustomDataAccessor dataAccessor;
 
     public MongoBankAccountStorage(MongoTemplateCustomDataAccessor dataAccessor){
         this.dataAccessor = dataAccessor;

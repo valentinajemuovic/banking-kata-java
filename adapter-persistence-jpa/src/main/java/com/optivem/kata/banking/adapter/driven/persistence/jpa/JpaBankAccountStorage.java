@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-@Profile(ProfileNames.AdapterPersistenceJpa)
+@Profile(ProfileNames.ADAPTER_PERSISTENCE_JPA)
 public class JpaBankAccountStorage implements BankAccountStorage {
 
-    private JpaBankAccountDataAccessor dataAccessor;
+    private final JpaBankAccountDataAccessor dataAccessor;
 
     public JpaBankAccountStorage(JpaBankAccountDataAccessor dataAccessor) {
         this.dataAccessor = dataAccessor;
@@ -22,8 +22,7 @@ public class JpaBankAccountStorage implements BankAccountStorage {
     
     @Override
     public Optional<BankAccountDto> find(String accountNumber) {
-        var accountNumberValue = accountNumber.toString();
-        var record = dataAccessor.findByAccountNumber(accountNumberValue);
+        var record = dataAccessor.findByAccountNumber(accountNumber);
 
         if(record.isEmpty()) {
             return Optional.empty();

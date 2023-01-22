@@ -1,16 +1,19 @@
 package com.optivem.kata.banking.adapter.driven.persistence.redis;
 
+import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.adapter.driven.persistence.redis.internal.BankAccountModel;
 import com.optivem.kata.banking.adapter.driven.persistence.redis.internal.RedisBankAccountDataAccessor;
 import com.optivem.kata.banking.adapter.driven.persistence.redis.mapper.BankAccountMapper;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.function.Consumer;
 
 @Component("RedisBankAccountStorage")
+@Profile(ProfileNames.ADAPTER_PERSISTENCE_REDIS)
 public class RedisBankAccountStorage implements BankAccountStorage {
 
     private final RedisBankAccountDataAccessor dataAccessor;

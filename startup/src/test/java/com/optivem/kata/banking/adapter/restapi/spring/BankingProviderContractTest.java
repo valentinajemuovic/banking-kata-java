@@ -28,12 +28,12 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // @ActiveProfiles({ "contract-test", ProfileNames.AdapterPersistenceJpa })
-@ActiveProfiles({ ProfileNames.AdapterPersistenceJpa, ProfileNames.AdapterGenerationRandom, ProfileNames.AdapterTimeSystem, ProfileNames.AdapterThirdpartySim, ProfileNames.AdapterAuthNone })
+@ActiveProfiles({ ProfileNames.ADAPTER_PERSISTENCE_JPA, ProfileNames.ADAPTER_PERSISTENCE_REDIS, ProfileNames.ADAPTER_GENERATION_RANDOM, ProfileNames.ADAPTER_TIME_SYSTEM, ProfileNames.ADAPTER_THIRDPARTY_SIM, ProfileNames.ADAPTER_AUTH_NONE})
 // @ContextConfiguration(classes = ContractTestConfiguration.class)
 @Import(ContractTestConfiguration.class)
 @Provider("banking-provider")
 @PactFolder("../adapter-restapi-spring/build/pacts")
-public class BankingProviderContractTest {
+class BankingProviderContractTest {
 
     @MockBean
     private Pipeline pipeline;

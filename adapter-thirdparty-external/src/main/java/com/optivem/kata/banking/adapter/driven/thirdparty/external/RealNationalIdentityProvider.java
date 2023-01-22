@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
-@Profile(ProfileNames.AdapterThirdpartyReal)
+@Profile(ProfileNames.ADAPTER_THIRDPARTY_REAL)
 public class RealNationalIdentityProvider implements NationalIdentityProvider {
     private static final String URL = "https://jsonplaceholder.typicode.com"; // TODO: Move into configuration
     private static final String PATH = "users/%s";
@@ -31,7 +31,7 @@ public class RealNationalIdentityProvider implements NationalIdentityProvider {
         var responseSpec = client.get().uri(path).retrieve();
 
         var user = responseSpec
-                .onStatus(status -> HttpStatus.NOT_FOUND.equals(status), response -> Mono.empty())
+                .onStatus(HttpStatus.NOT_FOUND::equals, response -> Mono.empty())
                 .bodyToMono(UserDto.class)
                 .block();
 

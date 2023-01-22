@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Component
-@Profile(ProfileNames.AdapterTimeSystem)
+@Profile(ProfileNames.ADAPTER_TIME_SYSTEM)
 public class SysDateTimeService implements DateTimeService {
     @Override
     public LocalDateTime now() {

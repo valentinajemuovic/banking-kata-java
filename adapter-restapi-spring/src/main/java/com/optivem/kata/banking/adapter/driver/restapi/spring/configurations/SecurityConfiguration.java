@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@Profile(ProfileNames.AdapterAuthKeycloak)
+@Profile(ProfileNames.ADAPTER_AUTH_KEYCLOAK)
 public class SecurityConfiguration {
 
     private final String jwkSetUri;
