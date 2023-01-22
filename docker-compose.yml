@@ -20,6 +20,8 @@ services:
     container_name: mongodb
     ports:
       - '27017:27017'
+    networks:
+      - local
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
@@ -30,6 +32,8 @@ services:
     restart: always
     ports:
       - '8081:8081'
+    networks:
+      - local
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
@@ -64,9 +68,21 @@ services:
       - ./startup/src/main/resources/keycloak/realm-export.json:/tmp/realm-export.json
     depends_on:
       - postgres
-
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - local
+    command: redis-server --save 20 1 --loglevel warning --requirepass b4EA2xC6LlKnlizPu9bwRRrQM
+    volumes:
+      - redis:/data
 volumes:
   postgres:
+    driver: local
+  redis:
     driver: local
 
 networks:

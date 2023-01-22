@@ -14,3 +14,7 @@ export ME_CONFIG_MONGODB_SERVER=mongodb
 export KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata
 export KEYCLOAK_TEST_CLIENT_ID=test-client
 export KEYCLOAK_TEST_CLIENT_SECRET=XXXX
+
+export REDIS_HOST=localhost
+export REDIS_PORT=6379
+export REDIS_PASSWORD=b4EA2xC6LlKnlizPu9bwRRrQM
