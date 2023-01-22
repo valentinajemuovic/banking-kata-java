@@ -49,7 +49,7 @@ public class RedisBankAccountStorage implements BankAccountStorage {
     }
 
     private Optional<BankAccountModel> findByAccountNumber(String accountNumber) {
-        return dataAccessor.findById(accountNumber);
+        return dataAccessor.findByAccountNumber(accountNumber);
     }
 
     private Consumer<BankAccountModel> updateTheModelWithInformationFrom(BankAccountDto bankAccountDto) {

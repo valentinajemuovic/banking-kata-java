@@ -27,8 +27,8 @@ public class RedisConfiguration {
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        var template = new RedisTemplate<String, Object>();
+    public RedisTemplate<byte[], byte[]> redisTemplate() {
+        var template = new RedisTemplate<byte[], byte[]>();
         template.setConnectionFactory(lettuceConnectionFactory());
         return template;
     }
