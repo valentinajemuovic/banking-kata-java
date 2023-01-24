@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
-@Profile(ProfileNames.AdapterThirdpartyReal)
+@Profile(ProfileNames.ADAPTER_THIRDPARTY_REAL)
 public class RealCustomerProvider implements CustomerProvider {
 
     private static final String PATH = "customers/%s";
@@ -28,7 +28,7 @@ public class RealCustomerProvider implements CustomerProvider {
         var responseSpec = client.get().uri(path).retrieve();
 
         var customerDto = responseSpec
-                .onStatus(status -> HttpStatus.NOT_FOUND.equals(status), response -> Mono.empty())
+                .onStatus(HttpStatus.NOT_FOUND::equals, response -> Mono.empty())
                 .bodyToMono(CustomerDto.class)
                 .block();
 

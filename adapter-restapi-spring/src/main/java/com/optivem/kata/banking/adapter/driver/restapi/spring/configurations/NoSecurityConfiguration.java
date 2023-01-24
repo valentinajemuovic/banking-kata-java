@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@Profile(ProfileNames.AdapterAuthNone)
+@Profile(ProfileNames.ADAPTER_AUTH_NONE)
 public class NoSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

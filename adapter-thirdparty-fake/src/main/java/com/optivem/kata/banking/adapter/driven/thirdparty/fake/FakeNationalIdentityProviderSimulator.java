@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile(ProfileNames.AdapterThirdpartySim)
+@Profile(ProfileNames.ADAPTER_THIRDPARTY_SIM)
 public class FakeNationalIdentityProviderSimulator implements NationalIdentityProvider {
 
     private final FakeNationalIdentityProvider provider;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 // TODO: VC: Probably move to separate module?
 @Component
-@Profile(ProfileNames.AdapterAuthFake)
+@Profile(ProfileNames.ADAPTER_AUTH_FAKE)
 public class FakeAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

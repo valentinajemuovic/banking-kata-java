@@ -1,0 +1,20 @@
+dependencies {
+    implementation project(':core')
+    implementation project(':adapter-base')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.7.8'
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
+    testImplementation project(':test-fixtures')
+    testImplementation project(':startup')
+    testImplementation project(':adapter-base')
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

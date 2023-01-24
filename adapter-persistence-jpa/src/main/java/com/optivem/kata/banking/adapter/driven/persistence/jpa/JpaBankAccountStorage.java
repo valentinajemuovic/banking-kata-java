@@ -5,16 +5,18 @@ import com.optivem.kata.banking.adapter.driven.persistence.jpa.internal.BankAcco
 import com.optivem.kata.banking.adapter.driven.persistence.jpa.internal.JpaBankAccountDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Primary
 @Component
-@Profile(ProfileNames.AdapterPersistenceJpa)
+@Profile(ProfileNames.ADAPTER_PERSISTENCE_JPA)
 public class JpaBankAccountStorage implements BankAccountStorage {
 
-    private JpaBankAccountDataAccessor dataAccessor;
+    private final JpaBankAccountDataAccessor dataAccessor;
 
     public JpaBankAccountStorage(JpaBankAccountDataAccessor dataAccessor) {
         this.dataAccessor = dataAccessor;
@@ -22,8 +24,7 @@ public class JpaBankAccountStorage implements BankAccountStorage {
     
     @Override
     public Optional<BankAccountDto> find(String accountNumber) {
-        var accountNumberValue = accountNumber.toString();
-        var record = dataAccessor.findByAccountNumber(accountNumberValue);
+        var record = dataAccessor.findByAccountNumber(accountNumber);
 
         if(record.isEmpty()) {
             return Optional.empty();
