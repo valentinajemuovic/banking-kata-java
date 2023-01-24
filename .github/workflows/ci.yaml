@@ -42,6 +42,9 @@ jobs:
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          REDIS_PASSWORD: b4EA2xC6LlKnlizPu9bwRRrQM
       - name: Gradle System Test
         run: ./gradlew systemTest
         env:
@@ -56,6 +59,9 @@ jobs:
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          REDIS_PASSWORD: b4EA2xC6LlKnlizPu9bwRRrQM
       - name: Gradle Test (All)
         run: ./gradlew test
         env:
@@ -70,6 +76,9 @@ jobs:
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          REDIS_PASSWORD: b4EA2xC6LlKnlizPu9bwRRrQM
       - name: Code Coverage
         run: ./gradlew codeCoverage
 # TODO: #81 Mutation Testing - Create separate job
