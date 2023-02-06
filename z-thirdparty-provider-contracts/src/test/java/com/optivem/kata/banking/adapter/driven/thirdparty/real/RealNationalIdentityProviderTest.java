@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven.thirdparty.external;
+package com.optivem.kata.banking.adapter.driven.thirdparty.real;
 
 
 import au.com.dius.pact.provider.junit.Provider;
