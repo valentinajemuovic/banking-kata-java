@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = BankingApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // @ActiveProfiles({ "contract-test", ProfileNames.AdapterPersistenceJpa })
+// TODO: VC: check if possible to ignore the active profiles and just go with in-memory because then no dependencies are needed and then this test could go into the adapter itself, not in startup... or not?
 @ActiveProfiles({ ProfileNames.ADAPTER_PERSISTENCE_JPA, ProfileNames.ADAPTER_PERSISTENCE_REDIS, ProfileNames.ADAPTER_GENERATION_RANDOM, ProfileNames.ADAPTER_TIME_SYSTEM, ProfileNames.ADAPTER_THIRDPARTY_SIM, ProfileNames.ADAPTER_AUTH_NONE})
 // @ContextConfiguration(classes = ContractTestConfiguration.class)
 @Import(ContractTestConfiguration.class)

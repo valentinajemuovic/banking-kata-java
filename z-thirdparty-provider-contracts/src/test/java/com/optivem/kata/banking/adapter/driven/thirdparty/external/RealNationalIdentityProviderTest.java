@@ -29,7 +29,7 @@ public class RealNationalIdentityProviderTest {
     void before(PactVerificationContext context) {
         var urlString = "https://jsonplaceholder.typicode.com"; // TODO: Make this configurable
         var url = new URL(urlString);
-        var testTarget = HttpsTestTarget.fromUrl(url);
+        var testTarget = HttpsTestTarget.fromUrl(url); // TODO: VC: Consider the plain HTTP version too
         context.setTarget(testTarget);
     }
 
