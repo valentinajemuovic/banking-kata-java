@@ -106,7 +106,7 @@ task realAdapterTest {
     dependsOn 'adapter-persistence-mongo:test'
     dependsOn 'adapter-persistence-redis:test'
     dependsOn 'adapter-restapi-spring:test'
-    dependsOn 'adapter-thirdparty-external:test'
+    dependsOn 'adapter-thirdparty-real:test'
     dependsOn 'adapter-time-system:test'
 }
 
@@ -146,7 +146,7 @@ task realAdapterMutationTest {
     dependsOn 'adapter-persistence-mongo:pitest'
     dependsOn 'adapter-persistence-redis:pitest'
     dependsOn 'adapter-restapi-spring:pitest'
-    dependsOn 'adapter-thirdparty-external:pitest'
+    dependsOn 'adapter-thirdparty-real:pitest'
     dependsOn 'adapter-time-system:pitest'
 }
 
