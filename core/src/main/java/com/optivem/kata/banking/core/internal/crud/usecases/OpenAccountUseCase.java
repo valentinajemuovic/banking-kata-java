@@ -11,7 +11,7 @@ import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import static com.optivem.kata.banking.core.internal.crud.common.Guard.guard;
 
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
-    private NationalIdentityProvider nationalIdentityProvider;
+    private NationalIdentityGateway nationalIdentityGateway;
     private CustomerGateway customerGateway;
     private BankAccountStorage bankAccountStorage;
     private AccountIdGenerator accountIdGenerator;
@@ -20,8 +20,8 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
     private EventBus eventBus;
 
-    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, CustomerGateway customerGateway, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
-        this.nationalIdentityProvider = nationalIdentityProvider;
+    public OpenAccountUseCase(NationalIdentityGateway nationalIdentityGateway, CustomerGateway customerGateway, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+        this.nationalIdentityGateway = nationalIdentityGateway;
         this.customerGateway = customerGateway;
         this.bankAccountStorage = bankAccountStorage;
         this.accountIdGenerator = accountIdGenerator;
@@ -37,7 +37,7 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
         var lastName = guard(request.getLastName()).againstNullOrWhitespace(ValidationMessages.LAST_NAME_EMPTY);
         var balance = guard(request.getBalance()).againstNegative(ValidationMessages.BALANCE_NEGATIVE);
 
-        var nationalIdentityNumberExists = nationalIdentityProvider.exists(nationalIdentityNumber);
+        var nationalIdentityNumberExists = nationalIdentityGateway.exists(nationalIdentityNumber);
 
         if(!nationalIdentityNumberExists) {
             throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);

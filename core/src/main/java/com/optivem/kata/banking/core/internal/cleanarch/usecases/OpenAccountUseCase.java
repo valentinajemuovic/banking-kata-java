@@ -9,7 +9,7 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.Acc
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
 import com.optivem.kata.banking.core.ports.driven.CustomerGateway;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
-import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
+import com.optivem.kata.banking.core.ports.driven.NationalIdentityGateway;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationException;
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 
 @Component
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
-    private final NationalIdentityProvider nationalIdentityProvider;
+    private final NationalIdentityGateway nationalIdentityGateway;
     private final CustomerGateway customerGateway;
     private final BankAccountRepository bankAccountRepository;
     private final DateTimeService dateTimeService;
@@ -28,8 +28,8 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     private final EventPublisher eventPublisher;
 
 
-    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, CustomerGateway customerGateway, BankAccountRepository bankAccountRepository, DateTimeService dateTimeService, EventPublisher eventPublisher) {
-        this.nationalIdentityProvider = nationalIdentityProvider;
+    public OpenAccountUseCase(NationalIdentityGateway nationalIdentityGateway, CustomerGateway customerGateway, BankAccountRepository bankAccountRepository, DateTimeService dateTimeService, EventPublisher eventPublisher) {
+        this.nationalIdentityGateway = nationalIdentityGateway;
         this.customerGateway = customerGateway;
         this.bankAccountRepository = bankAccountRepository;
         this.dateTimeService = dateTimeService;
@@ -52,7 +52,7 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
         var bankAccount = createBankAccount(nationalIdentityNumber, accountHolderName, balance, timestamp);
 
         // TODO: VC: Value object for national identity number
-        var exists = nationalIdentityProvider.exists(nationalIdentityNumber);
+        var exists = nationalIdentityGateway.exists(nationalIdentityNumber);
         if(!exists) {
             throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
         }

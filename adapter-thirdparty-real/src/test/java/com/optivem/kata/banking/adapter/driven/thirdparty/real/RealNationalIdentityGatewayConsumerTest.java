@@ -7,7 +7,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
-import com.optivem.kata.banking.adapter.driven.base.NationalIdentityProviderTest;
+import com.optivem.kata.banking.adapter.driven.base.NationalIdentityGatewayTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "national-identity-provider", hostInterface = "localhost")
-public class RealNationalIdentityProviderConsumerTest extends NationalIdentityProviderTest<RealNationalIdentityProvider> {
+public class RealNationalIdentityGatewayConsumerTest extends NationalIdentityGatewayTest<RealNationalIdentityGateway> {
 
     @BeforeEach
     public void init(MockServer mockServer) {
         var url = mockServer.getUrl();
-        provider = new RealNationalIdentityProvider(url);
+        provider = new RealNationalIdentityGateway(url);
     }
 
     @Pact(consumer = "banking-consumer")

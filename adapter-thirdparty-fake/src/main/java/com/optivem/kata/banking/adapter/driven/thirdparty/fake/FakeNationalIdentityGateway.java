@@ -1,14 +1,14 @@
 package com.optivem.kata.banking.adapter.driven.thirdparty.fake;
 
-import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
+import com.optivem.kata.banking.core.ports.driven.NationalIdentityGateway;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class FakeNationalIdentityProvider implements NationalIdentityProvider {
+public class FakeNationalIdentityGateway implements NationalIdentityGateway {
     private Set<String> nationalIdentityNumbers;
 
-    public FakeNationalIdentityProvider() {
+    public FakeNationalIdentityGateway() {
         this.nationalIdentityNumbers = new HashSet();
     }
 

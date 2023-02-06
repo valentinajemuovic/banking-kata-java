@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.adapter.driven.thirdparty.real;
 
 import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
-import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
+import com.optivem.kata.banking.core.ports.driven.NationalIdentityGateway;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -10,17 +10,17 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Profile(ProfileNames.ADAPTER_THIRDPARTY_REAL)
-public class RealNationalIdentityProvider implements NationalIdentityProvider {
+public class RealNationalIdentityGateway implements NationalIdentityGateway {
     private static final String URL = "https://jsonplaceholder.typicode.com"; // TODO: Move into configuration
     private static final String PATH = "users/%s";
 
     private final String url;
 
-    public RealNationalIdentityProvider(String url) {
+    public RealNationalIdentityGateway(String url) {
         this.url = url;
     }
 
-    public RealNationalIdentityProvider() {
+    public RealNationalIdentityGateway() {
         this(URL); // TODO: VC: Should be injected from configuration
     }
 

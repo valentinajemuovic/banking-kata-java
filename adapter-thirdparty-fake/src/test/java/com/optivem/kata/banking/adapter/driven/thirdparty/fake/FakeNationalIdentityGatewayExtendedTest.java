@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FakeNationalIdentityProviderExtendedTest {
+public class FakeNationalIdentityGatewayExtendedTest {
 
-    private FakeNationalIdentityProvider provider;
+    private FakeNationalIdentityGateway provider;
 
     @BeforeEach
     private void init() {
-        this.provider = new FakeNationalIdentityProvider();
+        this.provider = new FakeNationalIdentityGateway();
     }
 
     @Test

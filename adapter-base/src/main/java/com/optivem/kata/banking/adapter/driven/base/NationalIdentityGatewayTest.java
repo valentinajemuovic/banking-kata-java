@@ -1,12 +1,11 @@
 package com.optivem.kata.banking.adapter.driven.base;
 
-import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
-import org.junit.jupiter.api.BeforeEach;
+import com.optivem.kata.banking.core.ports.driven.NationalIdentityGateway;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class NationalIdentityProviderTest<T extends NationalIdentityProvider> {
+public abstract class NationalIdentityGatewayTest<T extends NationalIdentityGateway> {
 
     public static String EXISTING_ID = "2";
     public static String INVALID_ID = "99";

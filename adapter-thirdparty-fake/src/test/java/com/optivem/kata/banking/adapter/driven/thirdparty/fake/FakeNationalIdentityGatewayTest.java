@@ -1,14 +1,13 @@
 package com.optivem.kata.banking.adapter.driven.thirdparty.fake;
 
-import com.optivem.kata.banking.adapter.driven.base.NationalIdentityProviderTest;
-import com.optivem.kata.banking.core.ports.driven.NationalIdentityProvider;
+import com.optivem.kata.banking.adapter.driven.base.NationalIdentityGatewayTest;
 import org.junit.jupiter.api.BeforeEach;
 
-public class FakeNationalIdentityProviderTest extends NationalIdentityProviderTest {
+public class FakeNationalIdentityGatewayTest extends NationalIdentityGatewayTest {
 
     @BeforeEach
     void init() {
-        provider = new FakeNationalIdentityProvider();
+        provider = new FakeNationalIdentityGateway();
     }
 
     @Override

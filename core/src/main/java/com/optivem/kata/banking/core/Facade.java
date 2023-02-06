@@ -19,13 +19,13 @@ public class Facade {
     private final OpenAccountUseCase openAccountUseCase;
     private final ViewAccountUseCase viewAccountUseCase;
 
-    public Facade(NationalIdentityProvider nationalIdentityProvider, CustomerGateway customerGateway, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountStorage bankAccountStorage, EventBus eventBus) {
+    public Facade(NationalIdentityGateway nationalIdentityGateway, CustomerGateway customerGateway, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, BankAccountStorage bankAccountStorage, EventBus eventBus) {
         var scoreCalculator = DefaultScoreCalculator.create(dateTimeService);
         var bankAccountRepository = new BankAccountRepositoryImpl(bankAccountStorage, accountIdGenerator, accountNumberGenerator);
         var eventPublisher = new EventPublisherImpl(eventBus);
 
         this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository);
-        this.openAccountUseCase = new OpenAccountUseCase(nationalIdentityProvider, customerGateway, bankAccountRepository, dateTimeService, eventPublisher);
+        this.openAccountUseCase = new OpenAccountUseCase(nationalIdentityGateway, customerGateway, bankAccountRepository, dateTimeService, eventPublisher);
         this.viewAccountUseCase = new ViewAccountUseCase(bankAccountRepository, scoreCalculator);
     }
 
