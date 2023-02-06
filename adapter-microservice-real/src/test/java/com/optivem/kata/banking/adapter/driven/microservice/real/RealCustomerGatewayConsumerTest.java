@@ -7,7 +7,7 @@ import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
-import com.optivem.kata.banking.adapter.driven.base.CustomerProviderTest;
+import com.optivem.kata.banking.adapter.driven.base.CustomerGatewayTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "customer-provider", hostInterface = "localhost")
-public class RealCustomerProviderConsumerTest extends CustomerProviderTest<RealCustomerProvider> {
+public class RealCustomerGatewayConsumerTest extends CustomerGatewayTest<RealCustomerGateway> {
 
     @BeforeEach
     public void init(MockServer mockServer) {
         var url = mockServer.getUrl();
-        provider = new RealCustomerProvider(url);
+        provider = new RealCustomerGateway(url);
     }
 
     @Pact(consumer = "banking-consumer")

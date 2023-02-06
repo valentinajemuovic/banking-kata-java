@@ -1,15 +1,15 @@
 package com.optivem.kata.banking.adapter.driven.microservice.fake;
 
-import com.optivem.kata.banking.adapter.driven.base.CustomerProviderTest;
+import com.optivem.kata.banking.adapter.driven.base.CustomerGatewayTest;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FakeCustomerProviderTest extends CustomerProviderTest<FakeCustomerProvider> {
+public class FakeCustomerGatewayTest extends CustomerGatewayTest<FakeCustomerGateway> {
 
     @BeforeEach
     void init() {
-        provider = new FakeCustomerProvider();
+        provider = new FakeCustomerGateway();
     }
 
     @Override

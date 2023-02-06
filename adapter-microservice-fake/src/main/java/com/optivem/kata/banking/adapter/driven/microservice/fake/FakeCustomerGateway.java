@@ -1,15 +1,15 @@
 package com.optivem.kata.banking.adapter.driven.microservice.fake;
 
-import com.optivem.kata.banking.core.ports.driven.CustomerProvider;
+import com.optivem.kata.banking.core.ports.driven.CustomerGateway;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class FakeCustomerProvider implements CustomerProvider {
+public class FakeCustomerGateway implements CustomerGateway {
 
     private Set<String> blacklisted;
 
-    public FakeCustomerProvider() {
+    public FakeCustomerGateway() {
         this.blacklisted = new HashSet<>();
     }
 

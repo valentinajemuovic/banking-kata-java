@@ -4,7 +4,7 @@ import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountIdGenerator;
 import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapter.driven.messaging.fake.FakeEventBus;
-import com.optivem.kata.banking.adapter.driven.microservice.fake.FakeCustomerProvider;
+import com.optivem.kata.banking.adapter.driven.microservice.fake.FakeCustomerGateway;
 import com.optivem.kata.banking.adapter.driven.persistence.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.adapter.driven.thirdparty.fake.FakeNationalIdentityProvider;
 import com.optivem.kata.banking.adapter.driven.time.fake.FakeDateTimeService;
@@ -32,7 +32,7 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY
 
 class OpenAccountUseCaseTest {
     private FakeNationalIdentityProvider nationalIdentityProvider;
-    private FakeCustomerProvider customerProvider;
+    private FakeCustomerGateway customerProvider;
     private FakeBankAccountStorage storage;
     private FakeAccountIdGenerator accountIdGenerator;
     private FakeAccountNumberGenerator accountNumberGenerator;
@@ -49,7 +49,7 @@ class OpenAccountUseCaseTest {
     @BeforeEach
     void init() {
         this.nationalIdentityProvider = new FakeNationalIdentityProvider();
-        this.customerProvider = new FakeCustomerProvider();
+        this.customerProvider = new FakeCustomerGateway();
         this.storage = new FakeBankAccountStorage();
         this.accountIdGenerator = new FakeAccountIdGenerator();
         this.accountNumberGenerator = new FakeAccountNumberGenerator();

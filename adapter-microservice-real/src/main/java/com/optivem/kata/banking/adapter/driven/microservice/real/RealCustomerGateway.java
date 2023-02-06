@@ -1,7 +1,7 @@
 package com.optivem.kata.banking.adapter.driven.microservice.real;
 
 import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
-import com.optivem.kata.banking.core.ports.driven.CustomerProvider;
+import com.optivem.kata.banking.core.ports.driven.CustomerGateway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -11,13 +11,13 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Profile(ProfileNames.ADAPTER_MICROSERVICE_REAL)
-public class RealCustomerProvider implements CustomerProvider {
+public class RealCustomerGateway implements CustomerGateway {
 
     private static final String PATH = "customers/%s";
 
     private final String uri;
 
-    public RealCustomerProvider(@Value("${customer-provider-uri}") final String uri) {
+    public RealCustomerGateway(@Value("${customer-provider-uri}") final String uri) {
         this.uri = uri;
     }
 

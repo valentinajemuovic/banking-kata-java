@@ -1,12 +1,11 @@
 package com.optivem.kata.banking.adapter.driven.base;
 
-import com.optivem.kata.banking.core.ports.driven.CustomerProvider;
-import org.junit.jupiter.api.BeforeEach;
+import com.optivem.kata.banking.core.ports.driven.CustomerGateway;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class CustomerProviderTest<T extends CustomerProvider> {
+public abstract class CustomerGatewayTest<T extends CustomerGateway> {
 
     public static String BLACKLISTED_ID = "ABC_1001";
     public static String WHITELISTED_ID = "ABC_1002";

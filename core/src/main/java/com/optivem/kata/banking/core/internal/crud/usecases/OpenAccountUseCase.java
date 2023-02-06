@@ -12,7 +12,7 @@ import static com.optivem.kata.banking.core.internal.crud.common.Guard.guard;
 
 public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, OpenAccountResponse> {
     private NationalIdentityProvider nationalIdentityProvider;
-    private CustomerProvider customerProvider;
+    private CustomerGateway customerGateway;
     private BankAccountStorage bankAccountStorage;
     private AccountIdGenerator accountIdGenerator;
     private AccountNumberGenerator accountNumberGenerator;
@@ -20,9 +20,9 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
 
     private EventBus eventBus;
 
-    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, CustomerProvider customerProvider, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+    public OpenAccountUseCase(NationalIdentityProvider nationalIdentityProvider, CustomerGateway customerGateway, BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
         this.nationalIdentityProvider = nationalIdentityProvider;
-        this.customerProvider = customerProvider;
+        this.customerGateway = customerGateway;
         this.bankAccountStorage = bankAccountStorage;
         this.accountIdGenerator = accountIdGenerator;
         this.accountNumberGenerator = accountNumberGenerator;
@@ -43,7 +43,7 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
             throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
         }
 
-        var isBlacklisted = customerProvider.isBlacklisted(nationalIdentityNumber);
+        var isBlacklisted = customerGateway.isBlacklisted(nationalIdentityNumber);
 
         if(isBlacklisted) {
             throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_BLACKLISTED);
