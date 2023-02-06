@@ -1,7 +1,7 @@
 spring:
 
   profiles:
-    active: adapter-persistence-jpa,adapter-persistence-redis,adapter-generation-random,adapter-thirdparty-sim,adapter-time-system,adapter-auth-none
+    active: adapter-persistence-jpa,adapter-persistence-redis,adapter-generation-random,adapter-microservice-sim,adapter-thirdparty-sim,adapter-time-system,adapter-auth-none
 
   data:
     mongodb:

@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
-@Profile(ProfileNames.ADAPTER_THIRDPARTY_REAL)
+@Profile(ProfileNames.ADAPTER_MICROSERVICE_REAL)
 public class RealCustomerProvider implements CustomerProvider {
 
     private static final String PATH = "customers/%s";

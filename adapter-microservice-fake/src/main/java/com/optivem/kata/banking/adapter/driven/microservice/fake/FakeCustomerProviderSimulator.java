@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile(ProfileNames.ADAPTER_THIRDPARTY_SIM)
+@Profile(ProfileNames.ADAPTER_MICROSERVICE_SIM)
 public class FakeCustomerProviderSimulator implements CustomerProvider {
 
     private final FakeCustomerProvider provider;
