@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven.thirdparty.external;
+package com.optivem.kata.banking.adapter.driven.microservice.real;
 
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.dsl.PactDslJsonBody;

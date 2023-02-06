@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven.thirdparty.external;
+package com.optivem.kata.banking.adapter.driven.microservice.real;
 
 import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.CustomerProvider;

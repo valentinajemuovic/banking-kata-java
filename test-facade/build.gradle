@@ -1,6 +1,7 @@
 dependencies {
     implementation project(':adapter-generation-fake')
     implementation project(':adapter-messaging-fake')
+    implementation project(':adapter-microservice-fake')
     implementation project(':adapter-persistence-fake')
     implementation project(':adapter-thirdparty-fake')
     implementation project(':adapter-time-fake')

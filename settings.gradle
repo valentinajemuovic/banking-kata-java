@@ -21,4 +21,6 @@ include 'adapter-restapi-spring'
 include 'adapter-thirdparty-real'
 include 'z-customer-microservice'
 include 'z-thirdparty-provider-contracts'
+include 'adapter-microservice-real'
+include 'adapter-microservice-fake'
 

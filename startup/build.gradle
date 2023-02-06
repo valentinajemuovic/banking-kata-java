@@ -7,6 +7,8 @@ dependencies {
     implementation project(':adapter-generation-random')
     implementation project(':adapter-restapi-spring')
     implementation project(':adapter-messaging-inmemory')
+    implementation project(':adapter-microservice-fake')
+    implementation project(':adapter-microservice-real')
     implementation project(':adapter-thirdparty-fake')
     implementation project(':adapter-thirdparty-real')
 

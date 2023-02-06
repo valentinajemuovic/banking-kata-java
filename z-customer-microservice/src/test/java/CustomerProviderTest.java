@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = CustomerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Provider("customer-provider")
-@PactFolder("../adapter-thirdparty-real/build/pacts")
+@PactFolder("../adapter-microservice-real/build/pacts")
 public class CustomerProviderTest {
     @LocalServerPort
     private int port;

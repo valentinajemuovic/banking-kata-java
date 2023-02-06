@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driven.thirdparty.fake;
+package com.optivem.kata.banking.adapter.driven.microservice.fake;
 
 import com.optivem.kata.banking.core.ports.driven.CustomerProvider;
 

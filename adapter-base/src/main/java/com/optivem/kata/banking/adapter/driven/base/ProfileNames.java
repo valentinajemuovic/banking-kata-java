@@ -11,6 +11,8 @@ public class ProfileNames {
     public static final String ADAPTER_AUTH_NONE = "adapter-auth-none";
     public static final String ADAPTER_THIRDPARTY_REAL = "adapter-thirdparty-real";
     public static final String ADAPTER_THIRDPARTY_SIM = "adapter-thirdparty-sim";
+    public static final String ADAPTER_MICROSERVICE_REAL = "adapter-microservice-real";
+    public static final String ADAPTER_MICROSERVICE_SIM = "adapter-microservice-sim";
 
     private ProfileNames() {}
 }
