@@ -12,7 +12,7 @@ public class FakeNationalIdentityGatewayTest extends NationalIdentityGatewayTest
 
     @Override
     public void should_return_true_when_user_exists() {
-        provider.exists(EXISTING_ID);
+        provider.exists(EXISTING_ID); // TODO: VC: Perhaps some special setup method?
         super.should_return_true_when_user_exists();
     }
 }

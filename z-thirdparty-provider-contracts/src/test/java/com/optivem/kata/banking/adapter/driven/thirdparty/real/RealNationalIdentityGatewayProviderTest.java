@@ -16,7 +16,7 @@ import java.net.URL;
 
 @Provider("national-identity-provider")
 @PactFolder("../adapter-thirdparty-real/build/pacts")
-public class RealNationalIdentityProviderTest {
+public class RealNationalIdentityGatewayProviderTest {
 
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
