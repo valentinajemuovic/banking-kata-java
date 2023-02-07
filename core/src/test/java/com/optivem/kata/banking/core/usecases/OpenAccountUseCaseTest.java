@@ -65,7 +65,7 @@ class OpenAccountUseCaseTest {
     @ParameterizedTest
     @MethodSource
     void should_open_account_given_valid_request(String nationalIdentityNumber, String firstName, String lastName, int initialBalance, long generatedAccountId, String generatedAccountNumber, LocalDate openingDate) {
-        nationalIdentityProvider.setupExists(nationalIdentityNumber);
+        nationalIdentityProvider.setupExistent(nationalIdentityNumber);
         accountIdGenerator.setupNext(generatedAccountId);
         accountNumberGenerator.setupNext(generatedAccountNumber);
         dateTimeService.setupNow(LocalDateTime.of(openingDate, LocalTime.MIN));
@@ -133,7 +133,7 @@ class OpenAccountUseCaseTest {
     @Test
     void should_throw_exception_given_blacklisted_national_identity_number() {
         var nationalIdentityNumber = "NAT_1001";
-        nationalIdentityProvider.setupExists(nationalIdentityNumber);
+        nationalIdentityProvider.setupExistent(nationalIdentityNumber);
         customerProvider.setupBlacklisted(nationalIdentityNumber);
         accountIdGenerator.setupNext(1001L);
         accountNumberGenerator.setupNext("1-0-0-1");

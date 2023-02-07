@@ -27,8 +27,8 @@ public class FacadeFactory {
 
     public Facade create() {
         var nationalIdentityProvider = new FakeNationalIdentityGateway();
-        nationalIdentityProvider.setupExists(NATIONAL_IDENTITY_NUMBER_1);
-        nationalIdentityProvider.setupExists(NATIONAL_IDENTITY_NUMBER_2);
+        nationalIdentityProvider.setupExistent(NATIONAL_IDENTITY_NUMBER_1);
+        nationalIdentityProvider.setupExistent(NATIONAL_IDENTITY_NUMBER_2);
 
         var customerProvider = new FakeCustomerGateway();
 

@@ -3,7 +3,7 @@ package com.optivem.kata.banking.adapter.driven.thirdparty.fake;
 import com.optivem.kata.banking.adapter.driven.base.NationalIdentityGatewayTest;
 import org.junit.jupiter.api.BeforeEach;
 
-public class FakeNationalIdentityGatewayTest extends NationalIdentityGatewayTest {
+public class FakeNationalIdentityGatewayTest extends NationalIdentityGatewayTest<FakeNationalIdentityGateway> {
 
     @BeforeEach
     void init() {
@@ -11,8 +11,7 @@ public class FakeNationalIdentityGatewayTest extends NationalIdentityGatewayTest
     }
 
     @Override
-    public void should_return_true_when_user_exists() {
-        provider.exists(EXISTING_ID); // TODO: VC: Perhaps some special setup method?
-        super.should_return_true_when_user_exists();
+    protected void setupExistentUser(String nationalIdentityNumber) {
+        provider.setupExistent(nationalIdentityNumber);
     }
 }

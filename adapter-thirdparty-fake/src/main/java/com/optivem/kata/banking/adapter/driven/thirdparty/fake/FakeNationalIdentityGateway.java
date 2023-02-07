@@ -12,12 +12,12 @@ public class FakeNationalIdentityGateway implements NationalIdentityGateway {
         this.nationalIdentityNumbers = new HashSet();
     }
 
-    public void setupExists(String nationalIdentityNumber) {
-        this.nationalIdentityNumbers.add(nationalIdentityNumber);
-    }
-
     @Override
     public boolean exists(String nationalIdentityNumber) {
         return nationalIdentityNumbers.contains(nationalIdentityNumber);
+    }
+
+    public void setupExistent(String nationalIdentityNumber) {
+        this.nationalIdentityNumbers.add(nationalIdentityNumber);
     }
 }

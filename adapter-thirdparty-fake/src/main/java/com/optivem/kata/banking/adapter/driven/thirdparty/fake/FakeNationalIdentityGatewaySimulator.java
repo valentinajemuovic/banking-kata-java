@@ -13,8 +13,8 @@ public class FakeNationalIdentityGatewaySimulator implements NationalIdentityGat
 
     public FakeNationalIdentityGatewaySimulator() {
         this.provider = new FakeNationalIdentityGateway();
-        provider.setupExists("SIM_1");
-        provider.setupExists("SIM_2");
+        provider.setupExistent("SIM_1");
+        provider.setupExistent("SIM_2");
     }
 
     @Override
