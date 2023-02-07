@@ -11,8 +11,12 @@ public class FakeCustomerGatewayTest extends CustomerGatewayTest<FakeCustomerGat
     }
 
     @Override
-    public void should_return_true_when_user_is_blacklisted() {
-        provider.setupBlacklisted(BLACKLISTED_ID);
-        super.should_return_true_when_user_is_blacklisted();
+    protected void setupUserBlacklisted(String nationalIdentityNumber) {
+        provider.setupBlacklisted(nationalIdentityNumber);
+    }
+
+    @Override
+    protected void setupUserWhitelisted(String nationalIdentityNumber) {
+        provider.setupWhitelisted(nationalIdentityNumber);
     }
 }

@@ -2,23 +2,38 @@ package com.optivem.kata.banking.adapter.driven.microservice.fake;
 
 import com.optivem.kata.banking.core.ports.driven.CustomerGateway;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
 
 public class FakeCustomerGateway implements CustomerGateway {
 
-    private Set<String> blacklisted;
+    private static final boolean BLACKLISTED = true;
+    private static final boolean WHITELISTED = false;
+
+    private HashMap<String, Boolean> customers;
 
     public FakeCustomerGateway() {
-        this.blacklisted = new HashSet<>();
+        this.customers = new HashMap<>();
     }
 
     @Override
     public boolean isBlacklisted(String nationalIdentityNumber) {
-        return blacklisted.contains(nationalIdentityNumber);
+        if(!customers.containsKey(nationalIdentityNumber)) {
+            return false;
+        }
+
+        var status = customers.get(nationalIdentityNumber);
+        return isBlacklisted(status);
     }
 
     public void setupBlacklisted(String nationalIdentityNumber) {
-        blacklisted.add(nationalIdentityNumber);
+        customers.put(nationalIdentityNumber, BLACKLISTED);
+    }
+
+    public void setupWhitelisted(String nationalIdentityNumber) {
+        customers.put(nationalIdentityNumber, WHITELISTED);
+    }
+
+    private boolean isBlacklisted(boolean status) {
+        return status == BLACKLISTED;
     }
 }
