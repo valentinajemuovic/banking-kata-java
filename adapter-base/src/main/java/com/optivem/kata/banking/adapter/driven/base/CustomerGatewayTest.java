@@ -17,7 +17,9 @@ public abstract class CustomerGatewayTest<T extends CustomerGateway> {
     public void should_return_true_when_user_is_blacklisted() {
         var nationalIdentityNumber = BLACKLISTED_ID;
         setupUserBlacklisted(nationalIdentityNumber);
+
         var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
+
         assertThat(isBlacklisted).isTrue();
     }
 
@@ -25,14 +27,18 @@ public abstract class CustomerGatewayTest<T extends CustomerGateway> {
     public void should_return_true_when_user_is_whitelisted() {
         var nationalIdentityNumber = WHITELISTED_ID;
         setupUserWhitelisted(nationalIdentityNumber);
+
         var isBlacklisted = provider.isBlacklisted(nationalIdentityNumber);
+
         assertThat(isBlacklisted).isFalse();
     }
 
     @Test
     public void should_return_false_when_customer_not_exists() {
         var nationalIdentityNumber = NON_EXISTENT_ID;
+
         var exists = provider.isBlacklisted(nationalIdentityNumber);
+
         assertThat(exists).isFalse();
     }
 
