@@ -8,6 +8,7 @@ import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
 import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
+import com.optivem.kata.banking.core.common.http.HttpHost;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
@@ -33,8 +34,6 @@ import static org.mockito.Mockito.when;
 @PactFolder("../adapter-restapi-spring/build/pacts") // TODO: Use Pact Broker
 class BankingProviderContractTest {
 
-    private static final String LOCALHOST = "localhost";
-
     private static final String EXISTING_ACCOUNT_NUMBER_VALUE = "ABC_001";
     private static final String NON_EXISTENT_ACCOUNT_NUMBER_VALUE = "999-999999-999";
     private static final String FULL_NAME_VALUE = "John Smith";
@@ -55,7 +54,7 @@ class BankingProviderContractTest {
 
     @BeforeEach
     void before(PactVerificationContext context) {
-        var testTarget = new HttpTestTarget(LOCALHOST, port);
+        var testTarget = new HttpTestTarget(HttpHost.LOCALHOST, port);
         context.setTarget(testTarget);
     }
 

@@ -8,6 +8,7 @@ import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.optivem.kata.banking.adapter.driven.base.CustomerGatewayTest;
+import com.optivem.kata.banking.core.common.http.HttpHost;
 import com.optivem.kata.banking.core.common.http.HttpMethodName;
 import com.optivem.kata.banking.core.common.http.HttpStatusValue;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,10 +18,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = RealCustomerGatewayConsumerTest.PROVIDER_NAME, hostInterface = RealCustomerGatewayConsumerTest.HOST_INTERFACE)
+@PactTestFor(providerName = RealCustomerGatewayConsumerTest.PROVIDER_NAME, hostInterface = HttpHost.LOCALHOST)
 public class RealCustomerGatewayConsumerTest extends CustomerGatewayTest<RealCustomerGateway> {
 
-    public static final String HOST_INTERFACE = "localhost";
     public static final String PROVIDER_NAME = "customer-provider";
     private static final String CONSUMER_NAME = "banking-consumer";
 
