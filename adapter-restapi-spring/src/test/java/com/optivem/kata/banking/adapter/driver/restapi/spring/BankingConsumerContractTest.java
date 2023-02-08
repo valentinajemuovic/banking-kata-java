@@ -18,23 +18,26 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "banking-provider", hostInterface = "localhost")
+@PactTestFor(providerName = BankingConsumerContractTest.PROVIDER_NAME, hostInterface = "localhost")
 public class BankingConsumerContractTest {
 
-    private static String GET_BANK_ACCOUNT_PATH_FORMAT = "/bank-accounts/%s";
+    public static final String PROVIDER_NAME = "banking-provider";
+    private static final String CONSUMER_NAME = "banking-consumer";
 
-    private static String ACCOUNT_NUMBER_FIELD = "accountNumber";
-    private static String FULL_NAME_FIELD = "fullName";
-    private static String BALANCE_FIELD = "balance";
-    private static String SCORE_FIELD = "score";
+    private static final String GET_BANK_ACCOUNT_PATH_FORMAT = "/bank-accounts/%s";
 
-    private static String EXISTING_ACCOUNT_NUMBER_VALUE = "ABC_001";
-    private static String NON_EXISTENT_ACCOUNT_NUMBER_VALUE = "999-999999-999";
-    private static String FULL_NAME_VALUE = "John Smith";
-    private static int BALANCE_VALUE = 20;
-    private static Score SCORE_VALUE = Score.C;
+    private static final String ACCOUNT_NUMBER_FIELD = "accountNumber";
+    private static final String FULL_NAME_FIELD = "fullName";
+    private static final String BALANCE_FIELD = "balance";
+    private static final String SCORE_FIELD = "score";
 
-    @Pact(consumer = "banking-consumer")
+    private static final String EXISTING_ACCOUNT_NUMBER_VALUE = "ABC_001";
+    private static final String NON_EXISTENT_ACCOUNT_NUMBER_VALUE = "999-999999-999";
+    private static final String FULL_NAME_VALUE = "John Smith";
+    private static final int BALANCE_VALUE = 20;
+    private static final Score SCORE_VALUE = Score.C;
+
+    @Pact(consumer = CONSUMER_NAME)
     public RequestResponsePact createPactForNonexistentAccountNumber(PactDslWithProvider builder) {
         var accountNumber = NON_EXISTENT_ACCOUNT_NUMBER_VALUE;
 
@@ -49,7 +52,7 @@ public class BankingConsumerContractTest {
                 .toPact();
     }
 
-    @Pact(consumer = "banking-consumer")
+    @Pact(consumer = CONSUMER_NAME)
     public RequestResponsePact createPactForExistingAccountNumber(PactDslWithProvider builder) {
         var accountNumber = EXISTING_ACCOUNT_NUMBER_VALUE;
 
@@ -70,8 +73,6 @@ public class BankingConsumerContractTest {
                 .body(body)
                 .toPact();
     }
-
-
 
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentAccountNumber")
