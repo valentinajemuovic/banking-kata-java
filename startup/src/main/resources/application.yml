@@ -13,3 +13,4 @@ spring:
       host: localhost
 
 customer-provider-uri: http://something
+national-identity-uri:
