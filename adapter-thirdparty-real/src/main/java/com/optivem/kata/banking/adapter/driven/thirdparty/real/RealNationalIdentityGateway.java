@@ -20,10 +20,6 @@ public class RealNationalIdentityGateway implements NationalIdentityGateway {
         this.url = url;
     }
 
-    public RealNationalIdentityGateway() {
-        this(URL); // TODO: VC: Should be injected from configuration
-    }
-
     @Override
     public boolean exists(String nationalIdentityNumber) {
         var client = WebClient.create(url);
