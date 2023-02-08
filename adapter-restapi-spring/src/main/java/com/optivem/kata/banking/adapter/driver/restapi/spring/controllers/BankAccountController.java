@@ -29,7 +29,8 @@ public class BankAccountController extends BaseController {
         try {
             var response = pipeline.send(request);
             return new ResponseEntity<>(response, HttpStatus.OK);
-        }catch(ValidationException ex) {
+        } catch (ValidationException ex) {
+            // TODO: Refactor to centralized error handling
             if(ex.getMessage().equals(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST)) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {

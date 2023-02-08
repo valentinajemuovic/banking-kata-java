@@ -18,6 +18,8 @@ import java.net.URL;
 @PactFolder("../adapter-thirdparty-real/build/pacts")
 public class RealNationalIdentityGatewayProviderTest {
 
+    private static final String PATH = "https://jsonplaceholder.typicode.com"; // TODO: Make this configurable
+
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void pactVerificationTestTemplate(PactVerificationContext context) {
@@ -27,9 +29,8 @@ public class RealNationalIdentityGatewayProviderTest {
     @SneakyThrows
     @BeforeEach
     void before(PactVerificationContext context) {
-        var urlString = "https://jsonplaceholder.typicode.com"; // TODO: Make this configurable
-        var url = new URL(urlString);
-        var testTarget = HttpsTestTarget.fromUrl(url); // TODO: VC: Consider the plain HTTP version too
+        var url = new URL(PATH);
+        var testTarget = HttpsTestTarget.fromUrl(url);
         context.setTarget(testTarget);
     }
 

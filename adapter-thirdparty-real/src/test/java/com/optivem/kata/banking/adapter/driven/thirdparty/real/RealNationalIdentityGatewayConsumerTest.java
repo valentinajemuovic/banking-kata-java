@@ -28,12 +28,11 @@ public class RealNationalIdentityGatewayConsumerTest extends NationalIdentityGat
     private static final String GET_USER_PATH_FORMAT = "/users/%s";
 
     private static final String ID_FIELD = "id";
-    private RealNationalIdentityGateway provider;
 
     @BeforeEach
     public void init(MockServer mockServer) {
         var url = mockServer.getUrl();
-        provider = provider;
+        provider = new RealNationalIdentityGateway(url);
     }
 
     @Pact(consumer = CONSUMER_NAME)
