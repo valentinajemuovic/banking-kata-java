@@ -9,9 +9,10 @@ import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.optivem.kata.banking.adapter.driver.restapi.spring.clients.BankingClient;
 import com.optivem.kata.banking.adapter.driver.restapi.spring.clients.FakeTokenProvider;
+import com.optivem.kata.banking.core.common.http.HttpMethodName;
+import com.optivem.kata.banking.core.common.http.HttpStatusValue;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
 import com.optivem.kata.banking.core.ports.driver.accounts.viewaccount.ViewAccountResponse;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 

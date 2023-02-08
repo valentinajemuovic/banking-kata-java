@@ -16,14 +16,18 @@ public abstract class NationalIdentityGatewayTest<T extends NationalIdentityGate
     public void should_return_true_when_user_exists() {
         var nationalIdentityNumber = EXISTING_ID;
         setupExistentUser(nationalIdentityNumber);
+
         var exists = provider.exists(nationalIdentityNumber);
+
         assertThat(exists).isTrue();
     }
 
     @Test
     public void should_return_false_when_user_not_exists() {
         var nationalIdentityNumber = INVALID_ID;
+
         var exists = provider.exists(nationalIdentityNumber);
+
         assertThat(exists).isFalse();
     }
 

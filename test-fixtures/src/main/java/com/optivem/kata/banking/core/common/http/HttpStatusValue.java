@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driver.restapi.spring;
+package com.optivem.kata.banking.core.common.http;
 
 import org.springframework.http.HttpStatus;
 
