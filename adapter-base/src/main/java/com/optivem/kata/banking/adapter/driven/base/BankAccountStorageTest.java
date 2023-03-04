@@ -6,17 +6,15 @@ import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class BankAccountStorageTest {
-    private BankAccountStorage storage;
-    private AccountIdGenerator accountIdGenerator;
-    private AccountNumberGenerator accountNumberGenerator;
+    private final BankAccountStorage storage;
+    private final AccountIdGenerator accountIdGenerator;
+    private final AccountNumberGenerator accountNumberGenerator;
 
-    public BankAccountStorageTest(BankAccountStorage storage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator) {
+    protected BankAccountStorageTest(BankAccountStorage storage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator) {
         this.accountIdGenerator = accountIdGenerator;
         this.storage = storage;
         this.accountNumberGenerator = accountNumberGenerator;
@@ -26,7 +24,7 @@ public abstract class BankAccountStorageTest {
     void should_return_empty_given_non_existent_account_number() {
         var accountNumber = accountNumberGenerator.next();
         var bankAccount = storage.find(accountNumber);
-        assertThat(bankAccount).isEqualTo(Optional.empty());
+        assertThat(bankAccount).isNotPresent();
     }
 
     @Test
@@ -47,13 +45,39 @@ public abstract class BankAccountStorageTest {
         shouldRetrieveAddedAccount(bankAccount3);
     }
 
+    @Test
+    void should_only_update_filled_attributes() {
+        var newFirstName = "John";
+        var newLastName = "Bunyan";
+        var bankAccount = createSomeBankAccount();
+
+        storage.add(bankAccount);
+
+        var retrievedBankAccountAfterToSave = storage.find(bankAccount.getAccountNumber());
+        retrievedBankAccountAfterToSave.ifPresent(bankAccountToUpdate -> {
+            bankAccountToUpdate.setFirstName(newFirstName);
+            bankAccountToUpdate.setLastName(newLastName);
+            storage.update(bankAccountToUpdate);
+        });
+        var retrievedBankAccountAfterToUpdate = storage.find(bankAccount.getAccountNumber());
+
+        assertThat(retrievedBankAccountAfterToUpdate).isPresent();
+        assertThat(retrievedBankAccountAfterToUpdate.get().getFirstName()).isEqualTo(newFirstName);
+        assertThat(retrievedBankAccountAfterToUpdate.get().getLastName()).isEqualTo(newLastName);
+        assertThat(retrievedBankAccountAfterToUpdate.get().getBalance()).isEqualTo(bankAccount.getBalance());
+        assertThat(retrievedBankAccountAfterToUpdate.get().getAccountId()).isEqualTo(bankAccount.getAccountId());
+        assertThat(retrievedBankAccountAfterToUpdate.get().getAccountNumber()).isEqualTo(bankAccount.getAccountNumber());
+        assertThat(retrievedBankAccountAfterToUpdate.get().getNationalIdentityNumber()).isEqualTo(bankAccount.getNationalIdentityNumber());
+        assertThat(retrievedBankAccountAfterToUpdate.get().getOpeningDate()).isEqualTo(bankAccount.getOpeningDate());
+    }
+
     private void shouldRetrieveAddedAccount(BankAccountDto bankAccount) {
         storage.add(bankAccount);
 
         var retrievedBankAccount = storage.find(bankAccount.getAccountNumber());
 
         assertThat(retrievedBankAccount).isNotNull();
-        assertThat(retrievedBankAccount.get()).isEqualTo(bankAccount);
+        assertThat(retrievedBankAccount).contains(bankAccount);
     }
 
     private BankAccountDto createSomeBankAccount() {
