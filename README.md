@@ -75,7 +75,9 @@ This is due to a reported Mac-specific issue https://github.com/docker/for-mac/i
 For any other OS, please skip this step, because this issue is Mac-specific:
 
 ```shell
-./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
+#cd startup
+#chmod +x ./src/main/resources/keycloak/build-keycloak-image-m1.zsh
+#./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
 ```
 
 Run docker:
