@@ -48,15 +48,15 @@ As can be seen below, you can separately run these fast-running and slow-running
 - OpenJDK 17
 - Docker
 
-## Running Unit Tests
+## Running Gradle
 
-Run unit tests for `core`:
+Make sure that Gradle works:
 
 ```
-./gradlew coreTest
+./gradlew
 ```
 
-## Running Integration Tests
+## Environment Setup
 
 Apply the environment variables (Windows):
 
@@ -75,9 +75,9 @@ This is due to a reported Mac-specific issue https://github.com/docker/for-mac/i
 For any other OS, please skip this step, because this issue is Mac-specific:
 
 ```shell
-#cd startup
-#chmod +x ./src/main/resources/keycloak/build-keycloak-image-m1.zsh
-#./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
+cd startup
+chmod +x ./src/main/resources/keycloak/build-keycloak-image-m1.zsh
+./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
 ```
 
 Run docker:
@@ -86,23 +86,37 @@ Run docker:
 docker-compose up -d
 ```
 
+## Running Unit Tests
+
+Run unit tests for `core`:
+
+```
+./gradlew coreTest
+```
+
+## Running Integration Tests
+
+As a prerequisite, please see *Environment Setup*.
+
 To run all the adapter integration tests:
 
 ```shell
 ./gradlew adapterTest
 ```
 
-<!--- TODO: VC: System tests -->
-
 ## Running System Tests
 
-To run the whole system:
+As a prerequisite, please see *Environment Setup*.
+
+To run the whole system tests:
 
 ```shell
 ./gradlew systemTest
 ```
 
 ## Running all Tests
+
+As a prerequisite, please see *Environment Setup*.
 
 In the above instructions, we ran the tests separately.
 You can run them all:
