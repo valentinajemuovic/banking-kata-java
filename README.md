@@ -196,6 +196,18 @@ For mutation testing, the underlying call is:
 ./gradlew pitest
 ```
 
+For flyway operation from CLI:
+There will be flyway tasks available in the gradle as the plugin is applied to adapter-persistence-jpa.
+Tasks can be executed by the following way -
+
+```shell
+./gradlew adapter-persistence-jpa:flywayInfo  //will provide the schema file under flywayInfo
+./gradlew adapter-persistence-jpa:flywayClean //will clear up the schema from database
+./gradlew adapter-persistence-jpa:flywayMigrate //will apply the db schema migration into database
+```
+
+
+
 ## Issues
 
 If you experience Integration Tests failing, please see the following known issue https://github.com/valentinacupac/banking-kata-java/issues/64.
