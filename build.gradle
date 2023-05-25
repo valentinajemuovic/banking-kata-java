@@ -6,6 +6,7 @@ plugins {
     id 'info.solidsoft.pitest' version '1.7.4' apply false
     id 'jacoco'
     id 'com.adarshr.test-logger' version '3.2.0' // TODO: Check why not working
+    id 'org.flywaydb.flyway' version '8.1.0'
 }
 
 apply plugin: 'info.solidsoft.pitest.aggregator'
@@ -36,6 +37,13 @@ subprojects {
         outputFormats = [ "XML" ]
         exportLineCoverage = true
         timestampedReports = false
+    }
+
+    dependencies {
+        if(project.name in ['adapter-persistence-jpa']){
+            apply plugin: "org.flywaydb.flyway"
+            implementation 'org.flywaydb:flyway-core:8.1.0'
+        }
     }
 }
 
@@ -171,3 +179,6 @@ bootJar {
 jar {
     enabled = true
 }
+
+
+

@@ -11,6 +11,22 @@ dependencies {
     testImplementation project(':adapter-base')
 }
 
+flyway {
+    def postgresUrl = System.getenv('POSTGRES_URL')
+    def postgresUser = System.getenv('POSTGRES_USER')
+    def postgresPass = System.getenv('POSTGRES_PASSWORD')
+
+    url = postgresUrl
+    user = postgresUser
+    password = postgresPass
+    locations = ['classpath:db/migration/',"filesystem:${project.projectDir}/src/main/resources/db/migration/"]
+    baselineOnMigrate = true
+}
+
+
+test.dependsOn(flywayMigrate)
+
+
 bootJar {
     enabled = false
 }

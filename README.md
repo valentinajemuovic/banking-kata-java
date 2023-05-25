@@ -70,6 +70,15 @@ Apply the environment variables (for Linux/Mac):
 source ./env/env.sh
 ```
 
+Apply the environment variable in the ide, in case if it needs to run the application from ide UI button
+For intellij, there is a plugin EnvFile can help to run the env file.
+
+```shell
+#chmod 777 ./env/env.intellij.ui
+Then select the Run->Edit configuration which will then provide the option to import and run the file.
+```
+
+
 For Mac only, you need to build a custom Keycloak image to enable Keycloak to work on Mac M1.
 This is due to a reported Mac-specific issue https://github.com/docker/for-mac/issues/5310.
 For any other OS, please skip this step, because this issue is Mac-specific:
