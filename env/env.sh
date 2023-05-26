@@ -10,6 +10,8 @@ export MONGO_INITDB_ROOT_PASSWORD=rootpass
 export ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
 export ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
 export ME_CONFIG_MONGODB_SERVER=mongodb
+export MONGODB_DATABASE_NAME=kata
+export MONGODB_URI="mongodb://rootuser:rootpass@localhost:27017"
 
 export KEYCLOAK_REALM_URL=http://localhost:10000/auth/realms/banking-kata
 export KEYCLOAK_TEST_CLIENT_ID=test-client

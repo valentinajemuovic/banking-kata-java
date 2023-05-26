@@ -39,6 +39,8 @@ jobs:
           ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
           ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
           ME_CONFIG_MONGODB_SERVER: mongodb
+          MONGODB_DATABASE_NAME: kata
+          MONGODB_URI: mongodb://rootuser:rootpass@localhost:27017
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
@@ -56,6 +58,8 @@ jobs:
           ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
           ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
           ME_CONFIG_MONGODB_SERVER: mongodb
+          MONGODB_DATABASE_NAME: kata
+          MONGODB_URI: mongodb://rootuser:rootpass@localhost:27017
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
@@ -73,6 +77,8 @@ jobs:
           ME_CONFIG_MONGODB_ADMINUSERNAME: rootuser
           ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
           ME_CONFIG_MONGODB_SERVER: mongodb
+          MONGODB_DATABASE_NAME: kata
+          MONGODB_URI: mongodb://rootuser:rootpass@localhost:27017
           KEYCLOAK_REALM_URL: http://localhost:10000/auth/realms/banking-kata
           KEYCLOAK_TEST_CLIENT_ID: test-client
           KEYCLOAK_TEST_CLIENT_SECRET: B9N1WDFFMuZmYuEzXSbRC739YGaE7kb5
