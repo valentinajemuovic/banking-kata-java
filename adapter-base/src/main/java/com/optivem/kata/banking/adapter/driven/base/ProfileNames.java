@@ -3,6 +3,7 @@ package com.optivem.kata.banking.adapter.driven.base;
 public class ProfileNames {
     public static final String ADAPTER_GENERATION_RANDOM = "adapter-generation-random";
     public static final String ADAPTER_PERSISTENCE_JPA = "adapter-persistence-jpa";
+    public static final String ADAPTER_PERSISTENCE_JDBC = "adapter-persistence-jdbc";
     public static final String ADAPTER_PERSISTENCE_MONGO = "adapter-persistence-mongo";
     public static final String ADAPTER_PERSISTENCE_REDIS = "adapter-persistence-redis";
     public static final String ADAPTER_TIME_SYSTEM = "adapter-time-system";
