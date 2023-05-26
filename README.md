@@ -236,7 +236,8 @@ Our contributors are:
 - [Amin Talukder](https://www.linkedin.com/in/amin-talukder/) ([eamtalu](https://github.com/eamtalu))
 - [Franco Lombardo](https://www.linkedin.com/in/francolombardo/) ([f-lombardo](https://github.com/f-lombardo))
 - [Donald Siziba](https://www.linkedin.com/in/donald-siziba-35603322/) ([donaldsiziba](https://github.com/donaldsiziba))
-- [JoaoCipriano](https://www.linkedin.com/in/joao-lucas-cipriano/) ([JoaoCipriano](https://github.com/JoaoCipriano))
+- [Joao Cipriano](https://www.linkedin.com/in/joao-lucas-cipriano/) ([JoaoCipriano](https://github.com/JoaoCipriano))
+- [Guillaume Taffin](https://www.linkedin.com/in/guillaume-taffin-31343b129/) ([GuillaumeTaffin](https://github.com/GuillaumeTaffin))
 
 ## Contributing
 
