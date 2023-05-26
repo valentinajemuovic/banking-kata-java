@@ -238,6 +238,7 @@ Our contributors are:
 - [Donald Siziba](https://www.linkedin.com/in/donald-siziba-35603322/) ([donaldsiziba](https://github.com/donaldsiziba))
 - [Joao Cipriano](https://www.linkedin.com/in/joao-lucas-cipriano/) ([JoaoCipriano](https://github.com/JoaoCipriano))
 - [Guillaume Taffin](https://www.linkedin.com/in/guillaume-taffin-31343b129/) ([GuillaumeTaffin](https://github.com/GuillaumeTaffin))
+- [Juliano Silva](https://www.linkedin.com/in/julianojj/) ([julianojj](https://github.com/julianojj))
 
 ## Contributing
 
