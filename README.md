@@ -70,6 +70,15 @@ Apply the environment variables (for Linux/Mac):
 source ./env/env.sh
 ```
 
+Apply the environment variable in the ide, in case if it needs to run the application from ide UI button
+For intellij, there is a plugin EnvFile can help to run the env file.
+
+```shell
+#chmod 777 ./env/env.intellij.ui
+Then select the Run->Edit configuration which will then provide the option to import and run the file.
+```
+
+
 For Mac only, you need to build a custom Keycloak image to enable Keycloak to work on Mac M1.
 This is due to a reported Mac-specific issue https://github.com/docker/for-mac/issues/5310.
 For any other OS, please skip this step, because this issue is Mac-specific:
@@ -200,6 +209,18 @@ For mutation testing, the underlying call is:
 ```shell
 ./gradlew pitest
 ```
+
+For flyway operation from CLI:
+There will be flyway tasks available in the gradle as the plugin is applied to adapter-persistence-jpa.
+Tasks can be executed by the following way -
+
+```shell
+./gradlew adapter-persistence-jpa:flywayInfo  //will provide the schema file under flywayInfo
+./gradlew adapter-persistence-jpa:flywayClean //will clear up the schema from database
+./gradlew adapter-persistence-jpa:flywayMigrate //will apply the db schema migration into database
+```
+
+
 
 ## Issues
 
