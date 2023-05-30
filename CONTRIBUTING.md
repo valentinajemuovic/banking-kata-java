@@ -6,11 +6,10 @@ Do you have an idea for improving something in the code base, or new functionali
 
 If yes, you're welcome to contribute.
 
-1. See the existing tickets https://github.com/valentinacupac/banking-kata-java/issues
-2. If you see an UNASSIGNED ticket, and you want to contribute to it, please write a comment indicating your interest so that Valentina can assign the ticket to you. 
-3. If you don't see your idea on that list, please create a new ticket. Valentina will respond and then assign the ticket to you.
-5. For the project https://github.com/valentinacupac/banking-kata-java/fork and work on your fork.
-6. After you've finished, make a pull request (PR), we will review and merge your changes.
-7. If anything is unclear in the instructions above, you can raise a support ticket.
+1. See the existing tickets https://github.com/valentinacupac/banking-kata-java/issues (see unassigned tickets or you can add a new ticket).
+2. If you want to "reserve" the ticket for yourself, you need to write a comment on the ticket so that I can set you as assignee (because GitHub only allows me to set assignees to people who commented).
+3. Fork the project https://github.com/valentinacupac/banking-kata-java/fork and work on your fork.
+4. After you've finished, make a pull request (PR), we will review and merge your changes.
+5. If anything is unclear in the instructions above, you can raise a support ticket.
 
 Thank you once again!

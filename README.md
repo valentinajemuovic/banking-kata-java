@@ -49,15 +49,15 @@ As can be seen below, you can separately run these fast-running and slow-running
 - OpenJDK 17
 - Docker
 
-## Running Unit Tests
+## Running Gradle
 
-Run unit tests for `core`:
+Make sure that Gradle works:
 
 ```
-./gradlew coreTest
+./gradlew
 ```
 
-## Running Integration Tests
+## Environment Setup
 
 Apply the environment variables (Windows):
 
@@ -71,11 +71,22 @@ Apply the environment variables (for Linux/Mac):
 source ./env/env.sh
 ```
 
+Apply the environment variable in the ide, in case if it needs to run the application from ide UI button
+For intellij, there is a plugin EnvFile can help to run the env file.
+
+```shell
+#chmod 777 ./env/env.intellij.ui
+Then select the Run->Edit configuration which will then provide the option to import and run the file.
+```
+
+
 For Mac only, you need to build a custom Keycloak image to enable Keycloak to work on Mac M1.
 This is due to a reported Mac-specific issue https://github.com/docker/for-mac/issues/5310.
 For any other OS, please skip this step, because this issue is Mac-specific:
 
 ```shell
+cd startup
+chmod +x ./src/main/resources/keycloak/build-keycloak-image-m1.zsh
 ./src/main/resources/keycloak/build-keycloak-image-m1.zsh 16.0.0
 ```
 
@@ -85,23 +96,37 @@ Run docker:
 docker-compose up -d
 ```
 
+## Running Unit Tests
+
+Run unit tests for `core`:
+
+```
+./gradlew coreTest
+```
+
+## Running Integration Tests
+
+As a prerequisite, please see *Environment Setup*.
+
 To run all the adapter integration tests:
 
 ```shell
 ./gradlew adapterTest
 ```
 
-<!--- TODO: VC: System tests -->
-
 ## Running System Tests
 
-To run the whole system:
+As a prerequisite, please see *Environment Setup*.
+
+To run the whole system tests:
 
 ```shell
 ./gradlew systemTest
 ```
 
 ## Running all Tests
+
+As a prerequisite, please see *Environment Setup*.
 
 In the above instructions, we ran the tests separately.
 You can run them all:
@@ -186,6 +211,18 @@ For mutation testing, the underlying call is:
 ./gradlew pitest
 ```
 
+For flyway operation from CLI:
+There will be flyway tasks available in the gradle as the plugin is applied to adapter-persistence-jpa.
+Tasks can be executed by the following way -
+
+```shell
+./gradlew adapter-persistence-jpa:flywayInfo  //will provide the schema file under flywayInfo
+./gradlew adapter-persistence-jpa:flywayClean //will clear up the schema from database
+./gradlew adapter-persistence-jpa:flywayMigrate //will apply the db schema migration into database
+```
+
+
+
 ## Issues
 
 If you experience Integration Tests failing, please see the following known issue https://github.com/valentinacupac/banking-kata-java/issues/64.
@@ -200,7 +237,9 @@ Our contributors are:
 - [Amin Talukder](https://www.linkedin.com/in/amin-talukder/) ([eamtalu](https://github.com/eamtalu))
 - [Franco Lombardo](https://www.linkedin.com/in/francolombardo/) ([f-lombardo](https://github.com/f-lombardo))
 - [Donald Siziba](https://www.linkedin.com/in/donald-siziba-35603322/) ([donaldsiziba](https://github.com/donaldsiziba))
-- [JoaoCipriano](https://www.linkedin.com/in/joao-lucas-cipriano/) ([JoaoCipriano](https://github.com/JoaoCipriano))
+- [Joao Cipriano](https://www.linkedin.com/in/joao-lucas-cipriano/) ([JoaoCipriano](https://github.com/JoaoCipriano))
+- [Guillaume Taffin](https://www.linkedin.com/in/guillaume-taffin-31343b129/) ([GuillaumeTaffin](https://github.com/GuillaumeTaffin))
+- [Juliano Silva](https://www.linkedin.com/in/julianojj/) ([julianojj](https://github.com/julianojj))
 
 ## Contributing
 
