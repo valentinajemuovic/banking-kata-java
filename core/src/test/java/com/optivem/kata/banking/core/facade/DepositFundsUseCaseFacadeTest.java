@@ -9,6 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
@@ -18,6 +21,10 @@ import static com.optivem.kata.banking.core.common.data.MethodSources.NULL_EMPTY
 /**
  * This test is an alternative approach to DepositFundsUseCaseTest, so we would use either of these, but not both
  */
+
+// TODO: VC: DELETE
+
+    /*
 class DepositFundsUseCaseFacadeTest {
     private TestFacade facade;
 
@@ -35,6 +42,11 @@ class DepositFundsUseCaseFacadeTest {
     @ParameterizedTest
     @MethodSource
     void should_deposit_funds_given_valid_request(int initialBalance, int depositAmount, int expectedFinalBalance) {
+
+        var timestamp = LocalDateTime.of(LocalDate.of(2023, 5, 31), LocalTime.MIN);
+
+        facade.willHaveNextTime(timestamp);
+
         var accountNumber = facade
                 .alreadyHasBankAccount(initialBalance);
 
@@ -63,3 +75,4 @@ class DepositFundsUseCaseFacadeTest {
                 .shouldThrowValidationException(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
     }
 }
+*/

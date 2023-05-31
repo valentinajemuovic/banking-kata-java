@@ -22,7 +22,7 @@ public class FakeEventBus implements EventBus {
         events.add(event);
     }
 
-    public void shouldHavePublishedExactly(AccountOpenedDto expectedEvent) {
+    public void shouldHavePublishedExactly(EventDto expectedEvent) {
         var publishedEvents = getPublishedEvents();
         assertThat(publishedEvents.size()).isEqualTo(1);
         assertThat(publishedEvents.stream().findFirst().get()).isEqualTo(expectedEvent);
