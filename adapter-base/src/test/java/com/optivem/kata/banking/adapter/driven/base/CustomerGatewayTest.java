@@ -43,10 +43,8 @@ public abstract class CustomerGatewayTest<T extends CustomerGateway> {
     }
 
     protected void setupUserBlacklisted(String nationalIdentityNumber) {
-        return;
     }
 
     protected void setupUserWhitelisted(String nationalIdentityNumber) {
-        return;
     }
 }
