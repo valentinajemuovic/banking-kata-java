@@ -1,7 +1,7 @@
 dependencies {
     implementation project(':core')
 
-    testImplementation project(':adapter-base')
+    testImplementation project(path: ':adapter-base', configuration: 'testClasses')
 }
 
 bootJar {
