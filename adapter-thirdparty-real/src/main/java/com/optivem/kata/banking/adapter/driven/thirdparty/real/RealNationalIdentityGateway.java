@@ -11,7 +11,6 @@ import reactor.core.publisher.Mono;
 @Component
 @Profile(ProfileNames.ADAPTER_THIRDPARTY_REAL)
 public class RealNationalIdentityGateway implements NationalIdentityGateway {
-    private static final String URL = "https://jsonplaceholder.typicode.com"; // TODO: Move into configuration
     private static final String PATH = "users/%s";
 
     private final String url;
