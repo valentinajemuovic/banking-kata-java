@@ -2,7 +2,6 @@ package com.optivem.kata.banking.adapter.driven.base;
 
 import com.optivem.kata.banking.core.ports.driven.EventBus;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
-import com.optivem.kata.banking.core.ports.driven.events.EventDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ public abstract class EventBusTest<T extends EventBus> {
     protected T eventBus;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         this.eventBus = create();
     }
 

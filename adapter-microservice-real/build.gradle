@@ -2,7 +2,7 @@ dependencies {
     implementation project(':core')
     implementation project(':adapter-base')
 
-    testImplementation project(':adapter-base')
+    testImplementation project(path: ':adapter-base', configuration: 'testClasses')
     testImplementation project(':test-fixtures')
 }
 
