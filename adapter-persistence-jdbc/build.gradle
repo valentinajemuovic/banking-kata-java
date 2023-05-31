@@ -9,6 +9,7 @@ dependencies {
     testImplementation project(':test-fixtures')
     testImplementation project(':startup')
     testImplementation project(':adapter-generation-random')
+    testImplementation project(path: ':adapter-base', configuration: 'testClasses')
 }
 
 bootJar {

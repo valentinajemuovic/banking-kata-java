@@ -3,7 +3,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-test'
 
     testImplementation project(':test-fixtures')
-    testImplementation project(':adapter-base')
+    testImplementation project(path: ':adapter-base', configuration: 'testClasses')
 }
 
 bootJar {

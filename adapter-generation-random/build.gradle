@@ -7,7 +7,7 @@ dependencies {
 
     testImplementation project(':core')
     testImplementation project(':test-fixtures')
-    testImplementation project(':adapter-base')
+    testImplementation project(path: ':adapter-base', configuration: 'testClasses')
 }
 
 bootJar {
