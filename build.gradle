@@ -81,10 +81,13 @@ allprojects {
         testImplementation 'au.com.dius:pact-jvm-provider-junit5:4.0.10' // NOTE: For contract testing
     }
 
-    test {
+    gradle.taskGraph.whenReady { graph ->
+        if (graph.hasTask(':test')) {
+            test.dependsOn(':testPrerequisite')
+        }
+    }
 
-        onlyIf { task -> task.name == 'test' }
-        dependsOn ':testPrerequisite'
+    test {
 
         useJUnitPlatform()
 
