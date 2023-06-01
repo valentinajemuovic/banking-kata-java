@@ -1,8 +1,6 @@
-package com.optivem.kata.banking.core.internal.cleanarch.domain.common.events;
+package com.optivem.kata.banking.core.internal.cleanarch.domain.accounts;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountNumber;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.TransactionAmount;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.BaseDomainEvent;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.BaseDomainEvent;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

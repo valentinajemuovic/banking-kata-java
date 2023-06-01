@@ -4,13 +4,11 @@ import an.awesome.pipelinr.Command;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountNumber;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.TransactionAmount;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.FundsDeposited;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.FundsDeposited;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.EventPublisher;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
-import com.optivem.kata.banking.core.ports.driven.events.FundsDepositedDto;
 import com.optivem.kata.banking.core.ports.driver.VoidResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.depositfunds.DepositFundsRequest;
-import jdk.jfr.Event;
 
 public class DepositFundsUseCase implements Command.Handler<DepositFundsRequest, VoidResponse> {
 

@@ -1,8 +1,6 @@
 package com.optivem.kata.banking.core.internal.cleanarch.acl;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.AccountOpened;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.FundsDeposited;
-import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.FundsDeposited;
 import com.optivem.kata.banking.core.ports.driven.events.FundsDepositedDto;
 
 public class FundsDepositedConverter {

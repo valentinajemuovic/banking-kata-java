@@ -5,8 +5,8 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountH
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.Balance;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.AccountOpened;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountOpened;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.EventPublisher;
 import com.optivem.kata.banking.core.ports.driven.CustomerGateway;
 import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 import com.optivem.kata.banking.core.ports.driven.NationalIdentityGateway;

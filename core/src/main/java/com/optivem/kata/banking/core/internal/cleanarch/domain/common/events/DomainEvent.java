@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common;
+package com.optivem.kata.banking.core.internal.cleanarch.domain.common.events;
 
 import java.time.LocalDateTime;
 
