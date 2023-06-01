@@ -21,7 +21,8 @@ flyway {
     url = postgresUrl
     user = postgresUser
     password = postgresPass
-    locations = ['classpath:db/migration/',"filesystem:${project.projectDir}/src/main/resources/db/migration/"]
+    //locations = ['classpath:db/migration/',"filesystem:${project.projectDir}/src/main/resources/db/migration/"]
+    locations = ["filesystem:${project.projectDir}/src/main/resources/db/migration/"]
     baselineOnMigrate = true
 }
 

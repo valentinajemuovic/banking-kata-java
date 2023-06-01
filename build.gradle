@@ -82,6 +82,9 @@ allprojects {
     }
 
     test {
+
+        dependsOn ':testPrerequisite'
+
         useJUnitPlatform()
 
         testLogging {
@@ -93,6 +96,10 @@ allprojects {
         }
     }
 
+}
+
+task testPrerequisite{
+    dependsOn 'adapter-persistence-jpa:flywayMigrate'
 }
 
 task coreTest {
