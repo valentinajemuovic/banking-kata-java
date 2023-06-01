@@ -105,7 +105,14 @@ allprojects {
         testImplementation 'au.com.dius:pact-jvm-provider-junit5:4.0.10' // NOTE: For contract testing
     }
 
+    gradle.taskGraph.whenReady { graph ->
+        if (graph.hasTask(':test')) {
+            test.dependsOn(':testPrerequisite')
+        }
+    }
+
     test {
+
         useJUnitPlatform()
 
         testLogging {
@@ -119,6 +126,10 @@ allprojects {
         finalizedBy jacocoTestReport
     }
 
+}
+
+task testPrerequisite{
+    dependsOn 'adapter-persistence-jpa:flywayMigrate'
 }
 
 task coreTest {

@@ -24,7 +24,7 @@ public class Facade {
         var bankAccountRepository = new BankAccountRepositoryImpl(bankAccountStorage, accountIdGenerator, accountNumberGenerator);
         var eventPublisher = new EventPublisherImpl(eventBus);
 
-        this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository);
+        this.depositFundsUseCase = new DepositFundsUseCase(bankAccountRepository, dateTimeService, eventPublisher);
         this.openAccountUseCase = new OpenAccountUseCase(nationalIdentityGateway, customerGateway, bankAccountRepository, dateTimeService, eventPublisher);
         this.viewAccountUseCase = new ViewAccountUseCase(bankAccountRepository, scoreCalculator);
     }

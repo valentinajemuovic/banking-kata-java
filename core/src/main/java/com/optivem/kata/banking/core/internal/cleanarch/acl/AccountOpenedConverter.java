@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.core.internal.cleanarch.acl;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.AccountOpened;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountOpened;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 
 public class AccountOpenedConverter {
