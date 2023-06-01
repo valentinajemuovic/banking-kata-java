@@ -1,6 +1,6 @@
 
 
-CREATE TABLE bank_account (
+CREATE TABLE IF NOT EXISTS bank_account (
                               id BIGINT PRIMARY KEY,
                               account_number VARCHAR(255) UNIQUE NOT NULL,
                               national_identity_number VARCHAR(255) NOT NULL,
