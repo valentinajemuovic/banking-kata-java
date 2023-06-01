@@ -37,7 +37,6 @@ public class DepositFundsUseCase implements Command.Handler<DepositFundsRequest,
 
         var timestamp = dateTimeService.now();
         var event = new FundsDeposited(timestamp, accountNumber, amount);
-
         eventPublisher.publishEvent(event);
 
         return VoidResponse.EMPTY;

@@ -7,6 +7,7 @@ import com.optivem.kata.banking.core.ports.driver.VoidResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
+import com.optivem.kata.banking.core.ports.driver.accounts.withdrawfunds.WithdrawFundsRequest;
 
 public class CrudUseCaseFactory implements UseCaseFactory {
     @Override
@@ -16,6 +17,11 @@ public class CrudUseCaseFactory implements UseCaseFactory {
 
     @Override
     public Command.Handler<DepositFundsRequest, VoidResponse> createDepositFundsHandler(BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
+        return null;
+    }
+
+    @Override
+    public Command.Handler<WithdrawFundsRequest, VoidResponse> createWithdrawFundsHandler(BankAccountStorage bankAccountStorage, AccountIdGenerator accountIdGenerator, AccountNumberGenerator accountNumberGenerator, DateTimeService dateTimeService, EventBus eventBus) {
         return null;
     }
 }
