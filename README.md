@@ -59,6 +59,12 @@ Make sure that Gradle works:
 
 ## Environment Setup
 
+Remove old images/volumes:
+
+```shell
+docker-compose down -v
+```
+
 Apply the environment variables (Windows):
 
 ```shell
