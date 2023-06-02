@@ -1,7 +1,11 @@
 # Banking Kata - Java
 
 [![CI](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml/badge.svg)](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml)
+
+<!-- TOD0: VC: I temporarily commented this out because I'm fixing some metrics, I'll bring it back again approx next week after 7th Jun 2023-->
+<!--
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=valentinacupac_banking-kata-java&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=valentinacupac_banking-kata-java)
+-->
 
 ## Overview
 
