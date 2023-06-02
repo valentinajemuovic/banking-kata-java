@@ -18,6 +18,9 @@ sonarqube {
         property "sonar.organization", "valentinacupac"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.issue.ignore.multicriteria", "S5960"
+        property "sonar.issue.ignore.multicriteria.S5960.resourceKey", "src/main/java/**/*"
+        property "sonar.issue.ignore.multicriteria.S5960.ruleKey", "java:S5960"
     }
 }
 
