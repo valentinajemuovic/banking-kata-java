@@ -120,6 +120,8 @@ To run all the adapter integration tests:
 ./gradlew adapterTest
 ```
 
+Note: Currently, this fails locally due to open issues with Flyway & MongoDB( #111 and #114).
+
 ## Running System Tests
 
 As a prerequisite, please see *Environment Setup*.
@@ -129,6 +131,8 @@ To run the whole system tests:
 ```shell
 ./gradlew systemTest
 ```
+
+Note: Currently, this fails locally due to open issues with Flyway & MongoDB( #111 and #114).
 
 ## Running all Tests
 
@@ -140,6 +144,8 @@ You can run them all:
 ```shell
 ./gradlew test
 ```
+
+Note: Currently, this fails locally due to open issues with Flyway & MongoDB( #111 and #114).
 
 ## Running Code Coverage 
 
