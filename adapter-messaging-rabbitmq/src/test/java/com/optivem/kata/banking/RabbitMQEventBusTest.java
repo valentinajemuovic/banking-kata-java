@@ -1,5 +1,6 @@
 package com.optivem.kata.banking;
 
+import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.configuration.RabbitMQConfig;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +11,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
@@ -18,17 +21,22 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-
+@Profile(ProfileNames.ADAPTER_MESSAGING_RABBITMQ)
 class RabbitMQEventBusTest {
 
     private RabbitMQEventBus rabbitMQEventBus;
     private RabbitTemplate rabbitTemplate;
 
+    @Value("${default.exchange.name}") String exchangeName;
+    @Value("${default.queue.name}") String queueName;
+    @Value("${default.routingkey.name}") String routingKeyName;
+
     @BeforeEach
     public void init(){
         RabbitMQConfig rabbitMQConfig = new RabbitMQConfig();
+
         this.rabbitTemplate = rabbitMQConfig.rabbitAMQPTemplate(rabbitMQConfig.connectionFactory());
-        this.rabbitMQEventBus=new RabbitMQEventBus(this.rabbitTemplate);
+        this.rabbitMQEventBus=new RabbitMQEventBus(this.rabbitTemplate,exchangeName,queueName,routingKeyName);
 
     }
 

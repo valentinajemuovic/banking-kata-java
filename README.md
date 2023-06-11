@@ -95,6 +95,15 @@ Run docker:
 docker-compose up -d
 ```
 
+## verify if rabbitmq admin console is accessible and the docker image is running without issues
+```shell
+http://localhost:15672
+user: admin
+pass: admin
+
+
+```
+
 ## Running Unit Tests
 
 Run unit tests for `core`:

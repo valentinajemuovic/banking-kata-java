@@ -1,6 +1,6 @@
 dependencies {
     implementation project(':core')
-//    implementation project(':adapter-base')
+    implementation project(':adapter-base')
 
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'com.fasterxml.jackson.core:jackson-databind'

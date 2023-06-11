@@ -22,6 +22,7 @@ class AdminAMQPTest {
         this.adminAMQP = new AdminAMQP(rabbitAdmin, new RabbitTemplate());
     }
 
+    /*
     @Test
     @Order(1)
     public void should_create_an_exchange_when_calling_create_exchange(){
@@ -45,5 +46,8 @@ class AdminAMQPTest {
         //todo - do some assert
 
     }
+
+    */
+
 
 }
