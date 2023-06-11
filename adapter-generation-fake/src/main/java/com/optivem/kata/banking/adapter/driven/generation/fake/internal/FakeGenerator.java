@@ -1,6 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.generation.fake.internal;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.base.Generator;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.generation.Generator;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

@@ -10,7 +10,7 @@ public abstract class AccountNumberGeneratorTest {
     protected AccountNumberGenerator generator;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         this.generator = create();
     }
 
@@ -28,11 +28,13 @@ public abstract class AccountNumberGeneratorTest {
         assertThat(accountNumber1).isNotNull();
 
         var accountNumber2 = generator.next();
-        assertThat(accountNumber2).isNotNull();
-        assertThat(accountNumber2).isNotEqualTo(accountNumber1);
+        assertThat(accountNumber2)
+                .isNotNull()
+                .isNotEqualTo(accountNumber1);
 
         var accountNumber3 = generator.next();
-        assertThat(accountNumber3).isNotNull();
-        assertThat(accountNumber3).isNotEqualTo(accountNumber2);
+        assertThat(accountNumber3)
+                .isNotNull()
+                .isNotEqualTo(accountNumber2);
     }
 }

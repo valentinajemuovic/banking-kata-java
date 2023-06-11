@@ -1,7 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.messaging.fake;
 
 import com.optivem.kata.banking.core.ports.driven.EventBus;
-import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driven.events.EventDto;
 
 import java.util.ArrayDeque;
@@ -22,10 +21,12 @@ public class FakeEventBus implements EventBus {
         events.add(event);
     }
 
-    public void shouldHavePublishedExactly(AccountOpenedDto expectedEvent) {
+    public void shouldHavePublishedExactly(EventDto expectedEvent) {
         var publishedEvents = getPublishedEvents();
         assertThat(publishedEvents.size()).isEqualTo(1);
-        assertThat(publishedEvents.stream().findFirst().get()).isEqualTo(expectedEvent);
+        assertThat(publishedEvents.stream().findFirst())
+                .isPresent()
+                .contains(expectedEvent);
     }
 
     private List<EventDto> getPublishedEvents() {

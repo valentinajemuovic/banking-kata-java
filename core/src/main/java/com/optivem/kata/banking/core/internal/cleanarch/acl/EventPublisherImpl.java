@@ -1,8 +1,10 @@
 package com.optivem.kata.banking.core.internal.cleanarch.acl;
 
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.AccountOpened;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.DomainEvent;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.common.EventPublisher;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountOpened;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.FundsDeposited;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.FundsWithdrawn;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.DomainEvent;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.events.EventPublisher;
 import com.optivem.kata.banking.core.ports.driven.EventBus;
 import com.optivem.kata.banking.core.ports.driven.events.EventDto;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,13 @@ public class EventPublisherImpl implements EventPublisher {
         {
             return AccountOpenedConverter.fromEvent((AccountOpened) event);
         }
+        else if(event instanceof FundsDeposited) {
+            return FundsDepositedConverter.fromEvent((FundsDeposited) event);
+        }
+        else if(event instanceof FundsWithdrawn) {
+            return FundsWithdrawnConverter.fromEvent((FundsWithdrawn) event);
+        }
 
-        return null;
+        throw new IllegalArgumentException("Unrecognized event type");
     }
 }

@@ -7,16 +7,21 @@ plugins {
     id 'jacoco'
     id 'com.adarshr.test-logger' version '3.2.0' // TODO: Check why not working
     id 'org.flywaydb.flyway' version '8.1.0'
+    id 'org.sonarqube' version '3.5.0.2730'
 }
 
 apply plugin: 'info.solidsoft.pitest.aggregator'
 
-jacoco {
-    toolVersion = "0.8.7"
-}
-
-jacocoTestReport {
-    dependsOn test
+sonarqube {
+    properties {
+        property "sonar.projectKey", "valentinacupac_banking-kata-java"
+        property "sonar.organization", "valentinacupac"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.issue.ignore.multicriteria", "S5960"
+        property "sonar.issue.ignore.multicriteria.S5960.resourceKey", "src/main/java/**/*"
+        property "sonar.issue.ignore.multicriteria.S5960.ruleKey", "java:S5960"
+    }
 }
 
 subprojects {
@@ -24,6 +29,7 @@ subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'info.solidsoft.pitest'
+    apply plugin: 'jacoco'
 
     pitest {
         junit5PluginVersion = '0.15'
@@ -43,6 +49,27 @@ subprojects {
         if(project.name in ['adapter-persistence-jpa']){
             apply plugin: "org.flywaydb.flyway"
             implementation 'org.flywaydb:flyway-core:8.1.0'
+        }
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.sources", "src/main"
+            property "sonar.test.inclusions", "src/test"
+            property "sonar.jacoco.coverage.reportPaths", "$buildDir/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
+            property "sonar.junit.reportsPaths", "$buildDir/test-results/"
+        }
+    }
+
+    jacoco {
+        toolVersion = "0.8.8"
+    }
+
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            xml.enabled true
+            html.enabled true
         }
     }
 }
@@ -98,6 +125,8 @@ allprojects {
             showCauses true
             showStackTraces true
         }
+
+        finalizedBy jacocoTestReport
     }
 
 }
@@ -191,6 +220,3 @@ bootJar {
 jar {
     enabled = true
 }
-
-
-

@@ -4,6 +4,8 @@ import com.optivem.kata.banking.core.Facade;
 import com.optivem.kata.banking.core.common.builders.requests.OpenAccountRequestBuilder;
 import com.optivem.kata.banking.core.ports.driven.*;
 
+import java.time.LocalDateTime;
+
 public class TestFacade {
 
     private final Facade facade;

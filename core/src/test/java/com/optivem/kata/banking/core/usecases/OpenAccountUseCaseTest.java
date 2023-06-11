@@ -81,14 +81,6 @@ class OpenAccountUseCaseTest {
                 .accountNumber(generatedAccountNumber)
                 .build();
 
-        var expectedEvent = AccountOpenedDto.builder()
-                .timestamp(LocalDateTime.of(openingDate, LocalTime.MIN))
-                .accountId(generatedAccountId)
-                .firstName(firstName)
-                .lastName(lastName)
-                .balance(initialBalance)
-                .build();
-
         var expectedBankAccount = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountId(generatedAccountId)
                 .withAccountNumber(generatedAccountNumber)
@@ -99,7 +91,16 @@ class OpenAccountUseCaseTest {
                 .withBalance(initialBalance)
                 .build();
 
+        var expectedEvent = AccountOpenedDto.builder()
+                .timestamp(LocalDateTime.of(openingDate, LocalTime.MIN))
+                .accountId(generatedAccountId)
+                .firstName(firstName)
+                .lastName(lastName)
+                .balance(initialBalance)
+                .build();
+
         verifyThat(useCase).withRequest(request).shouldReturnResponse(expectedResponse);
+
         storage.shouldContain(expectedBankAccount);
         eventBus.shouldHavePublishedExactly(expectedEvent);
     }
