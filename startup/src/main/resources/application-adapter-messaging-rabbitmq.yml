@@ -1,0 +1,8 @@
+
+default:
+  exchange:
+    name: default-bankingkata-exchange
+  queue:
+    name: default-bankingkata-queue
+  routingkey:
+    name: default-bankingkata-queue

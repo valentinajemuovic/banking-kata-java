@@ -14,6 +14,7 @@ public class ProfileNames {
     public static final String ADAPTER_THIRDPARTY_SIM = "adapter-thirdparty-sim";
     public static final String ADAPTER_MICROSERVICE_REAL = "adapter-microservice-real";
     public static final String ADAPTER_MICROSERVICE_SIM = "adapter-microservice-sim";
+    public static final String ADAPTER_MESSAGING_RABBITMQ = "adapter-messaging-rabbitmq";
 
     private ProfileNames() {}
 }

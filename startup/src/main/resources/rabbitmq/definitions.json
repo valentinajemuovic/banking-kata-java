@@ -1,0 +1,63 @@
+
+{
+  "users": [
+    {
+      "name": "admin",
+    "password_hash": "Gn6oauyAS7r7F2dwdZyV3ipBrRTBDAkDAQlBXhKJQlOmCarT",
+    "hashing_algorithm": "rabbit_password_hashing_sha256",
+    "tags": [
+      "administrator"
+    ],
+    "limits": {}
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+    "vhost": "/",
+    "configure": ".*",
+    "write": ".*",
+    "read": ".*"
+    }
+  ],
+
+  "queues": [
+    {
+      "name": "default-bankingkata-queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "default-bankingkata-exchange",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "default-bankingkata-exchange",
+      "vhost": "/",
+      "destination": "default-bankingkata-queue",
+      "destination_type": "queue",
+      "routing_key": "default-bankingkata-queue",
+      "arguments": {}
+    }
+  ]
+}
+
+

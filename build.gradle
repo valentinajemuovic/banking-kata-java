@@ -151,6 +151,7 @@ task fakeAdapterTest {
 task realAdapterTest {
     dependsOn 'adapter-generation-random:test'
     dependsOn 'adapter-messaging-inmemory:test'
+    dependsOn 'adapter-messaging-rabbitmq:test'
     dependsOn 'adapter-microservice-real:test'
     dependsOn 'adapter-persistence-jpa:test'
     dependsOn 'adapter-persistence-mongo:test'

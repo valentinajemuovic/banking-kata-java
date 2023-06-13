@@ -79,6 +79,20 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass b4EA2xC6LlKnlizPu9bwRRrQM
     volumes:
       - redis:/data
+  rabbitmq:
+    container_name: rabbitmq-preload-conf
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672  # RabbitMQ default port
+      - 15672:15672  # RabbitMQ management plugin port
+    networks:
+      - local
+    volumes:
+      - ./startup/src/main/resources/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./startup/src/main/resources/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}  # RabbitMQ admin username
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASS}  # RabbitMQ admin password
 volumes:
   postgres:
     driver: local
