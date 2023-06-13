@@ -178,8 +178,39 @@ task runApp {
     dependsOn 'startup:bootRun'
 }
 
-task codeCoverage {
+task coreCodeCoverage {
     dependsOn 'core:codeCoverage'
+}
+
+task fakeAdapterCodeCoverage {
+    dependsOn 'adapter-generation-fake:codeCoverage'
+    dependsOn 'adapter-messaging-fake:codeCoverage'
+    dependsOn 'adapter-microservice-fake:codeCoverage'
+    dependsOn 'adapter-persistence-fake:codeCoverage'
+    dependsOn 'adapter-thirdparty-fake:codeCoverage'
+    dependsOn 'adapter-time-fake:codeCoverage'
+}
+
+task realAdapterCodeCoverage {
+    dependsOn 'adapter-generation-random:codeCoverage'
+    dependsOn 'adapter-messaging-inmemory:codeCoverage'
+    dependsOn 'adapter-microservice-real:codeCoverage'
+    dependsOn 'adapter-persistence-jpa:codeCoverage'
+    dependsOn 'adapter-persistence-mongo:codeCoverage'
+    dependsOn 'adapter-persistence-redis:codeCoverage'
+    dependsOn 'adapter-restapi-spring:codeCoverage'
+    dependsOn 'adapter-thirdparty-real:codeCoverage'
+    dependsOn 'adapter-time-system:codeCoverage'
+}
+
+task adapterCodeCoverage {
+    dependsOn fakeAdapterCodeCoverage
+    dependsOn realAdapterCodeCoverage
+}
+
+task codeCoverage {
+    dependsOn coreCodeCoverage
+    dependsOn adapterCodeCoverage
 }
 
 task coreMutationTest {
