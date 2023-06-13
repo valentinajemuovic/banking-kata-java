@@ -1,12 +1,11 @@
 package com.optivem.kata.banking.adapter.driven.generation.fake;
 
-import com.optivem.kata.banking.adapter.driven.base.AccountNumberGeneratorTest;
-import com.optivem.kata.banking.core.ports.driven.AccountNumberGenerator;
+import com.optivem.kata.banking.adapter.driven.base.GeneratorTest;
 
-class FakeAccountNumberGeneratorTest extends AccountNumberGeneratorTest {
+public class FakeAccountNumberGeneratorTest extends GeneratorTest<FakeAccountNumberGenerator> {
 
     @Override
-    protected AccountNumberGenerator create() {
+    protected FakeAccountNumberGenerator create() {
 
         var generator = new FakeAccountNumberGenerator();
 
