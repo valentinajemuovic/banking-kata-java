@@ -72,6 +72,10 @@ subprojects {
             html.required = true
         }
     }
+
+    task codeCoverage {
+        dependsOn jacocoTestReport
+    }
 }
 
 allprojects {
@@ -175,7 +179,7 @@ task runApp {
 }
 
 task codeCoverage {
-    dependsOn jacocoTestReport
+    dependsOn 'core:codeCoverage'
 }
 
 task coreMutationTest {

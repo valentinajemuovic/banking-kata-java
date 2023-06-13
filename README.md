@@ -168,6 +168,11 @@ Run code coverage (executes Jacoco):
 ./gradlew codeCoverage
 ```
 
+To run it for specific project:
+```shell
+./gradlew core:codeCoverage
+```
+
 ## Running Mutation Testing
 
 Run mutation testing (executes pitest):
