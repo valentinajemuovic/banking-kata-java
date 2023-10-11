@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.adapter.driven.messaging.inmemory.internal;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -10,21 +11,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class UseCaseEventHandler{
 
-    private final EventQueue<DomainApplicationEvent> queue;
+    private final EventQueue<DomainApplicationEvent<Message>> queue;
 
-    public UseCaseEventHandler(EventQueue<DomainApplicationEvent> eventEventQueue){
+    public UseCaseEventHandler(EventQueue<DomainApplicationEvent<Message>> eventEventQueue){
         this.queue = eventEventQueue;
     }
 
     @EventListener
-    public void handleEvent(DomainApplicationEvent event){
+    public void handleEvent(DomainApplicationEvent<Message> event){
             queue.addEvent(event);
-
-            // var eventFromQueue = queue.next();
-            // System.out.println(eventFromQueue.getId());
-            // System.out.println(eventFromQueue.getEventName());
-            // System.out.println(eventFromQueue.getLocalDateTime());
-
     }
-
 }
