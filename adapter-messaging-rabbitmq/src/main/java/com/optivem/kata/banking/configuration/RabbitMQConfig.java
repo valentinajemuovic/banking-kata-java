@@ -9,7 +9,6 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -69,12 +68,11 @@ public class RabbitMQConfig {
         amqpAdmin().declareBinding(binding);
     }
 
-
-
    /**
     * Create DTO Serializer for rabbitmqTemplate
     */
-   //this is to serialize pojo, therefore Jackson2MessageConverter from amqp library need to be binded with RabbitTemplate
+   //this is to serialize pojo, therefore,
+   // Jackson2MessageConverter from an amqp library need to be bound with RabbitTemplate
    @Bean
    public MessageConverter jsonMessageConverter(){
        ObjectMapper objectMapper = new ObjectMapper();
