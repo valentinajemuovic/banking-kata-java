@@ -4,7 +4,6 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions
 import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
-import org.assertj.core.api.Assertions;
 
 import java.util.HashMap;
 import java.util.Map;
