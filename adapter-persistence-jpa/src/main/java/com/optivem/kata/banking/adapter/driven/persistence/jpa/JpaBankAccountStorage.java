@@ -28,14 +28,8 @@ public class JpaBankAccountStorage implements BankAccountStorage {
 
     @Override
     public Optional<BankAccountDto> find(String accountNumber) {
-        var bankAccountRecord = dataAccessor.findByAccountNumber(accountNumber);
-
-        if(bankAccountRecord.isEmpty()) {
-            return Optional.empty();
-        }
-
-        var bankAccount = toDto(bankAccountRecord.get());
-        return Optional.of(bankAccount);
+        return dataAccessor.findByAccountNumber(accountNumber)
+                .map(this::toDto);
     }
 
     @Override
