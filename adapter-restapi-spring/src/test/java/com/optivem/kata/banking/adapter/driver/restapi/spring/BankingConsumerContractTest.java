@@ -40,9 +40,8 @@ public class BankingConsumerContractTest {
 
     @Pact(consumer = CONSUMER_NAME)
     public RequestResponsePact createPactForNonexistentAccountNumber(PactDslWithProvider builder) {
-        var accountNumber = NON_EXISTENT_ACCOUNT_NUMBER_VALUE;
 
-        var path = getPath(accountNumber);
+        var path = getPath(NON_EXISTENT_ACCOUNT_NUMBER_VALUE);
 
         return builder.given("GET Bank Account: a bank account with the specified ID 999-999999-999 does not exist")
                 .uponReceiving("A request for Bank Account data")
@@ -77,20 +76,18 @@ public class BankingConsumerContractTest {
 
     @Test
     @PactTestFor(pactMethod = "createPactForNonexistentAccountNumber")
-    public void should_return_none_when_bank_account_not_exists(MockServer mockServer) {
+    void should_return_none_when_bank_account_not_exists(MockServer mockServer) {
         var client = createBankingClient(mockServer);
-        var accountNumber = NON_EXISTENT_ACCOUNT_NUMBER_VALUE;
-        var response = client.viewAccount(accountNumber);
+        var response = client.viewAccount(NON_EXISTENT_ACCOUNT_NUMBER_VALUE);
 
         assertThat(response).isEmpty();
     }
 
     @Test
     @PactTestFor(pactMethod = "createPactForExistingAccountNumber")
-    public void should_return_response_when_bank_account_exists(MockServer mockServer) {
+    void should_return_response_when_bank_account_exists(MockServer mockServer) {
         var client = createBankingClient(mockServer);
-        var accountNumber = EXISTING_ACCOUNT_NUMBER_VALUE;
-        var response = client.viewAccount(accountNumber);
+        var response = client.viewAccount(EXISTING_ACCOUNT_NUMBER_VALUE);
 
         var expectedResponse = ViewAccountResponse.builder()
             .accountNumber(EXISTING_ACCOUNT_NUMBER_VALUE)
