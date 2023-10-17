@@ -18,7 +18,7 @@ public class RealTokenProvider implements TokenProvider {
             @Value("${client-id}") final String clientId,
             @Value("${client-secret}") final String clientSecret) {
 
-        this.client = WebClient.create(); // client;
+        this.client = WebClient.create();
         this.tokenUri = tokenUri;
         tokenRequestData = new LinkedMultiValueMap<>();
 
@@ -39,9 +39,5 @@ public class RealTokenProvider implements TokenProvider {
                 .block();
 
         return "Bearer " + token;
-
-        /*
-                .map(tokenResponse -> tokenResponse.get("access_token").textValue())
-                .blockFirst(); */
     }
 }
