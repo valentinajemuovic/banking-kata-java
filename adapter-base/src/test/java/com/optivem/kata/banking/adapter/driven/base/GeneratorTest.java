@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class GeneratorTest<G extends Generator> {
+public abstract class GeneratorTest<G extends Generator<?>> {
     protected G generator;
 
     @BeforeEach
