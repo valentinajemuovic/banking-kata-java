@@ -9,16 +9,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @Profile(ProfileNames.ADAPTER_MESSAGING_RABBITMQ)
@@ -33,10 +28,10 @@ class RabbitMQEventBusTest {
 
     @BeforeEach
     public void init(){
-        RabbitMQConfig rabbitMQConfig = new RabbitMQConfig();
+        var rabbitMQConfig = new RabbitMQConfig();
 
         this.rabbitTemplate = rabbitMQConfig.rabbitAMQPTemplate(rabbitMQConfig.connectionFactory());
-        this.rabbitMQEventBus=new RabbitMQEventBus(this.rabbitTemplate,exchangeName,queueName,routingKeyName);
+        this.rabbitMQEventBus=new RabbitMQEventBus(this.rabbitTemplate,exchangeName, routingKeyName);
 
     }
 
@@ -45,20 +40,18 @@ class RabbitMQEventBusTest {
                 Arguments.of(new AccountOpenedDto(LocalDateTime.now(),35535L,"Josh","Long",1)));
     }
 
-
     @ParameterizedTest
     @MethodSource("should_return_AccountOpenedDto_event")
-    public void should_send_dto_to_default_queue(AccountOpenedDto accountOpenedDto){
+    void should_send_dto_to_default_queue(AccountOpenedDto accountOpenedDto){
         rabbitMQEventBus.publish(accountOpenedDto);
     }
 
     @Test
-    public void should_consume_message_from_queue(){
-            Object message = rabbitTemplate.receiveAndConvert("default-bankingkata-queue");
+    void should_consume_message_from_queue(){
+            var message = rabbitTemplate.receiveAndConvert("default-bankingkata-queue");
             if (message != null) {
-                if(message instanceof AccountOpenedDto){
-                    AccountOpenedDto accountOpenedDto = (AccountOpenedDto) message;
-                    System.out.println(accountOpenedDto.toString());
+                if(message instanceof AccountOpenedDto accountOpenedDto){
+                    System.out.println(accountOpenedDto);
                 }
             } else {
                 System.out.println("No messages in the queue.");
