@@ -4,7 +4,9 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MongoTemplateCustomDataAccessor {
     private final MongoClient mongoClient;
     private final MongoTemplate mongoTemplate;

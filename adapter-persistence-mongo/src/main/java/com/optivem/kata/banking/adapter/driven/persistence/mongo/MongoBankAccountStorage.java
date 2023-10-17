@@ -4,6 +4,7 @@ import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.adapter.driven.persistence.mongo.internal.MongoTemplateCustomDataAccessor;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import com.optivem.kata.banking.core.ports.driven.BankAccountStorage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -15,10 +16,10 @@ import java.util.Optional;
 @Component
 @Profile(ProfileNames.ADAPTER_PERSISTENCE_MONGO)
 public class MongoBankAccountStorage implements BankAccountStorage {
-    public final String collectionName = "bank_account";
-
+    public static final String COLLECTION_NAME = "bank_account";
     private final MongoTemplateCustomDataAccessor dataAccessor;
 
+    @Autowired
     public MongoBankAccountStorage(MongoTemplateCustomDataAccessor dataAccessor){
         this.dataAccessor = dataAccessor;
     }
@@ -28,13 +29,13 @@ public class MongoBankAccountStorage implements BankAccountStorage {
         MongoTemplate mongoTemplate = this.dataAccessor.getMongoTemplate();
         Query query = new Query();
         query.addCriteria(Criteria.where("accountNumber").is(accountNumber));
-        return Optional.ofNullable(mongoTemplate.findOne(query, BankAccountDto.class, collectionName));
+        return Optional.ofNullable(mongoTemplate.findOne(query, BankAccountDto.class, COLLECTION_NAME));
     }
 
     @Override
     public void add(BankAccountDto bankAccount) {
         MongoTemplate mongoTemplate = this.dataAccessor.getMongoTemplate();
-        mongoTemplate.save(bankAccount, this.collectionName);
+        mongoTemplate.save(bankAccount, COLLECTION_NAME);
     }
 
     @Override
@@ -46,6 +47,6 @@ public class MongoBankAccountStorage implements BankAccountStorage {
         update.set("firstName", bankAccount.getFirstName());
         update.set("lastName", bankAccount.getLastName());
         update.set("balance", bankAccount.getBalance());
-        mongoTemplate.updateFirst(query, update, this.collectionName);
+        mongoTemplate.updateFirst(query, update, COLLECTION_NAME);
     }
 }
