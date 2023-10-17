@@ -14,9 +14,8 @@ public class BankingClient {
     private static final String VIEW_ACCOUNT_PATH_FORMAT = "/bank-accounts/%s";
     private static final String OPEN_ACCOUNT_PATH_FORMAT = "/bank-accounts";
 
-
     private final String url;
-    private TokenProvider tokenProvider;
+    private final TokenProvider tokenProvider;
 
     public BankingClient(String url, TokenProvider tokenProvider) {
         this.url = url;
@@ -30,7 +29,7 @@ public class BankingClient {
         var responseSpec = client.get().uri(path).header("Authorization", token).retrieve();
 
         var viewAccountResponse = responseSpec
-                .onStatus(status -> HttpStatus.NOT_FOUND.equals(status), response -> Mono.empty())
+                .onStatus(HttpStatus.NOT_FOUND::equals, response -> Mono.empty())
                 .bodyToMono(ViewAccountResponse.class)
                 .block();
 
@@ -43,14 +42,11 @@ public class BankingClient {
 
     public OpenAccountResponse openAccount(OpenAccountRequest request) {
         var client = WebClient.create(url);
-        var path = OPEN_ACCOUNT_PATH_FORMAT;
         var token = tokenProvider.getToken();
-        var responseSpec = client.post().uri(path).header("Authorization", token).bodyValue(request).retrieve();
+        var responseSpec = client.post().uri(OPEN_ACCOUNT_PATH_FORMAT).header("Authorization", token).bodyValue(request).retrieve();
 
-        var openAccountResponse = responseSpec
+        return responseSpec
                 .bodyToMono(OpenAccountResponse.class)
                 .block();
-
-        return openAccountResponse;
     }
 }
