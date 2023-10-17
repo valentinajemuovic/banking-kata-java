@@ -1,18 +1,17 @@
 package com.optivem.kata.banking.adapter.driven.persistence.mongo;
 
-import com.mongodb.client.MongoCollection;
 import com.optivem.kata.banking.adapter.driven.persistence.mongo.internal.MongoTemplateCustomDataAccessor;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDefaults;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
+import java.util.Objects;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class MongoBankAccountStorageTest {
+class MongoBankAccountStorageTest {
     private BankAccountDto bankAccountDto;
     private final MongoTemplateCustomDataAccessor mongoTemplateCustomDataAccessor;
     private MongoBankAccountStorage mongoBankAccountStorage;
@@ -23,49 +22,48 @@ public class MongoBankAccountStorageTest {
 
     @BeforeAll
     public void setUp() {
-        this.bankAccountDto = new BankAccountDto();
-        this.bankAccountDto.setAccountId(BankAccountDefaults.DEFAULT_ACCOUNT_ID);
-        this.bankAccountDto.setAccountNumber(BankAccountDefaults.DEFAULT_ACCOUNT_NUMBER);
-        this.bankAccountDto.setFirstName(BankAccountDefaults.DEFAULT_FIRST_NAME);
-        this.bankAccountDto.setLastName(BankAccountDefaults.DEFAULT_LAST_NAME);
-        this.bankAccountDto.setOpeningDate(BankAccountDefaults.DEFAULT_OPENING_DATE);
-        this.bankAccountDto.setNationalIdentityNumber(BankAccountDefaults.DEFAULT_NATIONAL_IDENTITY_NUMBER);
-        this.bankAccountDto.setBalance(BankAccountDefaults.DEFAULT_BALANCE);
-        this.mongoBankAccountStorage = new MongoBankAccountStorage(this.mongoTemplateCustomDataAccessor);
+        bankAccountDto = new BankAccountDto();
+        bankAccountDto.setAccountId(BankAccountDefaults.DEFAULT_ACCOUNT_ID);
+        bankAccountDto.setAccountNumber(BankAccountDefaults.DEFAULT_ACCOUNT_NUMBER);
+        bankAccountDto.setFirstName(BankAccountDefaults.DEFAULT_FIRST_NAME);
+        bankAccountDto.setLastName(BankAccountDefaults.DEFAULT_LAST_NAME);
+        bankAccountDto.setOpeningDate(BankAccountDefaults.DEFAULT_OPENING_DATE);
+        bankAccountDto.setNationalIdentityNumber(BankAccountDefaults.DEFAULT_NATIONAL_IDENTITY_NUMBER);
+        bankAccountDto.setBalance(BankAccountDefaults.DEFAULT_BALANCE);
+        mongoBankAccountStorage = new MongoBankAccountStorage(this.mongoTemplateCustomDataAccessor);
     }
 
     @AfterEach
-    public void clean_up()
-    {
-        MongoTemplate template = this.mongoTemplateCustomDataAccessor.getMongoTemplate();
-        template.dropCollection(this.mongoBankAccountStorage.collectionName);
+    public void clean_up() {
+        var template = this.mongoTemplateCustomDataAccessor.getMongoTemplate();
+        template.dropCollection(MongoBankAccountStorage.COLLECTION_NAME);
     }
 
     @AfterAll
-    public void down() {
+    public void tearDown() {
         this.mongoTemplateCustomDataAccessor.close();
     }
 
     @Test
-    public void not_should_get_bank_account_if_not_found() {
-        Optional<BankAccountDto> bankAccountDto = this.mongoBankAccountStorage.find("1");
+    void not_should_get_bank_account_if_not_found() {
+        Optional<BankAccountDto> bankAccountDto = mongoBankAccountStorage.find("1");
         assertTrue(bankAccountDto.isEmpty());
     }
 
     @Test
-    public void should_create_new_bank_account() {
-        this.mongoBankAccountStorage.add(this.bankAccountDto);
-        Optional<BankAccountDto> output = this.mongoBankAccountStorage.find(bankAccountDto.getAccountNumber());
-        assertEquals(output.get().getAccountNumber(), bankAccountDto.getAccountNumber());
+    void should_create_new_bank_account() {
+        mongoBankAccountStorage.add(bankAccountDto);
+        Optional<BankAccountDto> output = mongoBankAccountStorage.find(bankAccountDto.getAccountNumber());
+        assertEquals(Objects.requireNonNull(output.stream().findFirst().orElse(null)).getAccountNumber(), bankAccountDto.getAccountNumber());
     }
 
     @Test
-    public void should_update_bank_account() {
-        this.mongoBankAccountStorage.add(this.bankAccountDto);
-        assertEquals(BankAccountDefaults.DEFAULT_FIRST_NAME, this.bankAccountDto.getFirstName());
-        this.bankAccountDto.setBalance(1000);
-        this.mongoBankAccountStorage.update(this.bankAccountDto);
-        Optional<BankAccountDto> output = this.mongoBankAccountStorage.find(bankAccountDto.getAccountNumber());
-        assertEquals(1000, output.get().getBalance());
+    void should_update_bank_account() {
+        mongoBankAccountStorage.add(bankAccountDto);
+        assertEquals(BankAccountDefaults.DEFAULT_FIRST_NAME, bankAccountDto.getFirstName());
+        bankAccountDto.setBalance(1000);
+        mongoBankAccountStorage.update(bankAccountDto);
+        Optional<BankAccountDto> output = mongoBankAccountStorage.find(bankAccountDto.getAccountNumber());
+        assertEquals(1000, output.stream().findFirst().orElseThrow().getBalance());
     }
 }
