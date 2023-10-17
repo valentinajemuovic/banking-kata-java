@@ -16,8 +16,8 @@ class MongoBankAccountStorageTest {
     private final MongoTemplateCustomDataAccessor mongoTemplateCustomDataAccessor;
     private MongoBankAccountStorage mongoBankAccountStorage;
 
-    public MongoBankAccountStorageTest() {
-        this.mongoTemplateCustomDataAccessor = new MongoTemplateCustomDataAccessor();
+    MongoBankAccountStorageTest(MongoTemplateCustomDataAccessor mongoTemplateCustomDataAccessor) {
+        this.mongoTemplateCustomDataAccessor = mongoTemplateCustomDataAccessor;
     }
 
     @BeforeAll
@@ -34,7 +34,7 @@ class MongoBankAccountStorageTest {
     }
 
     @AfterEach
-    public void clean_up() {
+    public void cleanUp() {
         var template = this.mongoTemplateCustomDataAccessor.getMongoTemplate();
         template.dropCollection(MongoBankAccountStorage.COLLECTION_NAME);
     }
