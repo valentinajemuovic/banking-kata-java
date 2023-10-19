@@ -10,6 +10,7 @@ import com.optivem.kata.banking.adapter.driven.thirdparty.fake.FakeNationalIdent
 import com.optivem.kata.banking.adapter.driven.time.fake.FakeDateTimeService;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
+import com.optivem.kata.banking.core.common.factories.CrudUseCaseFactory;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.openaccount.OpenAccountResponse;
@@ -56,10 +57,14 @@ class OpenAccountUseCaseTest {
         this.dateTimeService = new FakeDateTimeService();
         this.eventBus = new FakeEventBus();
 
-        // TODO: VC: Make configurable so that we can run same test twice
-        // var useCaseFactory = new CrudUseCaseFactory();
-        var useCaseFactory = new CleanArchUseCaseFactory();
-        this.useCase = useCaseFactory.createOpenAccountHandler(nationalIdentityProvider, customerProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
+        var useCaseFactoryType = System.getProperty("useCaseFactoryType", "CleanArch");
+        if (useCaseFactoryType.equals("Crud")) {
+            var crudUseCaseFactory = new CrudUseCaseFactory();
+            useCase = crudUseCaseFactory.createOpenAccountHandler(nationalIdentityProvider, customerProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
+        } else {
+            var cleanArchUseCaseFactory = new CleanArchUseCaseFactory();
+            useCase = cleanArchUseCaseFactory.createOpenAccountHandler(nationalIdentityProvider, customerProvider, storage, accountIdGenerator, accountNumberGenerator, dateTimeService, eventBus);
+        }
     }
 
     @ParameterizedTest
@@ -112,11 +117,11 @@ class OpenAccountUseCaseTest {
         accountNumberGenerator.setupNext("1-0-0-1");
         dateTimeService.setupNow(LocalDateTime.of(LocalDate.of(2021, 6, 15), LocalTime.MIN));
 
-        var request = openAccountRequest()
+        var accountRequest = openAccountRequest()
                 .withNationalIdentityNumber(nationalIdentityNumber)
                 .build();
 
-        verifyThat(useCase).withRequest(request).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY);
+        verifyThat(useCase).withRequest(accountRequest).shouldThrowValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY);
     }
 
     @Test
