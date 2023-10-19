@@ -1,4 +1,4 @@
-package com.optivem.kata.banking.adapter.driver.restapi.spring.fake;
+package com.optivem.kata.banking.adapter.driver.fake.auth.fake;
 
 import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import org.springframework.context.annotation.Profile;

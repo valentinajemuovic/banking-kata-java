@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ontotext.javacourse.inputoutput'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(path: ':adapter-base')
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation project(':core')
+    implementation project(':adapter-base')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:5.6.2'
+
+    testImplementation project(':test-fixtures')
+}
+
+test {
+    useJUnitPlatform()
+}
