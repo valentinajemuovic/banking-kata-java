@@ -1,7 +1,5 @@
 package com.optivem.kata.banking.core.common.builders.ports.driven;
 
-import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountConverter;
-import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 
 import java.time.LocalDate;
@@ -76,11 +74,4 @@ public class BankAccountDtoTestBuilder {
                 .balance(balance)
                 .build();
     }
-
-    // TODO: VC: Consider separate file
-    public BankAccount buildEntity() {
-        return BankAccountConverter.toEntity(build());
-    }
-
-
 }
