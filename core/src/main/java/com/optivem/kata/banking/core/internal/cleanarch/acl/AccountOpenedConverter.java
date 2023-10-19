@@ -3,7 +3,10 @@ package com.optivem.kata.banking.core.internal.cleanarch.acl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.AccountOpened;
 import com.optivem.kata.banking.core.ports.driven.events.AccountOpenedDto;
 
-public class AccountOpenedConverter {
+public final class AccountOpenedConverter {
+    private AccountOpenedConverter() {
+    }
+
     public static AccountOpenedDto fromEvent(AccountOpened event) {
         return AccountOpenedDto.builder()
                 .timestamp(event.getTimestamp())
