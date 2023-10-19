@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.domain;
 
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountTestConverter;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.DefaultScoreCalculator;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.FactorAggregator;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
@@ -43,12 +44,12 @@ class ScoreCalculatorTest {
     }
 
     private void assertScore(int aggregationResult, Score expectedScore) {
-        var bankAccount = bankAccount().buildEntity();
+        var bankAccountDto = bankAccount()
+                .build();
+        var bankAccount = BankAccountTestConverter.toEntity(bankAccountDto);
         given(factorAggregator.aggregate(bankAccount)).willReturn(aggregationResult);
-
         var score = scoreCalculator.calculate(bankAccount);
 
         assertThat(score).isEqualTo(expectedScore);
     }
-
 }

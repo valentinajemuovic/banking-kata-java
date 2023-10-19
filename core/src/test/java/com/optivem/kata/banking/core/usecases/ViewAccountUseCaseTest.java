@@ -4,6 +4,7 @@ import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountIdGene
 import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.adapter.driven.persistence.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountTestConverter;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.Score;
@@ -55,12 +56,13 @@ class ViewAccountUseCaseTest {
 
         storage.givenExists(existingAccount);
 
-        var bankAccount = BankAccountDtoTestBuilder.bankAccount()
+        var bankAccountDto = BankAccountDtoTestBuilder.bankAccount()
                 .withAccountNumber(accountNumber)
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withBalance(initialBalance)
-                .buildEntity();
+                .build();
+        var bankAccount = BankAccountTestConverter.toEntity(bankAccountDto);
 
         given(scoreCalculator.calculate(bankAccount)).willReturn(score);
 

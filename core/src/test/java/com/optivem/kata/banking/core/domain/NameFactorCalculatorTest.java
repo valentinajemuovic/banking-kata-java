@@ -1,5 +1,6 @@
 package com.optivem.kata.banking.core.domain;
 
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountTestConverter;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.NameFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,13 +30,13 @@ class NameFactorCalculatorTest {
     @ParameterizedTest
     @MethodSource
     void should_return_5_given_that_total_name_length_is_less_than_or_equal_to_5(String firstName, String lastName) {
-        var bankAccount = bankAccount()
+        var bankAccountDto = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
-                .buildEntity();
+                .build();
 
+        var bankAccount = BankAccountTestConverter.toEntity(bankAccountDto);
         var expectedResult = 3;
-
         var result = factorCalculator.calculate(bankAccount);
 
         assertThat(result).isEqualTo(expectedResult);
@@ -50,11 +51,11 @@ class NameFactorCalculatorTest {
     @ParameterizedTest
     @MethodSource
     void should_return_total_name_length_given_that_total_name_length_is_greater_than_5_or_less_than_equal_to_10(String firstName, String lastName, int expectedResult) {
-        var bankAccount = bankAccount()
+        var bankAccountDto = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
-                .buildEntity();
-
+                .build();
+        var bankAccount =BankAccountTestConverter.toEntity(bankAccountDto);
         var result = factorCalculator.calculate(bankAccount);
 
         assertThat(result).isEqualTo(expectedResult);
@@ -68,11 +69,12 @@ class NameFactorCalculatorTest {
     @ParameterizedTest
     @MethodSource
     void should_return_total_name_length_times_3_given_that_total_name_length_is_greater_than_10(String firstName, String lastName, int expectedResult) {
-        var bankAccount = bankAccount()
+        var bankAccountDto = bankAccount()
                 .withFirstName(firstName)
                 .withLastName(lastName)
-                .buildEntity();
+                .build();
 
+        var bankAccount = BankAccountTestConverter.toEntity(bankAccountDto);
         var result = factorCalculator.calculate(bankAccount);
 
         assertThat(result).isEqualTo(expectedResult);

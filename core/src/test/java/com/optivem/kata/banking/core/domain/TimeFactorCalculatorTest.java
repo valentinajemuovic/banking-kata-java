@@ -1,6 +1,7 @@
 package com.optivem.kata.banking.core.domain;
 
 import com.optivem.kata.banking.adapter.driven.time.fake.FakeDateTimeService;
+import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountTestConverter;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.scoring.TimeFactorCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,12 +29,11 @@ class TimeFactorCalculatorTest {
 
         dateTimeService.setupNow(currentDateTime);
 
-        var bankAccount = bankAccount()
+        var bankAccountDto = bankAccount()
                 .withOpeningDate(openingDate)
-                .buildEntity();
-
+                .build();
+        var bankAccount = BankAccountTestConverter.toEntity(bankAccountDto);
         var expectedResult = 5;
-
         var result = factorCalculator.calculate(bankAccount);
 
         assertThat(result).isEqualTo(expectedResult);
