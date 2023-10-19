@@ -3,9 +3,9 @@ package com.optivem.kata.banking.core.internal.cleanarch.domain.scoring;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccount;
 
 public class LinearFactorAggregator implements FactorAggregator {
-    private FactorCalculator nameFactorCalculator;
-    private FactorCalculator balanceFactorCalculator;
-    private FactorCalculator timeFactorCalculator;
+    private final FactorCalculator nameFactorCalculator;
+    private final FactorCalculator balanceFactorCalculator;
+    private final FactorCalculator timeFactorCalculator;
 
     public LinearFactorAggregator(FactorCalculator nameFactorCalculator, FactorCalculator balanceFactorCalculator, FactorCalculator timeFactorCalculator) {
         this.nameFactorCalculator = nameFactorCalculator;
