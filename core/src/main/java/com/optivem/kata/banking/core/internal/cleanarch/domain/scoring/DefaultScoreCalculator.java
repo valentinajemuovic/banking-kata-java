@@ -5,7 +5,7 @@ import com.optivem.kata.banking.core.ports.driven.DateTimeService;
 
 public class DefaultScoreCalculator implements ScoreCalculator {
 
-    private FactorAggregator factorAggregator;
+    private final FactorAggregator factorAggregator;
 
     public DefaultScoreCalculator(FactorAggregator factorAggregator) {
         this.factorAggregator = factorAggregator;
