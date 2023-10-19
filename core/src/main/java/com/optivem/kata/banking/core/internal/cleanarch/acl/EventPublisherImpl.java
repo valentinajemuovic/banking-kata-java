@@ -25,15 +25,14 @@ public class EventPublisherImpl implements EventPublisher {
     }
 
     private EventDto getEventDto(DomainEvent event) {
-        if(event instanceof AccountOpened)
-        {
-            return AccountOpenedConverter.fromEvent((AccountOpened) event);
+        if(event instanceof AccountOpened accountOpened) {
+            return AccountOpenedConverter.fromEvent(accountOpened);
         }
-        else if(event instanceof FundsDeposited) {
-            return FundsDepositedConverter.fromEvent((FundsDeposited) event);
+        else if(event instanceof FundsDeposited fundsDeposited) {
+            return FundsDepositedConverter.fromEvent(fundsDeposited);
         }
-        else if(event instanceof FundsWithdrawn) {
-            return FundsWithdrawnConverter.fromEvent((FundsWithdrawn) event);
+        else if(event instanceof FundsWithdrawn fundsWithdrawn) {
+            return FundsWithdrawnConverter.fromEvent(fundsWithdrawn);
         }
 
         throw new IllegalArgumentException("Unrecognized event type");
