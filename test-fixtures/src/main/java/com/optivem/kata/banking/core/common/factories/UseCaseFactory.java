@@ -1,8 +1,6 @@
 package com.optivem.kata.banking.core.common.factories;
 
 import an.awesome.pipelinr.Command;
-import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountIdGenerator;
-import com.optivem.kata.banking.adapter.driven.generation.fake.FakeAccountNumberGenerator;
 import com.optivem.kata.banking.core.ports.driven.*;
 import com.optivem.kata.banking.core.ports.driver.VoidResponse;
 import com.optivem.kata.banking.core.ports.driver.accounts.depositfunds.DepositFundsRequest;
