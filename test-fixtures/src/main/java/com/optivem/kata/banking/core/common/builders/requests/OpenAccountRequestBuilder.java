@@ -53,6 +53,4 @@ public class OpenAccountRequestBuilder {
                 .balance(balance)
                 .build();
     }
-
-
 }
