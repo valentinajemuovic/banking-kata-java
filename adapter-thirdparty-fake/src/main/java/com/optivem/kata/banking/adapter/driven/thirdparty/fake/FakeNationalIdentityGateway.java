@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FakeNationalIdentityGateway implements NationalIdentityGateway {
-    private Set<String> nationalIdentityNumbers;
+    private final Set<String> nationalIdentityNumbers;
 
     public FakeNationalIdentityGateway() {
-        this.nationalIdentityNumbers = new HashSet();
+        this.nationalIdentityNumbers = new HashSet<>();
     }
 
     @Override
