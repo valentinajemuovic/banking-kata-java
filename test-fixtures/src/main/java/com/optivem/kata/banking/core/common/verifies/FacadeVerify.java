@@ -17,7 +17,7 @@ public class FacadeVerify {
         return new FacadeDepositFundsRequestVerify(facade, request);
     }
 
-    public void shouldContain(String accountNumber, int expectedFinalBalance) {
+    public void shouldContain(String accountNumber) {
         var request = viewAccountRequest()
                 .withAccountNumber(accountNumber)
                 .build();
