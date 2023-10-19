@@ -10,7 +10,6 @@ public class LongGuard extends BaseGuard<Long> {
     }
 
     private boolean isNonPositive() {
-        var result = value <= 0;
-        return result;
+        return value <= 0;
     }
 }
