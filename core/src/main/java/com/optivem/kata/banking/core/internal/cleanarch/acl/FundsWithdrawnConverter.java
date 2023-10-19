@@ -3,7 +3,10 @@ package com.optivem.kata.banking.core.internal.cleanarch.acl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.FundsWithdrawn;
 import com.optivem.kata.banking.core.ports.driven.events.FundsWithdrawnDto;
 
-public class FundsWithdrawnConverter {
+public final class FundsWithdrawnConverter {
+    private FundsWithdrawnConverter() {
+    }
+
     public static FundsWithdrawnDto fromEvent(FundsWithdrawn event) {
         return FundsWithdrawnDto.builder()
                 .timestamp(event.getTimestamp())
