@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 @Getter
 public class FundsDeposited extends BaseDomainEvent {
-    private AccountNumber accountNumber;
-    private TransactionAmount amount;
+    private final AccountNumber accountNumber;
+    private final TransactionAmount amount;
 
     public FundsDeposited(LocalDateTime timestamp, AccountNumber accountNumber, TransactionAmount amount) {
         super(timestamp);
