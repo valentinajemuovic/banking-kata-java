@@ -2,7 +2,9 @@ package com.optivem.kata.banking.core.common.data;
 
 import java.util.stream.Stream;
 
-public class MethodSources {
+public final class MethodSources {
+    private MethodSources() {
+    }
 
     private static final String BASE = "com.optivem.kata.banking.core.common.data.MethodSources#";
 
