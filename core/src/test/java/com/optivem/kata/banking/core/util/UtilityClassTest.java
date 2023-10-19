@@ -12,7 +12,7 @@ import java.lang.reflect.Modifier;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class UtilityClassTest {
+class UtilityClassTest {
     @Test
     void testConstructor() throws Exception {
         assertPrivateConstructor(Guard.class);
@@ -21,10 +21,11 @@ public class UtilityClassTest {
     }
 
     private <T> void assertPrivateConstructor(Class<T> clazz) throws NoSuchMethodException {
-        final Constructor constructor = clazz.getDeclaredConstructor();
-        assertThat(Modifier.isPrivate(constructor.getModifiers()));
+        final Constructor<T> constructor = clazz.getDeclaredConstructor();
+        boolean result = Modifier.isPrivate(constructor.getModifiers());
+        assertThat(result).isTrue();
         constructor.setAccessible(true);
 
-        assertThrows(InvocationTargetException.class, () -> constructor.newInstance());
+        assertThrows(InvocationTargetException.class, constructor::newInstance);
     }
 }
