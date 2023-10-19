@@ -7,7 +7,9 @@ import com.optivem.kata.banking.core.common.verifies.FacadeVerify;
 import com.optivem.kata.banking.core.common.verifies.UseCaseVerify;
 import org.junit.jupiter.api.function.Executable;
 
-public class Verifications {
+public final class Verifications {
+    private Verifications() {
+    }
 
     public static ExecutableVerify verifyThat(Executable executable) {
         return new ExecutableVerify(executable);
@@ -20,6 +22,4 @@ public class Verifications {
     public static FacadeVerify verifyThat(Facade facade) {
         return new FacadeVerify(facade);
     }
-
-
 }
