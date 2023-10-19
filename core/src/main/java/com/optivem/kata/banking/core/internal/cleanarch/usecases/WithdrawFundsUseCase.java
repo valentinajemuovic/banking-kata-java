@@ -36,7 +36,7 @@ public class WithdrawFundsUseCase implements Command.Handler<WithdrawFundsReques
         var event = new FundsWithdrawn(timestamp, accountNumber, amount);
         eventPublisher.publishEvent(event);
 
-        return VoidResponse.empty;
+        return VoidResponse.EMPTY;
     }
 
     private AccountNumber getAccountNumber(WithdrawFundsRequest request) {

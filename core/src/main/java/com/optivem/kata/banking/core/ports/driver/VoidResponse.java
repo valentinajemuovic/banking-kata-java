@@ -4,5 +4,5 @@ public final class VoidResponse {
     private VoidResponse() {
     }
 
-    public static VoidResponse empty;
+    public static VoidResponse EMPTY = new VoidResponse();
 }

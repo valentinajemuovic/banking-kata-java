@@ -37,7 +37,7 @@ public class DepositFundsUseCase implements Command.Handler<DepositFundsRequest,
         var event = new FundsDeposited(timestamp, accountNumber, amount);
         eventPublisher.publishEvent(event);
 
-        return VoidResponse.empty;
+        return VoidResponse.EMPTY;
     }
 
     private AccountNumber getAccountNumber(DepositFundsRequest request) {
