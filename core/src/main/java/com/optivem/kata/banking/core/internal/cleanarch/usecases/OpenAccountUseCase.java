@@ -37,22 +37,21 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     }
 
     public OpenAccountResponse handle(OpenAccountRequest request) {
-        var nationalIdentityNumber = request.getNationalIdentityNumber();
+        var nationalIdentityNumber = NationalIdentityNumber.of(request.getNationalIdentityNumber());
         var accountHolderName = getAccountHolderName(request);
         var balance = getBalance(request);
 
         var timestamp = dateTimeService.now();
 
-        var isBlacklisted = customerGateway.isBlacklisted(nationalIdentityNumber);
+        var isBlacklisted = customerGateway.isBlacklisted(String.valueOf(nationalIdentityNumber));
 
         if(isBlacklisted) {
             throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_BLACKLISTED);
         }
 
-        var bankAccount = createBankAccount(nationalIdentityNumber, accountHolderName, balance, timestamp);
+        var bankAccount = createBankAccount(String.valueOf(nationalIdentityNumber), accountHolderName, balance, timestamp);
 
-        // TODO: VC: Value object for national identity number
-        var exists = nationalIdentityGateway.exists(nationalIdentityNumber);
+        var exists = nationalIdentityGateway.exists(String.valueOf(nationalIdentityNumber));
         if(!exists) {
             throw new ValidationException(ValidationMessages.NATIONAL_IDENTITY_NUMBER_NONEXISTENT);
         }
