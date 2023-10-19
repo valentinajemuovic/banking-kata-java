@@ -5,7 +5,10 @@ import com.optivem.kata.banking.core.internal.cleanarch.domain.common.guards.Obj
 import com.optivem.kata.banking.core.internal.crud.common.guards.IntGuard;
 import com.optivem.kata.banking.core.internal.crud.common.guards.StringGuard;
 
-public class Guard {
+public final class Guard {
+    private Guard() {
+    }
+
     public static LongGuard guard(long value) {
         return new LongGuard(value);
     }
