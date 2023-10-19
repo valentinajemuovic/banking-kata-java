@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PipelinrConfiguration {
     @Bean
-    public Pipeline pipeline(ObjectProvider<Command.Handler> commandHandlers,
-                             ObjectProvider<Notification.Handler> notificationHandlers,
+    public Pipeline pipeline(ObjectProvider<Command.Handler<? extends Command<?>, ?>> commandHandlers,
+                             ObjectProvider<Notification.Handler<? extends Notification>> notificationHandlers,
                              ObjectProvider<Command.Middleware> middlewares) {
         return new Pipelinr()
-                .with(commandHandlers::stream)
-                .with(notificationHandlers::stream)
+                .with(() -> commandHandlers.stream().map(handler -> handler))
+                .with(() -> notificationHandlers.stream().map(handler -> handler))
                 .with(middlewares::orderedStream);
     }
 }
