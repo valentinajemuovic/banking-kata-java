@@ -24,7 +24,6 @@ import static org.mockito.Mockito.mock;
 
 class ViewAccountUseCaseTest {
     private FakeBankAccountStorage storage;
-    private BankAccountRepository repository;
     private ScoreCalculator scoreCalculator;
     private ViewAccountUseCase useCase;
 
@@ -33,7 +32,7 @@ class ViewAccountUseCaseTest {
         this.storage = new FakeBankAccountStorage();
         var accountIdGenerator = new FakeAccountIdGenerator();
         var accountNumberGenerator = new FakeAccountNumberGenerator();
-        this.repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
+        BankAccountRepository repository = new BankAccountRepositoryImpl(storage, accountIdGenerator, accountNumberGenerator);
         this.scoreCalculator = mock(ScoreCalculator.class);
         this.useCase = new ViewAccountUseCase(repository, scoreCalculator);
     }

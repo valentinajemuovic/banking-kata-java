@@ -10,11 +10,8 @@ import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDto
 import com.optivem.kata.banking.core.common.factories.CleanArchUseCaseFactory;
 import com.optivem.kata.banking.core.internal.cleanarch.acl.BankAccountRepositoryImpl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.BankAccountRepository;
-import com.optivem.kata.banking.core.internal.cleanarch.usecases.WithdrawFundsUseCase;
-import com.optivem.kata.banking.core.ports.driven.events.FundsDepositedDto;
 import com.optivem.kata.banking.core.ports.driven.events.FundsWithdrawnDto;
 import com.optivem.kata.banking.core.ports.driver.VoidResponse;
-import com.optivem.kata.banking.core.ports.driver.accounts.depositfunds.DepositFundsRequest;
 import com.optivem.kata.banking.core.ports.driver.accounts.withdrawfunds.WithdrawFundsRequest;
 import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 import org.junit.jupiter.api.BeforeEach;

@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import static com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder.bankAccount;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NameFactorCalculatorTest {
+class NameFactorCalculatorTest {
     private NameFactorCalculator factorCalculator;
 
     @BeforeEach

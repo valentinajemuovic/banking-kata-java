@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-public class LinearFactorAggregatorTest {
+class LinearFactorAggregatorTest {
     private FactorCalculator nameFactorCalculator;
     private FactorCalculator balanceFactorCalculator;
     private FactorCalculator timeFactorCalculator;

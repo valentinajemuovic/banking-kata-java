@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 import static com.optivem.kata.banking.core.common.data.MethodSources.NON_POSITIVE_LONGS;
 
-public class AccountIdTest {
+class AccountIdTest {
     @ParameterizedTest
     @MethodSource(NON_POSITIVE_LONGS)
     void should_throw_exception_given_non_positive_value() {
