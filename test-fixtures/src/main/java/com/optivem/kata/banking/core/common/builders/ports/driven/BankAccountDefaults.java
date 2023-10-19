@@ -2,7 +2,10 @@ package com.optivem.kata.banking.core.common.builders.ports.driven;
 
 import java.time.LocalDate;
 
-public class BankAccountDefaults {
+public final class BankAccountDefaults {
+    private BankAccountDefaults() {
+    }
+
     public static final long DEFAULT_ACCOUNT_ID = 32523523;
     public static final String DEFAULT_ACCOUNT_NUMBER = "GB10BARC20040184197751";
     public static final String DEFAULT_NATIONAL_IDENTITY_NUMBER = "XYZ_2";
