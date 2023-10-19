@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
-// TODO: VC: Probably move to separate module?
 @Component
 @Profile(ProfileNames.ADAPTER_AUTH_FAKE)
 public class FakeAuthenticationProvider implements AuthenticationProvider {
