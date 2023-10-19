@@ -30,7 +30,11 @@ public class RealNationalIdentityGateway implements NationalIdentityGateway {
                 .bodyToMono(UserDto.class)
                 .block();
 
-        return user != null && user.getId() != null;
+        if(user == null) {
+            return false;
+        }
+        var expectedName = "...";
+        return user.getId() != null && expectedName.equals(user.getName());
     }
 
     private String getPath(String nationalIdentityNumber) {

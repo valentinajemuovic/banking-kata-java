@@ -28,6 +28,8 @@ public class RealNationalIdentityGatewayConsumerTest extends NationalIdentityGat
     private static final String GET_USER_PATH_FORMAT = "/users/%s";
 
     private static final String ID_FIELD = "id";
+    private static final String NAME_FIELD = "name";
+    private static final String SAMPLE_NAME = "John Doe";
 
     @BeforeEach
     public void init(MockServer mockServer) {
@@ -40,7 +42,8 @@ public class RealNationalIdentityGatewayConsumerTest extends NationalIdentityGat
         var userId = Integer.parseInt(EXISTING_ID);
 
         var body = new PactDslJsonBody()
-                .numberType(ID_FIELD, userId);
+                .numberType(ID_FIELD, userId)
+                .stringType(NAME_FIELD, SAMPLE_NAME);
 
         var path = getPath(userId);
 
@@ -79,6 +82,13 @@ public class RealNationalIdentityGatewayConsumerTest extends NationalIdentityGat
     @PactTestFor(pactMethod = "createPactForNonexistentUserId")
     public void should_return_false_when_user_not_exists() {
         super.should_return_false_when_user_not_exists();
+    }
+
+    @Test
+    @PactTestFor(pactMethod = "createPactForMismatchedUserName")
+    public void should_return_false_when_user_name_mismatched() {
+        boolean result = provider.exists(EXISTING_ID);
+        assertThat(result).isTrue();
     }
 
     private static String getPath(int userId) {
