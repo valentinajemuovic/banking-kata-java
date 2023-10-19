@@ -3,7 +3,10 @@ package com.optivem.kata.banking.core.internal.cleanarch.acl;
 import com.optivem.kata.banking.core.internal.cleanarch.domain.accounts.*;
 import com.optivem.kata.banking.core.ports.driven.BankAccountDto;
 
-public class BankAccountConverter {
+public final class BankAccountConverter {
+    private BankAccountConverter() {
+    }
+
     public static BankAccount toEntity(BankAccountDto dto) {
         var accountId = AccountId.of(dto.getAccountId());
         var accountNumber = AccountNumber.of(dto.getAccountNumber());
