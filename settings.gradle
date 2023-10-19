@@ -26,4 +26,5 @@ include 'z-thirdparty-provider-contracts'
 include 'adapter-microservice-real'
 include 'adapter-microservice-fake'
 include 'adapter-messaging-rabbitmq'
+include 'adapter-fake-auth'
 
