@@ -2,14 +2,13 @@ package com.optivem.kata.banking.adminrabbitmq;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AdminAMQP {
     private final RabbitAdmin rabbitAdmin;
 
-    public AdminAMQP(RabbitAdmin rabbitAdmin, RabbitTemplate rabbitTemplate){
+    public AdminAMQP(RabbitAdmin rabbitAdmin){
         this.rabbitAdmin = rabbitAdmin;
     }
 
@@ -18,7 +17,7 @@ public class AdminAMQP {
     }
 
     public void createExchange(String exchangeName){
-        Exchange exchange = ExchangeBuilder.directExchange(exchangeName)
+        var exchange = ExchangeBuilder.directExchange(exchangeName)
                 .durable(true)
                 .build();
 
@@ -26,17 +25,13 @@ public class AdminAMQP {
     }
 
     public void createQueueAndBind(Exchange exchange) {
+        var queue = new Queue("dataQueue", true, false, false);
 
-        // Create the queue
-        Queue queue = new Queue("dataQueue", true, false, false);
-
-        // Declare the binding
-        Binding binding = BindingBuilder.bind(queue)
+        var binding = BindingBuilder.bind(queue)
                 .to(exchange)
                 .with("routingKeyDataQueue")
                 .noargs();
 
-        // Bind the queue to the exchange
         rabbitAdmin.declareQueue(queue);
         rabbitAdmin.declareBinding(binding);
     }
