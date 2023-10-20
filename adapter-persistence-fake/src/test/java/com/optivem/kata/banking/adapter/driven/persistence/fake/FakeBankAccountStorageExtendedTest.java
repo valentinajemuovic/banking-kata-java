@@ -1,9 +1,11 @@
 package com.optivem.kata.banking.adapter.driven.persistence.fake;
 
-import com.optivem.kata.banking.adapter.driven.persistence.fake.FakeBankAccountStorage;
 import com.optivem.kata.banking.core.common.builders.ports.driven.BankAccountDtoTestBuilder;
+import com.optivem.kata.banking.core.internal.cleanarch.domain.common.exceptions.RepositoryMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static com.optivem.kata.banking.core.common.Verifications.verifyThat;
 
 // TODO: VC: Incorporate this into main test later
 class FakeBankAccountStorageExtendedTest {
@@ -11,7 +13,7 @@ class FakeBankAccountStorageExtendedTest {
     private FakeBankAccountStorage storage;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         this.storage = new FakeBankAccountStorage();
     }
 
@@ -96,8 +98,9 @@ class FakeBankAccountStorageExtendedTest {
 
         storage.add(bankAccount);
 
-        var retrievedBankAccount = storage.find(accountNumber).get();
+        var retrievedBankAccount = storage.find(accountNumber).orElse(null);
 
+        assert retrievedBankAccount != null;
         retrievedBankAccount.setBalance(20);
 
         storage.shouldContain(expectedBankAccount);
@@ -119,15 +122,15 @@ class FakeBankAccountStorageExtendedTest {
 
         storage.add(bankAccount);
 
-        var retrievedBankAccount = storage.find(accountNumber).get();
+        var retrievedBankAccount = storage.find(accountNumber).orElse(null);
 
+        assert retrievedBankAccount != null;
         storage.update(retrievedBankAccount);
 
         retrievedBankAccount.setBalance(20);
 
         storage.shouldContain(expectedBankAccount);
     }
-
 
     @Test
     void should_throw_exception_when_attempt_add_bank_account_with_same_account_number_twice() {
@@ -146,9 +149,7 @@ class FakeBankAccountStorageExtendedTest {
                 .build();
 
         storage.add(bankAccount);
-
-        // TODO: VC: Bring back
-        // verifyThat(() -> storage.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
+        verifyThat(() -> storage.add(bankAccount2)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CONSTRAINT_VIOLATION);
     }
 
     @Test
@@ -159,7 +160,6 @@ class FakeBankAccountStorageExtendedTest {
                 .withAccountNumber(accountNumber)
                 .build();
 
-        // TODO: VC: Bring back
-        // verifyThat(() -> storage.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
+         verifyThat(() -> storage.update(bankAccount)).shouldThrowRepositoryException(RepositoryMessages.REPOSITORY_CANNOT_UPDATE_NON_EXISTENT);
     }
 }
