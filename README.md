@@ -2,7 +2,8 @@
 
 [![CI](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml/badge.svg)](https://github.com/valentinacupac/banking-kata-java/actions/workflows/ci.yaml)
 
-<!-- TOD0: VC: I temporarily commented this out because I'm fixing some metrics, I'll bring it back again approx next week after 7th Jun 2023-->
+<!-- TOD0: VC: I temporarily commented this out because I'm fixing some metrics.
+I'll bring it back again approx next week after 7th Jun 2023-->
 <!--
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=valentinacupac_banking-kata-java&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=valentinacupac_banking-kata-java)
 -->
@@ -23,7 +24,7 @@ We implement a Banking system with the following use cases:
 - Deposit funds
 - View account
 
-We also have authentication with Keycloak - a realm with client_id and with client_credentials flow enabled.
+We also have authentication with Keycloak—a realm with client_id and with client_credentials flow enabled.
 
 ## Architecture
 
@@ -33,7 +34,7 @@ The overall architecture is split into:
 
 The Application Core(`core`) is composed of: 
 - Ports (`ports`), representing an interface to the Application Core, isolating it from infrastructural concerns. There are both Driver (`driver`) ports, representing use cases; and Driven (`driven`) ports, representing gateways.
-- Internals (`internal`), representing the internal implementation of the Application Core, more specifically, the implementation of the Driver (`driver`) ports. This implementation can be anything. Here we illustrate the implementation with Clean Architecture (`cleanarch`) approach and the CRUD (`crud`) approach, but other approaches are possible too. The use case tests are independent of the implementation approach; the internal implementation is thus swappable.
+- Internals (`internal`), representing the internal implementation of the Application Core, more specifically, the implementation of the Driver (`driver`) ports. This implementation can be anything. Here we illustrate the implementation with Clean Architecture (`clean arch`) approach and the CRUD (`crud`) approach, but other approaches are possible too. The use case tests are independent of the implementation approach; the internal implementation is thus swappable.
 
 The Adapter (`adapter`) layer is composed of driver adapters and driven adapters.
 - Driver adapters: REST API Adapter (`adapter-restapi-*`)
@@ -168,7 +169,7 @@ Run code coverage (executes Jacoco):
 ./gradlew codeCoverage
 ```
 
-To run it for specific project:
+To run it for a specific project:
 ```shell
 ./gradlew core:codeCoverage
 ```
@@ -182,7 +183,7 @@ Run mutation testing (executes pitest):
 ```
 
 <!--- TODO: Add pitest report aggregation after issue is resolved 
-See issue #80 Pitest report aggregation not working --->
+See issue #80 Pitest report aggregation not working-->
 
 ## Viewing Reports
 
@@ -208,7 +209,7 @@ Then `CTRL+C` to terminate the app.
 
 ## Optional Notes
 
-The following are for additional reading, you do not need to execute these, but you can if you wish.
+The following is for additional reading, you do not need to execute these, but you can if you wish.
 
 Environment variables are located inside the `env` folder. You can optionally choose to edit them.
 
@@ -223,7 +224,8 @@ To run Docker with the environment file:
 docker-compose --env-file=env/.env.local up -d
 ```
 
-You can run the integration tests individually, e.g. if you modified a module (in this way you avoid waiting for all of them to finish):
+You can run the integration tests individually,
+e.g.,if you modified a module (in this way you avoid waiting for all of them to finish):
 
 ```shell
 ./gradlew adapter-persistence-jpa:test
@@ -242,8 +244,8 @@ For mutation testing, the underlying call is:
 ```
 
 For flyway operation from CLI:
-There will be flyway tasks available in the gradle as the plugin is applied to adapter-persistence-jpa.
-Tasks can be executed by the following way -
+There will be flyway tasks available in the Gradle as the plugin is applied to adapter-persistence-jpa.
+Tasks can be executed by the following way
 
 ```shell
 ./gradlew adapter-persistence-jpa:flywayInfo  //will provide the schema file under flywayInfo
