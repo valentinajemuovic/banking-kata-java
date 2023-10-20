@@ -4,6 +4,7 @@ dependencies {
 
     testImplementation project(path: ':adapter-base', configuration: 'testClasses')
     testImplementation project(':test-fixtures')
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.6.0'
 }
 
 bootJar {
