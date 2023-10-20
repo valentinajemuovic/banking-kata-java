@@ -83,8 +83,8 @@ services:
     container_name: rabbitmq-preload-conf
     image: rabbitmq:3-management
     ports:
-      - 5672:5672  # RabbitMQ default port
-      - 15672:15672  # RabbitMQ management plugin port
+      - "5672:5672"  # RabbitMQ default port
+      - "15672:15672"  # RabbitMQ management plugin port
     networks:
       - local
     volumes:
