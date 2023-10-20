@@ -6,9 +6,7 @@ import com.optivem.kata.banking.core.ports.driver.exceptions.ValidationMessages;
 
 import java.time.LocalDate;
 
-import static com.optivem.kata.banking.core.internal.cleanarch.domain.common.Guard.guard;
-
-/***
+/**
  * Alternative implementation of bank account - using event sourcing
  */
 public class ESBankAccount {
@@ -19,13 +17,10 @@ public class ESBankAccount {
     private final LocalDate openingDate;
     private Balance balance;
 
-    public ESBankAccount(AccountId accountId, AccountNumber accountNumber, String nationalIdentityNumber, AccountHolderName accountHolderName, LocalDate openingDate, Balance balance) {
-        Guard.guard(nationalIdentityNumber).againstNullOrWhitespace(ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY);
-        Guard.guard(accountId).againstNull(ValidationMessages.ACCOUNT_ID_EMPTY);
-        guard(accountNumber).againstNull(ValidationMessages.ACCOUNT_NUMBER_EMPTY);
-        Guard.guard(accountHolderName).againstNull(ValidationMessages.ACCOUNT_HOLDER_NAME_EMPTY);
-        Guard.guard(openingDate).againstNull(ValidationMessages.OPENING_DATE_EMPTY);
-        Guard.guard(balance).againstNull(ValidationMessages.BALANCE_EMPTY);
+    public ESBankAccount(AccountId accountId, AccountNumber accountNumber, String nationalIdentityNumber,
+                         AccountHolderName accountHolderName, LocalDate openingDate, Balance balance) {
+
+        checkArguments(accountId, accountNumber, nationalIdentityNumber, accountHolderName, openingDate, balance);
 
         this.accountId = accountId;
         this.accountNumber = accountNumber;
@@ -36,7 +31,8 @@ public class ESBankAccount {
     }
 
     public ESBankAccount(BankAccount other) {
-        this(other.getAccountId(), other.getAccountNumber(), other.getNationalIdentityNumber(), other.getAccountHolderName(), other.getOpeningDate(), other.getBalance());
+        this(other.getAccountId(), other.getAccountNumber(), other.getNationalIdentityNumber(),
+                other.getAccountHolderName(), other.getOpeningDate(), other.getBalance());
     }
 
     public AccountId getAccountId() { return accountId; }
@@ -67,7 +63,21 @@ public class ESBankAccount {
         if (amount.greaterThan(balance)) {
             throw new ValidationException(ValidationMessages.INSUFFICIENT_FUNDS);
         }
-
         balance = balance.subtract(amount);
+    }
+
+    private void checkArguments(Object... args) {
+        String[] validationMessages = {
+                ValidationMessages.ACCOUNT_ID_EMPTY,
+                ValidationMessages.ACCOUNT_NUMBER_EMPTY,
+                ValidationMessages.NATIONAL_IDENTITY_NUMBER_EMPTY,
+                ValidationMessages.ACCOUNT_HOLDER_NAME_EMPTY,
+                ValidationMessages.OPENING_DATE_EMPTY,
+                ValidationMessages.BALANCE_EMPTY
+        };
+
+        for (int i = 0; i < args.length; i++) {
+            Guard.guard(args[i]).againstNull(validationMessages[i]);
+        }
     }
 }
