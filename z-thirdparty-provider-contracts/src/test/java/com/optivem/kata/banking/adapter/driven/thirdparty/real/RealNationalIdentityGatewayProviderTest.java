@@ -1,6 +1,5 @@
 package com.optivem.kata.banking.adapter.driven.thirdparty.real;
 
-
 import au.com.dius.pact.provider.junit.Provider;
 import au.com.dius.pact.provider.junit.State;
 import au.com.dius.pact.provider.junit.loader.PactFolder;
@@ -11,14 +10,18 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.net.URL;
 
 @Provider("national-identity-provider")
 @PactFolder("../adapter-thirdparty-real/build/pacts")
-public class RealNationalIdentityGatewayProviderTest {
+@SpringBootTest
+class RealNationalIdentityGatewayProviderTest {
 
-    private static final String PATH = "https://jsonplaceholder.typicode.com"; // TODO: Make this configurable
+    @Value("${national.identity.provider.url}")
+    private String path;
 
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
@@ -29,7 +32,7 @@ public class RealNationalIdentityGatewayProviderTest {
     @SneakyThrows
     @BeforeEach
     void before(PactVerificationContext context) {
-        var url = new URL(PATH);
+        var url = new URL(path);
         var testTarget = HttpsTestTarget.fromUrl(url);
         context.setTarget(testTarget);
     }
