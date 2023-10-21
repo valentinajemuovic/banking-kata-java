@@ -17,10 +17,8 @@ public class CustomerController {
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable String id) {
         var customerDto = customerService.getCustomer(id);
 
-        if(customerDto.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(customerDto.get(), HttpStatus.OK);
+        return customerDto.map(dto ->
+                new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() ->
+                new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
