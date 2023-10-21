@@ -11,7 +11,7 @@ class FakeDateTimeServiceTest {
     private FakeDateTimeService service;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         this.service = new FakeDateTimeService();
     }
 
