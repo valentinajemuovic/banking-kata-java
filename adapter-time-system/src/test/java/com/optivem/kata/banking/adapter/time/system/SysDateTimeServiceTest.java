@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SysDateTimeServiceTest {
+class SysDateTimeServiceTest {
     private static final int SLEEP = 1;
 
     private SysDateTimeService service;
 
     @BeforeEach
-    private void init() {
+    public void init() {
         this.service = new SysDateTimeService();
     }
 
@@ -29,13 +29,15 @@ public class SysDateTimeServiceTest {
         Thread.sleep(SLEEP);
 
         var dateTime2 = service.now();
-        assertThat(dateTime2).isNotNull();
-        assertThat(dateTime2).isAfter(dateTime1);
+        assertThat(dateTime2)
+                .isNotNull()
+                .isAfter(dateTime1);
 
         Thread.sleep(SLEEP);
 
         var dateTime3 = service.now();
-        assertThat(dateTime3).isNotNull();
-        assertThat(dateTime3).isAfter(dateTime2);
+        assertThat(dateTime3)
+                .isNotNull()
+                .isAfter(dateTime2);
     }
 }
