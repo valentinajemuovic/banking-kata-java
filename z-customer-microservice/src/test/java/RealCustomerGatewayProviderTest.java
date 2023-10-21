@@ -7,7 +7,6 @@ import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvide
 import com.optivem.kata.banking.CustomerApplication;
 import com.optivem.kata.banking.CustomerDto;
 import com.optivem.kata.banking.CustomerService;
-import org.apache.http.HttpHost;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = CustomerApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Provider("customer-provider")
 @PactFolder("../adapter-microservice-real/build/pacts")
-public class RealCustomerGatewayProviderTest {
+class RealCustomerGatewayProviderTest {
     @LocalServerPort
     private int port;
 

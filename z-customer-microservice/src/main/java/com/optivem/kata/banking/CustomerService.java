@@ -15,9 +15,10 @@ public class CustomerService {
     }
 
     public Optional<CustomerDto> getCustomer(String id) {
-        if(!customers.containsKey(id)) {
-            return Optional.empty();
-        }
-        return Optional.of(customers.get(id));
+        return !customers.containsKey(id) ? Optional.empty() : Optional.of(customers.get(id));
+    }
+
+    public void addCustomer(String id, CustomerDto customerDto) {
+        customers.put(id, customerDto);
     }
 }
