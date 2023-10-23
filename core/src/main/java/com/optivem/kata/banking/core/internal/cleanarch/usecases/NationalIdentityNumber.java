@@ -1,8 +1,10 @@
 package com.optivem.kata.banking.core.internal.cleanarch.usecases;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
+@Getter
 @EqualsAndHashCode
 @ToString
 public final class NationalIdentityNumber {
@@ -15,10 +17,6 @@ public final class NationalIdentityNumber {
 
   public static NationalIdentityNumber of(String value) {
     return new NationalIdentityNumber(value);
-  }
-
-  public String getValue() {
-    return value;
   }
 
   private void checkValueNotNull(String value) {
