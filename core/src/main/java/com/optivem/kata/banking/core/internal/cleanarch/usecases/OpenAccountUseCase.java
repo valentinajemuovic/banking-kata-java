@@ -80,7 +80,9 @@ public class OpenAccountUseCase implements Command.Handler<OpenAccountRequest, O
     }
 
     private AccountOpened getAccountOpened(BankAccount bankAccount, LocalDateTime timestamp) {
-        return new AccountOpened(timestamp, bankAccount.getAccountId(), bankAccount.getAccountHolderName(), bankAccount.getBalance());
+        return new AccountOpened(timestamp, bankAccount.getAccountId(),
+                bankAccount.getAccountHolderName(),
+                bankAccount.getBalance());
     }
 
     private OpenAccountResponse getResponse(BankAccount bankAccount) {
