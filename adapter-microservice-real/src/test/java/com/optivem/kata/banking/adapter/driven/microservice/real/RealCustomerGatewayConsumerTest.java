@@ -15,8 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = RealCustomerGatewayConsumerTest.PROVIDER_NAME, hostInterface = HttpHost.LOCALHOST)
 public class RealCustomerGatewayConsumerTest extends CustomerGatewayTest<RealCustomerGateway> {
