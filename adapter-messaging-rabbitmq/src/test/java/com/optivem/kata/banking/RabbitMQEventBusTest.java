@@ -36,8 +36,9 @@ class RabbitMQEventBusTest {
     }
 
     private static Stream<Arguments> should_return_AccountOpenedDto_event() {
-        return Stream.of(Arguments.of(new AccountOpenedDto(LocalDateTime.now(),35535L,"Sam","Brook",1)),
-                Arguments.of(new AccountOpenedDto(LocalDateTime.now(),35535L,"Josh","Long",1)));
+        final var accountId = 35535L;
+        return Stream.of(Arguments.of(new AccountOpenedDto(LocalDateTime.now(),accountId,"Sam","Brook",1)),
+                Arguments.of(new AccountOpenedDto(LocalDateTime.now(),accountId,"Josh","Long",1)));
     }
 
     @ParameterizedTest
