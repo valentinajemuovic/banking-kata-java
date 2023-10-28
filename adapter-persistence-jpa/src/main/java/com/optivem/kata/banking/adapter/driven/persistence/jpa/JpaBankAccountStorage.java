@@ -44,7 +44,7 @@ public class JpaBankAccountStorage implements BankAccountStorage {
         bankAccountModelOptional.ifPresent(updateTheModelWithInformationFrom(bankAccountDto));
     }
 
-    private BankAccountRecord create(BankAccountDto bankAccount) {
+    protected BankAccountRecord create(BankAccountDto bankAccount) {
         var bankAccountRecord = new BankAccountRecord();
         bankAccountRecord.setId(bankAccount.getAccountId());
         bankAccountRecord.setAccountNumber(bankAccount.getAccountNumber());
@@ -56,7 +56,7 @@ public class JpaBankAccountStorage implements BankAccountStorage {
         return bankAccountRecord;
     }
 
-    private BankAccountDto toDto(BankAccountRecord bankAccountRecord) {
+   protected BankAccountDto toDto(BankAccountRecord bankAccountRecord) {
         var dto = new BankAccountDto();
         dto.setAccountId(bankAccountRecord.getId());
         dto.setAccountNumber(bankAccountRecord.getAccountNumber());
