@@ -8,4 +8,6 @@ public class FakeBankAccountStorageTest extends BankAccountStorageTest {
     public FakeBankAccountStorageTest() {
         super(new FakeBankAccountStorage(), new RandomAccountIdGenerator(), new RandomAccountNumberGenerator());
     }
+
+    //TODO: should be added tests for FakeBankAccountStorage
 }

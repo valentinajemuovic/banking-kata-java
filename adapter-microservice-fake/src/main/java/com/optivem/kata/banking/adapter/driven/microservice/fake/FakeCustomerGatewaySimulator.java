@@ -2,6 +2,7 @@ package com.optivem.kata.banking.adapter.driven.microservice.fake;
 
 import com.optivem.kata.banking.adapter.driven.base.ProfileNames;
 import com.optivem.kata.banking.core.ports.driven.CustomerGateway;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +12,9 @@ public class FakeCustomerGatewaySimulator implements CustomerGateway {
 
     private final FakeCustomerGateway provider;
 
-    public FakeCustomerGatewaySimulator() {
-        this.provider = new FakeCustomerGateway();
+    @Autowired
+    public FakeCustomerGatewaySimulator(FakeCustomerGateway provider) {
+        this.provider = provider;
     }
 
     @Override
