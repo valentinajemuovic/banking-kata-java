@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FakeLongGeneratorTest {
+class FakeLongGeneratorTest {
     private FakeGenerator<Long> generator;
 
     @BeforeEach
     void init() {
-        this.generator = new FakeGenerator();
+        this.generator = new FakeGenerator<>();
     }
 
     @Test
@@ -22,11 +22,9 @@ public class FakeLongGeneratorTest {
     @Test
     void should_return_next_element_when_there_is_one_element() {
         var expectedValue = 1001L;
-
         generator.setupNext(expectedValue);
 
         assertGeneratesNext(expectedValue);
-
         assertNextThrowsException();
     }
 
