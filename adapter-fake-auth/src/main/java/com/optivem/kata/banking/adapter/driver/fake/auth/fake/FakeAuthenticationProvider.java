@@ -16,6 +16,9 @@ import java.util.ArrayList;
 public class FakeAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        if (authentication == null) {
+            throw new IllegalArgumentException("Credentials cannot be null");
+        }
         var name = authentication.getName();
         var password = authentication.getCredentials().toString();
         var authorities = new ArrayList<GrantedAuthority>();
