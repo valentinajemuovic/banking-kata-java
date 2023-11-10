@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FakeStringGeneratorTest {
+class FakeStringGeneratorTest {
     private FakeGenerator<String> generator;
 
     @BeforeEach
     void init() {
-        this.generator = new FakeGenerator();
+        this.generator = new FakeGenerator<>();
     }
 
     @Test
