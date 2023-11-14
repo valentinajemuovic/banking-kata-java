@@ -62,10 +62,8 @@ class BankingProviderContractTest {
     public void toBankAccountNotExistState() {
         reset(pipeline);
 
-        var accountNumber = NON_EXISTENT_ACCOUNT_NUMBER_VALUE;
-
         var request = ViewAccountRequest.builder()
-                        .accountNumber(accountNumber)
+                        .accountNumber(NON_EXISTENT_ACCOUNT_NUMBER_VALUE)
                                 .build();
 
         var validationException = new ValidationException(ValidationMessages.ACCOUNT_NUMBER_NOT_EXIST);
