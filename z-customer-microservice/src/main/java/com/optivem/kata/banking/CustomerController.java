@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CustomerController {
+    private final CustomerService customerService;
 
     @Autowired
-    private CustomerService customerService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping("/customers/{id}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable String id) {
